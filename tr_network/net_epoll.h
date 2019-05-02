@@ -18,7 +18,6 @@ class Epoll
 public:
     Epoll();
     ~Epoll();
-
     // 获取epoll套接字
     int32_t GetFd();
     // 注册套接字事件
@@ -27,15 +26,14 @@ public:
     ESocketOpCode CancleSockEvent(TSocket *sock_pt);
     // 事件监听
     int32_t EventsWatch(int32_t timeout = 0);
+    // 创建epoll
     void Create(int32_t size);
     
 protected:
-    int32_t ep_fd_ = INVALID_SOCKET_FD;
-    int32_t max_size_ = 1;
-    // 事件集合
-    std::vector<epoll_event> v_events_;
-    // 监视的套接字记录
-    std::map<socket_fd_t, TSocket *> register_sockets_;
+    int32_t ep_fd_ = INVALID_SOCKET_FD;     // epoll套接字
+    int32_t max_size_ = 1;                  // 最大监听数量
+    std::vector<epoll_event> v_events_;     // 事件集合
+    std::map<socket_fd_t, TSocket *> register_sockets_; // 监视的套接字记录
 };
 
 #endif  // __NET_EPOLL_H__

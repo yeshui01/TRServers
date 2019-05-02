@@ -21,7 +21,6 @@ Epoll::Epoll()
 
 Epoll::~Epoll()
 {
-
 }
 
 void Epoll::Create(int32_t size)

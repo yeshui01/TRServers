@@ -19,11 +19,10 @@ class TSocket
 public:
     TSocket();
     virtual ~TSocket();
-
     // socket文件描述符
     socket_fd_t GetFd();
+    // 设置关联的套接字描述符
     void SetFd(socket_fd_t fd);
-
     // 获取套接字状态
     ESocketStatus GetStatus();
     // 设置套接字状态
@@ -79,7 +78,7 @@ protected:
     // 处理写数据意外错误
     virtual void HandleSendError();
 protected:
-    // 读到数据的处理
+    // 读到数据时的处理
     virtual void AfterReadData(int32_t read_size) = 0;
 protected:
     socket_fd_t fd_ = INVALID_SOCKET_FD;    // sock fd

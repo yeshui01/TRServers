@@ -354,7 +354,6 @@ void TSocket::HandleSendError()
 
  void TSocket::OnClose()
  {
-
  }
 
  int32_t TSocket::WaitRecv(char * buffer, int32_t buffer_size)

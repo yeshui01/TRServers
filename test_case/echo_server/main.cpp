@@ -35,10 +35,24 @@ void EchoConnection::AfterReadData(int32_t read_size)
 {
 	TDEBUG("echo connection afterreaddata, read_size:" << read_size);
 	// 直接回复数据
-	char * buffer = new char[read_size];
-	int32_t recv_s = Recv(buffer, read_size);
-	Send(buffer, recv_s);
-	TDEBUG("echo connect send data:" << buffer << ", data_len:" << recv_s);
+	int32_t sended_size = 0;
+	int32_t send_total = 0;
+	char buffer[1024];
+	do 
+	{
+		int32_t recv_s = Recv(buffer, 1024);
+		if (0 == recv_s)
+		{
+			break;
+		}
+		sended_size = Send(buffer, recv_s);
+		send_total += sended_size;
+		if (send_total >= read_size)
+		{
+			break;
+		}
+		TDEBUG("echo connect send data:" << buffer << ", data_len:" << recv_s);
+	} while (sended_size > 0);
 }
 
 void EchoConnection::OnClose()
