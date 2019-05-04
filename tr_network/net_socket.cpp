@@ -77,12 +77,12 @@ ESocketOpCode TSocket::Bind(std::string ip, int32_t port)
 
 ESocketOpCode TSocket::Listen()
 {
-    status_ = ESocketStatus::E_SOCKET_STATUS_LISTEN;
     auto code = listen(fd_, 100);
     if (-1 == code)
     {
         return ESocketOpCode::E_SOCKET_OP_LISTEN_ERROR;
     }
+    status_ = ESocketStatus::E_SOCKET_STATUS_LISTEN;
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 

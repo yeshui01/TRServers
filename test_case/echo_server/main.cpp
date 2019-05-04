@@ -12,7 +12,7 @@
 #include "net_connection.h"
 #include "base_server.h"
 #include "net_epoll.h"
-
+#include "log_module.h"
 #include <string>
 class EchoConnection : public TConnection
 {
@@ -23,7 +23,7 @@ public:
 	void OnClose() override;
 };
 
-#define g_ConnectPool TSingleton<TObjPool<EchoConnection> >::Instance()
+// #define g_ConnectPool TSingleton<TObjPool<EchoConnection> >::Instance()
 
 EchoConnection::EchoConnection() : TConnection()
 {
@@ -57,7 +57,8 @@ void EchoConnection::AfterReadData(int32_t read_size)
 
 void EchoConnection::OnClose()
 {
-	g_ConnectPool.Push(this);
+	TConnection::OnClose();
+	// g_ConnectPool.Push(this);
 	TDEBUG("EchoConnection OnClose");
 }
 
@@ -67,7 +68,11 @@ class EchoServer : public TBaseServer
 public:
 	EchoServer();
 	~EchoServer();
-	virtual TConnection * AllocateConnect();
+	virtual bool Init()
+	{
+		return true;
+	}
+	// virtual TConnection * AllocateConnect();
 };
 
 EchoServer::EchoServer()
@@ -80,10 +85,10 @@ EchoServer::~EchoServer()
 	TDEBUG("EchoServer destruct")
 }
 
-TConnection * EchoServer::AllocateConnect()
-{
-	return g_ConnectPool.Pop();
-}
+// TConnection * EchoServer::AllocateConnect()
+// {
+// 	return g_ConnectPool.Pop();
+// }
 
 // test
 int main(int argc, char* argv[])
@@ -94,20 +99,22 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 	int32_t port = std::stoi(std::string(argv[1]));
- 	std::cout << "hello echo server" << std::endl;
-	g_ConnectPool.Init(3);
+ 	TDEBUG("hello echo server");
+	//g_ConnectPool.Init(3);
 	EchoServer echo_server;
+	echo_server.InitConnectionPool<EchoConnection>(1);
 	echo_server.Bind("127.0.0.1", port);
 	TDEBUG("bind addr, port:" << port);
 	echo_server.Listen();
-	// 加入事件循环
-	Epoll epoll;
-	epoll.Create(100);
-	epoll.RegSockEvent(&echo_server, EPOLLIN);
-	echo_server.AddLoopRun([&epoll](time_t cur_time)
-	{
-		epoll.EventsWatch();
-	});
+	
+	// // 加入事件循环
+	// Epoll epoll;
+	// epoll.Create(100);
+	// epoll.RegSockEvent(&echo_server, EPOLLIN);
+	// echo_server.AddLoopRun([&epoll](time_t cur_time)
+	// {
+	// 	epoll.EventsWatch();
+	// });
 	echo_server.RunService();
 	return 0;
 }

@@ -15,6 +15,7 @@
 #include "net_socket.h"
 #include "log_module.h"
 #include "connect_manager.h"
+#include "base_server.h"
 TConnection::TConnection()
 {
 }
@@ -45,10 +46,25 @@ void TConnection::HandleError()
 
 void TConnection::OnClose()
 {
-    g_ConnectMgr.DelConnection(this);
+    // g_ConnectMgr.DelConnection(this);
+    if (server_)
+    {
+        server_->RecycleConnect(this);
+    }
 }
 
 void TConnection::AfterReadData(int32_t read_size)
 {
     // do nothing
+}
+
+// 关联一个server
+void TConnection::AttachServer(TBaseServer * server)
+{
+    server_ = server;
+}
+// 获取关联的server
+TBaseServer * TConnection::GetServer()
+{
+    return server_;
 }

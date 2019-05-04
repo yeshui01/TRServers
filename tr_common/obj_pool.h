@@ -42,6 +42,18 @@ public:
             }
         }
     }
+    template <class obj_type>
+    void InitEx(int32_t obj_num)
+    {
+        for (int32_t i = 0; i < obj_num; ++i)
+        {
+            obj_type * pt = new obj_type();
+            if (pt)
+            {
+                idle_objs_.push_back(pt);
+            }
+        }
+    }
     T* Pop()
     {
         if (idle_objs_.empty())
@@ -53,17 +65,25 @@ public:
     }
     void Push(T *pt)
     {
-        idle_objs_.push_back(pt);
         for (auto it = working_objs_.begin(); it != working_objs_.end();)
         {
             if ((*it) == pt)
             {
                 working_objs_.erase(it);
+                idle_objs_.push_back(pt);
                 break;
             }
             else
                 ++it;
         }
+    }
+    int32_t GetIdleSize()
+    {
+        return idle_objs_.size();
+    }
+    int32_t GetWorkingSize()
+    {
+        return working_objs_.size();
     }
 protected:
     std::list<T*> idle_objs_;    // 空闲的obj

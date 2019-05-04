@@ -101,6 +101,11 @@ ESocketOpCode Epoll::CancleSockEvent(TSocket *sock_pt)
 
 int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
 {
+    if (INVALID_SOCKET_FD == ep_fd_)
+    {
+        TERROR("ep sockeet is invalid");
+        return -1;
+    }
     auto code = epoll_wait(ep_fd_, &v_events_[0], max_size_, timeout);
     if (code == -1)
     {
@@ -133,4 +138,9 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
         }
     }
     return code;
+}
+
+int32_t Epoll::ResFdSpace()
+{
+    return max_size_ - register_sockets_.size();
 }

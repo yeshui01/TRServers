@@ -32,7 +32,7 @@ public:
 	EchoClient();
 	~EchoClient();
 	void OnClose() override;
-	virtual void AfterReadData(int32_t read_size);
+	void AfterReadData(int32_t read_size) override;
 };
 
 void EchoClient::AfterReadData(int32_t read_size)
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 		TERROR("connect server failed");
 		return 0;
 	}
-	int32_t count = 100;
+	int32_t count = 300;
 	auto start_time = std::chrono::system_clock::now();
 	for (int32_t i = 0; i < count; ++i)
 	{
