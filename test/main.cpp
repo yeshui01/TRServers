@@ -10,6 +10,7 @@
 #include "obj_pool.h"
 #include "singleton.h"
 #include "net_connection.h"
+#include "func_tools.h"
 #include <chrono>
 static void test_cycle_buffer()
 {
@@ -68,6 +69,24 @@ static void test_chrono()
 	//TDEBUG("steady_clock::now:" << system_clock::to_time_t(steady_clock::now()));
 }
 
+static void test_func_tools()
+{
+	TDEBUG("test func_tools");
+	auto r = FuncTools::SafeAdd<int32_t>(1, 2);
+	TDEBUG("FuncTools::SafeAdd<int32_t>(1, 2) result:" << r);
+	auto r2 = FuncTools::SafeAdd<int32_t>(10, -1);
+	TDEBUG("FuncTools::SafeAdd<int32_t>(10, -1); result:" << r2);
+	TDEBUG("std::numeric_limits<int32_t>::min() = " << std::numeric_limits<int32_t>::min());
+
+	auto r3 = FuncTools::SafeAdd<int32_t>(-1, 10);
+	TDEBUG("FuncTools::SafeAdd<int32_t>(-1, 10); result:" << r2);
+	auto r4 = FuncTools::SafeAdd<int32_t>(-10000, std::numeric_limits<int32_t>::min());
+	TDEBUG("FuncTools::SafeAdd<int32_t>(-10000, num_min); result:" << r4);
+
+	auto r5 = FuncTools::SafeAdd<int32_t>(std::numeric_limits<int32_t>::min(), -10000);
+	TDEBUG("FuncTools::SafeAdd<int32_t>(num_min,  -10000); result:" << r5);
+
+}
 
 int main(int argc, char* argv[])
 {
@@ -81,5 +100,6 @@ int main(int argc, char* argv[])
 	test_socket();
 	test_objpool();
 	test_chrono();
+	test_func_tools();
 	return 0;
 }
