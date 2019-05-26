@@ -20,6 +20,8 @@ public:
     void AttachServer(TBaseServer * server);
     // 获取关联的server
     TBaseServer * GetServer();
+    // 获取连接对象标识Id
+    int32_t GetConnId();
 protected:
     // 接受连接
     virtual void HandleAccept();
@@ -33,7 +35,9 @@ protected:
     // 读到数据的处理
     virtual void AfterReadData(int32_t read_size);
 protected:
+    static int32_t connection_id_index_;
+protected:
     TBaseServer * server_ = nullptr;
-
+    int32_t conn_id_ = 0;
 };
 #endif  // __NET_CONNECTION_H__

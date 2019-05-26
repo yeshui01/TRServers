@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include "tr_timer/time_wheel.h"
+#include "tr_timer/server_time.h"
 #include "log_module.h"
 #include "net_common.h"
 #include "net_socket.h"
@@ -67,6 +68,14 @@ static void test_chrono()
 	TDEBUG("system_clock::now:" << system_clock::to_time_t(system_clock::now()));
 	steady_clock::time_point t2 = steady_clock::now();
 	//TDEBUG("steady_clock::now:" << system_clock::to_time_t(steady_clock::now()));
+
+
+  	system_clock::time_point tp = system_clock::now();
+  	system_clock::duration dtn = tp.time_since_epoch();
+
+  	TDEBUG("current time since epoch, expressed in:");
+  	TDEBUG("periods: " << dtn.count());
+  	TDEBUG("seconds: " << dtn.count() * system_clock::period::num / system_clock::period::den / 1000);
 }
 
 static void test_func_tools()
@@ -88,6 +97,15 @@ static void test_func_tools()
 
 }
 
+static void test_server_time()
+{
+	g_ServerTime.UpdateTime();
+	std::time_t time_tamp = g_ServerTime.NowTime();
+	TDEBUG("cur_time:" << time_tamp << ", str:" << ctime(&time_tamp));
+	TDEBUG("cur_mtime:" << g_ServerTime.NowTimeMs());
+	TDEBUG("cur_utime:" << g_ServerTime.NowTimeUs())
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -96,10 +114,11 @@ int main(int argc, char* argv[])
 	  std::cout << "b = " << b << std::endl;
 	};
 	TDEBUG("hello tr servers test");
-	test_cycle_buffer();
-	test_socket();
-	test_objpool();
-	test_chrono();
-	test_func_tools();
+	// test_cycle_buffer();
+	// test_socket();
+	// test_objpool();
+	// test_chrono();
+	// test_func_tools();
+	test_server_time();
 	return 0;
 }

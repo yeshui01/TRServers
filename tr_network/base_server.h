@@ -14,7 +14,8 @@
 #include <memory>
 class Epoll;
 
-using loop_func_t = std::function<void(time_t cur_time)>;
+using loop_func_t = std::function<void(time_t cur_mtime)>;
+
 class TBaseServer : public TSocket
 {
 public:
@@ -42,9 +43,18 @@ public:
     void AfterReadData(int32_t read_size);
     // 设置连接队列大小
     void SetConnectEventLimitNum(int32_t max_sock_num);
+    // 设置运行阶段
+    void SetRunStep(EServerRunStep e_step);
 public:
     // 接受连接
     virtual void HandleAccept();
+    // 运行前的检查
+    virtual bool RunStepCheck();
+    // 正常运行
+    virtual bool RunStepRunning(); 
+protected:
+    // 回收连接
+    void RecycleConnections();
 protected:
     bool stop_ = false;
     std::vector<loop_func_t> v_loop_func_;
@@ -52,7 +62,7 @@ protected:
     TObjPool<TConnection> connection_pool_;
     std::vector<TConnection*> wait_recycle_connect_;  // 等待回收的连接
     int32_t max_connect_num_ = 0;
-
+    EServerRunStep run_step_ = EServerRunStep::E_SERVER_RUN_STEP_NONE;
 };
 
 #endif  // __BASE_SERVER_H__

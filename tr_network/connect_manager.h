@@ -11,7 +11,7 @@
 #include <map>
 #include "net_connection.h"
 #include "singleton.h"
-
+#include <functional>
 class ConnectManager : public TSingleton<ConnectManager>
 {
 public:
@@ -22,6 +22,8 @@ public:
     bool AddConnction(TConnection * connect_pt);
     // 从管理器删除连接
     void DelConnection(TConnection * connect_pt);
+    // 遍历处理
+    void Traversal(std::function<void (TConnection *)> && visit_fun);
 protected:
     std::map<int32_t, TConnection *> connections_;  // key: fd val:connection
 };

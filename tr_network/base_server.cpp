@@ -16,6 +16,7 @@
 #include "net_common.h"
 #include "connect_manager.h"
 #include "net_epoll.h"
+#include "server_time.h"
 #include <thread>
 #include <chrono>
 #include <algorithm>
@@ -90,7 +91,8 @@ void TBaseServer::LoopRun()
     // Nothing
     for (auto &v : v_loop_func_)
     {
-        v(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+        // v(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+        v(g_ServerTime.NowTimeMs());
     }
 }
 
@@ -102,31 +104,42 @@ void TBaseServer::RunService()
         return;
     }
     // 注册epoll监听
-    epoll_ptr_->RegSockEvent(this, EPOLLIN);
-
+    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_CHECK);
     while (!stop_)
     {
-        epoll_ptr_->EventsWatch();
-        LoopRun();
-        // 回收连接
-        if (!wait_recycle_connect_.empty())
+        g_ServerTime.UpdateTime();
+        switch (run_step_)
         {
-            TDEBUG("recycle wait_recycle_connect_,size:" << wait_recycle_connect_.size());
-            for (auto v : wait_recycle_connect_)
+            case EServerRunStep::E_SERVER_RUN_STEP_CHECK:
             {
-                TDEBUG("recycle connect, ptr:" << (int64_t)(v));
-                // TDEBUG("before idle_size:" << connection_pool_.GetIdleSize()
-                //     << ", working_size:" << connection_pool_.GetWorkingSize());
-                g_ConnectMgr.DelConnection(v);
-                connection_pool_.Push(v);
-                TDEBUG("after idle_size:" << connection_pool_.GetIdleSize()
-                    << ", working_size:" << connection_pool_.GetWorkingSize());
-                v->AttachServer(nullptr);
-                v->GetRecvBuffer().Reset();
-                v->GetWriteBuffer().Reset();
+                if (RunStepCheck())
+                {
+                    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_LISTEN);
+                }
+                break;
             }
-            wait_recycle_connect_.clear();
+            case EServerRunStep::E_SERVER_RUN_STEP_LISTEN:
+            {
+                epoll_ptr_->RegSockEvent(this, EPOLLIN);
+                SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_RUNNING);
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_RUNNING:
+            {
+                epoll_ptr_->EventsWatch();
+                RunStepRunning();
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_STOP:
+            {
+                break;
+            }
+        default:
+            break;
         }
+        
+        // 回收连接
+        RecycleConnections();
         
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
@@ -134,7 +147,16 @@ void TBaseServer::RunService()
 
 void TBaseServer::Stop()
 {
+    // 停服操作
+    // 关闭所有连接
+    g_ConnectMgr.Traversal([](TConnection * connect_pt){
+        if (connect_pt)
+        {
+            connect_pt->Close();
+        }
+    });
     stop_ = true;
+    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_STOP);
 }
 
 void TBaseServer::AddLoopRun(loop_func_t && func)
@@ -168,4 +190,42 @@ void TBaseServer::SetConnectEventLimitNum(int32_t max_sock_num)
     {
         epoll_ptr_->Create(max_connect_num_ + 1);
     }
+}
+
+void TBaseServer::RecycleConnections()
+{
+    if (!wait_recycle_connect_.empty())
+    {
+        TDEBUG("recycle wait_recycle_connect_,size:" << wait_recycle_connect_.size());
+        for (auto v : wait_recycle_connect_)
+        {
+            TDEBUG("recycle connect, ptr:" << (int64_t)(v) << ", conn_id:" << v->GetConnId());
+            // TDEBUG("before idle_size:" << connection_pool_.GetIdleSize()
+            //     << ", working_size:" << connection_pool_.GetWorkingSize());
+            g_ConnectMgr.DelConnection(v);
+            connection_pool_.Push(v);
+            TDEBUG("after idle_size:" << connection_pool_.GetIdleSize()
+                                      << ", working_size:" << connection_pool_.GetWorkingSize());
+            v->AttachServer(nullptr);
+            v->GetRecvBuffer().Reset();
+            v->GetWriteBuffer().Reset();
+        }
+        wait_recycle_connect_.clear();
+    }
+}
+
+bool TBaseServer::RunStepCheck()
+{
+    return true;
+}
+
+void TBaseServer::SetRunStep(EServerRunStep e_step)
+{
+    run_step_ = e_step;
+}
+
+bool TBaseServer::RunStepRunning()
+{
+    LoopRun();
+    return true;
 }

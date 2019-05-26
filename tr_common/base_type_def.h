@@ -8,6 +8,7 @@
 #ifndef __TR_BASE_TYPE_DEF_H__
 #define __TR_BASE_TYPE_DEF_H__
 #include <cstdint>
+#include <ctime>
 #if 0
 typedef char						int8_t;
 typedef unsigned char				uint8_t;
@@ -19,4 +20,7 @@ typedef long long					int64_t;
 typedef unsigned long long			uint64_t;
 typedef long long					utime_t;
 #endif
+
+// #define time_t int64_t
+
 #endif // __TR_BASE_TYPE_DEF_H__

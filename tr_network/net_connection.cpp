@@ -18,6 +18,8 @@
 #include "base_server.h"
 TConnection::TConnection()
 {
+    conn_id_ = connection_id_index_;
+    ++connection_id_index_;
 }
 TConnection::~TConnection()
 {
@@ -68,3 +70,11 @@ TBaseServer * TConnection::GetServer()
 {
     return server_;
 }
+
+int32_t TConnection::GetConnId()
+{
+    return conn_id_;
+}
+
+// 连接标识id，从1000开始
+int32_t TConnection::connection_id_index_ = 1000;

@@ -38,7 +38,7 @@ struct NetAddr
 };
 
 // socket 操作码
-enum class ESocketOpCode
+enum class ESocketOpCode : int32_t
 {
     E_SOCKET_OP_CODE_CORRECT = 0,
     E_SOCKET_OP_SOCK_CREATE_FAILE = 1,  // socket创建失败
@@ -50,4 +50,13 @@ enum class ESocketOpCode
     E_SOCKET_OP_EPOLL_UNREG_FAILE = 6,  // epoll取消事件失败
 };
 
+// 服务器运行阶段
+enum class EServerRunStep : int32_t
+{
+    E_SERVER_RUN_STEP_NONE = 0,        // 默认初始值
+    E_SERVER_RUN_STEP_CHECK = 1,       // 运行前的检测阶段
+    E_SERVER_RUN_STEP_LISTEN = 2,      // 监听阶段
+    E_SERVER_RUN_STEP_RUNNING = 3,      // 正常监听运行阶段
+    E_SERVER_RUN_STEP_STOP = 4,        // 停服阶段
+};
 #endif // __NET_COMMON_H__
