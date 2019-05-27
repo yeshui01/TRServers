@@ -59,9 +59,12 @@ void NetMessage::SetContent(const std::string &str_content)
 	content_ = str_content;
 }
 
-void NetMessage::SetContent(const char* buffer, int32_t len)
+void NetMessage::SetContent(const char* buffer, const int32_t len)
 {
-	content_ = std::string(buffer, len);
+	if (buffer && len > 0)
+	{
+		content_ = std::string(buffer, len);
+	}
 }
  
 const std::string & NetMessage::GetContent()
@@ -72,4 +75,65 @@ const std::string & NetMessage::GetContent()
 const std::string & NetMessage::GetContent() const
 {
 	return content_;
+}
+
+void NetMessage::SetReqNo(int64_t req_no)
+{
+	req_no_ = req_no;	
+}
+
+void NetMessage::SetRepNo(int64_t rep_no)
+{
+	rep_no_ = rep_no;
+}
+
+int32_t NetMessage::GetConfirm() const
+{
+	return confirm_;
+}
+
+int32_t NetMessage::GetConfirm()
+{
+	return confirm_;
+}
+
+bool NetMessage::Serialize(char * buffer, int32_t buffer_len)
+{
+	if (!buffer)
+	  	return false;
+	int32_t packet_size = SerializeByteNum();
+	if (buffer_len < packet_size)
+	  return false;
+	
+	int32_t * data_pt = reinterpret_cast<int32_t*>(buffer);
+	*data_pt = packet_size;		// 数据包总大小
+	++data_pt;
+	*data_pt = msg_class_;		// msg_class
+	++data_pt;
+	*data_pt = msg_type_;		// msg_type
+	++data_pt;
+	*data_pt = confirm_;		// confirm
+	++data_pt;
+	int64_t *big_field_pt = reinterpret_cast<int64_t*>(data_pt);
+	*big_field_pt = req_no_;	// req_no
+	++big_field_pt;
+	*big_field_pt = rep_no_;	// rep_no
+	++big_field_pt;
+	// content
+	buffer = reinterpret_cast<char*>(big_field_pt);
+	memcpy(buffer, content_.c_str(), content_.length());
+	return true;	
+}
+
+int32_t NetMessage::SerializeByteNum()
+{
+	int32_t packet_size = 0;
+	packet_size = sizeof(int32_t)
+	  	+ sizeof(msg_class_) 
+	  	+ sizeof(msg_type_) 
+		+ sizeof(req_no_) 
+		+ sizeof(rep_no_) 
+		+ sizeof(confirm_) 
+		+ content_.length();
+	return packet_size;
 }

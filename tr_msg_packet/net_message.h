@@ -28,17 +28,29 @@ public:
   // 获取请求id 
   int64_t GetReqNo() const;
   int64_t GetReqNo();
+  // 设置请求id
+  void SetReqNo(int64_t req_no);
   
   // 获取回复id
   int64_t GetRepNo() const;
   int64_t GetRepNo();
+  // 设置回复id
+  void SetRepNo(int64_t rep_no);
 
   // 设置消息内容
   void SetContent(const std::string &str_content);
-  void SetContent(const char* buffer, int32_t len);
+  void SetContent(const char* buffer, const int32_t len);
   // 获取消息内容
   const std::string & GetContent();
   const std::string & GetContent() const;
+
+  // 获取校验标识
+  int32_t GetConfirm() const;
+  int32_t GetConfirm();
+  // 序列化到指定buffer 
+  bool Serialize(char * buffer, int32_t buffer_len);
+  // 序列化大小计算
+  int32_t SerializeByteNum();
 protected:
   TConnection * connection_pt_;	// 消息对应的连接
   int32_t msg_class_/* = 0*/;
