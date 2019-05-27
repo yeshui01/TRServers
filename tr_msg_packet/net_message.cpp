@@ -137,3 +137,45 @@ int32_t NetMessage::SerializeByteNum()
 		+ content_.length();
 	return packet_size;
 }
+
+bool NetMessage::UnSerialize(const char * buffer, const int32_t buffer_len)
+{
+	if (!buffer)
+	  return false;
+	
+	if (buffer_len < sizeof(int32_t))
+	  return false;
+
+	const int32_t * data_pt = reinterpret_cast<const int32_t*>(buffer);
+	int32_t packet_size = *data_pt;
+	if (buffer_len < packet_size)
+	  return false;
+
+	++data_pt;
+	msg_class_ = *data_pt;
+	++data_pt;
+	msg_type_ = *data_pt;
+	++data_pt;
+	confirm_ = *data_pt;
+	++data_pt;
+	const int64_t *big_field_pt = reinterpret_cast<const int64_t*>(data_pt);
+	req_no_ = *big_field_pt;
+	++big_field_pt;
+	rep_no_ = *big_field_pt;
+	++big_field_pt;
+	// content
+	content_ = std::string(reinterpret_cast<const char*>(big_field_pt), packet_size - HeadSize());
+	return true;
+}
+
+int32_t NetMessage::HeadSize()
+{
+	int32_t head_size = 0;
+	head_size = sizeof(int32_t)
+	  	+ sizeof(msg_class_) 
+	  	+ sizeof(msg_type_) 
+		+ sizeof(req_no_) 
+		+ sizeof(rep_no_) 
+		+ sizeof(confirm_);
+	return head_size;
+}

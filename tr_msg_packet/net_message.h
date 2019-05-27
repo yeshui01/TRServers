@@ -47,10 +47,15 @@ public:
   // 获取校验标识
   int32_t GetConfirm() const;
   int32_t GetConfirm();
+
   // 序列化到指定buffer 
   bool Serialize(char * buffer, int32_t buffer_len);
   // 序列化大小计算
   int32_t SerializeByteNum();
+  // 数据包头大小
+  int32_t HeadSize();
+  // 反序列化
+  bool UnSerialize(const char * buffer, const int32_t buffer_len);
 protected:
   TConnection * connection_pt_;	// 消息对应的连接
   int32_t msg_class_/* = 0*/;
