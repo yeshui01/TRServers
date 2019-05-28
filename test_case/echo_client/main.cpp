@@ -42,6 +42,7 @@ void EchoClient::AfterReadData(int32_t read_size)
 	char * buffer = new char[read_size];
 	int32_t recv_s = Recv(buffer, read_size);
 	TDEBUG("EchoClient recv data:" << buffer << ", data_len:" << recv_s);
+	delete [] buffer;
 }
 
 EchoClient::EchoClient()

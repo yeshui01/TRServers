@@ -13,6 +13,8 @@
 #include "net_connection.h"
 #include "func_tools.h"
 #include <chrono>
+#include "net_message.h"
+
 static void test_cycle_buffer()
 {
 	CycleBuffer<char> buffer(6);
@@ -35,6 +37,7 @@ static void test_cycle_buffer()
 	readed_size = buffer.ReadData(buffer_test, 1024);
 	TDEBUG("buffer_test2:" << buffer_test);
 	TDEBUG("ReadData22 buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+
 }
 
 static void test_socket()
@@ -106,6 +109,40 @@ static void test_server_time()
 	TDEBUG("cur_utime:" << g_ServerTime.NowTimeUs())
 }
 
+static void test_net_message()
+{
+	// NetMessage net_msg(1, 1);
+	// std::string msg_content = "hello net message";
+	// net_msg.SetContent(msg_content);
+	// TDEBUG("msg head_size:" << net_msg.HeadSize());
+	// TDEBUG("msg serialize_size:" << net_msg.SerializeByteNum());
+	// TDEBUG("msg content:" << net_msg.GetContent());
+
+	TDEBUG("------------ msg with cycle_buffer ------------");
+	char send_buffer[1024] = "";
+	char recv_buffer[1024] = "";
+	CycleBuffer<char> buffer2(1024);
+	buffer2.SetReadIndex(1013);
+	buffer2.SetWriteIndex(1013);
+	// 开始写数据
+	NetMessage test_msg(1, 1);
+	std::string test_content = "hello req msg server!";
+	test_msg.SetContent(test_content);
+	test_msg.Serialize(send_buffer, sizeof(send_buffer));
+
+	TDEBUG("msg_serialized_size:" << test_msg.SerializeByteNum())
+	buffer2.WriteData(send_buffer, 53);
+	TDEBUG("buffer2.readindex:" << buffer2.GetReadIndex()
+		<< ", buffer2.write_index:" << buffer2.GetWriteIndex()
+		<< ", buffer2.data_size:" << buffer2.PeekDataSize());
+
+	buffer2.ReadData(recv_buffer, 53);
+	NetMessage rep_msg;
+	rep_msg.UnSerialize(recv_buffer, 53);
+	TDEBUG("rep_msg.msg_class:" << rep_msg.GetMsgClass()
+		<< ", rep_msg.msg_type:" << rep_msg.GetMsgType());
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -119,6 +156,7 @@ int main(int argc, char* argv[])
 	// test_objpool();
 	// test_chrono();
 	// test_func_tools();
-	test_server_time();
+	// test_server_time();
+	test_net_message();
 	return 0;
 }

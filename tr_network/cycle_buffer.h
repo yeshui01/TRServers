@@ -55,6 +55,24 @@ public:
     {
         return data_size_;
     }
+    // 当前读索引
+    int32_t GetReadIndex()
+    {
+        return read_index_;
+    }
+    // 获取写索引
+    int32_t GetWriteIndex()
+    {
+        return write_index_;
+    }
+    void SetReadIndex(int32_t index)
+    {
+        read_index_ = index;
+    }
+    void SetWriteIndex(int32_t index)
+    {
+        write_index_ = index;
+    }
     // 增长空间,返回剩余空间
     int32_t GrowSpace(int32_t grow_size)
     {
@@ -106,10 +124,28 @@ public:
             // 可以全部放入
             if (write_index_ == read_index_)
             {
-                // 首次开始
-                memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * to_write_size);
-                write_index_ += to_write_size;
-                writed_size = to_write_size;
+                // if (0 == write_index_)
+                // {
+                //     // 首次开始
+                //     memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * to_write_size);
+                //     write_index_ += to_write_size;
+                //     writed_size = to_write_size;
+                // }
+                // else 
+                {
+                    // 后期追平数据
+                    int32_t right_data_size = (v_buffer_.size() - write_index_) >= to_write_size ? to_write_size : (v_buffer_.size() - write_index_);
+                    memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * right_data_size);
+                    write_index_ += right_data_size;
+                    if (write_index_ >= v_buffer_.size())
+                        write_index_ %= v_buffer_.size();
+                
+                    if (to_write_size - right_data_size > 0)
+                    {
+                        memcpy(&v_buffer_[write_index_], data_pt + right_data_size, sizeof(elem_type) * (to_write_size - right_data_size));
+                        write_index_ += (to_write_size - right_data_size);
+                    }
+                }   
             }
             else if (write_index_ > read_index_)
             {
@@ -122,6 +158,7 @@ public:
                 if (to_write_size - right_data_size > 0)
                 {
                     memcpy(&v_buffer_[write_index_], data_pt + right_data_size, sizeof(elem_type) * (to_write_size - right_data_size));
+                    write_index_ += (to_write_size - right_data_size);
                 }
             }
             writed_size = to_write_size;
@@ -173,17 +210,42 @@ public:
                 read_index_ += (max_read_size - readed_size);
                 readed_size = max_read_size;
             }
+            if (read_index_ >= v_buffer_.size())
+                read_index_ %= v_buffer_.size();
         }
         else if (read_index_ == write_index_)
         {
             // 直接读取
-            memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * max_read_size);
-            read_index_ += max_read_size;
-            if (read_index_ >= v_buffer_.size())
-                read_index_ %= v_buffer_.size();
+            // if (0 == read_index_)
+            // {
+            //     memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * max_read_size);
+            //     read_index_ += max_read_size;
+            //     if (read_index_ >= v_buffer_.size())
+            //         read_index_ %= v_buffer_.size();
 
-            readed_size += max_read_size;
+            //     readed_size += max_read_size;
+            // }
+            // else 
+            {
+                int32_t right_data_size = (v_buffer_.size() - read_index_ >= max_read_size) ? max_read_size : (v_buffer_.size() - read_index_);
+                memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * right_data_size);
+                read_index_ += right_data_size;
+                if (read_index_ >= v_buffer_.size())
+                    read_index_ %= v_buffer_.size();
+                readed_size += right_data_size;
+
+                if (readed_size < max_read_size)
+                {
+                    // 继续读
+                    memcpy(data_buffer + readed_size, &v_buffer_[read_index_], sizeof(elem_type) * (max_read_size - readed_size));
+                    read_index_ += (max_read_size - readed_size);
+                    readed_size = max_read_size;
+                }
+            }
         }
+        if (read_index_ >= v_buffer_.size())
+            read_index_ %= v_buffer_.size();
+
         if (!peek)
             data_size_ -= readed_size;
         if (peek)

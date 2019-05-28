@@ -1,3 +1,10 @@
+/* ======================================================
+ * Author       : mknight
+ * Last modified: 2019-05-28 13:40
+ * Email        : 824338670@qq.com
+ * Filename     : net_message.h
+ * Description  : 
+ * ======================================================*/
 #ifndef __NET_MESSAGE_H__
 #define __NET_MESSAGE_H__
 
@@ -8,13 +15,13 @@
 class NetMessage
 {
 public:
-  NetMessage() = delete;
+  NetMessage();
 
   /* 消息构造函数
    * @param msg_class : 消息模块大类
    * @param msg_type  : 消息模块下的类型
    */
-  NetMessage(TConnection * connection_pt, int32_t msg_class, int32_t msg_type);
+  NetMessage(int32_t msg_class, int32_t msg_type);
   ~NetMessage();
 	
   // 获取消息模块大类
@@ -56,8 +63,13 @@ public:
   int32_t HeadSize();
   // 反序列化
   bool UnSerialize(const char * buffer, const int32_t buffer_len);
+
+  // 设置连接
+  void SetConnection(TConnection * connection_pt);
+  // 获取连接
+  TConnection * GetConnection();
 protected:
-  TConnection * connection_pt_;	// 消息对应的连接
+  TConnection * connection_pt_ = nullptr;	// 消息对应的连接
   int32_t msg_class_/* = 0*/;
   int32_t msg_type_/* = 0*/;
 

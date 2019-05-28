@@ -1,7 +1,19 @@
+/* ======================================================
+ * Author       : mknight
+ * Last modified: 2019-05-28 13:40
+ * Email        : 824338670@qq.com
+ * Filename     : net_message.cpp
+ * Description  : 
+ * ======================================================*/
 #include "net_message.h"
- 
-NetMessage::NetMessage(TConnection * connection_pt, int32_t msg_class, int32_t msg_type) 
-	: connection_pt_(connection_pt) , msg_class_(msg_class), msg_type_(msg_type)
+
+NetMessage::NetMessage()
+{
+	
+}
+
+NetMessage::NetMessage(int32_t msg_class, int32_t msg_type) 
+	: msg_class_(msg_class), msg_type_(msg_type)
 {
 
 }
@@ -178,4 +190,15 @@ int32_t NetMessage::HeadSize()
 		+ sizeof(rep_no_) 
 		+ sizeof(confirm_);
 	return head_size;
+}
+
+// 设置连接
+void NetMessage::SetConnection(TConnection * connection_pt)
+{
+	connection_pt_ = connection_pt;
+}
+// 获取连接
+TConnection * NetMessage::GetConnection()
+{
+	return connection_pt_;
 }
