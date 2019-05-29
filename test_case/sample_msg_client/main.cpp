@@ -14,7 +14,7 @@
 #include "net_connection.h"
 #include "base_server.h"
 #include "net_epoll.h"
-#include "msg_dispacher.h"
+#include "msg_dispatcher.h"
 #include "msg_handler.h"
 #include "msg_queue.h"
 #include "net_message.h"

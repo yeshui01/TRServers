@@ -2,20 +2,20 @@
  * Author       : mknight
  * Last modified: 2019-05-28 13:50
  * Email        : 824338670@qq.com
- * Filename     : msg_dispacher.cpp
+ * Filename     : msg_dispatcher.cpp
  * Description  : 
  * ======================================================*/
 
-#include "msg_dispacher.h"
+#include "msg_dispatcher.h"
 #include "msg_queue.h"
 #include "log_module.h"
 #include "net_message.h"
 #include "common_define.h"
-MsgDispacher::MsgDispacher()
+MsgDispatcher::MsgDispatcher()
 {
 }
 
-MsgDispacher::~MsgDispacher()
+MsgDispatcher::~MsgDispatcher()
 {
 	for (auto it = msg_handlers_.begin(); it != msg_handlers_.end(); ++it)
 	{
@@ -27,7 +27,7 @@ MsgDispacher::~MsgDispacher()
 }
 
 // // 注册消息处理器
-// bool MsgDispacher::RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt)
+// bool MsgDispatcher::RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt)
 // {
 // 	if (!handler_pt)
 // 		return false;
@@ -35,13 +35,13 @@ MsgDispacher::~MsgDispacher()
 // 	return msg_handlers_.insert(std::make_pair(msg_class, handler_pt)).second;
 // }
 // 根据msg_class获取消息处理器
-IMessageHandler* MsgDispacher::FindHandler(int32_t msg_class)
+IMessageHandler* MsgDispatcher::FindHandler(int32_t msg_class)
 {
 	auto it = msg_handlers_.find(msg_class);
 	return it != msg_handlers_.end() ? it->second : nullptr;
 }
 
-void MsgDispacher::DispachMessage()
+void MsgDispatcher::DispatchMessage()
 {
 	auto msg_pt = g_MsgQueue.PopMsg();
 	while (msg_pt)

@@ -13,7 +13,7 @@
 #include "base_server.h"
 #include "net_epoll.h"
 #include "log_module.h"
-#include "msg_dispacher.h"
+#include "msg_dispatcher.h"
 #include "msg_handler.h"
 #include "msg_queue.h"
 #include "net_message.h"
@@ -185,12 +185,12 @@ int main(int argc, char* argv[])
 
 	// 注册一个消息处理
 	// SampleMsgHandler * msg_handler = new SampleMsgHandler();
-	// g_MsgDispacher.RegisterMsgHandler(1, msg_handler);
-	g_MsgDispacher.RegisterMsgHandlerEx<SampleMsgHandler>(1);
+	// g_MsgDispatcher.RegisterMsgHandler(1, msg_handler);
+	g_MsgDispatcher.RegisterMsgHandlerEx<SampleMsgHandler>(1);
 	msg_server.Listen();
 	msg_server.AddLoopRun([](time_t cur_mtime)
 	{
-		g_MsgDispacher.DispachMessage();
+		g_MsgDispatcher.DispatchMessage();
 	});
 	msg_server.RunService();
 	// delete msg_handler;

@@ -2,7 +2,7 @@
  * Author       : mknight
  * Last modified: 2019-05-28 13:47
  * Email        : 824338670@qq.com
- * Filename     : msg_dispacher.h
+ * Filename     : msg_dispachter.h
  * Description  : 
  * ======================================================*/
 
@@ -15,15 +15,15 @@
 #include <map>
 
 class NetMessage;
-class MsgDispacher : public TSingleton<MsgDispacher>
+class MsgDispatcher : public TSingleton<MsgDispatcher>
 {
 public:
-	MsgDispacher();
-	~MsgDispacher();
+	MsgDispatcher();
+	~MsgDispatcher();
 
 public:
 	// 消息处理
-	void DispachMessage();
+	void DispatchMessage();
 	// 注册消息处理器
 	// bool RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt);
 	template<class MsgHandlerType>
@@ -53,5 +53,5 @@ protected:
 	std::map<int32_t, IMessageHandler*> msg_handlers_;
 };
 
-#define g_MsgDispacher MsgDispacher::Instance()
+#define g_MsgDispatcher MsgDispatcher::Instance()
 #endif	// __MSG_DIPACHER_H__
