@@ -10,6 +10,7 @@
 #include "msg_queue.h"
 #include "log_module.h"
 #include "net_message.h"
+#include "common_define.h"
 MsgDispacher::MsgDispacher()
 {
 }
@@ -18,8 +19,9 @@ MsgDispacher::~MsgDispacher()
 {
 	for (auto it = msg_handlers_.begin(); it != msg_handlers_.end(); ++it)
 	{
-		delete it->second;
-		it->second = nullptr;
+		// delete it->second;
+		// it->second = nullptr;
+		SAFE_DELETE_PTR(it->second);
 	}
 	msg_handlers_.clear();
 }

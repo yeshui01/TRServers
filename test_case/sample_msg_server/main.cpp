@@ -17,7 +17,7 @@
 #include "msg_handler.h"
 #include "msg_queue.h"
 #include "net_message.h"
-
+#include "common_define.h"
 #include <string>
 
 class MsgConnection : public TConnection
@@ -61,7 +61,7 @@ void MsgConnection::AfterReadData(int32_t read_size)
 		// 数据还未接受完整
 		return;
 	}
-	if (msg_head.Size() + msg_head.content_size > GetRecvBuffer().PeekDataSize())
+	if (msg_head.CalcPacketSize() > GetRecvBuffer().PeekDataSize())
 	{
 		// 数据还未接受完整
 		return;
@@ -72,7 +72,7 @@ void MsgConnection::AfterReadData(int32_t read_size)
 	// 	// 数据还未接受完整
 	// 	return;
 	// }
-	int32_t packet_size = msg_head.Size() + msg_head.content_size;
+	int32_t packet_size = msg_head.CalcPacketSize();
 	// 读取数据包
 	TDEBUG("fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
@@ -94,8 +94,9 @@ void MsgConnection::AfterReadData(int32_t read_size)
 	else
 	{
 		TERROR("msg UnSerialize failed");
-		delete message_pt;
-		message_pt = nullptr;
+		// delete message_pt;
+		// message_pt = nullptr;
+		SAFE_DELETE_PTR(message_pt)
 	}
 	TDEBUG("after fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());

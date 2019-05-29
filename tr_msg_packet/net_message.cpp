@@ -200,6 +200,10 @@ bool NetMessage::Serialize(char * buffer, int32_t buffer_len)
 	{
 		memcpy(buffer+msg_head_.Size(), content_.c_str(), content_.length());
 	}
+	else
+	{
+		return false;
+	}
 	return true;	
 }
 
@@ -241,6 +245,11 @@ bool NetMessage::UnSerialize(const char * buffer, const int32_t buffer_len)
 	if (msg_head_.UnSerialize(buffer, buffer_len))
 	{
 		content_ = std::string(reinterpret_cast<const char*>(buffer + msg_head_.Size()), SerializeByteNum() - HeadSize());
+	}
+	else 
+	{
+		msg_head_.Reset();
+		return false;
 	}
 	return true;
 }
