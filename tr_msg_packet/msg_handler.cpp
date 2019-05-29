@@ -19,7 +19,7 @@ IMessageHandler::~IMessageHandler()
 
 }
 
-EMsgHandleResult IMessageHandler::HandleMsg(int32_t msg_type, const NetMessage * messag_pt)
+EMsgHandleResult IMessageHandler::HandleMsg(int32_t msg_type, TConnection *session_pt, const NetMessage * messag_pt)
 {
 	if (!messag_pt)
 		return EMsgHandleResult::E_MSG_HANDLE_NOT_RETURN;
@@ -27,7 +27,8 @@ EMsgHandleResult IMessageHandler::HandleMsg(int32_t msg_type, const NetMessage *
 	auto it_handle_fun = msg_handlers_.find(msg_type);
 	if (it_handle_fun != msg_handlers_.end())
 	{
-		return it_handle_fun->second(const_cast<TConnection*>(messag_pt->GetConnection()), messag_pt);
+		// return it_handle_fun->second(const_cast<TConnection*>(messag_pt->GetConnection()), messag_pt);
+		return it_handle_fun->second(session_pt, messag_pt);
 	}
 	else
 	{

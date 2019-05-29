@@ -30,7 +30,7 @@ public:
 	virtual ~IMessageHandler();
 
 	// 处理消息入口
-	virtual EMsgHandleResult HandleMsg(int32_t msg_type, const NetMessage * messag_pt);
+	virtual EMsgHandleResult HandleMsg(int32_t msg_type, TConnection *session_pt, const NetMessage * messag_pt);
 	// 绑定消息处理接口
 	virtual void BindMsgHandle() = 0;
 	// 获取返回消息的内容

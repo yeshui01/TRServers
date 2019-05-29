@@ -50,7 +50,7 @@ void MsgDispacher::DispachMessage()
 		auto msg_handler = FindHandler(msg_class);
 		if (msg_handler)
 		{
-			EMsgHandleResult handle_result = msg_handler->HandleMsg(msg_pt->GetMsgType(), msg_pt);
+			EMsgHandleResult handle_result = msg_handler->HandleMsg(msg_pt->GetMsgType(), msg_pt->GetConnection(), msg_pt);
 			if (EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT == handle_result)
 			{
 				// 要返回数据
