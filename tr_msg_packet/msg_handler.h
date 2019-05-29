@@ -21,6 +21,8 @@ enum class EMsgHandleResult : int32_t
 };
 
 class NetMessage;
+class TConnection;
+
 class IMessageHandler
 {
 public:
@@ -40,8 +42,10 @@ protected:
 	std::string rep_content_;
 	// 消息类型对应的处理成员
 	// key:msg_type value:member function ptr
-	std::map<int32_t, std::function<EMsgHandleResult (const NetMessage * messag_pt)> > msg_handlers_;
+	std::map<int32_t, std::function<EMsgHandleResult (TConnection *session_pt, const NetMessage * messag_pt) > > msg_handlers_;
 };
 
+
+#define MSG_BIND_HANDLER(MSG_TYPE, CLASS_NAME, MEMBER_FUN) msg_handlers_.insert(std::make_pair(MSG_TYPE, std::bind(&CLASS_NAME::MEMBER_FUN, this, std::placeholders::_1, std::placeholders::_2)));
 #endif  // __MSG_HANDLER_H__
 

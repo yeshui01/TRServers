@@ -269,3 +269,8 @@ TConnection * NetMessage::GetConnection()
 {
 	return connection_pt_;
 }
+
+TConnection * NetMessage::GetConnection() const
+{
+	return connection_pt_;
+}

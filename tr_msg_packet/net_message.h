@@ -46,7 +46,7 @@ struct NetMsgHead
   bool UnSerialize(const char * buffer, const int32_t buffer_len);
 
   int32_t ContentSize();
-  
+
   int32_t CalcPacketSize();
 public:
   int32_t msg_class = 0;
@@ -113,7 +113,7 @@ public:
   void SetConnection(TConnection * connection_pt);
   // 获取连接
   TConnection * GetConnection();
-
+  TConnection * GetConnection() const;
 protected:
   TConnection * connection_pt_ = nullptr;	// 消息对应的连接
   // int32_t msg_class_/* = 0*/;

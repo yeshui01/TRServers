@@ -141,7 +141,7 @@ public:
 	virtual void BindMsgHandle();
 
 protected:
-	EMsgHandleResult MsgRepTest(const NetMessage * message_pt);
+	EMsgHandleResult MsgRepTest(TConnection * session_pt, const NetMessage * message_pt);
 };
 
 SampleMsgHandler::SampleMsgHandler()
@@ -157,10 +157,11 @@ SampleMsgHandler::~SampleMsgHandler()
 // 绑定消息处理接口
 void SampleMsgHandler::BindMsgHandle()
 {
-	msg_handlers_.insert(std::make_pair(1, std::bind(&SampleMsgHandler::MsgRepTest, this, std::placeholders::_1)));
+	// msg_handlers_.insert(std::make_pair(1, std::bind(&SampleMsgHandler::MsgRepTest, this, std::placeholders::_1, std::placeholders::_2)));
+	MSG_BIND_HANDLER(1, SampleMsgHandler, MsgRepTest);
 }
 
-EMsgHandleResult SampleMsgHandler::MsgRepTest(const NetMessage * message_pt)
+EMsgHandleResult SampleMsgHandler::MsgRepTest(TConnection * session_pt, const NetMessage * message_pt)
 {
 	TDEBUG("MsgRepTest");
 	rep_content_ = "test rep msg";

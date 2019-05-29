@@ -92,10 +92,16 @@ int main(int argc, char* argv[])
 	}
 	
 	auto start_time = std::chrono::system_clock::now();
+	static std::vector<std::string> s_test_content = {
+		"hello req msg server!",
+		"hello req msg server! 11111111",
+		"hello req msg server! 2222222222222",
+		"hello req msg server! 333"
+	};
 	for (int32_t i = 0; i < count; ++i)
 	{
 		TDEBUG("client ready send data");
-		std::string data = "hello req msg server!";
+		std::string data = s_test_content[i%s_test_content.size()];
 		char buffer[1024];
 		NetMessage net_message(1, 1);
 		net_message.SetContent(data);
