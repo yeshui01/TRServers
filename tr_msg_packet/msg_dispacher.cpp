@@ -16,16 +16,22 @@ MsgDispacher::MsgDispacher()
 
 MsgDispacher::~MsgDispacher()
 {
+	for (auto it = msg_handlers_.begin(); it != msg_handlers_.end(); ++it)
+	{
+		delete it->second;
+		it->second = nullptr;
+	}
+	msg_handlers_.clear();
 }
 
-// 注册消息处理器
-bool MsgDispacher::RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt)
-{
-	if (!handler_pt)
-		return false;
-	handler_pt->BindMsgHandle();
-	return msg_handlers_.insert(std::make_pair(msg_class, handler_pt)).second;
-}
+// // 注册消息处理器
+// bool MsgDispacher::RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt)
+// {
+// 	if (!handler_pt)
+// 		return false;
+// 	handler_pt->BindMsgHandle();
+// 	return msg_handlers_.insert(std::make_pair(msg_class, handler_pt)).second;
+// }
 // 根据msg_class获取消息处理器
 IMessageHandler* MsgDispacher::FindHandler(int32_t msg_class)
 {
@@ -56,13 +62,13 @@ void MsgDispacher::DispachMessage()
 					if (connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_CONNECTED
 						|| connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_BE_CONNECT)
 					{
-						char msg_buffer[1024] = "";
+						char msg_buffer[10240] = "";
 						net_message.SetConnection(connection_pt);
 						// 发送数据
 						int32_t msg_total_size = net_message.SerializeByteNum();
 						if (msg_total_size > sizeof(msg_buffer))
 						{
-							TERROR("msg_total_size is tool large, msg_total_size:" << msg_total_size);
+							TERROR("msg_total_size is too large, msg_total_size:" << msg_total_size);
 							// 采用动态内存分配
 							char * new_tmp_buffer = new char[msg_total_size];
 							net_message.Serialize(new_tmp_buffer, msg_total_size);

@@ -45,42 +45,57 @@ void MsgConnection::AfterReadData(int32_t read_size)
 		<< ", read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
 	// 读取消息到消息队列
-	static const int32_t head_size = 32;
-	if (GetRecvBuffer().PeekDataSize() < head_size)
+	// static const int32_t head_size = 32;
+	NetMsgHead msg_head;
+	if (GetRecvBuffer().PeekDataSize() < msg_head.Size())
 		return;
 	// peek 数据包头
-	char buffer_head[32] = "";
+	char buffer_head[216] = "";
 	
-	int32_t real_read_size = GetRecvBuffer().ReadData(buffer_head, sizeof(buffer_head), true);
-	if (real_read_size < head_size)
+	int32_t real_read_size = GetRecvBuffer().ReadData(buffer_head, msg_head.Size(), true);
+	if (real_read_size < msg_head.Size())
 		return;
 
-	int32_t * head_size_pt = reinterpret_cast<int32_t*>(buffer_head);
-	if (*head_size_pt > GetRecvBuffer().PeekDataSize())
+	if (!msg_head.UnSerialize(buffer_head, sizeof(buffer_head)))
 	{
 		// 数据还未接受完整
 		return;
 	}
+	if (msg_head.Size() + msg_head.content_size > GetRecvBuffer().PeekDataSize())
+	{
+		// 数据还未接受完整
+		return;
+	}
+	// int32_t * head_size_pt = reinterpret_cast<int32_t*>(buffer_head);
+	// if (*head_size_pt > GetRecvBuffer().PeekDataSize())
+	// {
+	// 	// 数据还未接受完整
+	// 	return;
+	// }
+	int32_t packet_size = msg_head.Size() + msg_head.content_size;
 	// 读取数据包
 	TDEBUG("fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
 	char packet_buffer[1024] = "";
-	GetRecvBuffer().ReadData(packet_buffer, *head_size_pt);
+	GetRecvBuffer().ReadData(packet_buffer, packet_size);
 	NetMessage * message_pt = new NetMessage();
-	if (message_pt->UnSerialize(packet_buffer, *head_size_pt))
+	if (message_pt->UnSerialize(packet_buffer, packet_size))
 	{
 		message_pt->SetConnection(this);
 		g_MsgQueue.AddMsg(message_pt);
-		TDEBUG("add new msg to queue, head_size:" << *head_size_pt << ",msg_class:" << message_pt->GetMsgClass()
+		TDEBUG("add new msg to queue, head_size:" << msg_head.Size() << ",msg_class:" << message_pt->GetMsgClass()
 			<< ", msg_type:" << message_pt->GetMsgType()
 			<< ", req_no:" << message_pt->GetReqNo()
 			<< ", rep_no:" << message_pt->GetRepNo()
 			<< ", confirm:" << message_pt->GetConfirm()
+			<< ", content_size:" << msg_head.ContentSize()
 			<< ", content:" << message_pt->GetContent());
 	}
 	else
 	{
 		TERROR("msg UnSerialize failed");
+		delete message_pt;
+		message_pt = nullptr;
 	}
 	TDEBUG("after fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
@@ -167,15 +182,15 @@ int main(int argc, char* argv[])
 	TDEBUG("bind addr, port:" << port);
 
 	// 注册一个消息处理
-	SampleMsgHandler * msg_handler = new SampleMsgHandler();
-	g_MsgDispacher.RegisterMsgHandler(1, msg_handler);
-
+	// SampleMsgHandler * msg_handler = new SampleMsgHandler();
+	// g_MsgDispacher.RegisterMsgHandler(1, msg_handler);
+	g_MsgDispacher.RegisterMsgHandlerEx<SampleMsgHandler>(1);
 	msg_server.Listen();
 	msg_server.AddLoopRun([](time_t cur_mtime)
 	{
 		g_MsgDispacher.DispachMessage();
 	});
 	msg_server.RunService();
-	delete msg_handler;
+	// delete msg_handler;
 	return 0;
 }

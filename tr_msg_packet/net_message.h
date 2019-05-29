@@ -12,6 +12,51 @@
 #include "net_connection.h"
 #include <string>
 
+// 消息头
+struct NetMsgHead
+{
+  NetMsgHead()
+  {
+
+  }
+
+  void Reset()
+  {
+    msg_class = 0;
+    msg_type = 0;
+    req_no = 0;
+    rep_no = 0;
+    confirm = 0;
+    content_size = 0;
+  }
+
+  int32_t Size()
+  {
+    int32_t head_size = sizeof(msg_class)
+                      + sizeof(msg_type)
+                      + sizeof(req_no)
+                      + sizeof(rep_no)
+                      + sizeof(confirm)
+                      + sizeof(content_size);
+    return head_size;
+  }
+
+  bool Serialize(char * buffer, int32_t buffer_len);
+
+  bool UnSerialize(const char * buffer, const int32_t buffer_len);
+
+  int32_t ContentSize();
+  
+  int32_t CalcPacketSize();
+public:
+  int32_t msg_class = 0;
+  int32_t msg_type = 0;
+  int64_t req_no = -1;   // 请求id
+  int64_t rep_no = -1;   // 回复id(跟请求id对应)
+  int32_t confirm = 0;   // 校验数据
+  int32_t content_size = 0; // 数据内容大小
+};
+
 class NetMessage
 {
 public:
@@ -68,14 +113,16 @@ public:
   void SetConnection(TConnection * connection_pt);
   // 获取连接
   TConnection * GetConnection();
+
 protected:
   TConnection * connection_pt_ = nullptr;	// 消息对应的连接
-  int32_t msg_class_/* = 0*/;
-  int32_t msg_type_/* = 0*/;
+  // int32_t msg_class_/* = 0*/;
+  // int32_t msg_type_/* = 0*/;
 
-  int64_t req_no_ = -1;		// 请求id
-  int64_t rep_no_ = -1;		// 回复id(跟请求id对应)
-  int32_t confirm_ = 0;		// 校验数据
+  // int64_t req_no_ = -1;		// 请求id
+  // int64_t rep_no_ = -1;		// 回复id(跟请求id对应)
+  // int32_t confirm_ = 0;		// 校验数据
+  NetMsgHead msg_head_;   // 消息头
   std::string content_;		// 消息内容
 };
 

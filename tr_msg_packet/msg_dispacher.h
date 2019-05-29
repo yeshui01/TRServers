@@ -22,9 +22,30 @@ public:
 	~MsgDispacher();
 
 public:
+	// 消息处理
 	void DispachMessage();
 	// 注册消息处理器
-	bool RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt);
+	// bool RegisterMsgHandler(int32_t msg_class, IMessageHandler * handler_pt);
+	template<class MsgHandlerType>
+	bool RegisterMsgHandlerEx(int32_t msg_class)
+	{
+		auto it = msg_handlers_.find(msg_class);
+		if (it == msg_handlers_.end())
+		{
+			MsgHandlerType * handler_pt = new MsgHandlerType();
+			auto ret = msg_handlers_.insert(std::make_pair(msg_class, handler_pt));
+			if (ret.second)
+			{
+				handler_pt->BindMsgHandle();
+			}
+			else
+			{
+				delete handler_pt;
+			}
+			return ret.second;
+		}
+		return false;
+	}
 	// 根据msg_class获取消息处理器
 	IMessageHandler* FindHandler(int32_t msg_class);
 protected:
