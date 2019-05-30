@@ -14,7 +14,7 @@
 #include "func_tools.h"
 #include <chrono>
 #include "net_message.h"
-
+#include "json/json.h"
 static void test_cycle_buffer()
 {
 	CycleBuffer<char> buffer(6);
@@ -111,13 +111,6 @@ static void test_server_time()
 
 static void test_net_message()
 {
-	// NetMessage net_msg(1, 1);
-	// std::string msg_content = "hello net message";
-	// net_msg.SetContent(msg_content);
-	// TDEBUG("msg head_size:" << net_msg.HeadSize());
-	// TDEBUG("msg serialize_size:" << net_msg.SerializeByteNum());
-	// TDEBUG("msg content:" << net_msg.GetContent());
-
 	TDEBUG("------------ msg with cycle_buffer ------------");
 	char send_buffer[1024] = "";
 	char recv_buffer[1024] = "";
@@ -143,6 +136,24 @@ static void test_net_message()
 		<< ", rep_msg.msg_type:" << rep_msg.GetMsgType());
 }
 
+static void test_jsconcpp()
+{
+	const char* str = "{\"uploadid\": \"UP000000\",\"code\": 100,\"msg\": \"\",\"files\": \"\"}";  
+
+    Json::Reader reader;  
+    Json::Value root;  
+    if (reader.parse(str, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+    {  
+        std::string upload_id = root["uploadid"].asString();  // 访问节点，upload_id = "UP000000"  
+        int code = root["code"].asInt();    // 访问节点，code = 100 
+        TDEBUG("parse json string, code = " << code << ", uploadid =" << upload_id);
+    }
+    else 
+    {
+    	TERROR("parse json string failed");
+    }
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -158,5 +169,6 @@ int main(int argc, char* argv[])
 	// test_func_tools();
 	// test_server_time();
 	test_net_message();
+	test_jsconcpp();
 	return 0;
 }

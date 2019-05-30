@@ -36,6 +36,12 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_log)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_common)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_msg_packet)
 
+#third lib include
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/third_libs/jsoncpp-src-0.5.0/include)
+
+#third lib src 
+FILE(GLOB THIRD_JSONCPP_SRC ${PROJECT_SOURCE_DIR}/third_libs/jsoncpp-src-0.5.0/src/lib_json/*.cpp)
+
 #源文件
 FILE(GLOB TIMER_SRC ${PROJECT_SOURCE_DIR}/tr_timer/*.cpp)
 FILE(GLOB COMMON_SRC ${PROJECT_SOURCE_DIR}/tr_common/*.cpp)
