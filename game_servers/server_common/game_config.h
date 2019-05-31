@@ -19,8 +19,7 @@ public:
 	~GameConfig();
 
 	void Load();
-protected:
-	EServerType server_type_ = EServerType::E_SERVER_TYPE_INVALID_SERVER;
+
 };
 
 #define g_GameConfig GameConfig::Instance()

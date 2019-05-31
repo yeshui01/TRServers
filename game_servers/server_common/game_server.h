@@ -28,7 +28,9 @@
 #include "msg_queue.h"
 #include "net_message.h"
 #include "common_define.h"
+#include "server_define.h"
 #include <string>
+
 
 class GameServer : public TBaseServer
 {
@@ -36,5 +38,8 @@ public:
 	GameServer();
 	~GameServer();
 	virtual bool Init() = 0;
+protected:
+	EServerType server_type_ = EServerType::E_SERVER_TYPE_INVALID_SERVER;
+
 };
 #endif // __TR_GAME_SERVER_H__
