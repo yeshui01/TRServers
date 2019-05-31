@@ -45,6 +45,9 @@ public:
     void SetConnectEventLimitNum(int32_t max_sock_num);
     // 设置运行阶段
     void SetRunStep(EServerRunStep e_step);
+    // 获取运行阶段
+    EServerRunStep GetRunStep() const;
+    EServerRunStep GetRunStep();
 public:
     // 接受连接
     virtual void HandleAccept();

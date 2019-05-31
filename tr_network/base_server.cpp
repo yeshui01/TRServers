@@ -229,3 +229,12 @@ bool TBaseServer::RunStepRunning()
     LoopRun();
     return true;
 }
+
+EServerRunStep TBaseServer::GetRunStep() const
+{
+    return run_step_;
+}
+EServerRunStep TBaseServer::GetRunStep()
+{
+    return run_step_;
+}

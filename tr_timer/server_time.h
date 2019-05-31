@@ -15,9 +15,9 @@
 // 每毫秒多少微秒
 #define TIME_USEC_PER_MSEC  (1000)
 // 每秒多少毫秒
-#define TIME_MSEC_PER_SEC (1000)
+#define TIME_MSEC_PER_SEC   (1000)
 // 每秒多少微妙
-#define TIME_USEC_PER_SEC (1000000)
+#define TIME_USEC_PER_SEC   (1000000)
 
 class ServerTime : public TSingleton<ServerTime>
 {
@@ -33,9 +33,9 @@ public:
     // 当前时间错，单位微秒
     time_t NowTimeUs();
 protected:
-    time_t time_usec_ = 0;      // echo时间 微妙
-    time_t time_msec_ = 0;      // echo时间 毫秒
-    time_t time_sec_ = 0;       // echo时间 秒
+    time_t time_usec_ = 0;      // epoch时间 微妙
+    time_t time_msec_ = 0;      // epoch时间 毫秒
+    time_t time_sec_ = 0;       // epoch时间 秒
     int64_t time_sec_shift_ = 0;    // 时间偏移(秒) 调时间用
 };
 
