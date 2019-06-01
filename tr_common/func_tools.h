@@ -14,7 +14,7 @@ namespace FuncTools
 {
 
 /* 两数相加求和
- * @param T : 只支持 int32_t 或者 int64_t
+ * @param T : 只支持 int32_t 或者 int64_t等数字类型
  * @param x1 : param 1
  * @param x2 : param2
  * @return : x1 + x2 final result
@@ -40,7 +40,7 @@ T SafeAdd(T x1, T x2)
 };
 
 /* 两数相减求差
- * @param T : 只支持 int32_t 或者 int64_t
+ * @param T : 只支持 int32_t 或者 int64_t等数字类型
  * @param x1 : param 1
  * @param x2 : param2
  * @return : x1 - x2 final result

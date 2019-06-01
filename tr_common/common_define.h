@@ -10,6 +10,10 @@
 #define __COMMON_DEFINE_H__
 
 
-#define SAFE_DELETE_PTR(x) if (x) delete x; x=nullptr;
+#define SAFE_DELETE_PTR(x) if (x) \
+{\
+delete x; \
+x=nullptr; \
+}
 
 #endif // __COMMON_DEFINE_H__

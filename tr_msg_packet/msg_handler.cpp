@@ -51,3 +51,19 @@ void IMessageHandler::BindMsgHandle()
 {
 
 }
+
+void IMessageHandler::AddHandleRepCallback(std::function<void (void)> && handle_finish_cb)
+{
+	v_after_msg_handle_cb_.push_back(handle_finish_cb);
+}
+
+void IMessageHandler::RunRepCallback()
+{
+	if (v_after_msg_handle_cb_.empty())
+		return;
+	for (auto & f : v_after_msg_handle_cb_)
+	{
+		f();
+	}
+	v_after_msg_handle_cb_.clear();
+}

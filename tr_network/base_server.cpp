@@ -1,3 +1,10 @@
+/********************************************************
+# Author       : mknight
+# Last modified: 2019-05-02 13:08
+# Email        : 824338670@qq.com
+# Filename     : base_server.cpp
+# Description  : 
+# *******************************************************/
 #include "base_server.h"
 #include "singleton.h"
 #include "net_epoll.h"
@@ -35,7 +42,7 @@ TConnection * TBaseServer::AllocateConnect()
 // 接受连接
 void TBaseServer::HandleAccept()
 {
-    if (epoll_->ResFdSpace() <= 0)
+    if (epoll_->RestFdSpace() <= 0)
     {
         TERROR("rest epoll fd scpace is 0");
         return;
@@ -56,7 +63,7 @@ void TBaseServer::HandleAccept()
             }
             connect_pt->SetStatus(ESocketStatus::E_SOCKET_STATUS_BE_CONNECT);
             connect_pt->SetFd(client_sock);
-            // TODO:记录对端地址
+            // TODO:记录对方的地址数据
             std::string ip = inet_ntoa(client_addr.sin_addr);
             TDEBUG("accept new connect, fd:" << client_sock << ", ip:" << ip << ", port:" << client_addr.sin_port);
             g_ConnectMgr.AddConnction(connect_pt);
@@ -237,4 +244,9 @@ EServerRunStep TBaseServer::GetRunStep() const
 EServerRunStep TBaseServer::GetRunStep()
 {
     return run_step_;
+}
+
+void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
+{
+    
 }

@@ -12,16 +12,32 @@
 #include "tr_common/common_define.h"
 #include "tr_common/singleton.h"
 #include "server_define.h"
-class GameConfig : public TSingleton<GameConfig>
+#include <string>
+#include "json/json.h"
+
+
+class ServerConfig : public TSingleton<ServerConfig>
 {
 public:
-	GameConfig();
-	~GameConfig();
+	ServerConfig();
+	~ServerConfig();
 
-	void Load();
+public:
+	// 加载服务器配置数据
+	bool Load();
+	// 清理配置数据
+	void Clear();
+	// 获取json配置
+	const Json::Value & GetJsonConfig();
+	// 获取大区id
+	int32_t GetZoneId();
+protected:
+	int32_t zone_id_ = 0;
 
+	// json配置数据缓存
+	Json::Value js_config_;
 };
 
-#define g_GameConfig GameConfig::Instance()
+#define g_ServerConfig ServerConfig::Instance()
 
 #endif // __TR_GAME_CONFIG_H__

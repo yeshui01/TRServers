@@ -24,11 +24,18 @@ public:
     using ParentClass = TSocket;
 
 public:
+    // 初始化
     virtual bool Init() = 0;
+    // 运行服务
     void RunService();
+    // 停服
     void Stop();
+    // 事件循环
     virtual void LoopRun();
+    // 分配一个连接
     virtual TConnection * AllocateConnect();
+    // 新的连接建立了
+    virtual void OnNewConnectComeIn(TConnection * new_connection);
     // 添加循环执行的函数
     void AddLoopRun(loop_func_t && func);
     // 添加连接到回收列表
@@ -40,6 +47,7 @@ public:
         connection_pool_.InitEx<T>(num);
         SetConnectEventLimitNum(num);
     }
+    // 读取数据后的处理
     void AfterReadData(int32_t read_size);
     // 设置连接队列大小
     void SetConnectEventLimitNum(int32_t max_sock_num);
@@ -48,8 +56,9 @@ public:
     // 获取运行阶段
     EServerRunStep GetRunStep() const;
     EServerRunStep GetRunStep();
+    
 public:
-    // 接受连接
+    // 接受连接处理
     virtual void HandleAccept();
     // 运行前的检查
     virtual bool RunStepCheck();

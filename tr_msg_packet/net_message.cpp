@@ -176,25 +176,6 @@ bool NetMessage::Serialize(char * buffer, int32_t buffer_len)
 	int32_t packet_size = SerializeByteNum();
 	if (buffer_len < packet_size)
 	  return false;
-	
-	// int32_t * data_pt = reinterpret_cast<int32_t*>(buffer);
-	// *data_pt = msg_head_.msg_class;		// msg_class
-	// ++data_pt;
-	// *data_pt = msg_head_.msg_type;		// msg_type
-	// ++data_pt;
-	// *data_pt = msg_head_.confirm;		// confirm
-	// ++data_pt;
-	// *data_pt = msg_head_.content_size;	// content_size
-	// ++data_pt;
-	// int64_t *big_field_pt = reinterpret_cast<int64_t*>(data_pt);
-	// *big_field_pt = req_no_;	// req_no
-	// ++big_field_pt;
-	// *big_field_pt = rep_no_;	// rep_no
-	// ++big_field_pt;
-
-	// content
-	//  = reinterpret_cast<char*>(big_field_pt);
-	// memcpy(buffer, content_.c_str(), content_.length());
 
 	if (msg_head_.Serialize(buffer, buffer_len))
 	{
@@ -220,31 +201,13 @@ bool NetMessage::UnSerialize(const char * buffer, const int32_t buffer_len)
 	
 	if (buffer_len < msg_head_.Size())
 	  return false;
-
-	// const int32_t * data_pt = reinterpret_cast<const int32_t*>(buffer);
-	// msg_head_.msg_class = *data_pt;	// msg_class
-	// ++data_pt;
-	// msg_head_.msg_type = *data_pt;	// msg_type
-	// ++data_pt;
-	// msg_head_.confirm = *data_pt;	// confirm
-	// ++data_pt;
-	// msg_head.content_size = *data_pt;	// content_size
-	// ++data_pt;
-	// if (msg_head_.Size() + msg_head_.content_size > buffer_len)
-	// {
-	// 	return false;
-	// }
-	// const int64_t *big_field_pt = reinterpret_cast<const int64_t*>(data_pt);
-	// req_no_ = *big_field_pt;
-	// ++big_field_pt;
-	// rep_no_ = *big_field_pt;
-	// ++big_field_pt;
-	// // content
-	// content_ = std::string(reinterpret_cast<const char*>(big_field_pt), SerializeByteNum() - HeadSize());
 	
 	if (msg_head_.UnSerialize(buffer, buffer_len))
 	{
-		content_ = std::string(reinterpret_cast<const char*>(buffer + msg_head_.Size()), SerializeByteNum() - HeadSize());
+		if (SerializeByteNum() - HeadSize() > 0)
+		{
+			content_ = std::string(reinterpret_cast<const char*>(buffer + msg_head_.Size()), SerializeByteNum() - HeadSize());
+		}
 	}
 	else 
 	{

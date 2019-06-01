@@ -1,3 +1,10 @@
+/********************************************************
+# Author       : mknight
+# Last modified: 2019-05-02 13:08
+# Email        : 824338670@qq.com
+# Filename     : connect_manager.cpp
+# Description  : 
+# *******************************************************/
 #include "connect_manager.h"
 #include "net_common.h"
 #include "log_module.h"

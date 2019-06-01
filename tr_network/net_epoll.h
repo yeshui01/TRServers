@@ -29,7 +29,7 @@ public:
     // 创建epoll
     void Create(int32_t size);
     // 获取剩余能够监听的套接字最大数量
-    int32_t ResFdSpace();
+    int32_t RestFdSpace();
 protected:
     int32_t ep_fd_ = INVALID_SOCKET_FD;     // epoll套接字
     int32_t max_size_ = 1;                  // 最大监听数量

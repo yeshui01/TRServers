@@ -64,7 +64,7 @@ void MsgDispatcher::DispatchMessage()
 					if (connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_CONNECTED
 						|| connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_BE_CONNECT)
 					{
-						char msg_buffer[10240] = "";
+						static char msg_buffer[10240] = "";
 						net_message.SetConnection(connection_pt);
 						// 发送数据
 						int32_t msg_total_size = net_message.SerializeByteNum();
@@ -92,6 +92,7 @@ void MsgDispatcher::DispatchMessage()
 				{
 					TERROR("msg have no connection");
 				}
+				msg_handler->RunRepCallback();
 				msg_handler->ClearContent();
 			}
 		}

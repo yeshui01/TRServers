@@ -12,7 +12,7 @@
 #include <iostream>
 
 // tmp code, to be continue to change to log4cplusplus
-#define TDEBUG(x) std::cout << "[debug]:file[" << __FILE__ << "]line[" << __LINE__ << "]" << x << std::endl;
-#define TERROR(x) std::cerr << "[error]:file[" << __FILE__ << "]line[" << __LINE__ << "]" << x << std::endl;
+#define TDEBUG(x) std::cout << "[debug]:file[" << __FILE__ << "]\nline[" << __LINE__ << "]" << x << std::endl;
+#define TERROR(x) std::cerr << "[error]:file[" << __FILE__ << "]\nline[" << __LINE__ << "]" << x << std::endl;
 
 #endif	// __LOG_MODULE_H__

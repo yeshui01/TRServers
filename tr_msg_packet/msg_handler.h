@@ -13,6 +13,7 @@
 #include <string>
 #include <functional>
 #include <map>
+#include <vector>
 // 消息处理结果类型
 enum class EMsgHandleResult : int32_t
 {
@@ -22,6 +23,8 @@ enum class EMsgHandleResult : int32_t
 
 class NetMessage;
 class TConnection;
+
+using msg_type_handler_t = std::function<EMsgHandleResult (TConnection *session_pt, const NetMessage * messag_pt) >;
 
 class IMessageHandler
 {
@@ -37,12 +40,18 @@ public:
 	const std::string & GetRepContent();
 	// 清理返回消息的内容
 	void ClearContent();
+	// 添加消息处理后的回调处理,消息处理后立刻执行一次注册的回调
+	void AddHandleRepCallback(std::function<void (void)> && handle_finish_cb);
+	// 执行一轮消息处理后的回调
+	void RunRepCallback();
 protected:
 	// 返回消息的内容缓存
 	std::string rep_content_;
 	// 消息类型对应的处理成员
 	// key:msg_type value:member function ptr
-	std::map<int32_t, std::function<EMsgHandleResult (TConnection *session_pt, const NetMessage * messag_pt) > > msg_handlers_;
+	std::map<int32_t,  msg_type_handler_t> msg_handlers_;
+	// 处理完消息后的回调处理
+	std::vector<std::function<void (void)> > v_after_msg_handle_cb_;
 };
 
 

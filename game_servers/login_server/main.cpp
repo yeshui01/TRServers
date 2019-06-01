@@ -27,11 +27,12 @@
 #include "common_define.h"
 #include <string>
 
-#include "game_servers/server_common/game_config.h"
+#include "game_servers/server_common/server_config.h"
+
 int main(int argc, char* argv[])
 {
 	TDEBUG("hello login server");
-	g_GameConfig.Load();
+	// g_GameConfig.Load();
 	// if (argc < 2)
 	// {
 	// 	TERROR("argc num error!!");

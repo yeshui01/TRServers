@@ -140,7 +140,7 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
     return code;
 }
 
-int32_t Epoll::ResFdSpace()
+int32_t Epoll::RestFdSpace()
 {
     return max_size_ - register_sockets_.size();
 }
