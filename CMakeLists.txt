@@ -36,9 +36,15 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_log)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_common)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tr_msg_packet)
 
+#设置库文件包含路径
+LINK_DIRECTORIES(/usr/local/lib/)
+LINK_DIRECTORIES(/usr/local/lib64/)
+LINK_DIRECTORIES(/usr/lib/)
+LINK_DIRECTORIES(/usr/lib64/)
+
 #third lib include
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/third_libs/jsoncpp-src-0.5.0/include)
-
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/third_libs/mysql_include/jdbc)
 #源文件
 FILE(GLOB TIMER_SRC ${PROJECT_SOURCE_DIR}/tr_timer/*.cpp)
 FILE(GLOB COMMON_SRC ${PROJECT_SOURCE_DIR}/tr_common/*.cpp)

@@ -15,6 +15,22 @@
 #include <chrono>
 #include "net_message.h"
 #include "json/json.h"
+
+#include "mysql_connection.h"
+
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
+#include "test.pb.h"
+
+#include <log4cplus/logger.h>
+#include <log4cplus/configurator.h>
+#include <log4cplus/helpers/stringhelper.h>
+#include <log4cplus/loggingmacros.h>
+
+
 static void test_cycle_buffer()
 {
 	CycleBuffer<char> buffer(6);
@@ -111,7 +127,7 @@ static void test_server_time()
 
 static void test_net_message()
 {
-	TDEBUG("------------ msg with cycle_buffer ------------");
+  TDEBUG("------------ msg with cycle_buffer ------------");
 	char send_buffer[1024] = "";
 	char recv_buffer[1024] = "";
 	CycleBuffer<char> buffer2(1024);
@@ -154,6 +170,137 @@ static void test_jsconcpp()
     }
 }
 
+static void test_mysqlconnector()
+{
+	TDEBUG("test mysql connector");
+	try
+	{
+		sql::Driver *driver;
+		sql::Connection *con = nullptr;
+		sql::Statement *stmt = nullptr;
+		sql::ResultSet *res = nullptr;
+		sql::PreparedStatement *pstmt = nullptr;
+
+		/* Create a connection */
+		driver = get_driver_instance();
+		con = driver->connect("tcp://127.0.0.1:3306", "root", "1q2w3e4r");
+		if (!con)
+		{
+			TERROR("connect database failed");
+			return;
+		}
+		TDEBUG("connect database success");
+		con->setSchema("test_db");
+		stmt = con->createStatement();
+		res = stmt->executeQuery("SELECT * from test_tb");
+		while (res->next())
+		{
+			int32_t id = res->getInt64(1);
+			std::string str = res->getString(2);
+			TDEBUG("read one data, id=" << id << ", str=" << str);
+		}
+		delete stmt;
+		delete res;
+		delete con;
+		// delete driver;
+	}
+	catch (sql::SQLException &e)
+	{
+		TDEBUG("# ERR: " << e.what());
+		TDEBUG(" (MySQL error code: " << e.getErrorCode());
+		TDEBUG("SQLState: " << e.getSQLState() << " )");
+	}
+}
+
+void test_protos()
+{
+	TDEBUG("test protos");
+	tprotos::user_info_t pb_user;
+	pb_user.set_id(1);
+	pb_user.set_name("太极");
+	std::string str;
+	pb_user.SerializeToString(&str);
+
+	tprotos::user_containers_t map_users;
+	auto pb_map = map_users.mutable_users();
+	if (!pb_map)
+	{
+		TERROR("pb_map is nullptr");
+	}
+	else
+	{
+		auto &user_map = *pb_map;
+		user_map[1] = pb_user;
+		for (auto it = user_map.begin(); it != user_map.end(); ++it)
+		{
+			TDEBUG("pb_key:" << it->first << ", user.id=" << it->second.id());
+		}
+	}
+	// 存入数据库
+	try
+	{
+		sql::Driver *driver;
+		sql::Connection *con = nullptr;
+		sql::PreparedStatement *pstmt = nullptr;
+		sql::PreparedStatement *p_stmp_read = nullptr;
+		sql::ResultSet *res = nullptr;
+		/* Create a connection */
+		driver = get_driver_instance();
+		con = driver->connect("tcp://127.0.0.1:3306", "root", "1q2w3e4r");
+		if (!con)
+		{
+			TERROR("connect database failed");
+			return;
+		}
+		TDEBUG("connect database success");
+		con->setSchema("test_db");
+		pstmt = con->prepareStatement("update test_tb set blob_data= ? where id = 1");
+		pstmt->setString(1,str);
+		pstmt->executeUpdate();
+		TDEBUG("write data to db success");
+		// 读出来反序列化
+		p_stmp_read = con->prepareStatement("select blob_data from test_tb where id = 1");
+		res = p_stmp_read->executeQuery();
+		while(res->next())
+		{
+			std::string str_blob = res->getString(1);
+			tprotos::user_info_t pb_user;
+			pb_user.ParseFromString(str_blob);
+			TDEBUG("unserialize blob proto_user");
+			TDEBUG("pb_user_info:" << pb_user.ShortDebugString());
+		}
+		delete p_stmp_read;
+		delete pstmt;
+		delete con;
+		
+		// delete driver;
+	}
+	catch (sql::SQLException &e)
+	{
+		TDEBUG("# ERR: " << e.what());
+		TDEBUG(" (MySQL error code: " << e.getErrorCode());
+		TDEBUG("SQLState: " << e.getSQLState() << " )");
+	}
+}
+
+void test_log4cplus()
+{
+	TDEBUG("test_log4cplus")
+	// static log4cplus::Logger logger = Logger::getInstance(LOG4CPLUS_TEXT("log"));
+	log4cplus::Logger logger = log4cplus::Logger::getRoot();
+	log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("log_config/test_log.properties"));
+	// LOG4CPLUS_TRACE_METHOD(logger, LOG4CPLUS_TEXT("::printDebug()"));
+	LOG4CPLUS_DEBUG(logger, "This is a DEBUG message");
+	LOG4CPLUS_INFO(logger, "This is a INFO message");
+	LOG4CPLUS_WARN(logger, "This is a WARN message");
+	LOG4CPLUS_ERROR(logger, "This is a ERROR message");
+	LOG4CPLUS_FATAL(logger, "This is a FATAL message");
+
+	g_ServerLog.Init("log_config/test_log.properties");
+	TWARN("hello");
+	// LOG4CPLUS_WARN(g_ServerLog.GetLogger(), "This is a WARN message");
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -168,7 +315,10 @@ int main(int argc, char* argv[])
 	// test_chrono();
 	// test_func_tools();
 	// test_server_time();
-	test_net_message();
-	test_jsconcpp();
+	// test_net_message();
+	// test_jsconcpp();
+	// test_mysqlconnector();
+	// test_protos();
+	test_log4cplus();
 	return 0;
 }
