@@ -63,22 +63,23 @@ void TBaseServer::HandleAccept()
             }
             connect_pt->SetStatus(ESocketStatus::E_SOCKET_STATUS_BE_CONNECT);
             connect_pt->SetFd(client_sock);
-            // TODO:记录对方的地址数据
+            // 记录对方的地址数据
             std::string ip = inet_ntoa(client_addr.sin_addr);
             TDEBUG("accept new connect, fd:" << client_sock << ", ip:" << ip << ", port:" << client_addr.sin_port);
-            g_ConnectMgr.AddConnction(connect_pt);
-            connect_pt->AttachServer(this);
-            // 添加到epoll
-            auto epoll_pt = GetEpoll();
-            if (epoll_pt)
-            {
-                connect_pt->SetNoblocking();
-                epoll_pt->RegSockEvent(connect_pt, EPOLLIN | EPOLLOUT | EPOLLERR);
-            }
-            else
-            {
-                TERROR("epoll_pt is null");
-            }
+            // g_ConnectMgr.AddConnction(connect_pt);
+            // connect_pt->AttachServer(this);
+            // // 添加到epoll
+            // auto epoll_pt = GetEpoll();
+            // if (epoll_pt)
+            // {
+            //     connect_pt->SetNoblocking();
+            //     epoll_pt->RegSockEvent(connect_pt, EPOLLIN | EPOLLOUT | EPOLLERR);
+            // }
+            // else
+            // {
+            //     TERROR("epoll_pt is null");
+            // }
+            OnNewConnectComeIn(connect_pt);
         }
         else
         {
@@ -110,11 +111,16 @@ void TBaseServer::RunService()
         TERROR("server init failed");
         return;
     }
+    TINFO("run service");
     // 注册epoll监听
     SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_CHECK);
     while (!stop_)
     {
         g_ServerTime.UpdateTime();
+        if (run_step_ >= EServerRunStep::E_SERVER_RUN_STEP_LISTEN)
+        {
+            epoll_ptr_->EventsWatch();
+        }
         switch (run_step_)
         {
             case EServerRunStep::E_SERVER_RUN_STEP_CHECK:
@@ -128,12 +134,19 @@ void TBaseServer::RunService()
             case EServerRunStep::E_SERVER_RUN_STEP_LISTEN:
             {
                 epoll_ptr_->RegSockEvent(this, EPOLLIN);
-                SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_RUNNING);
+                SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_WILL_RUNNING);
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_WILL_RUNNING:
+            {
+                if (RunStepWillRun())
+                {
+                    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_RUNNING);
+                }
                 break;
             }
             case EServerRunStep::E_SERVER_RUN_STEP_RUNNING:
             {
-                epoll_ptr_->EventsWatch();
                 RunStepRunning();
                 break;
             }
@@ -148,7 +161,7 @@ void TBaseServer::RunService()
         // 回收连接
         RecycleConnections();
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(30));
     }
 }
 
@@ -162,6 +175,7 @@ void TBaseServer::Stop()
             connect_pt->Close();
         }
     });
+    Close();
     stop_ = true;
     SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_STOP);
 }
@@ -248,5 +262,22 @@ EServerRunStep TBaseServer::GetRunStep()
 
 void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
 {
-    
+    g_ConnectMgr.AddConnction(new_connection);
+    new_connection->AttachServer(this);
+    // 添加到epoll
+    auto epoll_pt = GetEpoll();
+    if (epoll_pt)
+    {
+        new_connection->SetNoblocking();
+        epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLOUT | EPOLLERR);
+    }
+    else
+    {
+        TERROR("epoll_pt is null");
+    }
+}
+
+bool TBaseServer::RunStepWillRun()
+{
+    return true;
 }

@@ -1,12 +1,12 @@
 /*=======================================================
 # Author       : mknight
-# Last modified: 2019-06-01 13:01
+# Last modified: 2019-06-29 15:04
 # Email        : 824338670@qq.com
-# Filename     : login_server.h
+# Filename     : center_server.h
 # Description  : 
 # =======================================================*/
-#ifndef __TR_LOGIN_SERVER_H__
-#define __TR_LOGIN_SERVER_H__
+#ifndef __TR_CENTER_SERVER_H__
+#define __TR_CENTER_SERVER_H__
 
 #include <iostream>
 #include <string>
@@ -32,12 +32,12 @@
 #include "server_common/game_server.h"
 #include <string>
 
-using LoginParentClass = GameServer;
-class LoginServer : public GameServer
+using CenterParentClass = GameServer;
+class CenterServer : public GameServer
 {
 public:
-	LoginServer(int32_t index);
-	~LoginServer();
+	CenterServer(int32_t index);
+	~CenterServer();
 	virtual bool Init();
 public:
     // 新的连接建立了
@@ -50,4 +50,4 @@ public:
     virtual bool RunStepWillRun();
 };
 
-#endif 	// __TR_LOGIN_SERVER_H__
+#endif 	// __TR_CENTER_SERVER_H__

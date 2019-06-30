@@ -1,12 +1,12 @@
 /*=======================================================
 # Author       : mknight
-# Last modified: 2019-06-01 13:02
+# Last modified: 2019-06-29 15:05
 # Email        : 824338670@qq.com
-# Filename     : login_server.cpp
+# Filename     : root_server.cpp
 # Description  : 
 # =======================================================*/
 
-#include "login_server.h"
+#include "root_server.h"
 #include "server_common/server_config.h"
 #include "tr_timer/time_wheel.h"
 #include "log_module.h"
@@ -27,18 +27,18 @@
 #include "server_common/server_session.h"
 #include <string>
 
-LoginServer::LoginServer(int32_t index):GameServer(index)
+RootServer::RootServer(int32_t index):GameServer(index)
 {
-    server_type_ = EServerType::E_SERVER_TYPE_LOGIN_SERVER;
-    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN;
+    server_type_ = EServerType::E_SERVER_TYPE_ROOT_SERVER;
+    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT;
 }
 
-LoginServer::~LoginServer()
+RootServer::~RootServer()
 {
 
 }
 
-bool LoginServer::Init()
+bool RootServer::Init()
 {
     if (!g_ServerConfig.Load())
     {
@@ -48,36 +48,31 @@ bool LoginServer::Init()
 }
 
 // 运行前的检查
-bool LoginServer::RunStepCheck()
+bool RootServer::RunStepCheck()
 {
-    if (!StartLocalListen("login_server"))
+    if (!StartLocalListen("root_server"))
     {
         Stop();
         return false;
     }
-    // if (!BootUpConnectServer())
-    // {
-    //     Stop();
-    //     TERROR("boot up connect failed");
-    //     return false;
-    // }
+    
     return true;
 }
 
 // 正常运行
-bool LoginServer::RunStepRunning()
+bool RootServer::RunStepRunning()
 {
-    LoginParentClass::RunStepRunning();
+    RootParentClass::RunStepRunning();
     return true;
 }
 
-void LoginServer::OnNewConnectComeIn(TConnection * new_connection)
+void RootServer::OnNewConnectComeIn(TConnection * new_connection)
 {
-    LoginParentClass::OnNewConnectComeIn(new_connection);
+    RootParentClass::OnNewConnectComeIn(new_connection);
 }
 
 // 即将运行
-bool LoginServer::RunStepWillRun()
+bool RootServer::RunStepWillRun()
 {
-    return LoginParentClass::RunStepWillRun();
+    return RootParentClass::RunStepWillRun();
 }

@@ -28,10 +28,22 @@
 #include <string>
 
 #include "game_servers/server_common/server_config.h"
+#include "login_server.h"
+
+
+#include <log4cplus/logger.h>
+#include <log4cplus/configurator.h>
+#include <log4cplus/helpers/stringhelper.h>
+#include <log4cplus/loggingmacros.h>
 
 int main(int argc, char* argv[])
 {
+	log4cplus::Logger logger = log4cplus::Logger::getRoot();
+	// log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("log_config/login_server_log.properties"));
+	g_ServerLog.Init("log_config/login_server_log.properties");
 	TDEBUG("hello login server");
+	LoginServer login_server(0);
+	login_server.RunService();
 	// g_GameConfig.Load();
 	// if (argc < 2)
 	// {

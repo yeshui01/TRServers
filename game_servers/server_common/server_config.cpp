@@ -20,7 +20,6 @@ ServerConfig::~ServerConfig()
 bool ServerConfig::Load()
 {
     Json::Reader reader;
-    Json::Value js_config_;
     std::ifstream fs;
     fs.open("server_config.json", std::ios::binary);
     if (!fs.is_open())
@@ -44,7 +43,6 @@ bool ServerConfig::Load()
     }
     zone_id_ = js_config_["zone_id"].asInt();
     TDEBUG("config zone_id:" << zone_id_);
-
     return true;
 }
 

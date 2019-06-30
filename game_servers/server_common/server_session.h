@@ -23,13 +23,13 @@ struct SessionChannelInfo
 {
     void Reset()
     {
-        server_type = EServerType::E_SERVER_TYPE_INVALID_SERVER;
+        node_type = EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE;
         user_id = 0;
         server_index = 0;
         server_id = 0;
     }
     // 对应的服务器类型
-    EServerType server_type = EServerType::E_SERVER_TYPE_INVALID_SERVER;
+    EServerRouteNodeType node_type = EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE;
     // 服务器的idex标号
     int32_t server_index = 0;
     // 服务器id
@@ -56,9 +56,11 @@ public:
     // 获取通道信息
     const SessionChannelInfo & GetChannleInfo();
     // 设置通道服务器信息
-    void SetChannelServerInfo(EServerType server_type, int32_t index_id, int32_t server_id);
+    void SetChannelServerInfo(EServerRouteNodeType route_type, int32_t index_id, int32_t server_id);
     // 设置通道客户端标识
     void SetChannelUserId(int64_t user_id);
+    // 计算服务器id
+    static int32_t CalcServerId(EServerRouteNodeType route_type, int32_t index_id);
 protected:
     // 通道类型
     ESessionChannelType channel_type_ = ESessionChannelType::E_CHANNEL_NONE;

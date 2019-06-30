@@ -62,6 +62,8 @@ public:
     virtual void HandleAccept();
     // 运行前的检查
     virtual bool RunStepCheck();
+    // 即将运行
+    virtual bool RunStepWillRun();
     // 正常运行
     virtual bool RunStepRunning(); 
 protected:

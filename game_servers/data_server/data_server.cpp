@@ -1,12 +1,12 @@
 /*=======================================================
 # Author       : mknight
-# Last modified: 2019-06-01 13:02
+# Last modified: 2019-06-29 15:05
 # Email        : 824338670@qq.com
-# Filename     : login_server.cpp
+# Filename     : data_server.cpp
 # Description  : 
 # =======================================================*/
 
-#include "login_server.h"
+#include "data_server.h"
 #include "server_common/server_config.h"
 #include "tr_timer/time_wheel.h"
 #include "log_module.h"
@@ -27,18 +27,18 @@
 #include "server_common/server_session.h"
 #include <string>
 
-LoginServer::LoginServer(int32_t index):GameServer(index)
+DataServer::DataServer(int32_t index):GameServer(index)
 {
-    server_type_ = EServerType::E_SERVER_TYPE_LOGIN_SERVER;
-    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN;
+    server_type_ = EServerType::E_SERVER_TYPE_DATA_SERVER;
+    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA;
 }
 
-LoginServer::~LoginServer()
+DataServer::~DataServer()
 {
 
 }
 
-bool LoginServer::Init()
+bool DataServer::Init()
 {
     if (!g_ServerConfig.Load())
     {
@@ -48,9 +48,9 @@ bool LoginServer::Init()
 }
 
 // 运行前的检查
-bool LoginServer::RunStepCheck()
+bool DataServer::RunStepCheck()
 {
-    if (!StartLocalListen("login_server"))
+    if (!StartLocalListen("data_server"))
     {
         Stop();
         return false;
@@ -65,19 +65,19 @@ bool LoginServer::RunStepCheck()
 }
 
 // 正常运行
-bool LoginServer::RunStepRunning()
+bool DataServer::RunStepRunning()
 {
-    LoginParentClass::RunStepRunning();
+    DataParentClass::RunStepRunning();
     return true;
 }
 
-void LoginServer::OnNewConnectComeIn(TConnection * new_connection)
+void DataServer::OnNewConnectComeIn(TConnection * new_connection)
 {
-    LoginParentClass::OnNewConnectComeIn(new_connection);
+    DataParentClass::OnNewConnectComeIn(new_connection);
 }
 
 // 即将运行
-bool LoginServer::RunStepWillRun()
+bool DataServer::RunStepWillRun()
 {
-    return LoginParentClass::RunStepWillRun();
+    return  DataParentClass::RunStepWillRun();
 }

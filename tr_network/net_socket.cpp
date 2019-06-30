@@ -278,7 +278,7 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         {
             // 放到缓冲区等下次发送
             TDEBUG("send data be write to send buffer");
-            send_buffer_.WriteData(buffer + send_size, buffer_size - send_size);
+            send_buffer_.WriteDataToHead(buffer + send_size, buffer_size - send_size);
         }
     }
     else 
@@ -324,7 +324,6 @@ void TSocket::HandleRecvError()
 
 void TSocket::AfterReadData(int32_t read_size)
 {
-    // TODO:需要处理数据了
 }
 void TSocket::HandleSendError()
 {

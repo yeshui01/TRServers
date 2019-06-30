@@ -22,6 +22,7 @@
 #include "net_message.h"
 #include "common_define.h"
 #include <string>
+#include "server_info_manager.h"
 ServerSession::ServerSession() : TConnection()
 {
 
@@ -109,8 +110,12 @@ void ServerSession::AfterReadData(int32_t read_size)
 
 void ServerSession::OnClose()
 {
-    // TODO:
-
+	if (GetChannelType() == ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER)
+	{
+		g_ServerManager.DeleteServerInfo(GetConnId());
+	}
+	channel_type_ = ESessionChannelType::E_CHANNEL_NONE;
+	channel_info_.Reset();
     TConnection::OnClose();
 }
 
@@ -137,17 +142,17 @@ const SessionChannelInfo & ServerSession::GetChannleInfo()
 }
 
 // 设置通道服务器信息
-void ServerSession::SetChannelServerInfo(EServerType server_type, int32_t index_id, int32_t server_id)
+void ServerSession::SetChannelServerInfo(EServerRouteNodeType route_type, int32_t index_id, int32_t server_id)
 {
-	if (channel_info_.server_type == EServerType::E_SERVER_TYPE_INVALID_SERVER)
+	if (channel_info_.node_type == EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE)
 	{
-		channel_info_.server_type = server_type;
+		channel_info_.node_type = route_type;
 		channel_info_.server_index = index_id;
 		channel_info_.server_id = server_id;
 	}
 	else 
 	{
-		TERROR("set channel server info failed, because server_type is binded to :" << (int32_t)(channel_info_.server_type));
+		TERROR("set channel server info failed, because server_type is binded to :" << (int32_t)(channel_info_.node_type));
 	}
 }
 // 设置通道客户端标识
@@ -161,4 +166,9 @@ void ServerSession::SetChannelUserId(int64_t user_id)
 	{
 		TERROR("set channel user info failed, because user_id is binded to :" << channel_info_.user_id);
 	}
+}
+
+int32_t ServerSession::CalcServerId(EServerRouteNodeType route_type, int32_t index_id)
+{
+	return index_id * 100 + int32_t(route_type);
 }

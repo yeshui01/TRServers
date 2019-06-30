@@ -36,23 +36,79 @@ static void test_cycle_buffer()
 	CycleBuffer<char> buffer(6);
 	std::string str = "hello world";
 	std::string str2 = "hello worl2";
-	buffer.WriteData(str.c_str(), str.size() + 1);
-	TDEBUG("buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
-	char buffer_test[1024];
-	int32_t readed_size = buffer.ReadData(buffer_test, 1024, true);
-	TDEBUG("PeekData buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace()
-		<< ",readed_size:" << readed_size);
-	// buffer.GrowSpace(10);
-	// TDEBUG("GrowSpace buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
-	TDEBUG("buffer_test:" << buffer_test);
-	readed_size = buffer.ReadData(buffer_test, 1024);
-	TDEBUG("readed_size222:" << readed_size);
-	TDEBUG("buffer_test222:" << buffer_test);
-	TDEBUG("ReadData buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
-	buffer.WriteData(str2.c_str(), str2.size() + 1);
-	readed_size = buffer.ReadData(buffer_test, 1024);
-	TDEBUG("buffer_test2:" << buffer_test);
-	TDEBUG("ReadData22 buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+	char buffer_test[1024] = "";
+	int32_t readed_size = 0;
+	// buffer.WriteData(str.c_str(), str.size() + 1);
+	// TDEBUG("buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+	// int32_t readed_size = buffer.ReadData(buffer_test, 1024, true);
+	// TDEBUG("PeekData buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace()
+	// 	<< ",readed_size:" << readed_size);
+	// // buffer.GrowSpace(10);
+	// // TDEBUG("GrowSpace buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+	// TDEBUG("buffer_test:" << buffer_test);
+	// readed_size = buffer.ReadData(buffer_test, 1024);
+	// TDEBUG("readed_size222:" << readed_size);
+	// TDEBUG("buffer_test222:" << buffer_test);
+	// TDEBUG("ReadData buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+	// buffer.WriteData(str2.c_str(), str2.size() + 1);
+	// readed_size = buffer.ReadData(buffer_test, 1024);
+	// TDEBUG("buffer_test2:" << buffer_test);
+	// TDEBUG("ReadData22 buffer.data_size:" << buffer.PeekDataSize() << ", space:" << buffer.GetSpace() << ", restspace:" << buffer.GetRestSpace());
+
+	// std::string str3 = "6789";
+	// std::string str4 = "12345";
+	// CycleBuffer<char> buffer2(10);
+	// buffer2.WriteData("6789", 4);
+	// TDEBUG("WriteData:" << buffer2.PeekDataSize() 
+	// 	<< ", space:" << buffer2.GetSpace() 
+	// 	<< ", restspace:" << buffer2.GetRestSpace()
+	// 	<< ", read_index:" << buffer2.GetReadIndex()
+	// 	<< ", write_index:" << buffer2.GetWriteIndex());
+	// buffer2.WriteDataToHead("12345", 5);
+	// TDEBUG("WriteDataToHead:" << buffer2.PeekDataSize() 
+	// 	<< ", space:" << buffer2.GetSpace() 
+	// 	<< ", restspace:" << buffer2.GetRestSpace()
+	// 	<< ", read_index:" << buffer2.GetReadIndex()
+	// 	<< ", write_index:" << buffer2.GetWriteIndex());
+	// readed_size = buffer2.ReadData(buffer_test, 1024);
+	// buffer_test[9] = '\0';
+	// TDEBUG("buffer_test2:" << buffer_test);
+	// TDEBUG("ReadData4 buffer.data_size:" << buffer2.PeekDataSize() 
+	// 	<< ", space:" << buffer2.GetSpace() 
+	// 	<< ", restspace:" << buffer2.GetRestSpace()
+	// 	<< ", read_index:" << buffer2.GetReadIndex()
+	// 	<< ", write_index:" << buffer2.GetWriteIndex());
+
+	CycleBuffer<char> buffer3(11);
+	buffer3.WriteData("123456789", 9);
+	readed_size = buffer3.ReadData(buffer_test, 6);
+	buffer3.WriteDataToHead("123456", 6);
+	
+	TDEBUG("WriteDataToHead:" << buffer3.PeekDataSize() 
+		<< ", space:" << buffer3.GetSpace() 
+		<< ", restspace:" << buffer3.GetRestSpace()
+		<< ", read_index:" << buffer3.GetReadIndex()
+		<< ", write_index:" << buffer3.GetWriteIndex());
+
+	readed_size = buffer3.ReadData(buffer_test, 1024);
+	buffer_test[9] = '\0';
+	TDEBUG("buffer_test4:" << buffer_test);
+	TDEBUG("ReadData4 buffer.data_size:" << buffer3.PeekDataSize() 
+		<< ", space:" << buffer3.GetSpace() 
+		<< ", restspace:" << buffer3.GetRestSpace()
+		<< ", read_index:" << buffer3.GetReadIndex()
+		<< ", write_index:" << buffer3.GetWriteIndex());
+
+	// buffer3.WriteDataToHead("0", 1);
+	// readed_size = buffer3.ReadData(buffer_test, 1024);
+	// buffer_test[10] = '\0';
+
+	// TDEBUG("buffer_test5:" << buffer_test);
+	// TDEBUG("ReadData5 buffer.data_size:" << buffer3.PeekDataSize() 
+	// 	<< ", space:" << buffer3.GetSpace() 
+	// 	<< ", restspace:" << buffer3.GetRestSpace()
+	// 	<< ", read_index:" << buffer3.GetReadIndex()
+	// 	<< ", write_index:" << buffer3.GetWriteIndex());
 
 }
 
@@ -309,7 +365,9 @@ int main(int argc, char* argv[])
 	  std::cout << "b = " << b << std::endl;
 	};
 	TDEBUG("hello tr servers test");
-	// test_cycle_buffer();
+	test_log4cplus();
+
+	test_cycle_buffer();
 	// test_socket();
 	// test_objpool();
 	// test_chrono();
@@ -319,6 +377,7 @@ int main(int argc, char* argv[])
 	// test_jsconcpp();
 	// test_mysqlconnector();
 	// test_protos();
-	test_log4cplus();
+	
+
 	return 0;
 }

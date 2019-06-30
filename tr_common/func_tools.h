@@ -65,6 +65,21 @@ T SafeSub(T x1, T x2)
     return x1 - x2;
 }
 
+/* 获取map的值的指针
+ *  @param dic_value : 要获取的map的对象
+ *  @param key       : 要所以的键
+ *  @return          : 值的指针，如果没有返回nullptr
+ */
+template <typename map_type>
+    typename map_type::mapped_type *GetMapValue(map_type dic_value, typename map_type::key_type key)
+    {
+        auto it = dic_value.find(key);
+        if (it != dic_value.end())
+        {
+            return &it->second;
+        }
+        return nullptr;
+    }
 }   // namespace FuncTools end
 
 

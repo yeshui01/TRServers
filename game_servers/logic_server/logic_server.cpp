@@ -1,12 +1,12 @@
 /*=======================================================
 # Author       : mknight
-# Last modified: 2019-06-01 13:02
+# Last modified: 2019-06-29 15:05
 # Email        : 824338670@qq.com
-# Filename     : login_server.cpp
+# Filename     : logic_server.cpp
 # Description  : 
 # =======================================================*/
 
-#include "login_server.h"
+#include "logic_server.h"
 #include "server_common/server_config.h"
 #include "tr_timer/time_wheel.h"
 #include "log_module.h"
@@ -27,18 +27,18 @@
 #include "server_common/server_session.h"
 #include <string>
 
-LoginServer::LoginServer(int32_t index):GameServer(index)
+LogicServer::LogicServer(int32_t index):GameServer(index)
 {
-    server_type_ = EServerType::E_SERVER_TYPE_LOGIN_SERVER;
-    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN;
+    server_type_ = EServerType::E_SERVER_TYPE_LOGIC_SERVER;
+    node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC;
 }
 
-LoginServer::~LoginServer()
+LogicServer::~LogicServer()
 {
 
 }
 
-bool LoginServer::Init()
+bool LogicServer::Init()
 {
     if (!g_ServerConfig.Load())
     {
@@ -48,9 +48,9 @@ bool LoginServer::Init()
 }
 
 // 运行前的检查
-bool LoginServer::RunStepCheck()
+bool LogicServer::RunStepCheck()
 {
-    if (!StartLocalListen("login_server"))
+    if (!StartLocalListenByIndex("logic_server", index_))
     {
         Stop();
         return false;
@@ -65,19 +65,19 @@ bool LoginServer::RunStepCheck()
 }
 
 // 正常运行
-bool LoginServer::RunStepRunning()
+bool LogicServer::RunStepRunning()
 {
-    LoginParentClass::RunStepRunning();
+    LogicParentClass::RunStepRunning();
     return true;
 }
 
-void LoginServer::OnNewConnectComeIn(TConnection * new_connection)
+void LogicServer::OnNewConnectComeIn(TConnection * new_connection)
 {
-    LoginParentClass::OnNewConnectComeIn(new_connection);
+    LogicParentClass::OnNewConnectComeIn(new_connection);
 }
 
 // 即将运行
-bool LoginServer::RunStepWillRun()
+bool LogicServer::RunStepWillRun()
 {
-    return LoginParentClass::RunStepWillRun();
+    return LogicParentClass::RunStepWillRun();
 }

@@ -95,7 +95,7 @@ public:
         }
         return total_space_ - data_size_;
     }
-    // 放入数据到, 返回实际放入的大小
+    // 放入数据到尾部, 返回实际放入的大小
     int32_t WriteData(const elem_type * data_pt, int32_t to_write_size)
     {
         if (!data_pt)
@@ -103,9 +103,9 @@ public:
         int32_t writed_size = 0;
         if (GetRestSpace() < to_write_size)
         {
-            if (!limit_grow_ && GetSpace() < MAX_SOCKET_BUFFER_SIZE)
+            if (!limit_grow_/* && GetSpace() < MAX_SOCKET_BUFFER_SIZE*/)
             {
-                GrowSpace(init_space_);
+                GrowSpace(to_write_size - GetRestSpace());
             }
             else 
             {
@@ -114,64 +114,13 @@ public:
         }
         if (to_write_size < 1)
             return 0;
-        if (write_index_ == read_index_ && GetRestSpace() == 0)
+        if (GetRestSpace() == 0)
         {
             // 数据满了，不能再写了
             return 0;
         }
         if (GetRestSpace() >= to_write_size)
         {
-            // 可以全部放入
-            // if (write_index_ == read_index_)
-            // {
-            //     // if (0 == write_index_)
-            //     // {
-            //     //     // 首次开始
-            //     //     memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * to_write_size);
-            //     //     write_index_ += to_write_size;
-            //     //     writed_size = to_write_size;
-            //     // }
-            //     // else 
-            //     // {
-            //     //     int32_t right_data_size = (v_buffer_.size() - write_index_) >= to_write_size ? to_write_size : (v_buffer_.size() - write_index_);
-            //     //     memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * right_data_size);
-            //     //     write_index_ += right_data_size;
-            //     //     if (write_index_ >= v_buffer_.size())
-            //     //         write_index_ %= v_buffer_.size();
-                
-            //     //     if (to_write_size - right_data_size > 0)
-            //     //     {
-            //     //         memcpy(&v_buffer_[write_index_], data_pt + right_data_size, sizeof(elem_type) * (to_write_size - right_data_size));
-            //     //         write_index_ += (to_write_size - right_data_size);
-            //     //     }
-            //     // }  
-            //     int32_t right_data_size = (v_buffer_.size() - write_index_) >= to_write_size ? to_write_size : (v_buffer_.size() - write_index_);
-            //     memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * right_data_size);
-            //     write_index_ += right_data_size;
-            //     if (write_index_ >= v_buffer_.size())
-            //         write_index_ %= v_buffer_.size();
-                
-            //     if (to_write_size - right_data_size > 0)
-            //     {
-            //         memcpy(&v_buffer_[write_index_], data_pt + right_data_size, sizeof(elem_type) * (to_write_size - right_data_size));
-            //         write_index_ += (to_write_size - right_data_size);
-            //     }  
-            // }
-            // else if (write_index_ > read_index_)
-            // {
-            //     int32_t right_data_size = (v_buffer_.size() - write_index_) >= to_write_size ? to_write_size : (v_buffer_.size() - write_index_);
-            //     memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * right_data_size);
-            //     write_index_ += right_data_size;
-            //     if (write_index_ >= v_buffer_.size())
-            //         write_index_ %= v_buffer_.size();
-                
-            //     if (to_write_size - right_data_size > 0)
-            //     {
-            //         memcpy(&v_buffer_[write_index_], data_pt + right_data_size, sizeof(elem_type) * (to_write_size - right_data_size));
-            //         write_index_ += (to_write_size - right_data_size);
-            //     }
-            // }
-            
             int32_t right_data_size = (v_buffer_.size() - write_index_) >= to_write_size ? to_write_size : (v_buffer_.size() - write_index_);
             memcpy(&v_buffer_[write_index_], data_pt, sizeof(elem_type) * right_data_size);
             write_index_ += right_data_size;
@@ -193,7 +142,59 @@ public:
         }
         return writed_size;
     }
+    // 写入数据到头部
+    int32_t WriteDataToHead(const elem_type * data_pt, int32_t to_write_size)
+    {
+        if (!data_pt)
+            return 0;
+        int32_t writed_size = 0;
+        if (GetRestSpace() < to_write_size)
+        {
+            if (!limit_grow_/* && GetSpace() < MAX_SOCKET_BUFFER_SIZE*/)
+            {
+                GrowSpace(to_write_size - GetRestSpace());
+            }
+            else 
+            {
+                to_write_size = GetRestSpace() >= to_write_size ? to_write_size : GetRestSpace();
+            }
+        }
+        if (to_write_size < 1)
+            return 0;
+        if (GetRestSpace() == 0)
+        {
+            // 数据满了，不能再写了
+            return 0;
+        }
+        if (GetRestSpace() >= to_write_size)
+        {
+            if (write_index_ >= read_index_)
+            {
+                int32_t shift_size = 0;
+                int32_t right_size = v_buffer_.size() - write_index_;
+                shift_size =  right_size > to_write_size ? to_write_size : right_size;
+                if (shift_size > 0)
+                {
+                    memcpy(&v_buffer_[read_index_ + shift_size], &v_buffer_[read_index_], sizeof(elem_type) * PeekDataSize());
+                    write_index_ += shift_size;
+                    if (write_index_ >= v_buffer_.size())
+                        write_index_ %= v_buffer_.size();
 
+                    read_index_ += shift_size;
+                    if (read_index_ >= v_buffer_.size())
+                        read_index_ %= v_buffer_.size();
+                }
+            }
+            
+            read_index_ -= to_write_size;
+            int32_t bk_write_index_final = write_index_;
+            write_index_ = read_index_;
+
+            writed_size = WriteData(data_pt, to_write_size);
+            write_index_ = bk_write_index_final;
+        }
+        return writed_size;
+    }
     // 读取数据
     int32_t ReadData(elem_type * data_buffer, int32_t to_read_size, bool peek = false)
     {
@@ -238,34 +239,6 @@ public:
         }
         else if (read_index_ == write_index_)
         {
-            // 直接读取
-            // if (0 == read_index_)
-            // {
-            //     memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * max_read_size);
-            //     read_index_ += max_read_size;
-            //     if (read_index_ >= v_buffer_.size())
-            //         read_index_ %= v_buffer_.size();
-
-            //     readed_size += max_read_size;
-            // }
-            // else 
-            // {
-            //     int32_t right_data_size = (v_buffer_.size() - read_index_ >= max_read_size) ? max_read_size : (v_buffer_.size() - read_index_);
-            //     memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * right_data_size);
-            //     read_index_ += right_data_size;
-            //     if (read_index_ >= v_buffer_.size())
-            //         read_index_ %= v_buffer_.size();
-            //     readed_size += right_data_size;
-
-            //     if (readed_size < max_read_size)
-            //     {
-            //         // 继续读
-            //         memcpy(data_buffer + readed_size, &v_buffer_[read_index_], sizeof(elem_type) * (max_read_size - readed_size));
-            //         read_index_ += (max_read_size - readed_size);
-            //         readed_size = max_read_size;
-            //     }
-            // }
-
             int32_t right_data_size = (v_buffer_.size() - read_index_ >= max_read_size) ? max_read_size : (v_buffer_.size() - read_index_);
             memcpy(data_buffer, &v_buffer_[read_index_], sizeof(elem_type) * right_data_size);
             read_index_ += right_data_size;

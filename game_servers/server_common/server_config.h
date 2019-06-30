@@ -33,7 +33,7 @@ public:
 	int32_t GetZoneId();
 protected:
 	int32_t zone_id_ = 0;
-
+	
 	// json配置数据缓存
 	Json::Value js_config_;
 };

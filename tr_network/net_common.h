@@ -56,7 +56,8 @@ enum class EServerRunStep : int32_t
     E_SERVER_RUN_STEP_NONE = 0,        // 默认初始值
     E_SERVER_RUN_STEP_CHECK = 1,       // 运行前的检测阶段
     E_SERVER_RUN_STEP_LISTEN = 2,      // 监听阶段
-    E_SERVER_RUN_STEP_RUNNING = 3,      // 正常监听运行阶段
-    E_SERVER_RUN_STEP_STOP = 4,        // 停服阶段
+    E_SERVER_RUN_STEP_WILL_RUNNING = 3,  // 即将运行
+    E_SERVER_RUN_STEP_RUNNING = 4,      // 正常监听运行阶段
+    E_SERVER_RUN_STEP_STOP = 5,        // 停服阶段
 };
 #endif // __NET_COMMON_H__

@@ -31,13 +31,13 @@
 #include "server_define.h"
 #include <string>
 
-
+using GameParentClass = TBaseServer;
 class GameServer : public TBaseServer
 {
 public:
-	GameServer();
+	GameServer(int32_t index);
 	~GameServer();
-	virtual bool Init() = 0;
+	virtual bool Init();
 public:
     // 新的连接建立了
     virtual void OnNewConnectComeIn(TConnection * new_connection);
@@ -45,8 +45,23 @@ public:
     virtual bool RunStepCheck();
     // 正常运行
     virtual bool RunStepRunning();
+    // 启动监听
+    bool StartLocalListen(std::string server_name);
+    bool StartLocalListenByIndex(std::string server_name, int32_t index);
+    // 根据服务器节点类型获取服务器名字
+    std::pair<bool, std::string> GetServerNameByNodeType(EServerRouteNodeType route_type);
+    // 根据服务器名字获取路由节点类型
+    std::pair<bool, EServerRouteNodeType> GetRouteTypeByServerName(const std::string server_name);
+    // 根据服务器路由节点获取服务区类型
+    std::pair<bool, EServerType> GetServerTypeByNodeType(EServerRouteNodeType route_type);
+protected:
+    // 启动时连接其他服务器
+    virtual bool BootUpConnectServer();
+    // 即将运行
+    virtual bool RunStepWillRun();
 protected:
 	EServerType server_type_ = EServerType::E_SERVER_TYPE_INVALID_SERVER;
-
+    EServerRouteNodeType node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE;
+    int32_t index_ = 0;
 };
 #endif // __TR_GAME_SERVER_H__
