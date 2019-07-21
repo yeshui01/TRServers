@@ -154,7 +154,7 @@ public:
             {
                 GrowSpace(to_write_size - GetRestSpace());
             }
-            else 
+            else
             {
                 to_write_size = GetRestSpace() >= to_write_size ? to_write_size : GetRestSpace();
             }
@@ -185,8 +185,11 @@ public:
                         read_index_ %= v_buffer_.size();
                 }
             }
+            if (read_index_ >= to_write_size)
+            {
+                read_index_ -= to_write_size;
+            }
             
-            read_index_ -= to_write_size;
             int32_t bk_write_index_final = write_index_;
             write_index_ = read_index_;
 

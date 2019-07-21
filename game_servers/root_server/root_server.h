@@ -38,16 +38,25 @@ class RootServer : public GameServer
 public:
 	RootServer(int32_t index);
 	~RootServer();
-	virtual bool Init();
+	virtual bool Init() override;
 public:
     // 新的连接建立了
-    virtual void OnNewConnectComeIn(TConnection * new_connection);
+    virtual void OnNewConnectComeIn(TConnection * new_connection) override;
     // 运行前的检查
-    virtual bool RunStepCheck();
+    virtual bool RunStepCheck() override;
     // 正常运行
-    virtual bool RunStepRunning();
+    virtual bool RunStepRunning() override;
     // 即将运行
-    virtual bool RunStepWillRun();
+    virtual bool RunStepWillRun() override;
+    // 注册消息处理
+    void RegisterMsgHandle() override;
+
+public:
+    void AddWaitStart(EServerRouteNodeType node_type);
+    bool ChcekAllWaitStart();
+protected:
+    // 等待启动指令的服务器节点
+    std::map<EServerRouteNodeType, int32_t> node_type_waitstart_num_;    // key:node_type value:wait_num
 };
 
 #endif 	// __TR_ROOT_SERVER_H__

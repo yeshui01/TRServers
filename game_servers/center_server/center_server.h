@@ -48,6 +48,8 @@ public:
     virtual bool RunStepRunning();
     // 即将运行
     virtual bool RunStepWillRun();
+    // 注册消息处理
+    void RegisterMsgHandle() override;
 };
 
 #endif 	// __TR_CENTER_SERVER_H__

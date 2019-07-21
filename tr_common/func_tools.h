@@ -71,7 +71,7 @@ T SafeSub(T x1, T x2)
  *  @return          : 值的指针，如果没有返回nullptr
  */
 template <typename map_type>
-    typename map_type::mapped_type *GetMapValue(map_type dic_value, typename map_type::key_type key)
+    typename map_type::mapped_type * GetMapValue(map_type & dic_value, typename map_type::key_type key)
     {
         auto it = dic_value.find(key);
         if (it != dic_value.end())

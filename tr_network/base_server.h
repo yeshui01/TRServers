@@ -30,7 +30,7 @@ public:
     void RunService();
     // 停服
     void Stop();
-    // 事件循环
+    // 每帧循环
     virtual void LoopRun();
     // 分配一个连接
     virtual TConnection * AllocateConnect();
@@ -66,6 +66,12 @@ public:
     virtual bool RunStepWillRun();
     // 正常运行
     virtual bool RunStepRunning(); 
+    // 等待启动
+    virtual bool RunStepWaiting();
+    // 等待其他服务器
+    virtual bool RunStepWaitOtherServers();
+    // 运行前一刻
+    virtual bool RunStepPreRun();
 protected:
     // 回收连接
     void RecycleConnections();

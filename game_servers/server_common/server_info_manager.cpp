@@ -8,7 +8,7 @@
 #include "server_info_manager.h"
 #include "tr_common/func_tools.h"
 #include "tr_log/log_module.h"
-
+#include "server_session.h"
 ServerInfoManager::ServerInfoManager()
 {
 
@@ -20,17 +20,26 @@ ServerInfoManager::~ServerInfoManager()
 }
 
 // 添加服务器信息
-bool ServerInfoManager::AddServerInfo(int32_t session_id, EServerRouteNodeType node_type,
-    EServerType s_type, int32_t index)
+bool ServerInfoManager::AddServerInfo(ServerSession *session_pt, EServerRouteNodeType node_type,
+    EServerType s_type, int32_t index, int32_t zone_id)
 {
-    auto ret = server_infos_.emplace(session_id, ServerInfo(session_id, node_type, s_type, index));
+    if (!session_pt)
+        return false;
+    TINFO("AddServerInfo, sessionid:" << session_pt->GetConnId() << ", fd:" << session_pt->GetFd()
+        << ", sessionptr:" << (int64_t)session_pt << ", node_type:" << int32_t(node_type)
+        << ", index:" << index << ", server_type:" << int32_t(s_type) << ", zoneid:" << zone_id);
+    ServerInfo info(session_pt, node_type, s_type, index, zone_id);
+    auto ret = server_infos_.insert(std::make_pair(session_pt->GetConnId(), info));
     if (!ret.second)
     {
         return false;
     }
-    
-    type_servers_[int8_t(s_type)].push_back(&ret.first->second);
-    route_servers_[int8_t(node_type)].push_back(&ret.first->second);
+    auto & new_info = ret.first->second;
+    type_servers_[int8_t(s_type)].push_back(&new_info);
+    route_servers_[int8_t(node_type)].push_back(&new_info);
+    TDEBUG("node serveraddr:" << int64_t(&new_info) << ", node_type:" << (int32_t)new_info.node_type
+    << ", s_tpe:" << (int32_t)new_info.server_type << ", index:" << index);
+
     return true;
 }
 // 获取服务器信息
@@ -48,19 +57,67 @@ const std::vector<ServerInfo*> * ServerInfoManager::GetRouteTypeServers(EServerR
 {
     return FuncTools::GetMapValue(route_servers_, (int8_t)(node_type));
 }
+
+const ServerInfo* ServerInfoManager::GetRouteNodeInfo(EServerRouteNodeType node_type, int32_t index, int32_t zone_id)
+{
+    auto v_server_info = GetRouteTypeServers(node_type);
+    if (!v_server_info)
+    {
+        TDEBUG("not found node_type : " << int32_t(node_type));
+        return nullptr;
+    }
+    
+    const ServerInfo * ret = nullptr;
+    for (auto && v : *v_server_info)
+    {
+        // TDEBUG("v->route_type:" << int32_t(v->route_type) << ", v->index:" << v->server_index << " vptr:" << int64_t(v));
+        if (v->node_type == node_type && v->server_index == index && v->zone_id == zone_id)
+        {
+            ret = v;
+            break;
+        }
+    }
+    return ret;
+}
 // 删除一个服务器信息
 void ServerInfoManager::DeleteServerInfo(int32_t session_id)
 {
     auto it = server_infos_.find(session_id);
     if (it == server_infos_.end())
         return;
+    TINFO("DeleteServerInfo, session_id:" << session_id);
     server_infos_.erase(it);
     type_servers_.clear();
     route_servers_.clear();
     for (auto it_server = server_infos_.begin(); it_server != server_infos_.end(); ++it_server)
     {
         type_servers_[int8_t(it_server->second.server_type)].push_back(&it_server->second);
-        route_servers_[int8_t(it_server->second.route_type)].push_back(&it_server->second);
+        route_servers_[int8_t(it_server->second.node_type)].push_back(&it_server->second);
     }
 }
 
+// 设置当前服务器数据
+void ServerInfoManager::SetCurrentServerInfo(EServerRouteNodeType node_type, EServerType s_type, int32_t index)
+{
+    cur_node_type_ = node_type;
+    cur_server_type_ = s_type;
+    cur_server_index_ = index;
+}
+
+// 获取当前服务器node_type
+EServerRouteNodeType ServerInfoManager::GetCurrentNodeType()
+{
+    return cur_node_type_;
+}
+
+// 获取当前服务器类型
+EServerType ServerInfoManager::GetCurrentServerType()
+{
+    return cur_server_type_;
+}
+
+// 获取当前服务器index
+int32_t ServerInfoManager::GetCurrentServerIndex()
+{
+    return cur_server_index_;
+}

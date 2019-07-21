@@ -25,6 +25,7 @@
 #include "net_message.h"
 #include "common_define.h"
 #include "server_common/server_session.h"
+#include "server_common/server_info_manager.h"
 #include <string>
 
 LoginServer::LoginServer(int32_t index):GameServer(index)
@@ -40,9 +41,9 @@ LoginServer::~LoginServer()
 
 bool LoginServer::Init()
 {
-    if (!g_ServerConfig.Load())
+    if (!LoginParentClass::Init())
     {
-        Stop();
+        return false;
     }
     return true;
 }
@@ -79,5 +80,18 @@ void LoginServer::OnNewConnectComeIn(TConnection * new_connection)
 // 即将运行
 bool LoginServer::RunStepWillRun()
 {
-    return LoginParentClass::RunStepWillRun();
+    if (!LoginParentClass::RunStepWillRun())
+    {
+        return false;
+    }
+    // 通知其他服务器自己的服务器节点数据
+    std::vector<EServerRouteNodeType> v_node_type = {
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER};
+    for (auto && node_type : v_node_type)
+    {
+        RegServerInfoToOtherServers(node_type, 0);
+    }
+    return true;
 }

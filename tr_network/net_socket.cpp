@@ -220,32 +220,37 @@ void TSocket::HandleWrite()
     if (send_buffer_.PeekDataSize() > 0)
     {
         TDEBUG("ready to send data, peek data size:" << send_buffer_.PeekDataSize());
-        char buffer[1024];
+        static char buffer[4096];
+        //static int32_t buffer_default_size = 4096;
         int32_t send_size = 0;
         do
         {
-            int32_t s = send_buffer_.ReadData(buffer, 1024, true);
-            send_size = send(fd_, buffer, s, 0);
-            if (send_size > 0)
-            {
-                // 发送出去了send_size字节,缓冲区清理
-                send_buffer_.ReadData(buffer, send_size);
-            }
-            else if (send_size == 0)
-            {
-                // 对端关闭
-                HandleOpClose();
+            int32_t s = send_buffer_.ReadData(buffer, 4096);
+            // send_size = send(fd_, buffer, s, 0);
+            // if (send_size > 0)
+            // {
+            //     // 发送出去了send_size字节,缓冲区清理
+            //     send_buffer_.ReadData(buffer, send_size);
+            // }
+            // else if (send_size == 0)
+            // {
+            //     // 对端关闭
+            //     HandleOpClose();
+            //     break;
+            // }
+            // else if (send_size < 0)
+            // {
+            //     if (EAGAIN != errno)
+            //     {
+            //         // 意外错误
+            //         HandleSendError();
+            //     }
+            //     break;
+            // }
+            send_size = InnerSend(buffer, s, true);
+            if (send_size < 1)
                 break;
-            }
-            else if (send_size < 0)
-            {
-                if (EAGAIN != errno)
-                {
-                    // 意外错误
-                    HandleSendError();
-                }
-                break;
-            }
+
         } while (send_buffer_.GetRestSpace() > 0 && send_size > 0);
     }
 }
@@ -270,6 +275,16 @@ int32_t TSocket::Recv(char * buffer, int32_t buffer_size)
 // 发送数据
 int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
 {
+    return InnerSend(buffer, buffer_size, false);
+}
+
+ int32_t TSocket::InnerSend(const char * buffer, int32_t buffer_size, bool fail_to_head)
+ {
+    if (!buffer)
+    {
+        TERROR("buffer is nullptr");
+        return 0;
+    }
     int32_t send_size = send(fd_, buffer, buffer_size, 0);
     TDEBUG("TSocket::send, ret:" << send_size);
     if (send_size > 0)
@@ -285,11 +300,19 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
     {
         if (EAGAIN == errno)
         {
-            send_size = send_buffer_.WriteData(buffer, buffer_size);
+            if (fail_to_head)
+            {
+                send_size = send_buffer_.WriteDataToHead(buffer, buffer_size);
+            }
+            else
+            {
+                send_size = send_buffer_.WriteData(buffer, buffer_size);
+            }
             if (send_size < buffer_size)
             {
                 TERROR("send buffer full");
             }
+            return 0;
         }
         else 
         {
@@ -298,7 +321,7 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         }
     }
     return send_size;
-}
+ }
 
 void TSocket::HandleOpClose()
 {
@@ -327,6 +350,7 @@ void TSocket::AfterReadData(int32_t read_size)
 }
 void TSocket::HandleSendError()
 {
+    Close();
     if (epoll_)
     {
         TERROR("HandleSendError");

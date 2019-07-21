@@ -25,6 +25,7 @@
 #include "net_message.h"
 #include "common_define.h"
 #include "server_common/server_session.h"
+#include "server_common/server_info_manager.h"
 #include <string>
 
 LogicServer::LogicServer(int32_t index):GameServer(index)
@@ -40,9 +41,9 @@ LogicServer::~LogicServer()
 
 bool LogicServer::Init()
 {
-    if (!g_ServerConfig.Load())
+    if (!LogicParentClass::Init())
     {
-        Stop();
+        return false;
     }
     return true;
 }
@@ -79,5 +80,22 @@ void LogicServer::OnNewConnectComeIn(TConnection * new_connection)
 // 即将运行
 bool LogicServer::RunStepWillRun()
 {
-    return LogicParentClass::RunStepWillRun();
+    if (!LogicParentClass::RunStepWillRun())
+    {
+        return false;
+    }
+    // 通知其他服务器自己的服务器节点数据
+    std::vector<EServerRouteNodeType> v_node_type = {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER};
+    for (auto && node_type : v_node_type)
+    {
+        RegServerInfoToOtherServers(node_type, 0);
+    }
+    return true;
+}
+
+bool LogicServer::RunStepWaiting()
+{
+    return LogicParentClass::RunStepWaiting();
 }

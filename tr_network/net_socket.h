@@ -80,6 +80,8 @@ protected:
 protected:
     // 读到数据时的处理
     virtual void AfterReadData(int32_t read_size) = 0;
+    // 内部发送数据,发送失败是否放到缓冲区头部
+    int32_t InnerSend(const char * buffer, int32_t buffer_size, bool fail_to_head);
 protected:
     socket_fd_t fd_ = INVALID_SOCKET_FD;    // sock fd
     ESocketStatus status_ = ESocketStatus::E_SOCKET_STATUS_NONE;

@@ -120,6 +120,7 @@ void TBaseServer::RunService()
         if (run_step_ >= EServerRunStep::E_SERVER_RUN_STEP_LISTEN)
         {
             epoll_ptr_->EventsWatch();
+            LoopRun();
         }
         switch (run_step_)
         {
@@ -141,7 +142,39 @@ void TBaseServer::RunService()
             {
                 if (RunStepWillRun())
                 {
+                    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_WAIT_BOOTUP);
+                }
+                else
+                {
+                    Stop();
+                }
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_WAIT_BOOTUP:
+            {
+                if (RunStepWaiting())
+                {
+                    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_WAIT_OTHER_SERVERS);
+                }
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_WAIT_OTHER_SERVERS:
+            {
+                if (RunStepWaitOtherServers())
+                {
+                    SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_PRE_RUN);
+                }
+                break;
+            }
+            case EServerRunStep::E_SERVER_RUN_STEP_PRE_RUN:
+            {
+                if (RunStepPreRun())
+                {
                     SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_RUNNING);
+                }
+                else
+                {
+                    Stop();
                 }
                 break;
             }
@@ -243,11 +276,11 @@ bool TBaseServer::RunStepCheck()
 void TBaseServer::SetRunStep(EServerRunStep e_step)
 {
     run_step_ = e_step;
+    TINFO("SetRunStep, e_step:" << int32_t(e_step));
 }
 
 bool TBaseServer::RunStepRunning()
 {
-    LoopRun();
     return true;
 }
 
@@ -278,6 +311,22 @@ void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
 }
 
 bool TBaseServer::RunStepWillRun()
+{
+    return true;
+}
+
+ // 等待启动
+bool TBaseServer::RunStepWaiting()
+{
+    return true;
+}
+// 运行前一刻
+bool TBaseServer::RunStepPreRun()
+{
+    return true;
+}
+
+bool TBaseServer::RunStepWaitOtherServers()
 {
     return true;
 }

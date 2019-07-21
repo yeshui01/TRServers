@@ -40,72 +40,75 @@ void ServerSession::AfterReadData(int32_t read_size)
 		<< ", read_index:" << GetRecvBuffer().GetReadIndex()
 		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
 	// 读取消息到消息队列
-	NetMsgHead msg_head;
-	if (GetRecvBuffer().PeekDataSize() < msg_head.Size())
-		return;
-	// peek 数据包头
-	char buffer_head[256] = "";
-	int32_t real_read_size = GetRecvBuffer().ReadData(buffer_head, msg_head.Size(), true);
-	if (real_read_size < msg_head.Size())
-		return;
+	do
+	{
+		NetMsgHead msg_head;
+		if (GetRecvBuffer().PeekDataSize() < msg_head.Size())
+			return;
+		// peek 数据包头
+		char buffer_head[256] = "";
+		int32_t real_read_size = GetRecvBuffer().ReadData(buffer_head, msg_head.Size(), true);
+		if (real_read_size < msg_head.Size())
+			return;
 
-	if (!msg_head.UnSerialize(buffer_head, sizeof(buffer_head)))
-	{
-		TERROR("msg head unserialize msg failed, maybe logic error!!!");
-		return;
-	}
-	if (msg_head.CalcPacketSize() > GetRecvBuffer().PeekDataSize())
-	{
-		// 数据还未接受完整
-		return;
-	}
-	int32_t packet_size = msg_head.CalcPacketSize();
-	// 读取数据包
-	TDEBUG("fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
-		<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
-	
-    static char * packet_buffer = nullptr;
-    static int32_t packet_buffer_size = 0;
-    if (!packet_buffer)
-    {
-        // 初始默认10k
-        packet_buffer = new char [10240];
-        packet_buffer_size = 10240;
-    }
-    if (packet_buffer)
-    {
-        if (packet_buffer_size < packet_size)
-        {
-            TERROR("packet body maybe too large, please check!!!!");
-            // 重新分配更大的内存
-            SAFE_DELETE_PTR(packet_buffer);
-            packet_buffer = new char [packet_size];
-            packet_buffer_size = packet_size;
-        }
-    }
-    
-	GetRecvBuffer().ReadData(packet_buffer, packet_size);
-	NetMessage * message_pt = new NetMessage();
-	if (message_pt->UnSerialize(packet_buffer, packet_size))
-	{
-		message_pt->SetConnection(this);
-		g_MsgQueue.AddMsg(message_pt);
-		TDEBUG("add new msg to queue, head_size:" << msg_head.Size() 
-            << ",msg_class:" << message_pt->GetMsgClass()
-			<< ", msg_type:" << message_pt->GetMsgType()
-			<< ", req_no:" << message_pt->GetReqNo()
-			<< ", rep_no:" << message_pt->GetRepNo()
-			<< ", confirm:" << message_pt->GetConfirm()
-			<< ", content_size:" << msg_head.ContentSize());
-	}
-	else
-	{
-		TERROR("msg UnSerialize failed");
-		SAFE_DELETE_PTR(message_pt)
-	}
-	TDEBUG("after fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
-		<< ", write_index:" << GetRecvBuffer().GetWriteIndex()
-		<< ", recvbuff.space:" << GetRecvBuffer().GetSpace());
+		if (!msg_head.UnSerialize(buffer_head, sizeof(buffer_head)))
+		{
+			TERROR("msg head unserialize msg failed, maybe logic error!!!");
+			return;
+		}
+		if (msg_head.CalcPacketSize() > GetRecvBuffer().PeekDataSize())
+		{
+			// 数据还未接受完整
+			return;
+		}
+		int32_t packet_size = msg_head.CalcPacketSize();
+		// 读取数据包
+		TDEBUG("fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
+											<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
+
+		static char *packet_buffer = nullptr;
+		static int32_t packet_buffer_size = 0;
+		if (!packet_buffer)
+		{
+			// 初始默认10k
+			packet_buffer = new char[10240];
+			packet_buffer_size = 10240;
+		}
+		if (packet_buffer)
+		{
+			if (packet_buffer_size < packet_size)
+			{
+				TERROR("packet body maybe too large, please check!!!!");
+				// 重新分配更大的内存
+				SAFE_DELETE_PTR(packet_buffer);
+				packet_buffer = new char[packet_size];
+				packet_buffer_size = packet_size;
+			}
+		}
+
+		GetRecvBuffer().ReadData(packet_buffer, packet_size);
+		NetMessage *message_pt = new NetMessage();
+		if (message_pt->UnSerialize(packet_buffer, packet_size))
+		{
+			message_pt->SetConnection(this);
+			g_MsgQueue.AddMsg(message_pt);
+			TDEBUG("add new msg to queue, head_size:" << msg_head.Size()
+													  << ",msg_class:" << message_pt->GetMsgClass()
+													  << ", msg_type:" << message_pt->GetMsgType()
+													  << ", req_no:" << message_pt->GetReqNo()
+													  << ", rep_no:" << message_pt->GetRepNo()
+													  << ", confirm:" << message_pt->GetConfirm()
+													  << ", content_size:" << msg_head.ContentSize());
+		}
+		else
+		{
+			TERROR("msg UnSerialize failed");
+			SAFE_DELETE_PTR(message_pt)
+		}
+		TDEBUG("after fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
+												  << ", write_index:" << GetRecvBuffer().GetWriteIndex()
+												  << ", recvbuff.space:" << GetRecvBuffer().GetSpace());
+	} while (GetRecvBuffer().PeekDataSize() > 0);
 }
 
 void ServerSession::OnClose()

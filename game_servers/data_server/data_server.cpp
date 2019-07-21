@@ -25,6 +25,12 @@
 #include "net_message.h"
 #include "common_define.h"
 #include "server_common/server_session.h"
+#include "server_common/server_info_manager.h"
+#include "protocol_class.h"
+#include "protocol_frame.h"
+#include "protcl_frame.pb.h"
+#include "server_common/game_msg_helper.h"
+
 #include <string>
 
 DataServer::DataServer(int32_t index):GameServer(index)
@@ -40,9 +46,9 @@ DataServer::~DataServer()
 
 bool DataServer::Init()
 {
-    if (!g_ServerConfig.Load())
+    if (!DataParentClass::Init())
     {
-        Stop();
+        return false;
     }
     return true;
 }
@@ -79,5 +85,17 @@ void DataServer::OnNewConnectComeIn(TConnection * new_connection)
 // 即将运行
 bool DataServer::RunStepWillRun()
 {
-    return  DataParentClass::RunStepWillRun();
+    if (!DataParentClass::RunStepWillRun())
+    {
+        TERROR("will run error");
+        return false;
+    }
+
+    // 通知其他服务器自己的服务器节点数据
+    std::vector<EServerRouteNodeType> v_node_type = {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT};
+    for (auto && node_type : v_node_type)
+    {
+        RegServerInfoToOtherServers(node_type, 0);
+    }
+    return true;
 }

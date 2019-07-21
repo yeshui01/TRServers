@@ -25,12 +25,21 @@
 #include "net_message.h"
 #include "common_define.h"
 #include "server_common/server_session.h"
+#include "server_common/server_info_manager.h"
+#include "server_common/game_msg_helper.h"
+#include "tr_common/common_define.h"
+#include "protocol_class.h"
+#include "protocol_frame.h"
+#include "protcl_frame.pb.h"
+#include "server_common/game_msg_helper.h"
+
 #include <string>
 
 RootServer::RootServer(int32_t index):GameServer(index)
 {
     server_type_ = EServerType::E_SERVER_TYPE_ROOT_SERVER;
     node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT;
+    wait_other_servers_ = false;
 }
 
 RootServer::~RootServer()
@@ -40,9 +49,9 @@ RootServer::~RootServer()
 
 bool RootServer::Init()
 {
-    if (!g_ServerConfig.Load())
+    if (!RootParentClass::Init())
     {
-        Stop();
+        return false;
     }
     return true;
 }
@@ -74,5 +83,53 @@ void RootServer::OnNewConnectComeIn(TConnection * new_connection)
 // 即将运行
 bool RootServer::RunStepWillRun()
 {
-    return RootParentClass::RunStepWillRun();
+    if (!RootParentClass::RunStepWillRun())
+        return false;
+    
+    // 通知login_server自己的服务器信息
+    
+    REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
+    req.mutable_server_node()->set_node_type(int32_t(node_type_));
+    req.mutable_server_node()->set_server_type(int32_t(server_type_));
+    req.mutable_server_node()->set_server_index(index_);
+    req.mutable_server_node()->set_zone_id(g_ServerConfig.GetZoneId());
+    // PBMSG_TO_STR(req, msg_str);
+
+    g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+        INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), req,
+        [](const NetMessage * rep_msg, const AsyncMsgParam & cb_param){
+            REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
+            STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+            TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_REGISTER_SERVER_INFO:" << rep.ShortDebugString());
+        }, AsyncMsgParam(),
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN,
+        0);
+    return true;
+}
+
+void RootServer::AddWaitStart(EServerRouteNodeType node_type)
+{
+    node_type_waitstart_num_[node_type] += 1;
+    TINFO("AddWaitStart, node_type:" << int32_t(node_type) << ", num:" << node_type_waitstart_num_[node_type]);
+}
+bool RootServer::ChcekAllWaitStart()
+{
+    // test code
+    static std::map<EServerRouteNodeType, int32_t> node_limit_num = {
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, 2},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, 2},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, 1},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, 1}
+    };
+    bool ret = true;
+    for (auto it = node_limit_num.begin(); it != node_limit_num.end(); ++it)
+    {
+        TDEBUG("node_type_waitstart_num_[it->first]:" << node_type_waitstart_num_[it->first]);
+        if (node_type_waitstart_num_[it->first] < it->second)
+        {
+            ret = false;
+        }
+        
+    }
+    return ret;
 }

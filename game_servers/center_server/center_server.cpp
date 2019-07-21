@@ -25,6 +25,7 @@
 #include "net_message.h"
 #include "common_define.h"
 #include "server_common/server_session.h"
+#include "server_common/server_info_manager.h"
 #include <string>
 
 CenterServer::CenterServer(int32_t index):GameServer(index)
@@ -40,9 +41,9 @@ CenterServer::~CenterServer()
 
 bool CenterServer::Init()
 {
-    if (!g_ServerConfig.Load())
+    if (!CenterParentClass::Init())
     {
-        Stop();
+        return false;
     }
     return true;
 }
@@ -78,5 +79,13 @@ void CenterServer::OnNewConnectComeIn(TConnection * new_connection)
 
 bool CenterServer::RunStepWillRun()
 {
-    return CenterParentClass::RunStepWillRun();
+    CenterParentClass::RunStepWillRun();
+    // 通知其他服务器自己的服务器节点数据
+    std::vector<EServerRouteNodeType> v_node_type = {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA};
+    for (auto && node_type : v_node_type)
+    {
+        RegServerInfoToOtherServers(node_type, 0);
+    }
+    return true;
 }

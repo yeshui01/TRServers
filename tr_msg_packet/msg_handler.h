@@ -33,7 +33,7 @@ public:
 	virtual ~IMessageHandler();
 
 	// 处理消息入口
-	virtual EMsgHandleResult HandleMsg(int32_t msg_type, TConnection *session_pt, const NetMessage * messag_pt);
+	virtual EMsgHandleResult HandleMsg(int32_t msg_type, TConnection *session_pt, const NetMessage * message_pt);
 	// 绑定消息处理接口
 	virtual void BindMsgHandle() = 0;
 	// 获取返回消息的内容
@@ -56,5 +56,11 @@ protected:
 
 
 #define MSG_BIND_HANDLER(MSG_TYPE, CLASS_NAME, MEMBER_FUN) msg_handlers_.insert(std::make_pair(MSG_TYPE, std::bind(&CLASS_NAME::MEMBER_FUN, this, std::placeholders::_1, std::placeholders::_2)));
+
+#define RETURN_REP_CONTENT(rep_msg) rep_msg.SerializeToString(&rep_content_); \
+return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
+
+#define RETURN_NO_HANDLE return EMsgHandleResult::E_MSG_HANDLE_NOT_RETURN;
+
 #endif  // __MSG_HANDLER_H__
 

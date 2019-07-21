@@ -1,0 +1,70 @@
+syntax = "proto3";
+package protos;
+
+message server_info_t
+{
+    int32 node_type = 1;
+    int32 server_type = 2;
+    int32 server_index = 3;
+	int32 zone_id = 4;
+}
+
+// E_FRAME_MSG_REGISTER_SERVER_INFO = 1,   // 注册服务器信息
+message req_E_FRAME_MSG_REGISTER_SERVER_INFO
+{
+    server_info_t server_node = 1;
+    int32 zone_id = 2;
+}
+
+message rep_E_FRAME_MSG_REGISTER_SERVER_INFO
+{
+    int32 isok = 1;
+}
+
+// E_FRAME_MSG_NEW_SERVER_BOOTUP = 2,  // 通知服务器,有新的服务器连接
+message req_E_FRAME_MSG_NEW_SERVER_BOOTUP
+{
+	int32 node_type = 1;	// 节点类型
+	int32 server_type = 2;	// 服务器类型
+	int32 node_index = 3;	// 类型索引
+}
+
+message rep_E_FRAME_MSG_NEW_SERVER_BOOTUP
+{
+	int32 isok = 1;
+}
+
+// E_FRAME_MSG_QUERY_SERVER_NODE_LIST = 3, // 查询服务器节点
+message req_E_FRAME_MSG_QUERY_SERVER_NODE_LIST
+{
+	int32 node_type = 1;
+}
+
+message rep_E_FRAME_MSG_QUERY_SERVER_NODE_LIST
+{
+	int32 isok = 1;
+	repeated server_info_t server_list = 2;
+}
+
+// E_FRAME_MSG_ROOT_TO_XS_START_RUN = 4,   // root server通知各服务器运行
+message req_E_FRAME_MSG_ROOT_TO_XS_START_RUN
+{
+	
+}
+
+message rep_E_FRAME_MSG_ROOT_TO_XS_START_RUN
+{
+	int32 isok = 1;
+}
+
+// E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS = 5,  // 告诉rootserver,开始等待其他服务器了
+message req_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS
+{
+	int32 node_type = 1;
+	int32 node_index = 2;
+}
+
+message rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS
+{
+	int32 isok = 1;
+}

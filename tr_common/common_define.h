@@ -16,4 +16,7 @@ delete x; \
 x=nullptr; \
 }
 
+#define REQMSG(msg_type) protos::req_##msg_type
+#define REPMSG(msg_type) protos::rep_##msg_type
+
 #endif // __COMMON_DEFINE_H__
