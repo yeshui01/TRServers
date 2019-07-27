@@ -1,0 +1,19 @@
+{
+	"zone_id":1,
+	"login_server": { "ip":"127.0.0.1", "port": 6051, "sock_num": 10},
+	"root_server": { 
+		"ip":"127.0.0.1", "port": 5051, "sock_num": 15,
+		"logic_server_num":2,
+		"gate_server_num":2
+	},
+	"center_server": { "ip":"127.0.0.1", "port": 5052, "sock_num": 15},
+	"data_server": { "ip":"127.0.0.1", "port": 5053, "sock_num": 15},
+	"logic_server": [
+		{ "ip":"127.0.0.1", "port": 5060, "sock_num": 15},
+		{ "ip":"127.0.0.1", "port": 5061, "sock_num": 15}
+	],
+	"gate_server": [
+		{ "ip":"127.0.0.1", "port": 5070, "sock_num": 15},
+		{ "ip":"127.0.0.1", "port": 5071, "sock_num": 15}
+	]
+}
