@@ -53,6 +53,11 @@ bool RootServer::Init()
     {
         return false;
     }
+    // 初始化
+    node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA] = 1;
+    node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER] = 1;
+    node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC] = g_ServerConfig.GetJsonConfig()["root_server"]["logic_server_num"].asInt();
+    node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE] = g_ServerConfig.GetJsonConfig()["root_server"]["gate_server_num"].asInt();
     return true;
 }
 
@@ -112,24 +117,22 @@ void RootServer::AddWaitStart(EServerRouteNodeType node_type)
     node_type_waitstart_num_[node_type] += 1;
     TINFO("AddWaitStart, node_type:" << int32_t(node_type) << ", num:" << node_type_waitstart_num_[node_type]);
 }
-bool RootServer::ChcekAllWaitStart()
+bool RootServer::CheckAllWaitStart()
 {
-    // test code
-    static std::map<EServerRouteNodeType, int32_t> node_limit_num = {
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, 2},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, 2},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, 1},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, 1}
-    };
     bool ret = true;
-    for (auto it = node_limit_num.begin(); it != node_limit_num.end(); ++it)
+    for (auto it = node_type_to_wait_num_.begin(); it != node_type_to_wait_num_.end(); ++it)
     {
         TDEBUG("node_type_waitstart_num_[it->first]:" << node_type_waitstart_num_[it->first]);
         if (node_type_waitstart_num_[it->first] < it->second)
         {
             ret = false;
+            break;
         }
-        
     }
     return ret;
 }
+
+ const std::map<EServerRouteNodeType, int32_t> & RootServer::GetWaitStartNodes()
+ {
+     return node_type_waitstart_num_;
+ }

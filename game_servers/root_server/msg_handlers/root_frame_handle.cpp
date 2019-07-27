@@ -109,41 +109,27 @@ EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_p
     if (server_pt)
     {
         server_pt->AddWaitStart(EServerRouteNodeType(req.node_type()));
-        if (server_pt->ChcekAllWaitStart())
+        if (server_pt->CheckAllWaitStart())
         {
+            // 通知其他服务器,可以开始运行了
             REQMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN) push;
-            // TODO:通知其他服务器,可以开始运行了
-            // test
+            auto & wait_start_nodes = server_pt->GetWaitStartNodes();
             PBMSG_TO_STR(push, str);
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-             INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-             str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
-             0);
-
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-             INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-             str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER,
-             0);
-
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-             INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-             str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC,
-             0);
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-             INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-             str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC,
-             1);
-
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-            INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-            str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE,
-            0);
-            g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-            INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
-            str, EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE,
-            1);
-
-            TINFO("tell other server to start");
+            for (auto it = wait_start_nodes.begin(); it != wait_start_nodes.end(); ++it)
+            {
+                for (int32_t index = 0; index < it->second; ++index)
+                {
+                    g_MsgHelper.ForwardMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+                                               INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN),
+                                               str, it->first,
+                                               index);
+                    
+                    TINFO("root tell server start, server_name:" << server_pt->GetServerNameByNodeType(it->first).second
+                        << ", index:" << index);
+                }
+                
+            }
+            TINFO("tell all other server to start");
         }
     }
     else

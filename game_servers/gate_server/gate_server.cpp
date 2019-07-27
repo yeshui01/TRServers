@@ -26,6 +26,7 @@
 #include "common_define.h"
 #include "server_common/server_session.h"
 #include "server_common/server_info_manager.h"
+#include "server_common/launch_wait_event.h"
 #include <string>
 
 GateServer::GateServer(int32_t index):GameServer(index)
@@ -86,7 +87,7 @@ bool GateServer::RunStepWillRun()
     }
 
     // 查询并且连接logic_server
-    int32_t evt_id_connect_logic_server = 1;
+    int32_t evt_id_connect_logic_server = E_SERVER_LAUNCH_WAIT_LOGIC_SERVERS;
     AddOneBootupWaitEvent(evt_id_connect_logic_server, [evt_id_connect_logic_server, this]()
     {
         TINFO("do event func, evt_id:" << evt_id_connect_logic_server);

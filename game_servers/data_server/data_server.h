@@ -38,16 +38,16 @@ class DataServer : public GameServer
 public:
 	DataServer(int32_t index);
 	~DataServer();
-	virtual bool Init();
+	bool Init() override;
 public:
     // 新的连接建立了
-    virtual void OnNewConnectComeIn(TConnection * new_connection);
+    void OnNewConnectComeIn(TConnection * new_connection) override;
     // 运行前的检查
-    virtual bool RunStepCheck();
+    bool RunStepCheck() override;
     // 正常运行
-    virtual bool RunStepRunning();
+    bool RunStepRunning() override;
     // 即将运行
-    virtual bool RunStepWillRun();
+    bool RunStepWillRun() override;
     // 注册消息处理
     void RegisterMsgHandle() override;
 };

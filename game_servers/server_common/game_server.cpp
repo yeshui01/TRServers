@@ -268,7 +268,7 @@ std::pair<bool, std::string> GameServer::GetServerNameByNodeType(EServerRouteNod
         return std::make_pair(true, it->second);
     }
    
-    return std::make_pair(false, "");
+    return std::make_pair(false, "unknown_server");
 }
 // 根据服务器名字获取路由节点类型
 std::pair<bool, EServerRouteNodeType> GameServer::GetRouteTypeByServerName(const std::string server_name)

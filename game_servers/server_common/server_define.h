@@ -38,8 +38,9 @@ enum class EServerRouteNodeType : int8_t
 	E_SERVER_ROUTE_NODE_CENTER = 6,		// 区域中心
 	E_SERVER_ROUTE_NODE_DATA = 7,		// 数据服务
 	E_SERVER_ROUTE_NODE_LOGIC = 8,		// 逻辑
-	E_SERVER_ROUTE_NODE_WORLD_LOGIC = 9,	// 世界逻辑
-	E_SERVER_ROUTE_NODE_GATE = 10,		//  网关
+	E_SERVER_ROUTE_NODE_WORLD_LOGIC = 9,// 世界逻辑
+	E_SERVER_ROUTE_NODE_SCENE = 10,		// 场景服务器
+	E_SERVER_ROUTE_NODE_GATE = 11,		//  网关
 };
 
 // //////////////////////////////////////////////////////////////////////////////////////////

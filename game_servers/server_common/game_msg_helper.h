@@ -19,7 +19,7 @@ class GameMsgHelper : public TSingleton<GameMsgHelper>
 public:
     GameMsgHelper();
     ~GameMsgHelper();
-
+    
 public:
     /*
     *  转发消息到某个服务器
