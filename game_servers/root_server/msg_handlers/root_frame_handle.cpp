@@ -33,6 +33,7 @@ void RootFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), RootFrameHandler, OnRegisterServerInfo);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_QUERY_SERVER_NODE_LIST), RootFrameHandler, OnQueryServerNodeList);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), RootFrameHandler, OnServerWaitOtherStart);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_FORWARD_MESSAGE), RootFrameHandler, OnForwardMessage);
 }
 
 EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
@@ -43,7 +44,7 @@ EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed");
+        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -66,7 +67,7 @@ EMsgHandleResult RootFrameHandler::OnQueryServerNodeList(TConnection *session_pt
     {
         REPMSG(E_FRAME_MSG_QUERY_SERVER_NODE_LIST) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed");
+        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -98,7 +99,7 @@ EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_p
     {
         REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed");
+        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -138,4 +139,64 @@ EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_p
     }
     
     RETURN_REP_CONTENT(rep);
+}
+
+EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, const NetMessage * messag_pt)
+{
+    TINFO("OnForwardMessage");
+    REQMSG(E_FRAME_MSG_FORWARD_MESSAGE) req;
+    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    {
+        REPMSG(E_FRAME_MSG_FORWARD_MESSAGE) rep;
+        rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
+        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
+        if (messag_pt->GetReqNo() > 0)
+        {
+            // rep.SerializeToString(&rep_content_);
+            // return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
+            RETURN_REP_CONTENT(rep)
+        }
+        RETURN_NO_HANDLE;
+    }
+
+    if (messag_pt->GetReqNo() > 0)
+    {
+        auto req_no = messag_pt->GetReqNo();
+        AsyncMsgParam async_env;
+        async_env.session_pt = session_pt;
+        g_MsgHelper.ForwardAsyncMessage(req.msg_class(), 
+                                        req.msg_type(),
+                                        req.msg_content(),
+        [req_no](const NetMessage *rep_msg, const AsyncMsgParam &cb_param)->void {
+            // 消息转发回去
+            if (cb_param.session_pt)
+            {
+                auto rep_net_msg = g_MsgTools.MakeNetMessage(rep_msg->GetMsgClass(),
+                    rep_msg->GetMsgType(),
+                    rep_msg->GetContent());
+
+                rep_net_msg.SetRepNo(req_no);
+                
+                char * buffer = new char [rep_net_msg.SerializeByteNum()];
+                rep_net_msg.Serialize(buffer, rep_net_msg.SerializeByteNum());
+                cb_param.session_pt->Send(buffer, rep_net_msg.SerializeByteNum());
+                delete [] buffer;
+            }
+            else 
+            {
+                TWARN("async forward message ,not found session to reply");
+            }
+        }, std::move(async_env), EServerRouteNodeType(req.des_node_type()),
+        req.des_node_index(), req.des_zone_id());
+    }
+    else 
+    {
+        g_MsgHelper.ForwardMessage(req.msg_class(), 
+                                   req.msg_type(),
+                                   req.msg_content(),
+                                   EServerRouteNodeType(req.des_node_type()),
+                                   req.des_node_index(), 
+                                   req.des_zone_id());
+    }
+    RETURN_NO_HANDLE;
 }

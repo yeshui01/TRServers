@@ -27,6 +27,12 @@
 #include "server_common/server_session.h"
 #include "server_common/server_info_manager.h"
 #include "server_common/launch_wait_event.h"
+#include "protocol_class.h"
+#include "protocol_frame.h"
+#include "protocol_error_code.h"
+#include "protcl_frame.pb.h"
+#include "server_common/game_msg_helper.h"
+
 #include <string>
 
 GateServer::GateServer(int32_t index):GameServer(index)
@@ -79,7 +85,7 @@ bool GateServer::RunStepWillRun()
         return false;
     // 通知其他服务器自己的服务器节点数据
     std::vector<EServerRouteNodeType> v_node_type = {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
+        /*EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,*/
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER};
     for (auto && node_type : v_node_type)
     {
@@ -101,4 +107,28 @@ bool GateServer::RunStepWillRun()
 bool GateServer::RunStepWaiting()
 {
     return GateParentClass::RunStepWaiting();
+}
+
+bool GateServer::RunStepPreRun()
+{
+    GateParentClass::RunStepPreRun();
+    // test ,往login_server发一个测试消息
+    REQMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) req;
+    req.set_test_id(1);
+    req.set_show_text("hello forward ascync");
+    g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+        INT_FRAMEMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE), req,
+        [](const NetMessage * rep_msg, const AsyncMsgParam & cb_param){
+            REPMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) rep;
+            STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+            TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE:" << rep.ShortDebugString());
+        }, AsyncMsgParam(),
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, 0, 0);
+
+    req.set_test_id(2);
+    req.set_show_text("hello cross forward message");
+    g_MsgHelper.ForwardPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+        INT_FRAMEMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE), req,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, 0, 0);
+    return true;
 }

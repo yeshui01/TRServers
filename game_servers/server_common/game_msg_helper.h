@@ -28,11 +28,12 @@ public:
     *  @param content   : 消息类容
     *  @param node_type : 服务器节点类型
     *  @oaram node_inde : 服务器节点类型下的索引
+    *  @param zone_id   : 大区id,-1表示本区
     */
    bool ForwardMessage(int32_t msg_class, int32_t msg_type, 
         const std::string & content, 
         EServerRouteNodeType node_type, 
-        int32_t node_index);
+        int32_t node_index, int32_t zone_id = -1);
 
    /*
     *  转发异步回调消息到某个服务器
@@ -42,16 +43,14 @@ public:
     *  @param callback  : 异步回调函数
     *  @param node_type : 服务器节点类型
     *  @oaram node_inde : 服务器节点类型下的索引
+    *  @param zone_id   : 大区id,-1表示本区
     */
    bool ForwardAsyncMessage(int32_t msg_class, int32_t msg_type, 
         const std::string & content, asyncmsg_callback_t && callback, 
         AsyncMsgParam && cb_param,
         EServerRouteNodeType node_type, 
-        int32_t node_index);
+        int32_t node_index, int32_t zone_id = -1);
         
-    
-    
-    
     /**
      * 转发protobuf格式的异步回调消息
      * @param  msg_class  : 消息大类
@@ -61,18 +60,43 @@ public:
      * @param  cb_param   : 函调函数相关参数
      * @param  node_type  : 节点类型
      * @param  node_index : 节点索引
+     * @param zone_id     : 大区id,-1表示本区
      * @return {bool}     : 成功返回true,失败返回false
      */
     bool ForwardAsyncPbMessage(int32_t msg_class, int32_t msg_type, 
         ::google::protobuf::Message & pb_msg, asyncmsg_callback_t && callback, 
         AsyncMsgParam && cb_param, 
         EServerRouteNodeType node_type, 
-        int32_t node_index);
+        int32_t node_index, int32_t zone_id = -1);
+    
+    /*
+    *  转发消息到某个服务器
+    *  @param msg_class : 消息大类
+    *  @param msg_type  : 消息类型
+    *  @param pb_msg    : protobuf格式的消息
+    *  @param node_type : 服务器节点类型
+    *  @oaram node_inde : 服务器节点类型下的索引
+    *  @param zone_id   : 大区id,-1表示本区
+    */
+    bool ForwardPbMessage(int32_t msg_class, int32_t msg_type, 
+        ::google::protobuf::Message & pb_msg, 
+        EServerRouteNodeType node_type, 
+        int32_t node_index, int32_t zone_id = -1);
+
+    // 是否是世界节点
+    bool IsWorldServerNode(EServerRouteNodeType node_type);
+    // 是否是全局节点
+    bool IsGlobalServerNode(EServerRouteNodeType node_type);
+    // 是否是大区节点
+    bool IsZoneServerNode(EServerRouteNodeType node_type);
 protected:
     void EnsureMsgBuffer(int32_t buffer_size);
+    
 protected:
     char *msg_buffer_ = nullptr;
     int32_t buffer_size_ = 0;
+    // 路由路径,key1:start_node key2:end_node value:中间的转发节点
+    static std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServerRouteNodeType> > > s_route_path_;
 };
 
 #define g_MsgHelper GameMsgHelper::Instance()

@@ -52,6 +52,9 @@ public:
     bool RunStepWaiting() override;
     // 注册消息处理
     void RegisterMsgHandle() override;
+
+    // 运行前的处理
+    bool RunStepPreRun() override;
 };
 
 #endif 	// __TR_GATE_SERVER_H__

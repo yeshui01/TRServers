@@ -36,11 +36,15 @@ void protobuf_AddDesc_protcl_5fframe_2eproto();
 void protobuf_AssignDesc_protcl_5fframe_2eproto();
 void protobuf_ShutdownFile_protcl_5fframe_2eproto();
 
+class rep_E_FRAME_MSG_FORWARD_MESSAGE;
+class rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE;
 class rep_E_FRAME_MSG_NEW_SERVER_BOOTUP;
 class rep_E_FRAME_MSG_QUERY_SERVER_NODE_LIST;
 class rep_E_FRAME_MSG_REGISTER_SERVER_INFO;
 class rep_E_FRAME_MSG_ROOT_TO_XS_START_RUN;
 class rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS;
+class req_E_FRAME_MSG_FORWARD_MESSAGE;
+class req_E_FRAME_MSG_FORWARD_TEST_MESSAGE;
 class req_E_FRAME_MSG_NEW_SERVER_BOOTUP;
 class req_E_FRAME_MSG_QUERY_SERVER_NODE_LIST;
 class req_E_FRAME_MSG_REGISTER_SERVER_INFO;
@@ -1008,6 +1012,386 @@ class rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS : public ::google::protobuf::Messag
   void InitAsDefaultInstance();
   static rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_FORWARD_MESSAGE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_FORWARD_MESSAGE) */ {
+ public:
+  req_E_FRAME_MSG_FORWARD_MESSAGE();
+  virtual ~req_E_FRAME_MSG_FORWARD_MESSAGE();
+
+  req_E_FRAME_MSG_FORWARD_MESSAGE(const req_E_FRAME_MSG_FORWARD_MESSAGE& from);
+
+  inline req_E_FRAME_MSG_FORWARD_MESSAGE& operator=(const req_E_FRAME_MSG_FORWARD_MESSAGE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_FORWARD_MESSAGE& default_instance();
+
+  void Swap(req_E_FRAME_MSG_FORWARD_MESSAGE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_FORWARD_MESSAGE* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_FORWARD_MESSAGE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_FORWARD_MESSAGE& from);
+  void MergeFrom(const req_E_FRAME_MSG_FORWARD_MESSAGE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_FORWARD_MESSAGE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 des_zone_id = 1;
+  void clear_des_zone_id();
+  static const int kDesZoneIdFieldNumber = 1;
+  ::google::protobuf::int32 des_zone_id() const;
+  void set_des_zone_id(::google::protobuf::int32 value);
+
+  // optional int32 des_node_type = 2;
+  void clear_des_node_type();
+  static const int kDesNodeTypeFieldNumber = 2;
+  ::google::protobuf::int32 des_node_type() const;
+  void set_des_node_type(::google::protobuf::int32 value);
+
+  // optional int32 des_node_index = 3;
+  void clear_des_node_index();
+  static const int kDesNodeIndexFieldNumber = 3;
+  ::google::protobuf::int32 des_node_index() const;
+  void set_des_node_index(::google::protobuf::int32 value);
+
+  // optional int32 msg_class = 4;
+  void clear_msg_class();
+  static const int kMsgClassFieldNumber = 4;
+  ::google::protobuf::int32 msg_class() const;
+  void set_msg_class(::google::protobuf::int32 value);
+
+  // optional int32 msg_type = 5;
+  void clear_msg_type();
+  static const int kMsgTypeFieldNumber = 5;
+  ::google::protobuf::int32 msg_type() const;
+  void set_msg_type(::google::protobuf::int32 value);
+
+  // optional bytes msg_content = 6;
+  void clear_msg_content();
+  static const int kMsgContentFieldNumber = 6;
+  const ::std::string& msg_content() const;
+  void set_msg_content(const ::std::string& value);
+  void set_msg_content(const char* value);
+  void set_msg_content(const void* value, size_t size);
+  ::std::string* mutable_msg_content();
+  ::std::string* release_msg_content();
+  void set_allocated_msg_content(::std::string* msg_content);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_FORWARD_MESSAGE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 des_zone_id_;
+  ::google::protobuf::int32 des_node_type_;
+  ::google::protobuf::int32 des_node_index_;
+  ::google::protobuf::int32 msg_class_;
+  ::google::protobuf::internal::ArenaStringPtr msg_content_;
+  ::google::protobuf::int32 msg_type_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_FORWARD_MESSAGE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_FORWARD_MESSAGE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_FORWARD_MESSAGE) */ {
+ public:
+  rep_E_FRAME_MSG_FORWARD_MESSAGE();
+  virtual ~rep_E_FRAME_MSG_FORWARD_MESSAGE();
+
+  rep_E_FRAME_MSG_FORWARD_MESSAGE(const rep_E_FRAME_MSG_FORWARD_MESSAGE& from);
+
+  inline rep_E_FRAME_MSG_FORWARD_MESSAGE& operator=(const rep_E_FRAME_MSG_FORWARD_MESSAGE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_FORWARD_MESSAGE& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_FORWARD_MESSAGE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_FORWARD_MESSAGE* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_FORWARD_MESSAGE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_FORWARD_MESSAGE& from);
+  void MergeFrom(const rep_E_FRAME_MSG_FORWARD_MESSAGE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_FORWARD_MESSAGE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_FORWARD_MESSAGE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_FORWARD_MESSAGE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_FORWARD_TEST_MESSAGE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE) */ {
+ public:
+  req_E_FRAME_MSG_FORWARD_TEST_MESSAGE();
+  virtual ~req_E_FRAME_MSG_FORWARD_TEST_MESSAGE();
+
+  req_E_FRAME_MSG_FORWARD_TEST_MESSAGE(const req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+
+  inline req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& operator=(const req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& default_instance();
+
+  void Swap(req_E_FRAME_MSG_FORWARD_TEST_MESSAGE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_FORWARD_TEST_MESSAGE* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_FORWARD_TEST_MESSAGE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+  void MergeFrom(const req_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_FORWARD_TEST_MESSAGE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 test_id = 1;
+  void clear_test_id();
+  static const int kTestIdFieldNumber = 1;
+  ::google::protobuf::int32 test_id() const;
+  void set_test_id(::google::protobuf::int32 value);
+
+  // optional string show_text = 2;
+  void clear_show_text();
+  static const int kShowTextFieldNumber = 2;
+  const ::std::string& show_text() const;
+  void set_show_text(const ::std::string& value);
+  void set_show_text(const char* value);
+  void set_show_text(const char* value, size_t size);
+  ::std::string* mutable_show_text();
+  ::std::string* release_show_text();
+  void set_allocated_show_text(::std::string* show_text);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr show_text_;
+  ::google::protobuf::int32 test_id_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_FORWARD_TEST_MESSAGE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE) */ {
+ public:
+  rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE();
+  virtual ~rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE();
+
+  rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE(const rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+
+  inline rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& operator=(const rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+  void MergeFrom(const rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* default_instance_;
+};
 // ===================================================================
 
 
@@ -1348,7 +1732,231 @@ inline void rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS::set_isok(::google::protobuf:
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS.isok)
 }
 
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_FORWARD_MESSAGE
+
+// optional int32 des_zone_id = 1;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_des_zone_id() {
+  des_zone_id_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_MESSAGE::des_zone_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_zone_id)
+  return des_zone_id_;
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_des_zone_id(::google::protobuf::int32 value) {
+  
+  des_zone_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_zone_id)
+}
+
+// optional int32 des_node_type = 2;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_des_node_type() {
+  des_node_type_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_MESSAGE::des_node_type() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_node_type)
+  return des_node_type_;
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_des_node_type(::google::protobuf::int32 value) {
+  
+  des_node_type_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_node_type)
+}
+
+// optional int32 des_node_index = 3;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_des_node_index() {
+  des_node_index_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_MESSAGE::des_node_index() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_node_index)
+  return des_node_index_;
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_des_node_index(::google::protobuf::int32 value) {
+  
+  des_node_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.des_node_index)
+}
+
+// optional int32 msg_class = 4;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_msg_class() {
+  msg_class_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_MESSAGE::msg_class() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_class)
+  return msg_class_;
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_msg_class(::google::protobuf::int32 value) {
+  
+  msg_class_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_class)
+}
+
+// optional int32 msg_type = 5;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_msg_type() {
+  msg_type_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_MESSAGE::msg_type() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_type)
+  return msg_type_;
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_msg_type(::google::protobuf::int32 value) {
+  
+  msg_type_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_type)
+}
+
+// optional bytes msg_content = 6;
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::clear_msg_content() {
+  msg_content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& req_E_FRAME_MSG_FORWARD_MESSAGE::msg_content() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+  return msg_content_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_msg_content(const ::std::string& value) {
+  
+  msg_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_msg_content(const char* value) {
+  
+  msg_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_msg_content(const void* value, size_t size) {
+  
+  msg_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+}
+inline ::std::string* req_E_FRAME_MSG_FORWARD_MESSAGE::mutable_msg_content() {
+  
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+  return msg_content_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* req_E_FRAME_MSG_FORWARD_MESSAGE::release_msg_content() {
+  // @@protoc_insertion_point(field_release:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+  
+  return msg_content_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_FRAME_MSG_FORWARD_MESSAGE::set_allocated_msg_content(::std::string* msg_content) {
+  if (msg_content != NULL) {
+    
+  } else {
+    
+  }
+  msg_content_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), msg_content);
+  // @@protoc_insertion_point(field_set_allocated:protos.req_E_FRAME_MSG_FORWARD_MESSAGE.msg_content)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_FORWARD_MESSAGE
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_FORWARD_MESSAGE::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_FORWARD_MESSAGE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_FORWARD_MESSAGE.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_FORWARD_MESSAGE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_FORWARD_MESSAGE.isok)
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_FORWARD_TEST_MESSAGE
+
+// optional int32 test_id = 1;
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::clear_test_id() {
+  test_id_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::test_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.test_id)
+  return test_id_;
+}
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_test_id(::google::protobuf::int32 value) {
+  
+  test_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.test_id)
+}
+
+// optional string show_text = 2;
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::clear_show_text() {
+  show_text_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::show_text() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+  return show_text_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_show_text(const ::std::string& value) {
+  
+  show_text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+}
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_show_text(const char* value) {
+  
+  show_text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+}
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_show_text(const char* value, size_t size) {
+  
+  show_text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+}
+inline ::std::string* req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::mutable_show_text() {
+  
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+  return show_text_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::release_show_text() {
+  // @@protoc_insertion_point(field_release:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+  
+  return show_text_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_allocated_show_text(::std::string* show_text) {
+  if (show_text != NULL) {
+    
+  } else {
+    
+  }
+  show_text_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), show_text);
+  // @@protoc_insertion_point(field_set_allocated:protos.req_E_FRAME_MSG_FORWARD_TEST_MESSAGE.show_text)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE.isok)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

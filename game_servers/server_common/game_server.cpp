@@ -149,16 +149,27 @@ bool GameServer::BootUpConnectServer()
             return false;
         }
         // 2.登记到服务器管理
+        int32_t node_zone_id = g_ServerConfig.GetZoneId();
+        if (EServerRouteNodeType::E_SERVER_ROUTE_NODE_LIST == result.second || 
+            EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN == result.second || 
+            EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD == result.second || 
+            EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER == result.second || 
+            EServerRouteNodeType::E_SERVER_ROUTE_NODE_SCENE == result.second)
+        {
+            node_zone_id = 0;
+            TINFO("global or world node, zone id is 0");
+        }
         g_ServerManager.AddServerInfo(server_session, 
             result.second, 
             server_type_ret.second, 
-            0, g_ServerConfig.GetZoneId());
+            0, node_zone_id);
         
         TINFO("bootup add server info, session_id:" << server_session->GetConnId()
             << ", node_type:" << (int32_t)(result.second) 
             << ", server_type:" << (int32_t)server_type_ret.second
             << ", fd:" << server_session->GetFd()
-            << ", sessionptr:" << (int64_t)(server_session));
+            << ", sessionptr:" << (int64_t)(server_session)
+            << ", node_zone_id:" << node_zone_id);
         // 3.添加管理记录
         TBaseServer::OnNewConnectComeIn(server_session);
     }
@@ -371,7 +382,7 @@ bool GameServer::RunStepWaiting()
     }
     if (all_finished)
     {
-        if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER)
+        if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER && !g_MsgHelper.IsGlobalServerNode(g_ServerManager.GetCurrentNodeType()))
         {
             TINFO("all wait event finished");
             // 通知root，开始等待其他服务器启动了
@@ -542,11 +553,12 @@ bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t in
     g_ServerManager.AddServerInfo(server_session,
                                   result.second,
                                   server_type_ret.second,
-                                  0, g_ServerConfig.GetZoneId());
+                                  index, g_ServerConfig.GetZoneId());
 
     TINFO("bootup add server info, session_id:" << server_session->GetConnId()
                                                 << ", node_type:" << (int32_t)(result.second)
                                                 << ", server_type:" << (int32_t)server_type_ret.second
+                                                << ", index:" << index
                                                 << ", fd:" << server_session->GetFd()
                                                 << ", sessionptr:" << (int64_t)(server_session));
     // 3.添加管理记录

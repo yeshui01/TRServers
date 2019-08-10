@@ -84,14 +84,14 @@ bool LoginServer::RunStepWillRun()
     {
         return false;
     }
-    // 通知其他服务器自己的服务器节点数据
-    std::vector<EServerRouteNodeType> v_node_type = {
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER};
-    for (auto && node_type : v_node_type)
-    {
-        RegServerInfoToOtherServers(node_type, 0);
-    }
+    // // 通知其他服务器自己的服务器节点数据
+    // std::vector<EServerRouteNodeType> v_node_type = {
+    //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT,
+    //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
+    //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER};
+    // for (auto && node_type : v_node_type)
+    // {
+    //     RegServerInfoToOtherServers(node_type, 0);
+    // }
     return true;
 }

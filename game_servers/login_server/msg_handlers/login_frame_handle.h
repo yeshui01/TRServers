@@ -25,6 +25,8 @@ public:
 public:
     // 消息处理成员函数
     EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt);
+    // 测试转发的消息
+    EMsgHandleResult OnTestForwardMsg(TConnection *session_pt, const NetMessage * messag_pt);
 };
 
 #endif // __LOGIN_FRAME_MSG_HANDLE_H__

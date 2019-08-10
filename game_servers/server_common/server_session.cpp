@@ -78,7 +78,7 @@ void ServerSession::AfterReadData(int32_t read_size)
 		{
 			if (packet_buffer_size < packet_size)
 			{
-				TERROR("packet body maybe too large, please check!!!!");
+				TWARN("packet body maybe too large, please check!!!!");
 				// 重新分配更大的内存
 				SAFE_DELETE_PTR(packet_buffer);
 				packet_buffer = new char[packet_size];

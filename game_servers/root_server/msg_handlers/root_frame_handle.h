@@ -31,6 +31,8 @@ public:
     EMsgHandleResult OnQueryServerNodeList(TConnection *session_pt, const NetMessage * messag_pt);
     // 服务器等待开始
     EMsgHandleResult OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * messag_pt);
+    // 转发消息
+    EMsgHandleResult OnForwardMessage(TConnection *session_pt, const NetMessage * messag_pt);
 };
 
 #endif // __ROOT_FRAME_MSG_HANDLE_H__
