@@ -7,8 +7,8 @@
  * ======================================================*/
 #ifndef __TR_TIMER_H__
 #define __TR_TIMER_H__
-
 #include <cstdint>
+#include <ctime>
 // 定时器基类,时间单位：毫秒
 class TRTimer
 {

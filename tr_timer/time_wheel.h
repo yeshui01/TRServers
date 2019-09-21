@@ -7,8 +7,13 @@
  * ======================================================*/
 #ifndef __TR_TIME_WHEEL_H__
 #define __TR_TIME_WHEEL_H__
-#include "tr_common/base_type_def.h"
+#include "base_type_def.h"
 
+#include <memory>
+#include <map>
+#include <list>
+#include <vector>
+#include <cstdint>
 // 定时器每帧最小时间(毫秒)
 #define TR_TIMER_FRAME_LIMIT_MSEC	(25)
 
