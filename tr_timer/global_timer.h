@@ -26,8 +26,8 @@ public:
 	int32_t GetTimerSize();
 protected:
     std::shared_ptr<TimeWheel> time_wheel_;
-};
 
-#define g_GlobalTimer GlobalTimer::Instance();
+};
+#define g_GlobalTimer GlobalTimer::Instance()
 
 #endif // __GLOBAL_TIMER_H__

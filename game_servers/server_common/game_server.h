@@ -74,6 +74,8 @@ public:
     virtual bool RunStepPreRun();
     // 正常运行
     virtual bool RunStepRunning();
+    // 停服
+    virtual bool RunStepStop();
     // 注册消息处理
     virtual void RegisterMsgHandle();
     

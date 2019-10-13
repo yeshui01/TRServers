@@ -185,6 +185,7 @@ void TBaseServer::RunService()
             }
             case EServerRunStep::E_SERVER_RUN_STEP_STOP:
             {
+                RunStepStop();
                 break;
             }
         default:
@@ -327,6 +328,11 @@ bool TBaseServer::RunStepPreRun()
 }
 
 bool TBaseServer::RunStepWaitOtherServers()
+{
+    return true;
+}
+
+bool TBaseServer::RunStepStop()
 {
     return true;
 }

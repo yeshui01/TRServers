@@ -33,10 +33,11 @@ bool NetMsgHead::Serialize(char * buffer, int32_t buffer_len)
 	*data_pt = content_size;	// content_size
 	++data_pt;
 	int64_t *big_field_pt = reinterpret_cast<int64_t*>(data_pt);
-	*big_field_pt = req_no;	// req_no
+	*big_field_pt = req_no;		// req_no
 	++big_field_pt;
-	*big_field_pt = rep_no;	// rep_no
+	*big_field_pt = rep_no;		// rep_no
 	++big_field_pt;
+	*big_field_pt = param;		// param
 	return true;
 }
 
@@ -49,11 +50,11 @@ bool NetMsgHead::UnSerialize(const char * buffer, const int32_t buffer_len)
 	  return false;
 
 	const int32_t * data_pt = reinterpret_cast<const int32_t*>(buffer);
-	msg_class = *data_pt;	// msg_class
+	msg_class = *data_pt;		// msg_class
 	++data_pt;
-	msg_type = *data_pt;	// msg_type
+	msg_type = *data_pt;		// msg_type
 	++data_pt;
-	confirm = *data_pt;		// confirm
+	confirm = *data_pt;			// confirm
 	++data_pt;
 	content_size = *data_pt;	// content_size
 	++data_pt;
@@ -61,6 +62,8 @@ bool NetMsgHead::UnSerialize(const char * buffer, const int32_t buffer_len)
 	req_no = *big_field_pt;		// req_no
 	++big_field_pt;
 	rep_no = *big_field_pt;		// rep_no
+	++big_field_pt;
+	param = *big_field_pt;		// param
 	return true;
 }
 

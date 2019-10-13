@@ -27,7 +27,7 @@
 #include "server_common/server_session.h"
 #include "server_common/server_info_manager.h"
 #include <string>
-
+#include "login_global.h"
 LoginServer::LoginServer(int32_t index):GameServer(index)
 {
     server_type_ = EServerType::E_SERVER_TYPE_LOGIN_SERVER;
@@ -41,7 +41,12 @@ LoginServer::~LoginServer()
 
 bool LoginServer::Init()
 {
+    SetWaitOtherServers(false);
     if (!LoginParentClass::Init())
+    {
+        return false;
+    }
+    if (!g_LoginGlobal.Init())
     {
         return false;
     }
@@ -93,5 +98,13 @@ bool LoginServer::RunStepWillRun()
     // {
     //     RegServerInfoToOtherServers(node_type, 0);
     // }
+    return true;
+}
+
+bool LoginServer::RunStepStop()
+{
+    LoginParentClass::RunStepStop();
+    // 全局停服处理
+    g_LoginGlobal.Stop();
     return true;
 }

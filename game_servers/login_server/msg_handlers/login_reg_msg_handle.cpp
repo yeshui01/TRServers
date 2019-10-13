@@ -10,6 +10,7 @@
 #include "tr_msg_packet/msg_dispatcher.h"
 #include "tr_msg_packet/msg_handler.h"
 #include "login_frame_handle.h"
+#include "login_account_handle.h"
 #include "protcl_frame.pb.h"
 #include "protocol_class.h"
 #include "protocol_frame.h"
@@ -21,8 +22,8 @@ void LoginServer::RegisterMsgHandle()
 		g_MsgDispatcher.DispatchMessage();
 	});
     
-    g_MsgDispatcher.RegisterMsgHandlerEx<LoginFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
+    g_MsgDispatcher.RegisterMsgHandlerEx<LoginFrameHandler>(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME));
+    g_MsgDispatcher.RegisterMsgHandlerEx<LoginAccountHandler>(INT_MSGCLASS(E_PROTOCOL_CLASS_LOGIN));
 
     TINFO("login server register msg handlers");
 }

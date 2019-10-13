@@ -1,0 +1,66 @@
+syntax = "proto3";
+package protos;
+
+// E_LOGIN_MSG_C2S_REGISTER_ACCOUNT                    = 1,  // 注册账号
+message req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
+{
+    string account_name = 1;    // 账号名字
+    string pswd = 2;            // 密码
+}
+
+message rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
+{
+    int32 isok = 1;
+    string account_name = 2;    // 账号名字
+    string pswd = 3;            // 密码
+    int64 account_id = 4;       // 账号唯一标识id
+}
+
+// 角色快照数据
+message role_snapshot_t
+{
+    int64 role_id = 1;      // 角色id
+    string nickname  = 2;   // 昵称
+}
+
+// E_LOGIN_MSG_C2S_LOGIN                               = 2,  // c->s登录
+message req_E_LOGIN_MSG_C2S_LOGIN
+{
+    string account_name = 1;    // 账号名字
+    string pswd = 2;            // 密码
+    int64 account_id = 3;       // 账号唯一id
+    int32 zone_id = 4;          // 区号id
+}
+
+message rep_E_LOGIN_MSG_C2S_LOGIN
+{
+    int32 isok = 1;
+    repeated role_snapshot_t role_list = 2; // 角色快照列表
+}
+
+// E_LOGIN_MSG_GG2ROOT_LOGIN                           = 3,  // gg->root请求登录
+message req_E_LOGIN_MSG_GG2ROOT_LOGIN
+{
+    string account_name = 1;    // 账号名字
+    string pswd = 2;            // 密码
+    int64 account_id = 3;       // 账号唯一id
+    int32 zone_id = 4;          // 区号id
+}
+
+message rep_E_LOGIN_MSG_GG2ROOT_LOGIN
+{
+    int32 isok = 1;
+}
+
+// E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK                   = 4,  // root->login账号校验
+message req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK
+{
+    string account_name = 1;    // 账号名字
+    string pswd = 2;            // 密码
+    int64 account_id = 3;       // 账号唯一id
+}
+
+message rep_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK
+{
+    int32 isok = 1;
+}

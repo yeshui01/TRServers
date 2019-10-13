@@ -35,6 +35,7 @@
 #include <log4cplus/configurator.h>
 #include <log4cplus/helpers/stringhelper.h>
 #include <log4cplus/loggingmacros.h>
+#include "tr_database/data_table_item.h"
 
 int main(int argc, char* argv[])
 {
@@ -67,5 +68,6 @@ int main(int argc, char* argv[])
 	// 	g_MsgDispatcher.DispatchMessage();
 	// });
 	// msg_server.RunService();
+
 	return 0;
 }

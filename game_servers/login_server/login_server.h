@@ -50,6 +50,8 @@ public:
     bool RunStepWillRun() override;
     // 注册消息处理
     void RegisterMsgHandle() override;
+    // 停服
+    bool RunStepStop() override;
 };
 
 #endif 	// __TR_LOGIN_SERVER_H__

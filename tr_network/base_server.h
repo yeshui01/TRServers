@@ -72,6 +72,8 @@ public:
     virtual bool RunStepWaitOtherServers();
     // 运行前一刻
     virtual bool RunStepPreRun();
+    // 停服
+    virtual bool RunStepStop();
 protected:
     // 回收连接
     void RecycleConnections();

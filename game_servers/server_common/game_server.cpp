@@ -14,6 +14,7 @@
 #include "protocol_frame.h"
 #include "protcl_frame.pb.h"
 #include "game_msg_helper.h"
+#include "tr_timer/global_timer.h"
 GameServer::GameServer(int32_t index)
 {
 	index_ = index;
@@ -55,7 +56,10 @@ bool GameServer::Init()
         const_cast<GameServer*>(this)->Stop();
     });
     
-
+    AddLoopRun([](time_t cur_mtime)
+    {
+        g_GlobalTimer.Update(cur_mtime);
+    });
     return true;
 }
 
@@ -154,7 +158,7 @@ bool GameServer::BootUpConnectServer()
             EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN == result.second || 
             EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD == result.second || 
             EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER == result.second || 
-            EServerRouteNodeType::E_SERVER_ROUTE_NODE_SCENE == result.second)
+            EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW == result.second)
         {
             node_zone_id = 0;
             TINFO("global or world node, zone id is 0");
@@ -570,4 +574,11 @@ void GameServer::SetWaitOtherServers(bool wait)
 {
     wait_other_servers_ = wait;
     TINFO("SetWaitOtherServers, wait:" << wait);
+}
+
+bool GameServer::RunStepStop()
+{
+    GameParentClass::RunStepStop();
+
+    return true;
 }

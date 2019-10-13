@@ -9,7 +9,7 @@
 #define __MSG_QUEUE_H__
 #include "base_type_def.h"
 #include "singleton.h"
-#include <list>
+#include <deque>
 
 class NetMessage;
 class TMessageQueue : public TSingleton<TMessageQueue>
@@ -24,7 +24,7 @@ public:
 	// 获取队列大小
 	int32_t GetSize();
 protected:
-	std::list<NetMessage*> msg_queue_;
+	std::deque<NetMessage*> msg_queue_;
 };
 
 #define g_MsgQueue TMessageQueue::Instance()

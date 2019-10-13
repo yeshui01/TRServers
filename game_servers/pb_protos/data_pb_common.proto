@@ -1,0 +1,30 @@
+syntax = "proto3";
+package db_protos;
+
+// 数据字段
+message pb_table_field
+{
+	int32 val_type = 1;
+	int32 field_index = 2;
+	float val_f = 3;
+	int32 val_int = 4;
+	int64 val_bigint = 5;
+	string val_str = 6;
+	bool val_bool = 7;
+}
+
+// 数据项
+message pb_table_item
+{
+	repeated pb_table_field field_list = 1;
+	int32 db_status = 2;	// 数据状态
+}
+
+// 数据模块(表)
+message pb_data_module
+{
+	int32 table_id = 1;
+	repeated pb_table_item data_items = 2;	// 数据项列表
+}
+
+

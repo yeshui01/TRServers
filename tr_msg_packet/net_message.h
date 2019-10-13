@@ -28,6 +28,7 @@ struct NetMsgHead
     rep_no = 0;
     confirm = 0;
     content_size = 0;
+    param = 0;
   }
 
   int32_t Size()
@@ -37,7 +38,8 @@ struct NetMsgHead
                       + sizeof(req_no)
                       + sizeof(rep_no)
                       + sizeof(confirm)
-                      + sizeof(content_size);
+                      + sizeof(content_size)
+                      + sizeof(param);
     return head_size;
   }
 
@@ -53,6 +55,7 @@ public:
   int32_t msg_type = 0;
   int64_t req_no = -1;   // 请求id
   int64_t rep_no = -1;   // 回复id(跟请求id对应)
+  int64_t param = 0;     // 携带参数
   int32_t confirm = 0;   // 校验数据
   int32_t content_size = 0; // 数据内容大小
 };

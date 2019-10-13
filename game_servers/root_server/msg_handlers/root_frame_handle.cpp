@@ -177,10 +177,14 @@ EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, con
 
                 rep_net_msg.SetRepNo(req_no);
                 
-                char * buffer = new char [rep_net_msg.SerializeByteNum()];
-                rep_net_msg.Serialize(buffer, rep_net_msg.SerializeByteNum());
-                cb_param.session_pt->Send(buffer, rep_net_msg.SerializeByteNum());
-                delete [] buffer;
+                // char * buffer = new char [rep_net_msg.SerializeByteNum()];
+                // rep_net_msg.Serialize(buffer, rep_net_msg.SerializeByteNum());
+                // cb_param.session_pt->Send(buffer, rep_net_msg.SerializeByteNum());
+                // delete [] buffer;
+                int32_t packet_size = rep_net_msg.SerializeByteNum();
+                std::vector<char> buffer(packet_size, '\0');
+                rep_net_msg.Serialize(buffer.data(), packet_size);
+                cb_param.session_pt->Send(buffer.data(), packet_size);
             }
             else 
             {

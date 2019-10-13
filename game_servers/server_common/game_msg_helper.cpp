@@ -22,7 +22,11 @@ GameMsgHelper::GameMsgHelper()
 
 GameMsgHelper::~GameMsgHelper()
 {
-
+    if (msg_buffer_)
+    {
+        delete [] msg_buffer_;
+        msg_buffer_ = nullptr;
+    }
 }
 
 std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServerRouteNodeType> > > GameMsgHelper::s_route_path_ =
@@ -390,7 +394,7 @@ bool GameMsgHelper::IsWorldServerNode(EServerRouteNodeType node_type)
     static std::vector<EServerRouteNodeType> s_world_nodes = {
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD,
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_SCENE
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW
     };
     return std::find(s_world_nodes.begin(), s_world_nodes.end(), node_type) != s_world_nodes.end();
 }
