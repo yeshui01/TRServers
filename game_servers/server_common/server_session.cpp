@@ -113,6 +113,11 @@ void ServerSession::AfterReadData(int32_t read_size)
 
 void ServerSession::OnClose()
 {
+	for (auto & cb : close_callbacks_)
+	{
+		cb(this);
+	}
+	close_callbacks_.clear();
 	if (GetChannelType() == ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER)
 	{
 		g_ServerManager.DeleteServerInfo(GetConnId());
@@ -173,5 +178,10 @@ void ServerSession::SetChannelUserId(int64_t user_id)
 
 int32_t ServerSession::CalcServerId(EServerRouteNodeType route_type, int32_t index_id)
 {
-	return index_id * 100 + int32_t(route_type);
+	return index_id * 1000 + int32_t(route_type);
+}
+
+void ServerSession::AddCloseCallback(session_close_callback_t && close_cb)
+{
+	close_callbacks_.push_back(close_cb);
 }

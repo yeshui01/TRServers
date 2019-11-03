@@ -15,6 +15,8 @@
 #include "server_common/server_config.h"
 #include "protcl_frame.pb.h"
 #include "server_common/server_define.h"
+#include "server_common/server_describe.h"
+
 GameMsgHelper::GameMsgHelper()
 {
     
@@ -84,7 +86,16 @@ bool GameMsgHelper::ForwardMessage(int32_t msg_class,
     {
         zone_id = g_ServerConfig.GetZoneId();
     }
-
+    if (g_MsgHelper.IsGlobalServerNode(node_type))
+    {
+        zone_id = g_ServerConfig.GetGlobalZoneId();
+    }
+    else if (g_MsgHelper.IsWorldServerNode(node_type))
+    {
+        zone_id = g_ServerConfig.GetWorldZoneId();
+    }
+    
+    
     auto it_routes = s_route_path_.find(g_ServerManager.GetCurrentNodeType());
     if (it_routes == s_route_path_.end())
     {
@@ -129,11 +140,11 @@ bool GameMsgHelper::ForwardMessage(int32_t msg_class,
         EnsureMsgBuffer(msg_size);
         net_msg.Serialize(msg_buffer_, buffer_size_);
         TINFO("ForwardMessage no cross, req_id:" << net_msg.GetReqNo()
-                                             << ", msg_class:" << net_msg.GetMsgClass()
-                                             << ", msg_type:" << net_msg.GetMsgType()
-                                             << ", msg_size:" << msg_size
-                                             << ", node_type:" << int32_t(node_type)
-                                             << ", node_index:" << node_index);
+            << ", msg_class:" << net_msg.GetMsgClass() << "(" << g_ServerDes.GetMsgClassName(net_msg.GetMsgClass()) << ")"
+            << ", msg_type:" << net_msg.GetMsgType() << "(" << g_ServerDes.GetMsgTypeName(net_msg.GetMsgClass(), net_msg.GetMsgType()) << ")"
+            << ", msg_size:" << msg_size
+            << ", node_type:" << int32_t(node_type) << "(" << g_ServerDes.GetServerNodeName(int32_t(node_type)) << ")"
+            << ", node_index:" << node_index);
 
         if (msg_buffer_ && msg_size > 0)
             session_pt->Send(msg_buffer_, msg_size);
@@ -158,12 +169,22 @@ bool GameMsgHelper::ForwardMessage(int32_t msg_class,
         // // 如果是世界节点
         if (IsWorldServerNode(next_node_type))
         {
-            next_node_zone_id = 0;
+            next_node_zone_id = g_ServerConfig.GetWorldZoneId();
         }
-        if (IsZoneServerNode(next_node_type) && IsZoneServerNode(g_ServerManager.GetCurrentNodeType()))
+        else if (IsGlobalServerNode(next_node_type))
+        {
+            next_node_zone_id = g_ServerConfig.GetGlobalZoneId();
+        }
+        else if (IsZoneServerNode(next_node_type) && IsZoneServerNode(g_ServerManager.GetCurrentNodeType()))
         {
             next_node_zone_id = g_ServerConfig.GetZoneId();
         }
+        else
+        {
+            TERROR("unknown node zone type");
+            return false;
+        }
+        
         auto server_node = g_ServerManager.GetRouteNodeInfo(next_node_type, next_node_index, next_node_zone_id);
         if (!server_node)
         {
@@ -193,10 +214,10 @@ bool GameMsgHelper::ForwardMessage(int32_t msg_class,
         net_msg.Serialize(msg_buffer_, buffer_size_);
 
         TINFO("ForwardMessage need cross"
-              << ", msg_class:" << net_msg.GetMsgClass()
-              << ", msg_type:" << net_msg.GetMsgType()
+              << ", msg_class:" << net_msg.GetMsgClass() << "(" << g_ServerDes.GetMsgClassName(net_msg.GetMsgClass()) << ")"
+              << ", msg_type:" << net_msg.GetMsgType() << "(" << g_ServerDes.GetMsgTypeName(net_msg.GetMsgClass(), net_msg.GetMsgType()) << ")"
               << ", msg_size:" << msg_size
-              << ", node_type:" << int32_t(node_type)
+              << ", node_type:" << int32_t(node_type) << "(" << g_ServerDes.GetServerNodeName(int32_t(node_type)) << ")"
               << ", node_index:" << node_index
               << ", fd_:" << session_pt->GetFd());
         if (msg_buffer_ && msg_size > 0)
@@ -215,6 +236,14 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
     if (-1 == zone_id)
     {
         zone_id = g_ServerConfig.GetZoneId();
+    }
+    if (g_MsgHelper.IsGlobalServerNode(node_type))
+    {
+        zone_id = g_ServerConfig.GetGlobalZoneId();
+    }
+    else if (g_MsgHelper.IsWorldServerNode(node_type))
+    {
+        zone_id = g_ServerConfig.GetWorldZoneId();
     }
     
     auto it_routes = s_route_path_.find(g_ServerManager.GetCurrentNodeType());
@@ -268,13 +297,14 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
         EnsureMsgBuffer(msg_size);
         net_msg.Serialize(msg_buffer_, buffer_size_);
 
-        TINFO("ForwardAsyncMessage no cross, req_id:" << net_msg.GetReqNo()
-                                             << ", msg_class:" << net_msg.GetMsgClass()
-                                             << ", msg_type:" << net_msg.GetMsgType()
-                                             << ", msg_size:" << msg_size
-                                             << ", node_type:" << int32_t(node_type)
-                                             << ", node_index:" << node_index
-                                             << ", fd_:" << session_pt->GetFd());
+        TINFO("ForwardAsyncMessage no cross, req_no:" << net_msg.GetReqNo()
+            << ", msg_class:" << net_msg.GetMsgClass() << "(" << g_ServerDes.GetMsgClassName(net_msg.GetMsgClass()) << ")"
+            << ", msg_type:" << net_msg.GetMsgType() << "(" << g_ServerDes.GetMsgTypeName(net_msg.GetMsgClass(), net_msg.GetMsgType()) << ")"
+            << ", msg_size:" << msg_size
+            << ", node_type:" << int32_t(node_type) << "(" << g_ServerDes.GetServerNodeName(int32_t(node_type)) << ")"
+            << ", node_index:" << node_index
+            << ", fd_:" << session_pt->GetFd());
+
         if (msg_buffer_ && msg_size > 0)
             session_pt->Send(msg_buffer_, msg_size);
 
@@ -300,20 +330,30 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
         // // 如果是世界节点
         if (IsWorldServerNode(next_node_type))
         {
-            next_node_zone_id = 0;
+            next_node_zone_id = g_ServerConfig.GetWorldZoneId();
         }
-        if (IsZoneServerNode(next_node_type) && IsZoneServerNode(g_ServerManager.GetCurrentNodeType()))
+        else if (IsGlobalServerNode(next_node_type))
+        {
+            next_node_zone_id = g_ServerConfig.GetGlobalZoneId();
+        }
+        else if (IsZoneServerNode(next_node_type) && IsZoneServerNode(g_ServerManager.GetCurrentNodeType()))
         {
             next_node_zone_id = g_ServerConfig.GetZoneId();
+        }
+        else
+        {
+            TERROR("unknown node zone type");
+            return false;
         }
         auto server_node = g_ServerManager.GetRouteNodeInfo(next_node_type, next_node_index, next_node_zone_id);
         if (!server_node)
         {
             TERROR("ForwardAsyncMessage failed, not found server_node, node_type:" << int32_t(next_node_type)
-                                                                                   << ", node_index:" << next_node_index
-                                                                                   << ", zone_id:" << next_node_zone_id
-                                                                                   << ", msg_class:" << msg_class
-                                                                                   << ", msg_type:" << msg_type);
+                    << ", node_index:" << next_node_index
+                    << ", zone_id:" << next_node_zone_id
+                    << ", msg_class:" << msg_class << "(" << g_ServerDes.GetMsgClassName(msg_class) << ")"
+                    << ", msg_type:" << msg_type << "(" << g_ServerDes.GetMsgTypeName(msg_class, msg_type) << ")"
+                    );
 
             return false;
         }
@@ -336,13 +376,14 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
         EnsureMsgBuffer(msg_size);
         net_msg.Serialize(msg_buffer_, buffer_size_);
 
-        TINFO("ForwardAsyncMessage need cross req_id:" << net_msg.GetReqNo()
-                                             << ", msg_class:" << net_msg.GetMsgClass()
-                                             << ", msg_type:" << net_msg.GetMsgType()
-                                             << ", msg_size:" << msg_size
-                                             << ", node_type:" << int32_t(node_type)
-                                             << ", node_index:" << node_index
-                                             << ", fd_:" << session_pt->GetFd());
+        TINFO("ForwardAsyncMessage need cross req_no:" << net_msg.GetReqNo()
+            << ", msg_class:" << net_msg.GetMsgClass() << "(" << g_ServerDes.GetMsgClassName(msg_class) << ")"
+            << ", msg_type:" << net_msg.GetMsgType() << "(" << g_ServerDes.GetMsgTypeName(msg_class, msg_type) << ")"
+            << ", msg_size:" << msg_size
+            << ", node_type:" << int32_t(node_type) << "(" << g_ServerDes.GetServerNodeName(int32_t(node_type)) << ")"
+            << ", node_index:" << node_index
+            << ", fd_:" << session_pt->GetFd());
+
         if (msg_buffer_ && msg_size > 0)
             session_pt->Send(msg_buffer_, msg_size);
     }
@@ -394,7 +435,7 @@ bool GameMsgHelper::IsWorldServerNode(EServerRouteNodeType node_type)
     static std::vector<EServerRouteNodeType> s_world_nodes = {
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD,
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW_MANAGER,
     };
     return std::find(s_world_nodes.begin(), s_world_nodes.end(), node_type) != s_world_nodes.end();
 }
@@ -402,7 +443,7 @@ bool GameMsgHelper::IsWorldServerNode(EServerRouteNodeType node_type)
 bool GameMsgHelper::IsGlobalServerNode(EServerRouteNodeType node_type)
 {
     static std::vector<EServerRouteNodeType> s_global_nodes = {
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD,
+        // EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD,
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN
     };
 
@@ -420,4 +461,47 @@ bool GameMsgHelper::IsZoneServerNode(EServerRouteNodeType node_type)
     };
 
     return std::find(s_zone_nodes.begin(), s_zone_nodes.end(), node_type) != s_zone_nodes.end();
+}
+
+AsyncMsgParam GameMsgHelper::GenAsyncMsgEnvParam(TConnection *session_pt, const NetMessage * message_pt)
+{
+    AsyncMsgParam async_env;
+    async_env.session_pt = session_pt;
+    if (message_pt)
+    {
+        async_env.msg_class = message_pt->GetMsgClass();
+        async_env.msg_type = message_pt->GetMsgType();
+        async_env.req_no = message_pt->GetReqNo();
+        async_env.rep_no = message_pt->GetRepNo();
+    }
+    return async_env;
+}
+
+void GameMsgHelper::SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param)
+{
+    std::string str;
+    pb_msg.SerializeToString(&str);
+
+    auto rep_net_msg = g_MsgTools.MakeNetMessage(async_param.msg_class,
+                                                 async_param.msg_type, 
+                                                 str);
+    if (async_param.req_no > 0)
+    {
+        rep_net_msg.SetRepNo(async_param.req_no);
+    }
+    TINFO("SendAsyncRepMsg rep_no:" << async_param.req_no 
+        << ", msg(" << async_param.msg_class << "," << async_param.msg_type << ")"
+        << ", msg_data:" << pb_msg.ShortDebugString());
+
+    int32_t packet_size = rep_net_msg.SerializeByteNum();
+    std::vector<char> buffer(packet_size, '\0');
+    rep_net_msg.Serialize(buffer.data(), packet_size);
+    if (async_param.session_pt)
+    {
+        async_param.session_pt->Send(buffer.data(), packet_size);
+    }
+    else
+    {
+        TERROR("async_param.session is nullptr, msg_class:" << async_param.msg_class << ", msg_type:" << async_param.msg_type);
+    }
 }

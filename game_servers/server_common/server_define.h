@@ -10,7 +10,7 @@
 #define __GAME_SERVER_DEFINE_H__
 #include "tr_common/base_type_def.h"
 
-// 服务器类型枚举
+// 服务器类型枚举(目前限制1000以内,ServerSession::CalcServerId算法绑定)
 enum class EServerType : uint8_t
 {
 	E_SERVER_TYPE_INVALID_SERVER = 0, 	// 无效的服务器类型
@@ -26,12 +26,13 @@ enum class EServerType : uint8_t
 	E_SERVER_TYPE_WORLD_SERVER = 100, 	// 世界服务器
 	E_SERVER_TYPE_WORLD_CENTER = 101,	// 世界中心逻辑服
 	E_SERVER_TYPE_VIEW_SERVER = 102,	// 视图服务器
+	E_SERVER_TYPE_VIEW_MANAGER_SERVER = 103,	// 视图管理服务器
 
 	E_SERVER_TYPE_LOGIN_SERVER = 150,	// 登录服务器
 	E_SERVER_TYPE_LIST_SERVER = 151,	// 选服列表服务器
 };
 
-// 服务器路由节点类型
+// 服务器路由节点类型(目前限制1000以内,ServerSession::CalcServerId算法绑定)
 enum class EServerRouteNodeType : uint8_t
 {
 	E_SERVER_ROUTE_NODE_NONE = 0,
@@ -47,6 +48,7 @@ enum class EServerRouteNodeType : uint8_t
 	E_SERVER_ROUTE_NODE_WORLD = 100,		// 世界服
 	E_SERVER_ROUTE_NODE_WORLD_CENTER = 101,	// 世界逻辑
 	E_SERVER_ROUTE_NODE_VIEW = 102,			// 视图表现服务器
+	E_SERVER_ROUTE_NODE_VIEW_MANAGER = 103,	// 视图管理服务器节点
 
 	E_SERVER_ROUTE_NODE_LOGIN = 150,		// 登录服
 	E_SERVER_ROUTE_NODE_LIST = 151,			// 列表服

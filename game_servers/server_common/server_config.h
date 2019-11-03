@@ -31,9 +31,17 @@ public:
 	const Json::Value & GetJsonConfig();
 	// 获取大区id
 	int32_t GetZoneId();
+	// 获取世界的大区id标识
+	int32_t GetWorldZoneId();
+	// 动态修改zoneid
+	void SetZoneId(int32_t zone_id);
+	// 获取全局区id
+	int32_t GetGlobalZoneId();
+	
 protected:
 	int32_t zone_id_ = 0;
-	
+	int32_t world_zone_id_ = 0;
+	int32_t global_zone_id_ = 0;
 	// json配置数据缓存
 	Json::Value js_config_;
 };

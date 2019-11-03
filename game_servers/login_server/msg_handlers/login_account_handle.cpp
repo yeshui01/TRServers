@@ -32,6 +32,7 @@ LoginAccountHandler::~LoginAccountHandler()
 void LoginAccountHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_REGISTER_ACCOUNT), LoginAccountHandler, OnRegisnterAccount);
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK), LoginAccountHandler, OnAccountCheck);
 }
 
 // 注册账号
@@ -103,5 +104,54 @@ EMsgHandleResult LoginAccountHandler::OnRegisnterAccount(TConnection *session_pt
     }
     rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_CORRECT));
     
+    RETURN_REP_CONTENT(rep);
+}
+
+EMsgHandleResult LoginAccountHandler::OnAccountCheck(TConnection *session_pt, const NetMessage * messag_pt)
+{
+    TINFO("OnAccountCheck");
+    REQMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK) req;
+    REPMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK) rep;
+    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    {
+        TERROR("parse pbmsg failed");
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);
+    }
+    TINFO("req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK:" << req.ShortDebugString());
+    rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_CORRECT));
+
+    if (req.account_name().length() < 2 || req.pswd().length() < 6)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PARAM_ERROR, rep);
+    }
+    int32_t acc_db_id = DatabaseHash::AccountDataBaseHashIdByAccName(req.account_name());
+    std::string acc_tb = DatabaseHash::AccountTbNameHashByAccName(req.account_name());
+    TDEBUG("acc_name:" << req.account_name() << ", acc_db_id:" << acc_db_id << ", acc_tb:" << acc_tb);
+    // 是否已经存在这个名字
+    auto database_pt = g_LoginGlobal.db_helper_.HoldDataBase(acc_db_id);
+    if (!database_pt)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_CORRECT, rep);
+    }
+    std::vector<DataTableItem> v_local_set;
+    std::stringstream ss_sql;
+    ss_sql << "select user_id, user_name, pswd from " << acc_tb << " where user_name = '" << req.account_name() << "';";
+    TDEBUG("ss_sql:" << ss_sql.str());
+    database_pt->Query(ss_sql.str(), v_local_set);
+    if (v_local_set.size() < 1)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_NOT_EXISTED, rep);
+    }
+    if (v_local_set.size() > 1)
+    {
+        // 数据异常
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PARAM_ERROR, rep);
+    }
+    // 密码是否正确
+    if (v_local_set[0].GetFieldStringValue(2) != req.pswd())
+    {
+        // 密码错误
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_PSWD_ERROR, rep);
+    }
     RETURN_REP_CONTENT(rep);
 }

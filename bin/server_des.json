@@ -1,0 +1,6 @@
+{
+	"node_des":[
+		{"node_type":1, "node_name": "E_SERVER_ROUTE_NODE_INTERFACE"},
+		{"node_type":2, "node_name": "E_SERVER_ROUTE_NODE_ROOT"}
+	]
+}

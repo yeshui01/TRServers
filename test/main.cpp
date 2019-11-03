@@ -30,6 +30,7 @@
 #include <log4cplus/helpers/stringhelper.h>
 #include <log4cplus/loggingmacros.h>
 
+#include <fstream>
 
 static void test_cycle_buffer()
 {
@@ -357,6 +358,82 @@ void test_log4cplus()
 	// LOG4CPLUS_WARN(g_ServerLog.GetLogger(), "This is a WARN message");
 }
 
+void test_load_jsonfile()
+{
+	std::map<int32_t, std::string> node_type_des;  // key:node_type value:node_name
+    std::map<int32_t, std::string> msg_class_des;  // key:msg_class value:msg_class_name
+    std::map<int32_t, std::map<int32_t, std::string> > msg_type_des; // key1: msg_class key2:msg_type  vlaue:msg_type_name
+	// server_des.json
+    {
+        Json::Reader reader;
+        std::ifstream fs;
+        Json::Value server_des_jv;
+        fs.open("server_des.json", std::ios::binary);
+        if (!fs.is_open())
+        {
+            TERROR("open server_des.json failed");
+            return;
+        }
+        if (!reader.parse(fs, server_des_jv, false))
+        {
+            fs.close();
+            TERROR("parse server_des.json failed");
+            return;
+        }
+        TINFO("parce server_des.json success")
+        if (server_des_jv.isMember("node_des"))
+        {
+            auto &node_des_jv = server_des_jv["node_des"];
+            for (int32_t i = 0; i < node_des_jv.size(); ++i)
+            {
+                int32_t node_type = node_des_jv[i]["node_type"].asInt();
+                std::string node_name = node_des_jv[i]["node_name"].asString();
+                node_type_des[node_type] = node_name;
+            }
+        }
+        fs.close();
+    }
+    {
+        // protocol_des.json
+        Json::Reader reader;
+        std::ifstream fs;
+        Json::Value protocol_des_jv;
+        fs.open("protocol_des.json", std::ios::binary);
+        if (!fs.is_open())
+        {
+            TERROR("protocol_des.json failed");
+            return;
+        }
+        if (!reader.parse(fs, protocol_des_jv, false))
+        {
+            fs.close();
+            TERROR("parse protocol_des.json failed");
+            return;
+        }
+        TINFO("parce protocol_des.json success")
+        if (protocol_des_jv.isMember("proto_class_des"))
+        {
+            auto &msg_class_jv = protocol_des_jv["proto_class_des"];
+            for (int32_t i = 0; i < msg_class_jv.size(); ++i)
+            {
+                int32_t msg_class = msg_class_jv[i]["msg_class"].asInt();
+                std::string msg_class_name = msg_class_jv[i]["class_des"].asString();
+                msg_class_des[msg_class] = msg_class_name;
+                // msg types
+                auto & msg_type_jv = msg_class_jv[i]["msg_type"];
+                for (int32_t j = 0; j < msg_type_jv.size(); ++j)
+                {
+                    int32_t msg_type = msg_type_jv[j]["type"].asInt();
+                    std::string type_name = msg_type_jv[j]["des"].asString();
+                    msg_type_des[msg_class][msg_type] = type_name;
+                }
+            }
+        }
+        fs.close();
+    }
+	return;
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -377,7 +454,7 @@ int main(int argc, char* argv[])
 	// test_jsconcpp();
 	// test_mysqlconnector();
 	// test_protos();
-	
+	test_load_jsonfile();
 
 	return 0;
 }

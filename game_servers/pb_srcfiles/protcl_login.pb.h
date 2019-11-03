@@ -741,11 +741,24 @@ class rep_E_LOGIN_MSG_GG2ROOT_LOGIN : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::int32 isok() const;
   void set_isok(::google::protobuf::int32 value);
 
+  // repeated .protos.role_snapshot_t role_list = 2;
+  int role_list_size() const;
+  void clear_role_list();
+  static const int kRoleListFieldNumber = 2;
+  const ::protos::role_snapshot_t& role_list(int index) const;
+  ::protos::role_snapshot_t* mutable_role_list(int index);
+  ::protos::role_snapshot_t* add_role_list();
+  ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >*
+      mutable_role_list();
+  const ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >&
+      role_list() const;
+
   // @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t > role_list_;
   ::google::protobuf::int32 isok_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
@@ -1525,6 +1538,36 @@ inline void rep_E_LOGIN_MSG_GG2ROOT_LOGIN::set_isok(::google::protobuf::int32 va
   
   isok_ = value;
   // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.isok)
+}
+
+// repeated .protos.role_snapshot_t role_list = 2;
+inline int rep_E_LOGIN_MSG_GG2ROOT_LOGIN::role_list_size() const {
+  return role_list_.size();
+}
+inline void rep_E_LOGIN_MSG_GG2ROOT_LOGIN::clear_role_list() {
+  role_list_.Clear();
+}
+inline const ::protos::role_snapshot_t& rep_E_LOGIN_MSG_GG2ROOT_LOGIN::role_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.role_list)
+  return role_list_.Get(index);
+}
+inline ::protos::role_snapshot_t* rep_E_LOGIN_MSG_GG2ROOT_LOGIN::mutable_role_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.role_list)
+  return role_list_.Mutable(index);
+}
+inline ::protos::role_snapshot_t* rep_E_LOGIN_MSG_GG2ROOT_LOGIN::add_role_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.role_list)
+  return role_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >*
+rep_E_LOGIN_MSG_GG2ROOT_LOGIN::mutable_role_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.role_list)
+  return &role_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >&
+rep_E_LOGIN_MSG_GG2ROOT_LOGIN::role_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_LOGIN_MSG_GG2ROOT_LOGIN.role_list)
+  return role_list_;
 }
 
 // -------------------------------------------------------------------

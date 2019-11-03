@@ -114,6 +114,7 @@ bool GateServer::RunStepPreRun()
     GateParentClass::RunStepPreRun();
     // test ,往login_server发一个测试消息
     REQMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) req;
+    TINFO("send test message");
     req.set_test_id(1);
     req.set_show_text("hello forward ascync");
     g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
@@ -129,6 +130,6 @@ bool GateServer::RunStepPreRun()
     req.set_show_text("hello cross forward message");
     g_MsgHelper.ForwardPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
         INT_FRAMEMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE), req,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, 0, 0);
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, 0, -1);
     return true;
 }

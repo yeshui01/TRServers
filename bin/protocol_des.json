@@ -1,0 +1,23 @@
+{
+	"proto_class_des":[
+			{
+				"msg_class": 1,
+				"class_des": "MSG_CLASS_FRAME",
+				"msg_type":[
+					{"type":1, "des":"E_FRAME_MSG_REGISTER_SERVER_INFO"},
+					{"type":2, "des":"E_FRAME_MSG_NEW_SERVER_BOOTUP"},
+					
+					{"type":999999999, "des":"end type des"}
+				]
+			},
+			{
+				"msg_class": 2,
+				"class_des": "MSG_CLASS_LOGIN",
+				"msg_type":[
+					{"type":1, "des":"E_LOGIN_MSG_C2S_REGISTER_ACCOUNT"},
+					{"type":2, "des":"E_LOGIN_MSG_C2S_LOGIN"},
+					{"type":999999999, "des":"end type des"}
+				]
+			}
+	]
+}

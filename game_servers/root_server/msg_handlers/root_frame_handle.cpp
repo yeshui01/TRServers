@@ -18,6 +18,7 @@
 #include "root_server/root_server.h"
 #include "server_common/game_msg_helper.h"
 #include "server_common/server_config.h"
+#include "server_common/client_net_node.h"
 RootFrameHandler::RootFrameHandler()
 {
 
@@ -34,6 +35,7 @@ void RootFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_QUERY_SERVER_NODE_LIST), RootFrameHandler, OnQueryServerNodeList);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), RootFrameHandler, OnServerWaitOtherStart);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_FORWARD_MESSAGE), RootFrameHandler, OnForwardMessage);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE), RootFrameHandler, OnGateClientOffline);
 }
 
 EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
@@ -56,6 +58,7 @@ EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
         EServerType(req.server_node().server_type()), 
         req.server_node().server_index(),
         req.server_node().zone_id());
+    
     RETURN_REP_CONTENT(rep);
 }
 
@@ -202,5 +205,30 @@ EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, con
                                    req.des_node_index(), 
                                    req.des_zone_id());
     }
+    RETURN_NO_HANDLE;
+}
+
+EMsgHandleResult RootFrameHandler::OnGateClientOffline(TConnection *session_pt, const NetMessage * messag_pt)
+{
+    REQMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) req;
+    // REPMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) rep;
+    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    {
+        TERROR("parse pbmsg failed");
+        // SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);
+        RETURN_NO_HANDLE;
+    }
+    TINFO("req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE:" << req.ShortDebugString());
+
+    auto user_id = req.user_id();
+    // 通知其他服务器,客户端下线
+    auto user_pt = g_ClientNetNodeMgr.HoldClientUser(user_id);
+    if (!user_pt)
+    {
+        TERROR("not found user_id, may be logic error, user_id:" << user_id);
+        RETURN_NO_HANDLE;
+    }
+    // TODO:通知其他相关服务器,客户端下线
+    g_ClientNetNodeMgr.DeleteUser(user_id);
     RETURN_NO_HANDLE;
 }

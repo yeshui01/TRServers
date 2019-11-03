@@ -1,6 +1,9 @@
 {
 	"zone_id":1,
-	"login_server": { "ip":"127.0.0.1", "port": 6051, "sock_num": 10},
+	"world_zone_id":10000,
+	"global_zone_id":90000,
+	"account_db": {"db_name": "db_account", "user": "root", "pswd": "1q2w3e4r", "host":"localhost"},
+	"login_server": { "ip":"192.168.98.128", "port": 6051, "sock_num": 10},
 	"root_server": { 
 		"ip":"127.0.0.1", "port": 5051, "sock_num": 15,
 		"logic_server_num":2,
@@ -13,7 +16,7 @@
 		{ "ip":"127.0.0.1", "port": 5061, "sock_num": 15}
 	],
 	"gate_server": [
-		{ "ip":"127.0.0.1", "port": 5070, "sock_num": 15},
-		{ "ip":"127.0.0.1", "port": 5071, "sock_num": 15}
+		{ "ip":"192.168.98.128", "port": 5065, "sock_num": 15},
+		{ "ip":"192.168.98.128", "port": 5059, "sock_num": 15}
 	]
 }

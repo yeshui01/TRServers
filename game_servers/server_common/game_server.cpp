@@ -15,6 +15,8 @@
 #include "protcl_frame.pb.h"
 #include "game_msg_helper.h"
 #include "tr_timer/global_timer.h"
+#include "server_common/server_describe.h"
+
 GameServer::GameServer(int32_t index)
 {
 	index_ = index;
@@ -40,7 +42,7 @@ bool GameServer::Init()
     signal(SIGINT, SignalHandle);
     signal(SIGTERM, SignalHandle);
     signal(SIGABRT, SignalHandle);
-
+    g_ServerDes.Load();
 	if (!g_ServerConfig.Load())
     {
         Stop();
@@ -131,13 +133,14 @@ bool GameServer::BootUpConnectServer()
         }
         server_session->SetStatus(ESocketStatus::E_SOCKET_STATUS_CONNECTED);
         // 1.设置连接通道数据
-        server_session->SetChannelType(ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER);
+        // server_session->SetChannelType(ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER);
         auto result = GetRouteTypeByServerName(server_name);
-        if (result.first)
-        {
-            server_session->SetChannelServerInfo(result.second, 0, ServerSession::CalcServerId(result.second, 0));
-        }
-        else
+        // if (result.first)
+        // {
+        //     server_session->SetChannelServerInfo(result.second, 0, ServerSession::CalcServerId(result.second, 0));
+        // }
+        
+        if (result.first == false)
         {
             TERROR("not found node type, server_name:" << server_name);
             session->Close();
@@ -154,14 +157,19 @@ bool GameServer::BootUpConnectServer()
         }
         // 2.登记到服务器管理
         int32_t node_zone_id = g_ServerConfig.GetZoneId();
-        if (EServerRouteNodeType::E_SERVER_ROUTE_NODE_LIST == result.second || 
-            EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN == result.second || 
-            EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD == result.second || 
-            EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER == result.second || 
-            EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW == result.second)
+        // if (EServerRouteNodeType::E_SERVER_ROUTE_NODE_LIST == result.second || 
+        //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN == result.second || 
+        //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD == result.second || 
+        //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_WORLD_CENTER == result.second || 
+        //     EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW_MANAGER == result.second)
+        if (g_MsgHelper.IsWorldServerNode(result.second))
         {
-            node_zone_id = 0;
-            TINFO("global or world node, zone id is 0");
+            node_zone_id = g_ServerConfig.GetWorldZoneId();
+            TINFO("global or world node, zone id is node_zone_id");
+        }
+        else if (g_MsgHelper.IsGlobalServerNode(result.second))
+        {
+            node_zone_id = g_ServerConfig.GetGlobalZoneId();
         }
         g_ServerManager.AddServerInfo(server_session, 
             result.second, 
@@ -534,11 +542,12 @@ bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t in
     // 1.设置连接通道数据
     server_session->SetChannelType(ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER);
     auto result = GetRouteTypeByServerName(server_name);
-    if (result.first)
-    {
-        server_session->SetChannelServerInfo(result.second, 0, ServerSession::CalcServerId(result.second, 0));
-    }
-    else
+    // if (result.first)
+    // {
+    //     server_session->SetChannelServerInfo(result.second, 0, ServerSession::CalcServerId(result.second, 0));
+    // }
+    // else
+    if (result.first == false)
     {
         TERROR("not found node type, server_name:" << server_name);
         session->Close();
@@ -553,11 +562,21 @@ bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t in
         RecycleConnect(session);
         return false;
     }
+    int32_t node_zone_id = g_ServerConfig.GetZoneId();
+    if (g_MsgHelper.IsWorldServerNode(result.second))
+    {
+        node_zone_id = g_ServerConfig.GetWorldZoneId();
+        TINFO("global or world node, zone id is node_zone_id");
+    }
+    else if (g_MsgHelper.IsGlobalServerNode(result.second))
+    {
+        node_zone_id = g_ServerConfig.GetGlobalZoneId();
+    }
     // 2.登记到服务器管理
     g_ServerManager.AddServerInfo(server_session,
                                   result.second,
                                   server_type_ret.second,
-                                  index, g_ServerConfig.GetZoneId());
+                                  index, node_zone_id);
 
     TINFO("bootup add server info, session_id:" << server_session->GetConnId()
                                                 << ", node_type:" << (int32_t)(result.second)
@@ -581,4 +600,15 @@ bool GameServer::RunStepStop()
     GameParentClass::RunStepStop();
 
     return true;
+}
+
+// 获取节点类型
+EServerRouteNodeType GameServer::GetRouteNodeType()
+{
+    return node_type_;
+}
+// 获取节点索引
+int32_t GameServer::GetRouteNodeIndex()
+{
+    return index_;
 }

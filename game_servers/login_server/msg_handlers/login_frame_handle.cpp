@@ -52,6 +52,7 @@ EMsgHandleResult LoginFrameHandler::OnRegisterServerInfo(TConnection *session_pt
         EServerType(req.server_node().server_type()), 
         req.server_node().server_index(), 
         req.server_node().zone_id());
+    
     RETURN_REP_CONTENT(rep);
 }
 

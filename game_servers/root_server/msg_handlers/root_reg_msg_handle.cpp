@@ -14,6 +14,7 @@
 #include "protocol_frame.h"
 #include "tr_log/log_module.h"
 #include "root_frame_handle.h"
+#include "root_login_handle.h"
 void RootServer::RegisterMsgHandle()
 {
     AddLoopRun([](time_t cur_mtime)
@@ -22,7 +23,6 @@ void RootServer::RegisterMsgHandle()
 	});
     
     g_MsgDispatcher.RegisterMsgHandlerEx<RootFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
-
+    g_MsgDispatcher.RegisterMsgHandlerEx<RootLoginHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_LOGIN));
     TINFO("root server register msg handlers");
 }

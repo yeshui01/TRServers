@@ -20,6 +20,9 @@ enum class EFrameMsgType : int32_t
     E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS              = 5,  // 告诉rootserver,开始等待其他服务器了
     E_FRAME_MSG_FORWARD_MESSAGE                     = 6,  // 转发消息
     E_FRAME_MSG_FORWARD_TEST_MESSAGE                = 7,  // 测试用的转发消息
+    E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE      = 8,  // 更新客户端网络节点
+    E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE              = 9,  // gg->root客户端下线
+    E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE              = 10, // root->xs 通知其他服务器客户端下线
 };
 
 #define INT_FRAMEMSG(msg_type) int32_t(EFrameMsgType::msg_type)

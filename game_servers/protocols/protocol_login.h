@@ -11,7 +11,7 @@
 
 #include "base_type_def.h"
 
-enum class ELoginMsgType : int32_t
+enum ELoginMsgType : int32_t
 {
     E_LOGIN_MSG_C2S_REGISTER_ACCOUNT                    = 1,  // 注册账号
     E_LOGIN_MSG_C2S_LOGIN                               = 2,  // c->s登录
@@ -19,6 +19,6 @@ enum class ELoginMsgType : int32_t
     E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK                   = 4,  // root->login账号校验
 };
 
-#define INT_LOGINMSG(msg_type) int32_t(ELoginMsgType::msg_type)
+#define INT_LOGINMSG(msg_type) static_cast<int32_t>(msg_type)
 
 #endif // __TR_PROTOCOL_LOGIN_H__

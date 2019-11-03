@@ -18,7 +18,7 @@ public:
 #ifdef MT_SINGLETON
 		if (nullptr == s_instance_)
 		{
-			std::unique_lock<boost::mutex> scoped_lock(s_mutex_);
+			std::unique_lock<std::mutex> scoped_lock(s_mutex_);
 #endif
 			if (nullptr == s_instance_)
 			{
@@ -35,7 +35,7 @@ public:
 #ifdef MT_SINGLETON
 		if (nullptr != s_instance_)
 		{
-			std::unique_lock<boost::mutex> scoped_lock(s_mutex_);
+			std::unique_lock<std::mutex> scoped_lock(s_mutex_);
 #endif
 			if (nullptr != s_instance_)
 			{
@@ -55,7 +55,7 @@ private:
 	static T *s_instance_;
 
 #ifdef MT_SINGLETON
-	static std:: ::mutex s_mutex_;
+	static std::mutex s_mutex_;
 #endif
 };
 

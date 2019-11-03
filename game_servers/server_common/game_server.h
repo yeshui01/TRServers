@@ -94,6 +94,11 @@ public:
     void AddOneBootupWaitEvent(int32_t wait_evt_id, bootup_wait_event_do_t && evt_do);
     // 设置是否等待其他服务器
     void SetWaitOtherServers(bool wait);
+    // 获取节点类型
+    EServerRouteNodeType GetRouteNodeType();
+    // 获取节点索引
+    int32_t GetRouteNodeIndex();
+    
 protected:
     // 启动时连接其他服务器
     virtual bool BootUpConnectServer();
@@ -109,6 +114,7 @@ protected:
     void RegServerInfoToOtherServers(EServerRouteNodeType node_type, int32_t index);
     // 根据服务器节点类型和配置连接服务器
     bool ConnectToOtherServer(EServerRouteNodeType node_type, int32_t index);
+    
 protected:
 	EServerType server_type_ = EServerType::E_SERVER_TYPE_INVALID_SERVER;
     EServerRouteNodeType node_type_ = EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE;
@@ -116,6 +122,7 @@ protected:
     time_t bootup_update_time_ = 0;
     std::map<int32_t, ServerBootupWaitEvent> wait_events_;  // 等待启动的事件列表
     bool wait_other_servers_ = true;
+
 protected:
     static std::vector<std::function<void (int32_t sig)> > s_v_sigfuns_;
     static std::map<EServerRouteNodeType, std::vector<std::string> > s_node_bootup_connect_;

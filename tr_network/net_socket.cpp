@@ -83,6 +83,8 @@ ESocketOpCode TSocket::Listen()
         return ESocketOpCode::E_SOCKET_OP_LISTEN_ERROR;
     }
     status_ = ESocketStatus::E_SOCKET_STATUS_LISTEN;
+    bool reuse_addr = true;
+    setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse_addr, sizeof(bool));
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 

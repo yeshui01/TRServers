@@ -68,7 +68,22 @@ public:
         AsyncMsgParam && cb_param, 
         EServerRouteNodeType node_type, 
         int32_t node_index, int32_t zone_id = -1);
-    
+
+    /**
+    * 生成异步message上下文参数
+    * @param  session_pt       : 
+    * @param  message_pt       : 
+    * @return {AsyncMsgParam}  : 
+    */
+	AsyncMsgParam GenAsyncMsgEnvParam(TConnection *session_pt, const NetMessage * message_pt);
+
+    /**
+     * 发送异步回复消息
+     * @param  pb_msg      : 
+     * @param  async_param : 
+     */
+    void SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param);
+
     /*
     *  转发消息到某个服务器
     *  @param msg_class : 消息大类
@@ -100,4 +115,19 @@ protected:
 };
 
 #define g_MsgHelper GameMsgHelper::Instance()
+
+// 异步消息宏定义,简化代码书写
+#define TR_BEGIN_ASYNC_MSG_WITH_PARAM(MSG_CLASS, MSG_TYPE, pb_req, lambda_list) g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(MSG_CLASS),\
+    MSG_TYPE, pb_req,\
+    lambda_list(const NetMessage *rep_msg, const AsyncMsgParam &cb_param){\
+    REPMSG(MSG_TYPE) cb_rep;\
+    STRING_TO_PBMSG(rep_msg->GetContent(), cb_rep);\
+    TDEBUG("asyncmsg callback:rep_" << #MSG_TYPE << ":" << cb_rep.ShortDebugString());
+    
+
+#define TR_END_ASYNC_MSG_WITH_PARAM(ROUTE_NODE_TYPE, NODE_INDEX) },g_MsgHelper.GenAsyncMsgEnvParam(session_pt, messag_pt),\
+EServerRouteNodeType::ROUTE_NODE_TYPE, NODE_INDEX);
+
+
+
 #endif  // __TR_GAME_MSG_HELPER_H__

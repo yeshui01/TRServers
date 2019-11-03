@@ -14,6 +14,7 @@
 #include "protocol_frame.h"
 #include "tr_log/log_module.h"
 #include "gate_frame_handle.h"
+#include "gate_login_handle.h"
 void GateServer::RegisterMsgHandle()
 {
     AddLoopRun([](time_t cur_mtime)
@@ -22,7 +23,7 @@ void GateServer::RegisterMsgHandle()
 	});
     
     g_MsgDispatcher.RegisterMsgHandlerEx<GateFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
+    g_MsgDispatcher.RegisterMsgHandlerEx<GateLoginHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_LOGIN));
 
     TINFO("gate server register msg handlers");
 }

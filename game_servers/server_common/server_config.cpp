@@ -35,13 +35,25 @@ bool ServerConfig::Load()
     }
     fs.close();
     TDEBUG("parse server config sucess");
-    // login server
+    
     if (js_config_["zone_id"].isNull())
     {
         TERROR("not found zone_id");
         return false;
     }
+    if (js_config_["world_zone_id"].isNull())
+    {
+        TERROR("not found world_zone_id");
+        return false;
+    }
+    if (js_config_["global_zone_id"].isNull())
+    {
+        TERROR("not found global_zone_id");
+        return false;
+    }
     zone_id_ = js_config_["zone_id"].asInt();
+    world_zone_id_ = js_config_["zone_id"].asInt();
+    global_zone_id_ = js_config_["global_zone_id"].asInt();
     TDEBUG("config zone_id:" << zone_id_);
     return true;
 }
@@ -59,4 +71,20 @@ const Json::Value & ServerConfig::GetJsonConfig()
 int32_t ServerConfig::GetZoneId()
 {
     return zone_id_;
+}
+
+int32_t ServerConfig::GetWorldZoneId()
+{
+    return world_zone_id_;
+}
+
+void ServerConfig::SetZoneId(int32_t zone_id)
+{
+    zone_id_ = zone_id;
+}
+
+// 获取全局区id
+int32_t ServerConfig::GetGlobalZoneId()
+{
+    return global_zone_id_;
 }

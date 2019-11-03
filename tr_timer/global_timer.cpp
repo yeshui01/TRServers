@@ -39,5 +39,5 @@ void GlobalTimer::DeleteTimer(std::shared_ptr<TRTimer> todo_timer)
 // 获取当前timer数量
 int32_t GlobalTimer::GetTimerSize()
 {
-    time_wheel_->GetTimerSize();
+    return time_wheel_->GetTimerSize();
 }

@@ -19,6 +19,10 @@ class NetMessage;
 struct AsyncMsgParam
 {
     TConnection * session_pt = nullptr;
+    int32_t msg_class = 0;
+    int32_t msg_type = 0;
+    int64_t req_no = -1;
+    int64_t rep_no = -1;
 };
 
 using asyncmsg_callback_t = std::function<void (const NetMessage * rep_msg, const AsyncMsgParam & cb_param)>;

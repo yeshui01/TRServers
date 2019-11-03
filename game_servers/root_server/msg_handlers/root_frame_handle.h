@@ -33,6 +33,8 @@ public:
     EMsgHandleResult OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * messag_pt);
     // 转发消息
     EMsgHandleResult OnForwardMessage(TConnection *session_pt, const NetMessage * messag_pt);
+    // 网关通知客户端下线
+    EMsgHandleResult OnGateClientOffline(TConnection *session_pt, const NetMessage * messag_pt);
 };
 
 #endif // __ROOT_FRAME_MSG_HANDLE_H__

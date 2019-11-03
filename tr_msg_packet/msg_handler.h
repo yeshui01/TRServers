@@ -44,6 +44,7 @@ public:
 	void AddHandleRepCallback(std::function<void (void)> && handle_finish_cb);
 	// 执行一轮消息处理后的回调
 	void RunRepCallback();
+	
 protected:
 	// 返回消息的内容缓存
 	std::string rep_content_;
@@ -62,7 +63,8 @@ return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
 
 #define RETURN_NO_HANDLE return EMsgHandleResult::E_MSG_HANDLE_NOT_RETURN;
 
-#define SET_ISOK_AND_RETURN_CONTENT(ISOK_CODE, rep_msg) rep_msg.set_isok(INT_PROTOERR(ISOK_CODE));RETURN_REP_CONTENT(rep_msg)
+#define SET_ISOK_AND_RETURN_CONTENT(ISOK_CODE, rep_msg) rep_msg.set_isok(INT_PROTOERR(ISOK_CODE)); \
+RETURN_REP_CONTENT(rep_msg)
 
 #endif  // __MSG_HANDLER_H__
 

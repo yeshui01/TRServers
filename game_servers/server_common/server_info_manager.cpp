@@ -38,8 +38,9 @@ bool ServerInfoManager::AddServerInfo(ServerSession *session_pt, EServerRouteNod
     type_servers_[int8_t(s_type)].push_back(&new_info);
     route_servers_[int8_t(node_type)].push_back(&new_info);
     TDEBUG("node serveraddr:" << int64_t(&new_info) << ", node_type:" << (int32_t)new_info.node_type
-    << ", s_tpe:" << (int32_t)new_info.server_type << ", index:" << index);
-
+    << ", server_type:" << (int32_t)new_info.server_type << ", index:" << index);
+    session_pt->SetChannelType(ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER);
+    session_pt->SetChannelServerInfo(node_type, index, ServerSession::CalcServerId(node_type, index));
     return true;
 }
 // 获取服务器信息

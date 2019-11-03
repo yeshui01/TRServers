@@ -26,6 +26,8 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/map.h>
+#include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
@@ -36,19 +38,27 @@ void protobuf_AddDesc_protcl_5fframe_2eproto();
 void protobuf_AssignDesc_protcl_5fframe_2eproto();
 void protobuf_ShutdownFile_protcl_5fframe_2eproto();
 
+class client_net_node_t;
+class client_user_t;
 class rep_E_FRAME_MSG_FORWARD_MESSAGE;
 class rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE;
+class rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE;
 class rep_E_FRAME_MSG_NEW_SERVER_BOOTUP;
 class rep_E_FRAME_MSG_QUERY_SERVER_NODE_LIST;
 class rep_E_FRAME_MSG_REGISTER_SERVER_INFO;
+class rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE;
 class rep_E_FRAME_MSG_ROOT_TO_XS_START_RUN;
+class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE;
 class rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS;
 class req_E_FRAME_MSG_FORWARD_MESSAGE;
 class req_E_FRAME_MSG_FORWARD_TEST_MESSAGE;
+class req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE;
 class req_E_FRAME_MSG_NEW_SERVER_BOOTUP;
 class req_E_FRAME_MSG_QUERY_SERVER_NODE_LIST;
 class req_E_FRAME_MSG_REGISTER_SERVER_INFO;
+class req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE;
 class req_E_FRAME_MSG_ROOT_TO_XS_START_RUN;
+class req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE;
 class req_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS;
 class server_info_t;
 
@@ -154,6 +164,212 @@ class server_info_t : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   void InitAsDefaultInstance();
   static server_info_t* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class client_net_node_t : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.client_net_node_t) */ {
+ public:
+  client_net_node_t();
+  virtual ~client_net_node_t();
+
+  client_net_node_t(const client_net_node_t& from);
+
+  inline client_net_node_t& operator=(const client_net_node_t& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const client_net_node_t& default_instance();
+
+  void Swap(client_net_node_t* other);
+
+  // implements Message ----------------------------------------------
+
+  inline client_net_node_t* New() const { return New(NULL); }
+
+  client_net_node_t* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const client_net_node_t& from);
+  void MergeFrom(const client_net_node_t& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(client_net_node_t* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 node_type = 1;
+  void clear_node_type();
+  static const int kNodeTypeFieldNumber = 1;
+  ::google::protobuf::int32 node_type() const;
+  void set_node_type(::google::protobuf::int32 value);
+
+  // optional int32 node_index = 2;
+  void clear_node_index();
+  static const int kNodeIndexFieldNumber = 2;
+  ::google::protobuf::int32 node_index() const;
+  void set_node_index(::google::protobuf::int32 value);
+
+  // optional int32 node_status = 3;
+  void clear_node_status();
+  static const int kNodeStatusFieldNumber = 3;
+  ::google::protobuf::int32 node_status() const;
+  void set_node_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.client_net_node_t)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 node_type_;
+  ::google::protobuf::int32 node_index_;
+  ::google::protobuf::int32 node_status_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static client_net_node_t* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class client_user_t : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.client_user_t) */ {
+ public:
+  client_user_t();
+  virtual ~client_user_t();
+
+  client_user_t(const client_user_t& from);
+
+  inline client_user_t& operator=(const client_user_t& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const client_user_t& default_instance();
+
+  void Swap(client_user_t* other);
+
+  // implements Message ----------------------------------------------
+
+  inline client_user_t* New() const { return New(NULL); }
+
+  client_user_t* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const client_user_t& from);
+  void MergeFrom(const client_user_t& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(client_user_t* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 user_id = 1;
+  void clear_user_id();
+  static const int kUserIdFieldNumber = 1;
+  ::google::protobuf::int64 user_id() const;
+  void set_user_id(::google::protobuf::int64 value);
+
+  // optional int64 role_id = 2;
+  void clear_role_id();
+  static const int kRoleIdFieldNumber = 2;
+  ::google::protobuf::int64 role_id() const;
+  void set_role_id(::google::protobuf::int64 value);
+
+  // map<int32, .protos.client_net_node_t> node_list = 3;
+  int node_list_size() const;
+  void clear_node_list();
+  static const int kNodeListFieldNumber = 3;
+  const ::google::protobuf::Map< ::google::protobuf::int32, ::protos::client_net_node_t >&
+      node_list() const;
+  ::google::protobuf::Map< ::google::protobuf::int32, ::protos::client_net_node_t >*
+      mutable_node_list();
+
+  // @@protoc_insertion_point(class_scope:protos.client_user_t)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 user_id_;
+  ::google::protobuf::int64 role_id_;
+  typedef ::google::protobuf::internal::MapEntryLite<
+      ::google::protobuf::int32, ::protos::client_net_node_t,
+      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 >
+      client_user_t_NodeListEntry;
+  ::google::protobuf::internal::MapField<
+      ::google::protobuf::int32, ::protos::client_net_node_t,
+      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > node_list_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static client_user_t* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1392,6 +1608,522 @@ class rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE : public ::google::protobuf::Message 
   void InitAsDefaultInstance();
   static rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE) */ {
+ public:
+  req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE();
+  virtual ~req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE();
+
+  req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE(const req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+
+  inline req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& operator=(const req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& default_instance();
+
+  void Swap(req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+  void MergeFrom(const req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 update_type = 1;
+  void clear_update_type();
+  static const int kUpdateTypeFieldNumber = 1;
+  ::google::protobuf::int32 update_type() const;
+  void set_update_type(::google::protobuf::int32 value);
+
+  // optional .protos.client_user_t client_data = 2;
+  bool has_client_data() const;
+  void clear_client_data();
+  static const int kClientDataFieldNumber = 2;
+  const ::protos::client_user_t& client_data() const;
+  ::protos::client_user_t* mutable_client_data();
+  ::protos::client_user_t* release_client_data();
+  void set_allocated_client_data(::protos::client_user_t* client_data);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::protos::client_user_t* client_data_;
+  ::google::protobuf::int32 update_type_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE) */ {
+ public:
+  rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE();
+  virtual ~rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE();
+
+  rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE(const rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+
+  inline rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& operator=(const rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+  void MergeFrom(const rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) */ {
+ public:
+  req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE();
+  virtual ~req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE();
+
+  req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE(const req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+
+  inline req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& operator=(const req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& default_instance();
+
+  void Swap(req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+  void MergeFrom(const req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 user_id = 1;
+  void clear_user_id();
+  static const int kUserIdFieldNumber = 1;
+  ::google::protobuf::int64 user_id() const;
+  void set_user_id(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 user_id_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) */ {
+ public:
+  rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE();
+  virtual ~rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE();
+
+  rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE(const rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+
+  inline rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& operator=(const rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+  void MergeFrom(const rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE) */ {
+ public:
+  req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
+  virtual ~req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
+
+  req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE(const req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+
+  inline req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& operator=(const req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& default_instance();
+
+  void Swap(req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+  void MergeFrom(const req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 user_id = 1;
+  void clear_user_id();
+  static const int kUserIdFieldNumber = 1;
+  ::google::protobuf::int64 user_id() const;
+  void set_user_id(::google::protobuf::int64 value);
+
+  // optional int32 reason = 2;
+  void clear_reason();
+  static const int kReasonFieldNumber = 2;
+  ::google::protobuf::int32 reason() const;
+  void set_reason(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 user_id_;
+  ::google::protobuf::int32 reason_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE) */ {
+ public:
+  rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
+  virtual ~rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
+
+  rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE(const rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+
+  inline rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& operator=(const rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+  void MergeFrom(const rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 user_id = 1;
+  void clear_user_id();
+  static const int kUserIdFieldNumber = 1;
+  ::google::protobuf::int64 user_id() const;
+  void set_user_id(::google::protobuf::int64 value);
+
+  // optional int32 reason = 2;
+  void clear_reason();
+  static const int kReasonFieldNumber = 2;
+  ::google::protobuf::int32 reason() const;
+  void set_reason(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 user_id_;
+  ::google::protobuf::int32 reason_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* default_instance_;
+};
 // ===================================================================
 
 
@@ -1454,6 +2186,102 @@ inline void server_info_t::set_zone_id(::google::protobuf::int32 value) {
   
   zone_id_ = value;
   // @@protoc_insertion_point(field_set:protos.server_info_t.zone_id)
+}
+
+// -------------------------------------------------------------------
+
+// client_net_node_t
+
+// optional int32 node_type = 1;
+inline void client_net_node_t::clear_node_type() {
+  node_type_ = 0;
+}
+inline ::google::protobuf::int32 client_net_node_t::node_type() const {
+  // @@protoc_insertion_point(field_get:protos.client_net_node_t.node_type)
+  return node_type_;
+}
+inline void client_net_node_t::set_node_type(::google::protobuf::int32 value) {
+  
+  node_type_ = value;
+  // @@protoc_insertion_point(field_set:protos.client_net_node_t.node_type)
+}
+
+// optional int32 node_index = 2;
+inline void client_net_node_t::clear_node_index() {
+  node_index_ = 0;
+}
+inline ::google::protobuf::int32 client_net_node_t::node_index() const {
+  // @@protoc_insertion_point(field_get:protos.client_net_node_t.node_index)
+  return node_index_;
+}
+inline void client_net_node_t::set_node_index(::google::protobuf::int32 value) {
+  
+  node_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.client_net_node_t.node_index)
+}
+
+// optional int32 node_status = 3;
+inline void client_net_node_t::clear_node_status() {
+  node_status_ = 0;
+}
+inline ::google::protobuf::int32 client_net_node_t::node_status() const {
+  // @@protoc_insertion_point(field_get:protos.client_net_node_t.node_status)
+  return node_status_;
+}
+inline void client_net_node_t::set_node_status(::google::protobuf::int32 value) {
+  
+  node_status_ = value;
+  // @@protoc_insertion_point(field_set:protos.client_net_node_t.node_status)
+}
+
+// -------------------------------------------------------------------
+
+// client_user_t
+
+// optional int64 user_id = 1;
+inline void client_user_t::clear_user_id() {
+  user_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 client_user_t::user_id() const {
+  // @@protoc_insertion_point(field_get:protos.client_user_t.user_id)
+  return user_id_;
+}
+inline void client_user_t::set_user_id(::google::protobuf::int64 value) {
+  
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.client_user_t.user_id)
+}
+
+// optional int64 role_id = 2;
+inline void client_user_t::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 client_user_t::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.client_user_t.role_id)
+  return role_id_;
+}
+inline void client_user_t::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.client_user_t.role_id)
+}
+
+// map<int32, .protos.client_net_node_t> node_list = 3;
+inline int client_user_t::node_list_size() const {
+  return node_list_.size();
+}
+inline void client_user_t::clear_node_list() {
+  node_list_.Clear();
+}
+inline const ::google::protobuf::Map< ::google::protobuf::int32, ::protos::client_net_node_t >&
+client_user_t::node_list() const {
+  // @@protoc_insertion_point(field_map:protos.client_user_t.node_list)
+  return node_list_.GetMap();
+}
+inline ::google::protobuf::Map< ::google::protobuf::int32, ::protos::client_net_node_t >*
+client_user_t::mutable_node_list() {
+  // @@protoc_insertion_point(field_mutable_map:protos.client_user_t.node_list)
+  return node_list_.MutableMap();
 }
 
 // -------------------------------------------------------------------
@@ -1948,7 +2776,197 @@ inline void rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE::set_isok(::google::protobuf::i
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_FORWARD_TEST_MESSAGE.isok)
 }
 
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE
+
+// optional int32 update_type = 1;
+inline void req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::clear_update_type() {
+  update_type_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::update_type() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.update_type)
+  return update_type_;
+}
+inline void req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::set_update_type(::google::protobuf::int32 value) {
+  
+  update_type_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.update_type)
+}
+
+// optional .protos.client_user_t client_data = 2;
+inline bool req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::has_client_data() const {
+  return !_is_default_instance_ && client_data_ != NULL;
+}
+inline void req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::clear_client_data() {
+  if (GetArenaNoVirtual() == NULL && client_data_ != NULL) delete client_data_;
+  client_data_ = NULL;
+}
+inline const ::protos::client_user_t& req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::client_data() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.client_data)
+  return client_data_ != NULL ? *client_data_ : *default_instance_->client_data_;
+}
+inline ::protos::client_user_t* req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::mutable_client_data() {
+  
+  if (client_data_ == NULL) {
+    client_data_ = new ::protos::client_user_t;
+  }
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.client_data)
+  return client_data_;
+}
+inline ::protos::client_user_t* req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::release_client_data() {
+  // @@protoc_insertion_point(field_release:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.client_data)
+  
+  ::protos::client_user_t* temp = client_data_;
+  client_data_ = NULL;
+  return temp;
+}
+inline void req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::set_allocated_client_data(::protos::client_user_t* client_data) {
+  delete client_data_;
+  client_data_ = client_data;
+  if (client_data) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protos.req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.client_data)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE.isok)
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE
+
+// optional int64 user_id = 1;
+inline void req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::clear_user_id() {
+  user_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::user_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE.user_id)
+  return user_id_;
+}
+inline void req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::set_user_id(::google::protobuf::int64 value) {
+  
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE.user_id)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE.isok)
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
+
+// optional int64 user_id = 1;
+inline void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_user_id() {
+  user_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::user_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
+  return user_id_;
+}
+inline void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_user_id(::google::protobuf::int64 value) {
+  
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
+}
+
+// optional int32 reason = 2;
+inline void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
+  reason_ = 0;
+}
+inline ::google::protobuf::int32 req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::reason() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
+  return reason_;
+}
+inline void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_reason(::google::protobuf::int32 value) {
+  
+  reason_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
+
+// optional int64 user_id = 1;
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_user_id() {
+  user_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::user_id() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
+  return user_id_;
+}
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_user_id(::google::protobuf::int64 value) {
+  
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
+}
+
+// optional int32 reason = 2;
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
+  reason_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::reason() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
+  return reason_;
+}
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_reason(::google::protobuf::int32 value) {
+  
+  reason_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

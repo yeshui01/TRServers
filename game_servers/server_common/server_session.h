@@ -10,6 +10,8 @@
 
 #include "net_connection.h"
 #include "server_define.h"
+#include <functional>
+#include <vector>
 // 会话的通道类型
 enum class ESessionChannelType : int32_t
 {
@@ -39,6 +41,9 @@ struct SessionChannelInfo
     // 
 };
 
+class ServerSession;
+using session_close_callback_t = std::function<void (ServerSession* session)>;
+
 class ServerSession : public TConnection
 {
 public:
@@ -61,10 +66,14 @@ public:
     void SetChannelUserId(int64_t user_id);
     // 计算服务器id
     static int32_t CalcServerId(EServerRouteNodeType route_type, int32_t index_id);
+    // 注册关闭回调
+    void AddCloseCallback(session_close_callback_t && close_cb);
 protected:
     // 通道类型
     ESessionChannelType channel_type_ = ESessionChannelType::E_CHANNEL_NONE;
     // 会话数据
     SessionChannelInfo channel_info_;
+    // 连接关闭回调
+    std::vector<session_close_callback_t> close_callbacks_;
 };
 #endif // __TR_SERVER_SESSION_H__

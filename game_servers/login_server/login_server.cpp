@@ -46,6 +46,7 @@ bool LoginServer::Init()
     {
         return false;
     }
+    g_ServerConfig.SetZoneId(g_ServerConfig.GetGlobalZoneId());
     if (!g_LoginGlobal.Init())
     {
         return false;
