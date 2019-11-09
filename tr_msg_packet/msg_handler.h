@@ -66,5 +66,32 @@ return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
 #define SET_ISOK_AND_RETURN_CONTENT(ISOK_CODE, rep_msg) rep_msg.set_isok(INT_PROTOERR(ISOK_CODE)); \
 RETURN_REP_CONTENT(rep_msg)
 
+// 声明消息处理的成员函数
+#define DECLATE_MSG_HANDLER_FUN(FUNC_NAME) EMsgHandleResult FUNC_NAME(TConnection *session_pt, const NetMessage * message_pt);
+
+// 开始消息处理
+#define TR_BEGIN_HANDLE_MSG(HANDLER_NAME, FUNC_NAME, MSG_NAME) EMsgHandleResult HANDLER_NAME::FUNC_NAME(TConnection *session_pt, const NetMessage * message_pt) \
+{\
+    REQMSG(MSG_NAME) req; \
+    REPMSG(MSG_NAME) rep; \
+	TINFO(""#HANDLER_NAME"::"#FUNC_NAME);\
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req)) \
+    {\
+        rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));\
+        TERROR("parse pbmsg failed");\
+        rep.SerializeToString(&rep_content_);\
+        return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;\
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);\
+    } \
+	TINFO("req_" << #MSG_NAME << ":" << req.ShortDebugString());
+
+// 结束消息处理,但是不用返回消息
+#define TR_END_HANDLE_MSG_NO_RETURN_MSG RETURN_NO_HANDLE \
+}
+
+// 结束消息处理,需要返回消息内容
+#define TR_END_HANDLE_MSG_AND_RETURN_MSG RETURN_REP_CONTENT(rep);\
+}
+
 #endif  // __MSG_HANDLER_H__
 

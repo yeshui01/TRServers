@@ -1,6 +1,15 @@
 syntax = "proto3";
 package protos;
 
+
+
+// 角色快照数据
+message role_snapshot_t
+{
+    int64 role_id = 1;      // 角色id
+    string nickname  = 2;   // 昵称
+}
+
 // E_LOGIN_MSG_C2S_REGISTER_ACCOUNT                    = 1,  // 注册账号
 message req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
 {
@@ -14,13 +23,6 @@ message rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
     string account_name = 2;    // 账号名字
     string pswd = 3;            // 密码
     int64 account_id = 4;       // 账号唯一标识id
-}
-
-// 角色快照数据
-message role_snapshot_t
-{
-    int64 role_id = 1;      // 角色id
-    string nickname  = 2;   // 昵称
 }
 
 // E_LOGIN_MSG_C2S_LOGIN                               = 2,  // c->s登录
@@ -64,4 +66,69 @@ message req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK
 message rep_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK
 {
     int32 isok = 1;
+}
+
+// E_LOGIN_MSG_C2S_CREATE_ROLE                         = 5,  // c->s 创建角色
+message req_E_LOGIN_MSG_C2S_CREATE_ROLE
+{
+	string nickname = 1;
+}
+message rep_E_LOGIN_MSG_C2S_CREATE_ROLE
+{
+	int32 isok = 1;
+	role_snapshot_t snapshot = 2;	// 角色快照
+}
+
+// E_LOGIN_MSG_GG2ROOT_CREATE_ROLE                     = 6,  // gg->root 创建角色
+message req_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE
+{
+	int64 acc_id = 1;
+	string nickname = 2;
+}
+
+message rep_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE
+{
+	int32 isok = 1;
+	role_snapshot_t snapshot = 2;	// 角色快照
+}
+
+//    E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE                  = 7,  // root->login 创建角色
+message req_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE
+{
+	int64 acc_id = 1;
+	string nickname = 2;
+}
+
+message rep_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE
+{
+	int32 isok = 1;
+	string nickname = 2;
+	int64 acc_id = 3;
+	int64 role_id = 4;
+}
+
+// E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE                   = 8,  // root->data 创建角色
+message req_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE
+{
+	int64 acc_id = 1;
+	string nickname = 2;
+	int64 role_id = 3;
+}
+message rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE
+{
+	int32 isok = 1;
+}
+   
+// E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE                  = 9,  // root->logic 创建角色
+message req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE
+{
+	int64 role_id = 1;
+	int64 acc_id = 2;
+	string nickname = 3;
+}
+
+message rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE
+{
+	int32 isok = 1;
+	role_snapshot_t snapshot = 2;	// 角色快照
 }

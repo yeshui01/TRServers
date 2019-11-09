@@ -16,6 +16,13 @@
 				"msg_type":[
 					{"type":1, "des":"E_LOGIN_MSG_C2S_REGISTER_ACCOUNT"},
 					{"type":2, "des":"E_LOGIN_MSG_C2S_LOGIN"},
+					{"type":3, "des":"E_LOGIN_MSG_GG2ROOT_LOGIN"},
+					{"type":4, "des":"E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK"},
+					{"type":5, "des":"E_LOGIN_MSG_C2S_CREATE_ROLE"},
+					{"type":6, "des":"E_LOGIN_MSG_GG2ROOT_CREATE_ROLE"},
+					{"type":7, "des":"E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE"},
+					{"type":8, "des":"E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE"},
+					{"type":9, "des":"E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE"},
 					{"type":999999999, "des":"end type des"}
 				]
 			}

@@ -27,5 +27,7 @@ public:
 public:
     // 消息处理成员函数-登录
     EMsgHandleResult OnClientLogin(TConnection *session_pt, const NetMessage * message_pt);
+    // 消息处理-创角
+    DECLATE_MSG_HANDLER_FUN(OnCreateRole);
 };
 #endif // __GATE_LOGIN_HANDLE_H__

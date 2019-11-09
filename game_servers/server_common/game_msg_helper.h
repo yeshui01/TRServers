@@ -122,7 +122,7 @@ protected:
     lambda_list(const NetMessage *rep_msg, const AsyncMsgParam &cb_param){\
     REPMSG(MSG_TYPE) cb_rep;\
     STRING_TO_PBMSG(rep_msg->GetContent(), cb_rep);\
-    TDEBUG("asyncmsg callback:rep_" << #MSG_TYPE << ":" << cb_rep.ShortDebugString());
+    TINFO("asyncmsg callback:rep_" << #MSG_TYPE << ":" << cb_rep.ShortDebugString());
     
 
 #define TR_END_ASYNC_MSG_WITH_PARAM(ROUTE_NODE_TYPE, NODE_INDEX) },g_MsgHelper.GenAsyncMsgEnvParam(session_pt, message_pt),\

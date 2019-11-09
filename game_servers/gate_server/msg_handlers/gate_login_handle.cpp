@@ -38,6 +38,8 @@ GateLoginHandler::~GateLoginHandler()
 void GateLoginHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_LOGIN), GateLoginHandler, OnClientLogin);
+    
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_CREATE_ROLE), GateLoginHandler, OnCreateRole);
 }
 
 EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const NetMessage * message_pt)
@@ -128,3 +130,9 @@ EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const 
     
     RETURN_NO_HANDLE;
 }
+
+TR_BEGIN_HANDLE_MSG(GateLoginHandler, OnCreateRole, E_LOGIN_MSG_C2S_CREATE_ROLE)
+{
+    // TODO:
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG
