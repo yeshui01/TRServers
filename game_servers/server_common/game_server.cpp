@@ -54,7 +54,7 @@ bool GameServer::Init()
     RegisterMsgHandle();
 
     
-    RegSignalHandle([this](int32_t sig_num){
+    RegSignalHandle([this](int32_t sig_num) mutable{
         const_cast<GameServer*>(this)->Stop();
     });
     

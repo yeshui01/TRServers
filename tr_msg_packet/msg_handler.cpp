@@ -27,7 +27,7 @@ EMsgHandleResult IMessageHandler::HandleMsg(int32_t msg_type, TConnection *sessi
 	auto it_handle_fun = msg_handlers_.find(msg_type);
 	if (it_handle_fun != msg_handlers_.end())
 	{
-		// return it_handle_fun->second(const_cast<TConnection*>(messag_pt->GetConnection()), messag_pt);
+		// return it_handle_fun->second(const_cast<TConnection*>(message_pt->GetConnection()), message_pt);
 		return it_handle_fun->second(session_pt, message_pt);
 	}
 	else

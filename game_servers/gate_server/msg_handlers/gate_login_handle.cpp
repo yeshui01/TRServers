@@ -40,12 +40,12 @@ void GateLoginHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_LOGIN), GateLoginHandler, OnClientLogin);
 }
 
-EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnClientLogin");
     REQMSG(E_LOGIN_MSG_C2S_LOGIN) req;
     REPMSG(E_LOGIN_MSG_C2S_LOGIN) rep;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
         TERROR("parse pbmsg failed");
@@ -123,7 +123,7 @@ EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const 
     //             // cb_param.session_pt->Send(buffer.data(), packet_size);
     //             g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
     //             TINFO("rep async rep_E_LOGIN_MSG_C2S_LOGIN:" << ret.ShortDebugString());
-    //         }, g_MsgHelper.GenAsyncMsgEnvParam(session_pt, messag_pt), 
+    //         }, g_MsgHelper.GenAsyncMsgEnvParam(session_pt, message_pt), 
     //         EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
     
     RETURN_NO_HANDLE;

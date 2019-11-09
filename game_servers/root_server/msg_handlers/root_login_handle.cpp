@@ -38,12 +38,12 @@ void RootLoginHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_GG2ROOT_LOGIN), RootLoginHandler, OnGateClientLogin);
 }
 
-EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnClientLogin");
     REQMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) req;
     REPMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) rep;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         TERROR("parse pbmsg failed");
         SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);

@@ -31,11 +31,11 @@ void LoginFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE), LoginFrameHandler, OnTestForwardMsg);
 }
 
-EMsgHandleResult LoginFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LoginFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisterServerInfo");
     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(-1);
@@ -56,16 +56,16 @@ EMsgHandleResult LoginFrameHandler::OnRegisterServerInfo(TConnection *session_pt
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult LoginFrameHandler::OnTestForwardMsg(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LoginFrameHandler::OnTestForwardMsg(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("LOGIN OnTestForwardMsg")
     REQMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
-        if (messag_pt->GetReqNo() > 0)
+        TERROR("parse pbmsg failed, msg_class:" << message_pt->GetMsgClass() << ", msg_type:" << message_pt->GetMsgType());
+        if (message_pt->GetReqNo() > 0)
         {
             RETURN_REP_CONTENT(rep);
         }
@@ -73,7 +73,7 @@ EMsgHandleResult LoginFrameHandler::OnTestForwardMsg(TConnection *session_pt, co
     }
 
     TINFO("recv test msg:" << req.ShortDebugString());
-    if (messag_pt->GetReqNo() > 0)
+    if (message_pt->GetReqNo() > 0)
     {
         REPMSG(E_FRAME_MSG_FORWARD_TEST_MESSAGE) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_CORRECT));

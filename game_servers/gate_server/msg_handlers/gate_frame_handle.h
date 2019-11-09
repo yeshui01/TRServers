@@ -26,9 +26,9 @@ public:
 
 public:
     // 消息处理成员函数
-    EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt);
     // 等待其他服务器完成，开始运行
-    EMsgHandleResult OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt);
 };
 
 #endif // __GATE_FRAME_MSG_HANDLE_H__

@@ -125,7 +125,7 @@ protected:
     TDEBUG("asyncmsg callback:rep_" << #MSG_TYPE << ":" << cb_rep.ShortDebugString());
     
 
-#define TR_END_ASYNC_MSG_WITH_PARAM(ROUTE_NODE_TYPE, NODE_INDEX) },g_MsgHelper.GenAsyncMsgEnvParam(session_pt, messag_pt),\
+#define TR_END_ASYNC_MSG_WITH_PARAM(ROUTE_NODE_TYPE, NODE_INDEX) },g_MsgHelper.GenAsyncMsgEnvParam(session_pt, message_pt),\
 EServerRouteNodeType::ROUTE_NODE_TYPE, NODE_INDEX);
 
 

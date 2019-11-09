@@ -32,11 +32,11 @@ void LogicFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), LogicFrameHandler, OnRecvRootStartCmd);
 }
 
-EMsgHandleResult LogicFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LogicFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisterServerInfo");
     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(-1);
@@ -57,7 +57,7 @@ EMsgHandleResult LogicFrameHandler::OnRegisterServerInfo(TConnection *session_pt
 }
 
 
-EMsgHandleResult LogicFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LogicFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRecvRootStartCmd");
     LogicServer * server_pt = dynamic_cast<LogicServer*>(session_pt->GetServer());

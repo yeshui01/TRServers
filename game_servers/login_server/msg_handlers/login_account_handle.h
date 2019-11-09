@@ -25,8 +25,8 @@ public:
 
 public:
     // 消息处理成员函数-注册账号
-    EMsgHandleResult OnRegisnterAccount(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnRegisnterAccount(TConnection *session_pt, const NetMessage * message_pt);
     // 校验账号
-    EMsgHandleResult OnAccountCheck(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnAccountCheck(TConnection *session_pt, const NetMessage * message_pt);
 };
 #endif // __TR_LOGIN_ACCOUNT_HANDLE_H__

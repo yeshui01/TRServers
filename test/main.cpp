@@ -434,6 +434,11 @@ void test_load_jsonfile()
 	return;
 }
 
+void test_custom()
+{
+	TDEBUG("test_custom");
+}
+
 int main(int argc, char* argv[])
 {
  	std::cout << "hello test" << std::endl;
@@ -454,7 +459,7 @@ int main(int argc, char* argv[])
 	// test_jsconcpp();
 	// test_mysqlconnector();
 	// test_protos();
-	test_load_jsonfile();
-
+	// test_load_jsonfile();
+	test_custom();
 	return 0;
 }

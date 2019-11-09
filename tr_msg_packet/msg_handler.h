@@ -24,7 +24,7 @@ enum class EMsgHandleResult : int32_t
 class NetMessage;
 class TConnection;
 
-using msg_type_handler_t = std::function<EMsgHandleResult (TConnection *session_pt, const NetMessage * messag_pt) >;
+using msg_type_handler_t = std::function<EMsgHandleResult (TConnection *session_pt, const NetMessage * message_pt) >;
 
 class IMessageHandler
 {

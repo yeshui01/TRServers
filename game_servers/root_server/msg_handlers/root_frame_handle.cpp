@@ -38,15 +38,15 @@ void RootFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE), RootFrameHandler, OnGateClientOffline);
 }
 
-EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisterServerInfo");
     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
+        TERROR("parse pbmsg failed, msg_class:" << message_pt->GetMsgClass() << ", msg_type:" << message_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -62,15 +62,15 @@ EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult RootFrameHandler::OnQueryServerNodeList(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootFrameHandler::OnQueryServerNodeList(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnQueryServerNodeList");
     REQMSG(E_FRAME_MSG_QUERY_SERVER_NODE_LIST) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_QUERY_SERVER_NODE_LIST) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
+        TERROR("parse pbmsg failed, msg_class:" << message_pt->GetMsgClass() << ", msg_type:" << message_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -94,15 +94,15 @@ EMsgHandleResult RootFrameHandler::OnQueryServerNodeList(TConnection *session_pt
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnServerWaitOtherStart");
     REQMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
+        TERROR("parse pbmsg failed, msg_class:" << message_pt->GetMsgClass() << ", msg_type:" << message_pt->GetMsgType());
         rep.SerializeToString(&rep_content_);
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
     }
@@ -144,16 +144,16 @@ EMsgHandleResult RootFrameHandler::OnServerWaitOtherStart(TConnection *session_p
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnForwardMessage");
     REQMSG(E_FRAME_MSG_FORWARD_MESSAGE) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_FORWARD_MESSAGE) rep;
         rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR));
-        TERROR("parse pbmsg failed, msg_class:" << messag_pt->GetMsgClass() << ", msg_type:" << messag_pt->GetMsgType());
-        if (messag_pt->GetReqNo() > 0)
+        TERROR("parse pbmsg failed, msg_class:" << message_pt->GetMsgClass() << ", msg_type:" << message_pt->GetMsgType());
+        if (message_pt->GetReqNo() > 0)
         {
             // rep.SerializeToString(&rep_content_);
             // return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
@@ -162,9 +162,9 @@ EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, con
         RETURN_NO_HANDLE;
     }
 
-    if (messag_pt->GetReqNo() > 0)
+    if (message_pt->GetReqNo() > 0)
     {
-        auto req_no = messag_pt->GetReqNo();
+        auto req_no = message_pt->GetReqNo();
         AsyncMsgParam async_env;
         async_env.session_pt = session_pt;
         g_MsgHelper.ForwardAsyncMessage(req.msg_class(), 
@@ -208,11 +208,11 @@ EMsgHandleResult RootFrameHandler::OnForwardMessage(TConnection *session_pt, con
     RETURN_NO_HANDLE;
 }
 
-EMsgHandleResult RootFrameHandler::OnGateClientOffline(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult RootFrameHandler::OnGateClientOffline(TConnection *session_pt, const NetMessage * message_pt)
 {
     REQMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) req;
     // REPMSG(E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE) rep;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         TERROR("parse pbmsg failed");
         // SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);

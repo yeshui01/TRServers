@@ -26,15 +26,15 @@ public:
 public:
     // 消息处理成员函数
     // 处理注册服务器信息
-    EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt);
     // 查询类型节点服务器列表
-    EMsgHandleResult OnQueryServerNodeList(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnQueryServerNodeList(TConnection *session_pt, const NetMessage * message_pt);
     // 服务器等待开始
-    EMsgHandleResult OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnServerWaitOtherStart(TConnection *session_pt, const NetMessage * message_pt);
     // 转发消息
-    EMsgHandleResult OnForwardMessage(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnForwardMessage(TConnection *session_pt, const NetMessage * message_pt);
     // 网关通知客户端下线
-    EMsgHandleResult OnGateClientOffline(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnGateClientOffline(TConnection *session_pt, const NetMessage * message_pt);
 };
 
 #endif // __ROOT_FRAME_MSG_HANDLE_H__

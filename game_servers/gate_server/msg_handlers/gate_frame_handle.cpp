@@ -33,11 +33,11 @@ void GateFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), GateFrameHandler, OnRecvRootStartCmd);
 }
 
-EMsgHandleResult GateFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult GateFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisterServerInfo");
     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(-1);
@@ -58,7 +58,7 @@ EMsgHandleResult GateFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
 }
 
 
-EMsgHandleResult GateFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult GateFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRecvRootStartCmd");
     GateServer * server_pt = dynamic_cast<GateServer*>(session_pt->GetServer());

@@ -26,6 +26,6 @@ public:
 
 public:
     // 消息处理成员函数-登录
-    EMsgHandleResult OnClientLogin(TConnection *session_pt, const NetMessage * messag_pt);
+    EMsgHandleResult OnClientLogin(TConnection *session_pt, const NetMessage * message_pt);
 };
 #endif // __GATE_LOGIN_HANDLE_H__

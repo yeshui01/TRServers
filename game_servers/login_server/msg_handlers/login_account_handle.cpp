@@ -36,12 +36,12 @@ void LoginAccountHandler::BindMsgHandle()
 }
 
 // 注册账号
-EMsgHandleResult LoginAccountHandler::OnRegisnterAccount(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LoginAccountHandler::OnRegisnterAccount(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisnterAccount");
     REQMSG(E_LOGIN_MSG_C2S_REGISTER_ACCOUNT) req;
     REPMSG(E_LOGIN_MSG_C2S_REGISTER_ACCOUNT) rep;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         rep.set_isok((INT_PROTOERR(E_PROTOCOL_ERR_PB_PARSE_ERROR)));
         TERROR("parse pbmsg failed");
@@ -107,12 +107,12 @@ EMsgHandleResult LoginAccountHandler::OnRegisnterAccount(TConnection *session_pt
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult LoginAccountHandler::OnAccountCheck(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult LoginAccountHandler::OnAccountCheck(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnAccountCheck");
     REQMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK) req;
     REPMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK) rep;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         TERROR("parse pbmsg failed");
         SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);

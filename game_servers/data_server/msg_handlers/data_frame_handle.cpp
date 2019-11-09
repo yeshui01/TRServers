@@ -31,11 +31,11 @@ void DataFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), DataFrameHandler, OnRecvRootStartCmd);
 }
 
-EMsgHandleResult DataFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult DataFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRegisterServerInfo");
     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
-    if (!STRING_TO_PBMSG(messag_pt->GetContent(), req))
+    if (!STRING_TO_PBMSG(message_pt->GetContent(), req))
     {
         REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
         rep.set_isok(-1);
@@ -56,7 +56,7 @@ EMsgHandleResult DataFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
     RETURN_REP_CONTENT(rep);
 }
 
-EMsgHandleResult DataFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * messag_pt)
+EMsgHandleResult DataFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt)
 {
     TINFO("OnRecvRootStartCmd");
     DataServer * server_pt = dynamic_cast<DataServer*>(session_pt->GetServer());
