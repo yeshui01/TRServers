@@ -67,7 +67,7 @@ return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
 RETURN_REP_CONTENT(rep_msg)
 
 // 声明消息处理的成员函数
-#define DECLATE_MSG_HANDLER_FUN(FUNC_NAME) EMsgHandleResult FUNC_NAME(TConnection *session_pt, const NetMessage * message_pt);
+#define DECLARE_MSG_HANDLER_FUN(FUNC_NAME) EMsgHandleResult FUNC_NAME(TConnection *session_pt, const NetMessage * message_pt);
 
 // 开始消息处理
 #define TR_BEGIN_HANDLE_MSG(HANDLER_NAME, FUNC_NAME, MSG_NAME) EMsgHandleResult HANDLER_NAME::FUNC_NAME(TConnection *session_pt, const NetMessage * message_pt) \
