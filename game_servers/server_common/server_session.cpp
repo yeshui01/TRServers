@@ -144,7 +144,7 @@ void ServerSession::SetChannelType(ESessionChannelType e_type)
 	}
 }
 
-const SessionChannelInfo & ServerSession::GetChannleInfo()
+const SessionChannelInfo & ServerSession::GetChannelInfo()
 {
 	return channel_info_;
 }

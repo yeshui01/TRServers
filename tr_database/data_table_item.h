@@ -175,6 +175,7 @@ public:
         auto it = data_items_.find(key);
         if (it != data_items_.end())
         {
+            delete it->second;
             data_items_.erase(it);
         }
     }

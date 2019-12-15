@@ -59,7 +59,7 @@ public:
     // 设置会话通道类型
     void SetChannelType(ESessionChannelType e_type);
     // 获取通道信息
-    const SessionChannelInfo & GetChannleInfo();
+    const SessionChannelInfo & GetChannelInfo();
     // 设置通道服务器信息
     void SetChannelServerInfo(EServerRouteNodeType route_type, int32_t index_id, int32_t server_id);
     // 设置通道客户端标识

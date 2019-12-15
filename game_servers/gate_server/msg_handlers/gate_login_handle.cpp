@@ -62,7 +62,7 @@ EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const 
     root_req.set_account_id(req.account_id());
     root_req.set_zone_id(g_ServerConfig.GetZoneId());
     
-    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_GG2ROOT_LOGIN, root_req,[accid{req.account_id()}])
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_GG2ROOT_LOGIN, root_req,accid{req.account_id()})
     {
         REPMSG(E_LOGIN_MSG_C2S_LOGIN) ret;
         ret.set_isok(cb_rep.isok());
@@ -133,6 +133,34 @@ EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const 
 
 TR_BEGIN_HANDLE_MSG(GateLoginHandler, OnCreateRole, E_LOGIN_MSG_C2S_CREATE_ROLE)
 {
-    // TODO:
+    auto client_session = dynamic_cast<ServerSession*>(session_pt);
+    if (!client_session)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_INNER_ERROR, rep);
+    }
+    if (client_session->GetChannelType() != ESessionChannelType::E_CHANNEL_CLIENT_TO_SERVER)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_INVALID_SESSION, rep);
+    }
+    if (client_session->GetChannelInfo().user_id == 0)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_UNLOGIN, rep);
+    }
+    if (req.nickname().length() < 5)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PARAM_ERROR, rep);
+    }
+    int64_t acc_id = client_session->GetChannelInfo().user_id;
+    REQMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE) root_req;
+    root_req.set_acc_id(acc_id);
+    root_req.set_nickname(req.nickname());
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_GG2ROOT_CREATE_ROLE, root_req)
+    {
+        REPMSG(E_LOGIN_MSG_C2S_CREATE_ROLE) ret;
+        ret.set_isok(cb_rep.isok());
+        ret.mutable_snapshot()->CopyFrom(cb_rep.snapshot());
+        g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+    }
+    TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_ROOT, 0);
 }
 TR_END_HANDLE_MSG_NO_RETURN_MSG

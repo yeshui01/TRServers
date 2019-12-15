@@ -1,6 +1,7 @@
 /*=======================================================
 # Author       : mknight
-# Last modified: 2019-07-13 12:29
+# Create time  : 2019-07-13 12:29
+# Last modified: 2019-11-09 14:56
 # Email        : 824338670@qq.com
 # Filename     : game_msg_helper.h
 # Description  : 
@@ -116,18 +117,53 @@ protected:
 
 #define g_MsgHelper GameMsgHelper::Instance()
 
-// 异步消息宏定义,简化代码书写
-#define TR_BEGIN_ASYNC_MSG_WITH_PARAM(MSG_CLASS, MSG_TYPE, pb_req, lambda_list) g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(MSG_CLASS),\
+
+/**
+ * 异步消息宏定义,简化代码书写-附带消息上下文参数
+ * @param  MSG_CLASS  : 消息类别
+ * @param  MSG_TYPE   : 消息类型
+ * @param  pb_req     : 要发送的proto消息
+ * @param  captures   : 回调函数变量捕捉列表
+ */
+#define TR_BEGIN_ASYNC_MSG_WITH_PARAM(MSG_CLASS, MSG_TYPE, pb_req, captures...) g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(MSG_CLASS),\
     MSG_TYPE, pb_req,\
-    lambda_list(const NetMessage *rep_msg, const AsyncMsgParam &cb_param){\
+    [captures](const NetMessage *rep_msg, const AsyncMsgParam &cb_param){\
     REPMSG(MSG_TYPE) cb_rep;\
     STRING_TO_PBMSG(rep_msg->GetContent(), cb_rep);\
     TINFO("asyncmsg callback:rep_" << #MSG_TYPE << ":" << cb_rep.ShortDebugString());
     
-
+/**
+ * 异步消息结束宏，与TR_BEGIN_ASYNC_MSG_WITH_PARAM配套使用
+ * @param  ROUTE_NODE_TYPE  : 目标节点类型
+ * @param  NODE_INDEX       : 目标节点所以
+ */
 #define TR_END_ASYNC_MSG_WITH_PARAM(ROUTE_NODE_TYPE, NODE_INDEX) },g_MsgHelper.GenAsyncMsgEnvParam(session_pt, message_pt),\
 EServerRouteNodeType::ROUTE_NODE_TYPE, NODE_INDEX);
 
 
+/**
+ * 异步消息宏定义,简化代码书写-不带消息上下文参数
+ * @param  MSG_CLASS  : 消息类别
+ * @param  MSG_TYPE   : 消息类型
+ * @param  pb_req     : 要发送的proto消息
+ * @param  rep_var    : 与pb_req对应得rep解析消息对应的变量名
+ * @param  ...        : 回调函数变量捕捉列表
+ */
+// 异步消息宏，不带消息上下文参数
+#define TR_BEGIN_ASYNC_MSG(MSG_CLASS, MSG_TYPE, pb_req, rep_var,...) g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(MSG_CLASS),\
+    MSG_TYPE, pb_req,\
+    [__VA_ARGS__](const NetMessage *rep_msg, const AsyncMsgParam &cb_param){\
+    REPMSG(MSG_TYPE) rep_var;\
+    STRING_TO_PBMSG(rep_msg->GetContent(), rep_var);\
+    TINFO("asyncmsg callback:rep_" << #MSG_TYPE << ":" << rep_var.ShortDebugString());
+    
+
+/**
+ * 异步消息结束宏，与TR_BEGIN_ASYNC_MSG配套使用
+ * @param  ROUTE_NODE_TYPE  : 目标节点类型
+ * @param  NODE_INDEX       : 目标节点所以
+ */
+#define TR_END_ASYNC_MSG(ROUTE_NODE_TYPE, NODE_INDEX) },AsyncMsgParam(),\
+EServerRouteNodeType::ROUTE_NODE_TYPE, NODE_INDEX);
 
 #endif  // __TR_GAME_MSG_HELPER_H__

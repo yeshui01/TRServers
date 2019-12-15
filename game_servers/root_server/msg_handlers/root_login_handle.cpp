@@ -36,6 +36,7 @@ RootLoginHandler::~RootLoginHandler()
 void RootLoginHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_GG2ROOT_LOGIN), RootLoginHandler, OnGateClientLogin);
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE), RootLoginHandler, OnGateCreateRole);
 }
 
 EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, const NetMessage * message_pt)
@@ -63,7 +64,7 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
     login_req.set_pswd(req.pswd());
     login_req.set_account_id(req.account_id());
     login_req.set_zone_id(g_ServerConfig.GetZoneId());
-    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK, login_req,[accid{req.account_id()}])
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK, login_req,accid{req.account_id()})
     {
         REPMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) ret;
         ret.set_isok(cb_rep.isok());
@@ -75,7 +76,7 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
             ServerSession* session_pt = dynamic_cast<ServerSession*>(cb_param.session_pt);
             if (session_pt)
             {
-                g_ClientNetNodeMgr.UpdateUserNode(accid, session_pt->GetChannleInfo().node_type, session_pt->GetChannleInfo().server_index);
+                g_ClientNetNodeMgr.UpdateUserNode(accid, session_pt->GetChannelInfo().node_type, session_pt->GetChannelInfo().server_index);
                 // 通知网关?不用，网关自己根据回调处理
             }
             else
@@ -95,3 +96,43 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
 
     RETURN_NO_HANDLE;
 }
+
+TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREATE_ROLE)
+{
+    int64_t acc_id = req.acc_id();
+    auto user_status = g_ClientNetNodeMgr.GetUserStatus(acc_id);
+    if (EUserStatus::E_CIENT_USER_STATUS_LOGINED != user_status)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_STATUS, rep);
+    }
+    REQMSG(E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE) login_req;
+    login_req.set_acc_id(acc_id);
+    login_req.set_nickname(req.nickname());
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE, login_req,acc_id)
+    {
+        if (cb_rep.isok() != INT_PROTOERR(E_PROTOCOL_ERR_CORRECT))
+        {
+            TWARN("step 1 create role failed, acc_id:" << acc_id);
+            REPMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE) ret;
+            ret.set_isok(cb_rep.isok());
+            g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+            return;
+        }
+        REQMSG(E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE) data_req;
+        TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE, data_req, data_rep, async_env{cb_param},acc_id)
+        {
+            if (data_rep.isok() != INT_PROTOERR(E_PROTOCOL_ERR_CORRECT))
+            {
+                TWARN("step 2 create role failed, acc_id:" << acc_id);
+                REPMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE) ret;
+                ret.set_isok(data_rep.isok());
+                g_MsgHelper.SendAsyncRepMsg(ret, async_env);
+                return;
+            }
+            // TODO: to logic server init role data
+        }
+        TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_DATA, 0)
+    }
+    TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_LOGIN, 0)
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG

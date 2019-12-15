@@ -288,7 +288,7 @@ const std::string & DataTableItem::GetFieldStringValue(int8_t field_index) const
     }
     else if (val_ptr->field_val.val_str == nullptr)
     {
-         throw std::invalid_argument("field have no string value");
+        throw std::invalid_argument("field have no string value");
     }
     
     return *(val_ptr->field_val.val_str);
