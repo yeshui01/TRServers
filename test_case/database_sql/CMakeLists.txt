@@ -8,4 +8,4 @@ MESSAGE("PROJECT_SOURCE_DIR:${PROJECT_SOURCE_DIR}")
 
 ADD_EXECUTABLE(database_sql_exe ${TOP_COMMON_SRC} ${MAIN_SRC} ${MAIN_PROTO_SRC} ${SERVER_DB_SRC} ${TEST_PB_SRC})
 #链接库文件
-TARGET_LINK_LIBRARIES(database_sql_exe liblog4cplus.so libmysqlcppconn.so libprotobuf.so)
+TARGET_LINK_LIBRARIES(database_sql_exe libpthread.so liblog4cplus.so libmysqlcppconn.so libprotobuf.so)

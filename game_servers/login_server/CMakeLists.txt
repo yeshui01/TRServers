@@ -15,4 +15,4 @@ ADD_EXECUTABLE(login_server ${TOP_COMMON_SRC} ${SERVER_COMMON_SRC} ${MAIN_SRC} $
 ${SERVER_DB_TOOLS_SRC} ${SERVER_DATA_TABLES})
 
 #链接库文件
-TARGET_LINK_LIBRARIES(login_server liblog4cplus.so libprotobuf.so libmysqlcppconn.so)
+TARGET_LINK_LIBRARIES(login_server libpthread.so liblog4cplus.so libprotobuf.so libmysqlcppconn.so)

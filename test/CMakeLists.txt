@@ -11,4 +11,4 @@ MESSAGE("PROJECT_SOURCE_DIR:${PROJECT_SOURCE_DIR}")
 ADD_EXECUTABLE(test_exe ${TOP_COMMON_SRC} ${MAIN_SRC} ${MAIN_PROTO_SRC})
 
 #链接库文件
-TARGET_LINK_LIBRARIES(test_exe libmysqlcppconn.so libprotobuf.so liblog4cplus.so)
+TARGET_LINK_LIBRARIES(test_exe libpthread.so libmysqlcppconn.so libprotobuf.so liblog4cplus.so)
