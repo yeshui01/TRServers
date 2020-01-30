@@ -22,6 +22,14 @@ enum ELoginMsgType : int32_t
     E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE                  = 7,  // root->login 创建角色
     E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE                   = 8,  // root->data 创建角色
     E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE                  = 9,  // root->logic 创建角色
+    E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT           = 10, // 获取玩家角色快照
+
+    E_LOGIN_MSG_C2S_ENTER_GAME                          = 11,  // 客户端请求进入游戏
+
+    E_LOGIN_MSG_GG2CENTER_ENTER_GAME                    = 101,   // gate->center 进入游戏
+    E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME                  = 102,   // center->root 玩家进入游戏
+    E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME                   = 103,   // root->logic 玩家进入游戏
+
 };
 
 #define INT_LOGINMSG(msg_type) static_cast<int32_t>(msg_type)

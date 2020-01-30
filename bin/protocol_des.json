@@ -23,6 +23,8 @@
 					{"type":7, "des":"E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE"},
 					{"type":8, "des":"E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE"},
 					{"type":9, "des":"E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE"},
+					{"type":10, "des":"E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT"},
+					
 					{"type":999999999, "des":"end type des"}
 				]
 			}

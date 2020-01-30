@@ -120,7 +120,7 @@ public:
     // 开启线程运行
     void StartWorkers();
     // 等待所有线程运行
-    void WaitWokers();
+    void WaitWorkers();
     // 结束所有后台线程
     void StopWorkers();
     // 同步执行sql语句,主线程中调用
@@ -132,19 +132,26 @@ public:
     // 回调任务队列是否为空
     bool CallBackTaskEmpty();
     size_t CallBackTaskSize();
-    
+    // 设置所有连接使用utf8字符集
+    void SetConnsUtf8Char();
+    // 初始安装预处理语句
+    void InstallPreStmts(std::function<void (sql::Connection *, TRDBPrepareStmtMgr *) > && install_func);
+    // 获取主连接的预处理语句
+    sql::PreparedStatement *HoldMainPreStmt(int32_t stmt_id);
 public:
     // 查询结果转换到本地结果集
     static void ResultSetConvt(sql::ResultSet * meta_result, std::vector<DataTableItem> & v_local_set);
 protected:
     sql::Connection * HoldConnect(int32_t index);
     void WorkerReady(int32_t worker_id);
+    TRDBPrepareStmtMgr *HoldPreStmtMgr(int32_t index);
 protected:
     std::string db_name_;   // 数据库名
     std::string user_;      // 用户名
     std::string pswd_;      // 密码
     std::string host_;      // 主机地址
     std::vector<std::shared_ptr<sql::Connection> > conns_;  // 连接器池
+    std::vector<std::shared_ptr<TRDBPrepareStmtMgr> > conn_prestmt_mgrs_; // 连接预处理语句管理器
 protected:
     std::deque<TRAsyncDBTask *> db_event_queue_;            // 数据库异步任务队列
     std::mutex evt_queue_mutex_;                            // 异步事件队列互斥锁
@@ -170,6 +177,8 @@ public:
     bool AddDataBase(int32_t database_id, std::shared_ptr<TRDataBase> database_ptr);
     // 获取一个数据库对象
     TRDataBase * HoldDataBase(int32_t database_id);
+    // 每帧运行
+    void FrameUpdate();
     // 停止所有数据库服务
     void Stop();
 protected:

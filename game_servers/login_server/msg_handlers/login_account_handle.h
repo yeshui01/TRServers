@@ -28,5 +28,7 @@ public:
     EMsgHandleResult OnRegisnterAccount(TConnection *session_pt, const NetMessage * message_pt);
     // 校验账号
     EMsgHandleResult OnAccountCheck(TConnection *session_pt, const NetMessage * message_pt);
+    // 消息处理-创角
+    DECLARE_MSG_HANDLER_FUN(OnCreateRole);
 };
 #endif // __TR_LOGIN_ACCOUNT_HANDLE_H__

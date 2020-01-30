@@ -24,7 +24,7 @@ public:
 
 public:
    // 消息处理-创角
-    DECLARE_MSG_HANDLER_FUN(OnCreateRole);
+    DECLARE_MSG_HANDLER_FUN(OnLogicCreateRole);
 };
 
 #endif // __TR_LOGIC_LOGIN_HANDLE_H__

@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "data_pb_common.proto";
 package protos;
 
 message server_info_t
@@ -147,4 +148,48 @@ message rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
 	int32 reason = 2;
 }
 
+// E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES       = 11,   // 保存玩家数据
+message req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+{
+	int64 role_id = 1;
+	repeated pb_data_module table_list = 2;			   // 数据模块列表
+}
 
+message rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+{
+	int32 isok = 1;
+}
+
+// E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES       = 12,   // 保存全局数据
+message req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+{
+	repeated pb_data_module table_list = 2;			   // 数据模块列表
+}
+
+message rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+{
+	int32 isok = 1;
+}
+
+// E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES       = 13, // 加载玩家数据表
+message req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+{
+	int64 role_id = 1;
+}
+message rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+{
+	int32 isok = 1;
+	int64 role_id = 2;
+	repeated pb_data_module table_list = 3;			   // 数据模块列表
+}
+
+// E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES       = 14, // 加载全局数据表
+message req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+{
+}
+
+message rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+{
+	int32 isok = 1;
+	repeated pb_data_module table_list = 2;			   // 数据模块列表
+}

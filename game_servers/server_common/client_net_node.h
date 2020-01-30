@@ -24,8 +24,8 @@ enum class EClientNodeStatus : int8_t
 enum class EUserStatus : int32_t
 {
     E_CLIENT_USER_STATUS_NONE = 0,          // 初始状态
-    E_CIENT_USER_STATUS_LOGIN_ING = 1,      // 登录中
-    E_CIENT_USER_STATUS_LOGINED = 2,        // 登录成功
+    E_CLIENT_USER_STATUS_LOGIN_ING = 1,      // 登录中
+    E_CLIENT_USER_STATUS_LOGINED = 2,        // 登录成功
     E_CLIENT_USER_STATUS_CHANGE_VIEW = 3,   // 视图变更中
     E_CLIENT_USER_STATUS_NORMAL = 4,        // 正常进行游戏
     E_CLIENT_USER_STATUS_OFFLINE_ING = 5,   // 离线中

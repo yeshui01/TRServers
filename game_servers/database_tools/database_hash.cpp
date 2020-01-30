@@ -45,4 +45,37 @@ namespace DatabaseHash
         ss << index;
         return "account" + ss.str();
     }
+    // 根据角色名字,hash到对应的表名
+    std::string RoleNameTbNameHashByNickname(std::string nickname)
+    {
+        // 取后两个字节做哈希值,如果不足两个字节,默认返回第一个
+        int32_t len = nickname.length();
+        if (len < 2)
+            return "role_name01";
+
+        const char * start = & nickname[nickname.size() - 2];
+        const uint16_t * hash_val = reinterpret_cast<const uint16_t *>(start);
+        int32_t index = (*hash_val) % 10 + 1;  // role_name01 - role_name10
+
+        std::stringstream ss;
+        ss.width(2);
+        ss.fill('0');
+        ss << index;
+        return "role_name" + ss.str();
+    }
+    // 根据账号id映射账号数据库id
+    int32_t GetAccountDbID(int64_t acc_id)
+    {
+        return (acc_id / ACCOUNT_TB_HASH_FACTOR) % 10;
+    }
+    // 根据账号id映射到账号名
+    std::string AccountTbNameHashByAccId(int64_t acc_id)
+    {
+        int32_t index = (acc_id / ACCOUNT_TB_HASH_FACTOR) / 10;
+        std::stringstream ss;
+        ss.width(2);
+        ss.fill('0');
+        ss << index;
+        return "account" + ss.str();
+    }
 };  // namespace DatabaseHash end

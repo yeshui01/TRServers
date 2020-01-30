@@ -91,6 +91,30 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_ = NULL;
 
 }  // namespace
 
@@ -468,6 +492,129 @@ void protobuf_AssignDesc_protcl_5fframe_2eproto() {
       sizeof(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, _is_default_instance_));
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_ = file->message_type(23);
+  static const int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, role_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, table_list_),
+  };
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_,
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_,
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, _is_default_instance_));
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_ = file->message_type(24);
+  static const int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, isok_),
+  };
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_,
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_,
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES, _is_default_instance_));
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_ = file->message_type(25);
+  static const int req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, table_list_),
+  };
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_,
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_,
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, _is_default_instance_));
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_ = file->message_type(26);
+  static const int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, isok_),
+  };
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_,
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_,
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES, _is_default_instance_));
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_ = file->message_type(27);
+  static const int req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, role_id_),
+  };
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_,
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_,
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, _is_default_instance_));
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_ = file->message_type(28);
+  static const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, role_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, table_list_),
+  };
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_,
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_,
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES, _is_default_instance_));
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_ = file->message_type(29);
+  static const int req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_offsets_[1] = {
+  };
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_,
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_,
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, _is_default_instance_));
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_ = file->message_type(30);
+  static const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, table_list_),
+  };
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_,
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_,
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES, _is_default_instance_));
 }
 
 namespace {
@@ -536,6 +683,22 @@ void protobuf_RegisterTypes(const ::std::string&) {
       req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_descriptor_, &req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_descriptor_, &rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_, &req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_, &rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_, &req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_, &rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_, &req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_, &rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_, &req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_, &rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance());
 }
 
 }  // namespace
@@ -587,6 +750,22 @@ void protobuf_ShutdownFile_protcl_5fframe_2eproto() {
   delete req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_reflection_;
   delete rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance_;
   delete rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_reflection_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_;
+  delete req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_;
+  delete rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_;
 }
 
 void protobuf_AddDesc_protcl_5fframe_2eproto() GOOGLE_ATTRIBUTE_COLD;
@@ -596,54 +775,73 @@ void protobuf_AddDesc_protcl_5fframe_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::protos::protobuf_AddDesc_data_5fpb_5fcommon_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022protcl_frame.proto\022\006protos\"^\n\rserver_i"
-    "nfo_t\022\021\n\tnode_type\030\001 \001(\005\022\023\n\013server_type\030"
-    "\002 \001(\005\022\024\n\014server_index\030\003 \001(\005\022\017\n\007zone_id\030\004"
-    " \001(\005\"O\n\021client_net_node_t\022\021\n\tnode_type\030\001"
-    " \001(\005\022\022\n\nnode_index\030\002 \001(\005\022\023\n\013node_status\030"
-    "\003 \001(\005\"\265\001\n\rclient_user_t\022\017\n\007user_id\030\001 \001(\003"
-    "\022\017\n\007role_id\030\002 \001(\003\0226\n\tnode_list\030\003 \003(\0132#.p"
-    "rotos.client_user_t.NodeListEntry\032J\n\rNod"
-    "eListEntry\022\013\n\003key\030\001 \001(\005\022(\n\005value\030\002 \001(\0132\031"
-    ".protos.client_net_node_t:\0028\001\"c\n$req_E_F"
-    "RAME_MSG_REGISTER_SERVER_INFO\022*\n\013server_"
-    "node\030\001 \001(\0132\025.protos.server_info_t\022\017\n\007zon"
-    "e_id\030\002 \001(\005\"4\n$rep_E_FRAME_MSG_REGISTER_S"
-    "ERVER_INFO\022\014\n\004isok\030\001 \001(\005\"_\n!req_E_FRAME_"
-    "MSG_NEW_SERVER_BOOTUP\022\021\n\tnode_type\030\001 \001(\005"
-    "\022\023\n\013server_type\030\002 \001(\005\022\022\n\nnode_index\030\003 \001("
-    "\005\"1\n!rep_E_FRAME_MSG_NEW_SERVER_BOOTUP\022\014"
-    "\n\004isok\030\001 \001(\005\";\n&req_E_FRAME_MSG_QUERY_SE"
-    "RVER_NODE_LIST\022\021\n\tnode_type\030\001 \001(\005\"b\n&rep"
-    "_E_FRAME_MSG_QUERY_SERVER_NODE_LIST\022\014\n\004i"
-    "sok\030\001 \001(\005\022*\n\013server_list\030\002 \003(\0132\025.protos."
-    "server_info_t\"&\n$req_E_FRAME_MSG_ROOT_TO"
-    "_XS_START_RUN\"4\n$rep_E_FRAME_MSG_ROOT_TO"
-    "_XS_START_RUN\022\014\n\004isok\030\001 \001(\005\"O\n&req_E_FRA"
-    "ME_MSG_XS_TO_ROOT_WAIT_OTHERS\022\021\n\tnode_ty"
-    "pe\030\001 \001(\005\022\022\n\nnode_index\030\002 \001(\005\"6\n&rep_E_FR"
-    "AME_MSG_XS_TO_ROOT_WAIT_OTHERS\022\014\n\004isok\030\001"
-    " \001(\005\"\237\001\n\037req_E_FRAME_MSG_FORWARD_MESSAGE"
-    "\022\023\n\013des_zone_id\030\001 \001(\005\022\025\n\rdes_node_type\030\002"
-    " \001(\005\022\026\n\016des_node_index\030\003 \001(\005\022\021\n\tmsg_clas"
-    "s\030\004 \001(\005\022\020\n\010msg_type\030\005 \001(\005\022\023\n\013msg_content"
-    "\030\006 \001(\014\"/\n\037rep_E_FRAME_MSG_FORWARD_MESSAG"
-    "E\022\014\n\004isok\030\001 \001(\005\"J\n$req_E_FRAME_MSG_FORWA"
-    "RD_TEST_MESSAGE\022\017\n\007test_id\030\001 \001(\005\022\021\n\tshow"
-    "_text\030\002 \001(\t\"4\n$rep_E_FRAME_MSG_FORWARD_T"
-    "EST_MESSAGE\022\014\n\004isok\030\001 \001(\005\"q\n.req_E_FRAME"
-    "_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE\022\023\n\013u"
-    "pdate_type\030\001 \001(\005\022*\n\013client_data\030\002 \001(\0132\025."
-    "protos.client_user_t\">\n.rep_E_FRAME_MSG_"
-    "ROOT2XS_UPDATE_CLIENT_NET_NODE\022\014\n\004isok\030\001"
-    " \001(\005\"9\n&req_E_FRAME_MSG_GG2ROOT_CLIENT_O"
-    "FFLINE\022\017\n\007user_id\030\001 \001(\003\"6\n&rep_E_FRAME_M"
-    "SG_GG2ROOT_CLIENT_OFFLINE\022\014\n\004isok\030\001 \001(\005\""
-    "I\n&req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLIN"
-    "E\022\017\n\007user_id\030\001 \001(\003\022\016\n\006reason\030\002 \001(\005\"I\n&re"
-    "p_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE\022\017\n\007"
-    "user_id\030\001 \001(\003\022\016\n\006reason\030\002 \001(\005b\006proto3", 1877);
+    "\n\022protcl_frame.proto\022\006protos\032\024data_pb_co"
+    "mmon.proto\"^\n\rserver_info_t\022\021\n\tnode_type"
+    "\030\001 \001(\005\022\023\n\013server_type\030\002 \001(\005\022\024\n\014server_in"
+    "dex\030\003 \001(\005\022\017\n\007zone_id\030\004 \001(\005\"O\n\021client_net"
+    "_node_t\022\021\n\tnode_type\030\001 \001(\005\022\022\n\nnode_index"
+    "\030\002 \001(\005\022\023\n\013node_status\030\003 \001(\005\"\265\001\n\rclient_u"
+    "ser_t\022\017\n\007user_id\030\001 \001(\003\022\017\n\007role_id\030\002 \001(\003\022"
+    "6\n\tnode_list\030\003 \003(\0132#.protos.client_user_"
+    "t.NodeListEntry\032J\n\rNodeListEntry\022\013\n\003key\030"
+    "\001 \001(\005\022(\n\005value\030\002 \001(\0132\031.protos.client_net"
+    "_node_t:\0028\001\"c\n$req_E_FRAME_MSG_REGISTER_"
+    "SERVER_INFO\022*\n\013server_node\030\001 \001(\0132\025.proto"
+    "s.server_info_t\022\017\n\007zone_id\030\002 \001(\005\"4\n$rep_"
+    "E_FRAME_MSG_REGISTER_SERVER_INFO\022\014\n\004isok"
+    "\030\001 \001(\005\"_\n!req_E_FRAME_MSG_NEW_SERVER_BOO"
+    "TUP\022\021\n\tnode_type\030\001 \001(\005\022\023\n\013server_type\030\002 "
+    "\001(\005\022\022\n\nnode_index\030\003 \001(\005\"1\n!rep_E_FRAME_M"
+    "SG_NEW_SERVER_BOOTUP\022\014\n\004isok\030\001 \001(\005\";\n&re"
+    "q_E_FRAME_MSG_QUERY_SERVER_NODE_LIST\022\021\n\t"
+    "node_type\030\001 \001(\005\"b\n&rep_E_FRAME_MSG_QUERY"
+    "_SERVER_NODE_LIST\022\014\n\004isok\030\001 \001(\005\022*\n\013serve"
+    "r_list\030\002 \003(\0132\025.protos.server_info_t\"&\n$r"
+    "eq_E_FRAME_MSG_ROOT_TO_XS_START_RUN\"4\n$r"
+    "ep_E_FRAME_MSG_ROOT_TO_XS_START_RUN\022\014\n\004i"
+    "sok\030\001 \001(\005\"O\n&req_E_FRAME_MSG_XS_TO_ROOT_"
+    "WAIT_OTHERS\022\021\n\tnode_type\030\001 \001(\005\022\022\n\nnode_i"
+    "ndex\030\002 \001(\005\"6\n&rep_E_FRAME_MSG_XS_TO_ROOT"
+    "_WAIT_OTHERS\022\014\n\004isok\030\001 \001(\005\"\237\001\n\037req_E_FRA"
+    "ME_MSG_FORWARD_MESSAGE\022\023\n\013des_zone_id\030\001 "
+    "\001(\005\022\025\n\rdes_node_type\030\002 \001(\005\022\026\n\016des_node_i"
+    "ndex\030\003 \001(\005\022\021\n\tmsg_class\030\004 \001(\005\022\020\n\010msg_typ"
+    "e\030\005 \001(\005\022\023\n\013msg_content\030\006 \001(\014\"/\n\037rep_E_FR"
+    "AME_MSG_FORWARD_MESSAGE\022\014\n\004isok\030\001 \001(\005\"J\n"
+    "$req_E_FRAME_MSG_FORWARD_TEST_MESSAGE\022\017\n"
+    "\007test_id\030\001 \001(\005\022\021\n\tshow_text\030\002 \001(\t\"4\n$rep"
+    "_E_FRAME_MSG_FORWARD_TEST_MESSAGE\022\014\n\004iso"
+    "k\030\001 \001(\005\"q\n.req_E_FRAME_MSG_ROOT2XS_UPDAT"
+    "E_CLIENT_NET_NODE\022\023\n\013update_type\030\001 \001(\005\022*"
+    "\n\013client_data\030\002 \001(\0132\025.protos.client_user"
+    "_t\">\n.rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLI"
+    "ENT_NET_NODE\022\014\n\004isok\030\001 \001(\005\"9\n&req_E_FRAM"
+    "E_MSG_GG2ROOT_CLIENT_OFFLINE\022\017\n\007user_id\030"
+    "\001 \001(\003\"6\n&rep_E_FRAME_MSG_GG2ROOT_CLIENT_"
+    "OFFLINE\022\014\n\004isok\030\001 \001(\005\"I\n&req_E_FRAME_MSG"
+    "_ROOT_XS_CLIENT_OFFLINE\022\017\n\007user_id\030\001 \001(\003"
+    "\022\016\n\006reason\030\002 \001(\005\"I\n&rep_E_FRAME_MSG_ROOT"
+    "_XS_CLIENT_OFFLINE\022\017\n\007user_id\030\001 \001(\003\022\016\n\006r"
+    "eason\030\002 \001(\005\"l\n-req_E_FRAME_MSG_XS_TO_DAT"
+    "A_SAVE_PLAYER_TABLES\022\017\n\007role_id\030\001 \001(\003\022*\n"
+    "\ntable_list\030\002 \003(\0132\026.protos.pb_data_modul"
+    "e\"=\n-rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLA"
+    "YER_TABLES\022\014\n\004isok\030\001 \001(\005\"[\n-req_E_FRAME_"
+    "MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES\022*\n\ntab"
+    "le_list\030\002 \003(\0132\026.protos.pb_data_module\"=\n"
+    "-rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_"
+    "TABLES\022\014\n\004isok\030\001 \001(\005\"@\n-req_E_FRAME_MSG_"
+    "XS_TO_DATA_LOAD_PLAYER_TABLES\022\017\n\007role_id"
+    "\030\001 \001(\003\"z\n-rep_E_FRAME_MSG_XS_TO_DATA_LOA"
+    "D_PLAYER_TABLES\022\014\n\004isok\030\001 \001(\005\022\017\n\007role_id"
+    "\030\002 \001(\003\022*\n\ntable_list\030\003 \003(\0132\026.protos.pb_d"
+    "ata_module\"/\n-req_E_FRAME_MSG_XS_TO_DATA"
+    "_LOAD_GLOBAL_TABLES\"i\n-rep_E_FRAME_MSG_X"
+    "S_TO_DATA_LOAD_GLOBAL_TABLES\022\014\n\004isok\030\001 \001"
+    "(\005\022*\n\ntable_list\030\002 \003(\0132\026.protos.pb_data_"
+    "moduleb\006proto3", 2574);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protcl_frame.proto", &protobuf_RegisterTypes);
   server_info_t::default_instance_ = new server_info_t();
@@ -669,6 +867,14 @@ void protobuf_AddDesc_protcl_5fframe_2eproto() {
   rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::default_instance_ = new rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE();
   req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance_ = new req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
   rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance_ = new rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE();
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_ = new req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_ = new rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_ = new req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_ = new rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_ = new req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_ = new rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_ = new req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_ = new rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
   server_info_t::default_instance_->InitAsDefaultInstance();
   client_net_node_t::default_instance_->InitAsDefaultInstance();
   client_user_t::default_instance_->InitAsDefaultInstance();
@@ -692,6 +898,14 @@ void protobuf_AddDesc_protcl_5fframe_2eproto() {
   rep_E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE::default_instance_->InitAsDefaultInstance();
   req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance_->InitAsDefaultInstance();
   rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::default_instance_->InitAsDefaultInstance();
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_->InitAsDefaultInstance();
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_->InitAsDefaultInstance();
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_->InitAsDefaultInstance();
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_->InitAsDefaultInstance();
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_->InitAsDefaultInstance();
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_->InitAsDefaultInstance();
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_->InitAsDefaultInstance();
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protcl_5fframe_2eproto);
 }
 
@@ -7620,6 +7834,2141 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
   
   reason_ = value;
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::kRoleIdFieldNumber;
+const int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::kTableListFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::~req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  SharedDtor();
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_;
+}
+
+const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_ = NULL;
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::New(::google::protobuf::Arena* arena) const {
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* n = new req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  role_id_ = GOOGLE_LONGLONG(0);
+  table_list_.Clear();
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_table_list;
+        break;
+      }
+
+      // repeated .protos.pb_data_module table_list = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_table_list:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_table_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_table_list()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_table_list;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return false;
+#undef DO_
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->table_list(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+::google::protobuf::uint8* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, this->table_list(i), false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return target;
+}
+
+int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  total_size += 1 * this->table_list_size();
+  for (int i = 0; i < this->table_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->table_list(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  table_list_.MergeFrom(from.table_list_);
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::Swap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other) {
+  std::swap(role_id_, other->role_id_);
+  table_list_.UnsafeArenaSwap(&other->table_list_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_;
+  metadata.reflection = req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+
+// optional int64 role_id = 1;
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+ void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.role_id)
+}
+
+// repeated .protos.pb_data_module table_list = 2;
+int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+const ::protos::pb_data_module& req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Get(index);
+}
+::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return &table_list_;
+}
+const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::kIsokFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::~rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  SharedDtor();
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_;
+}
+
+const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::default_instance_ = NULL;
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::New(::google::protobuf::Arena* arena) const {
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* n = new rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  isok_ = 0;
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return false;
+#undef DO_
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+}
+
+::google::protobuf::uint8* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  return target;
+}
+
+int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::Swap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other) {
+  std::swap(isok_, other->isok_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_descriptor_;
+  metadata.reflection = rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+
+// optional int32 isok = 1;
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.isok)
+  return isok_;
+}
+ void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.isok)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::kTableListFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::~req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  SharedDtor();
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_;
+}
+
+const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_ = NULL;
+
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::New(::google::protobuf::Arena* arena) const {
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* n = new req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  table_list_.Clear();
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .protos.pb_data_module table_list = 2;
+      case 2: {
+        if (tag == 18) {
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_table_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_table_list()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_table_list;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return false;
+#undef DO_
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->table_list(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+::google::protobuf::uint8* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, this->table_list(i), false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return target;
+}
+
+int req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  int total_size = 0;
+
+  // repeated .protos.pb_data_module table_list = 2;
+  total_size += 1 * this->table_list_size();
+  for (int i = 0; i < this->table_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->table_list(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  table_list_.MergeFrom(from.table_list_);
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::Swap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other) {
+  table_list_.UnsafeArenaSwap(&other->table_list_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_;
+  metadata.reflection = req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+
+// repeated .protos.pb_data_module table_list = 2;
+int req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+const ::protos::pb_data_module& req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Get(index);
+}
+::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return &table_list_;
+}
+const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::kIsokFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::~rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  SharedDtor();
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_;
+}
+
+const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::default_instance_ = NULL;
+
+rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::New(::google::protobuf::Arena* arena) const {
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* n = new rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  isok_ = 0;
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return false;
+#undef DO_
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+}
+
+::google::protobuf::uint8* rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  return target;
+}
+
+int rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::Swap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other) {
+  std::swap(isok_, other->isok_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_descriptor_;
+  metadata.reflection = rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+
+// optional int32 isok = 1;
+void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.isok)
+  return isok_;
+}
+ void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.isok)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::kRoleIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::~req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  SharedDtor();
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_;
+}
+
+const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_ = NULL;
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::New(::google::protobuf::Arena* arena) const {
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* n = new req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return false;
+#undef DO_
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+::google::protobuf::uint8* req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return target;
+}
+
+int req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::Swap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other) {
+  std::swap(role_id_, other->role_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_;
+  metadata.reflection = req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+
+// optional int64 role_id = 1;
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+ void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::kIsokFieldNumber;
+const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::kRoleIdFieldNumber;
+const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::kTableListFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::~rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  SharedDtor();
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_;
+}
+
+const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::default_instance_ = NULL;
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::New(::google::protobuf::Arena* arena) const {
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* n = new rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  isok_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+  table_list_.Clear();
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_role_id;
+        break;
+      }
+
+      // optional int64 role_id = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_role_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_table_list;
+        break;
+      }
+
+      // repeated .protos.pb_data_module table_list = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_table_list:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_table_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_table_list()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_loop_table_list;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return false;
+#undef DO_
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // optional int64 role_id = 2;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->role_id(), output);
+  }
+
+  // repeated .protos.pb_data_module table_list = 3;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->table_list(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+}
+
+::google::protobuf::uint8* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // optional int64 role_id = 2;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->role_id(), target);
+  }
+
+  // repeated .protos.pb_data_module table_list = 3;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3, this->table_list(i), false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  return target;
+}
+
+int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // optional int64 role_id = 2;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  // repeated .protos.pb_data_module table_list = 3;
+  total_size += 1 * this->table_list_size();
+  for (int i = 0; i < this->table_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->table_list(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  table_list_.MergeFrom(from.table_list_);
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::Swap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other) {
+  std::swap(isok_, other->isok_);
+  std::swap(role_id_, other->role_id_);
+  table_list_.UnsafeArenaSwap(&other->table_list_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_descriptor_;
+  metadata.reflection = rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+
+// optional int32 isok = 1;
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.isok)
+  return isok_;
+}
+ void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.isok)
+}
+
+// optional int64 role_id = 2;
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+ void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+}
+
+// repeated .protos.pb_data_module table_list = 3;
+int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+const ::protos::pb_data_module& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Get(index);
+}
+::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return &table_list_;
+}
+const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::~req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  SharedDtor();
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_;
+}
+
+const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_ = NULL;
+
+req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::New(::google::protobuf::Arena* arena) const {
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* n = new req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0 ||
+        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return false;
+#undef DO_
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  // @@protoc_insertion_point(serialize_end:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+::google::protobuf::uint8* req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return target;
+}
+
+int req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  int total_size = 0;
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::Swap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other) {
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_;
+  metadata.reflection = req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::kIsokFieldNumber;
+const int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::kTableListFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::~rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  SharedDtor();
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_;
+}
+
+const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5fframe_2eproto();
+  return *default_instance_;
+}
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::default_instance_ = NULL;
+
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::New(::google::protobuf::Arena* arena) const {
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* n = new rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  isok_ = 0;
+  table_list_.Clear();
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_table_list;
+        break;
+      }
+
+      // repeated .protos.pb_data_module table_list = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_table_list:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_table_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_table_list()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_table_list;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return false;
+#undef DO_
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->table_list(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+}
+
+::google::protobuf::uint8* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  for (unsigned int i = 0, n = this->table_list_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, this->table_list(i), false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  return target;
+}
+
+int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // repeated .protos.pb_data_module table_list = 2;
+  total_size += 1 * this->table_list_size();
+  for (int i = 0; i < this->table_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->table_list(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  table_list_.MergeFrom(from.table_list_);
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::Swap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other) {
+  std::swap(isok_, other->isok_);
+  table_list_.UnsafeArenaSwap(&other->table_list_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_descriptor_;
+  metadata.reflection = rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+
+// optional int32 isok = 1;
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.isok)
+  return isok_;
+}
+ void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.isok)
+}
+
+// repeated .protos.pb_data_module table_list = 2;
+int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+const ::protos::pb_data_module& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Get(index);
+}
+::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return &table_list_;
+}
+const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

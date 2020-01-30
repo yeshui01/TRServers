@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='protcl_login.proto',
   package='protos',
   syntax='proto3',
-  serialized_pb=_b('\n\x12protcl_login.proto\x12\x06protos\"4\n\x0frole_snapshot_t\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"B\n\rrole_create_t\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x63\x63_id\x18\x03 \x01(\x03\"J\n$req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\"l\n$rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x02 \x01(\t\x12\x0c\n\x04pswd\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\x03\"d\n\x19req_E_LOGIN_MSG_C2S_LOGIN\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\x12\x0f\n\x07zone_id\x18\x04 \x01(\x05\"U\n\x19rep_E_LOGIN_MSG_C2S_LOGIN\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12*\n\trole_list\x18\x02 \x03(\x0b\x32\x17.protos.role_snapshot_t\"h\n\x1dreq_E_LOGIN_MSG_GG2ROOT_LOGIN\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\x12\x0f\n\x07zone_id\x18\x04 \x01(\x05\"Y\n\x1drep_E_LOGIN_MSG_GG2ROOT_LOGIN\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12*\n\trole_list\x18\x02 \x03(\x0b\x32\x17.protos.role_snapshot_t\"_\n%req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\"5\n%rep_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK\x12\x0c\n\x04isok\x18\x01 \x01(\x05\"3\n\x1freq_E_LOGIN_MSG_C2S_CREATE_ROLE\x12\x10\n\x08nickname\x18\x01 \x01(\t\"Z\n\x1frep_E_LOGIN_MSG_C2S_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_t\"G\n#req_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"^\n#rep_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_t\"J\n&req_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"i\n&rep_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x63\x63_id\x18\x03 \x01(\x03\x12\x0f\n\x07role_id\x18\x04 \x01(\x03\"Z\n%req_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0f\n\x07role_id\x18\x03 \x01(\x03\"5\n%rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\"[\n&req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x0e\n\x06\x61\x63\x63_id\x18\x02 \x01(\x03\x12\x10\n\x08nickname\x18\x03 \x01(\t\"a\n&rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_tb\x06proto3')
+  serialized_pb=_b('\n\x12protcl_login.proto\x12\x06protos\"4\n\x0frole_snapshot_t\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"D\n\x0erole_game_data\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0f\n\x07zone_id\x18\x03 \x01(\x05\"J\n$req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\"l\n$rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x02 \x01(\t\x12\x0c\n\x04pswd\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\x03\"d\n\x19req_E_LOGIN_MSG_C2S_LOGIN\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\x12\x0f\n\x07zone_id\x18\x04 \x01(\x05\"U\n\x19rep_E_LOGIN_MSG_C2S_LOGIN\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12*\n\trole_list\x18\x02 \x03(\x0b\x32\x17.protos.role_snapshot_t\"h\n\x1dreq_E_LOGIN_MSG_GG2ROOT_LOGIN\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\x12\x0f\n\x07zone_id\x18\x04 \x01(\x05\"Y\n\x1drep_E_LOGIN_MSG_GG2ROOT_LOGIN\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12*\n\trole_list\x18\x02 \x03(\x0b\x32\x17.protos.role_snapshot_t\"_\n%req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x0c\n\x04pswd\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\x03\"5\n%rep_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK\x12\x0c\n\x04isok\x18\x01 \x01(\x05\"3\n\x1freq_E_LOGIN_MSG_C2S_CREATE_ROLE\x12\x10\n\x08nickname\x18\x01 \x01(\t\"Z\n\x1frep_E_LOGIN_MSG_C2S_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_t\"G\n#req_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"^\n#rep_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_t\"J\n&req_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\"i\n&rep_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x63\x63_id\x18\x03 \x01(\x03\x12\x0f\n\x07role_id\x18\x04 \x01(\x03\"Z\n%req_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x0f\n\x07role_id\x18\x03 \x01(\x03\"5\n%rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\"[\n&req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\x12\x0e\n\x06\x61\x63\x63_id\x18\x02 \x01(\x03\x12\x10\n\x08nickname\x18\x03 \x01(\t\"a\n&rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\x08snapshot\x18\x02 \x01(\x0b\x32\x17.protos.role_snapshot_t\"?\n-req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT\x12\x0e\n\x06\x61\x63\x63_id\x18\x01 \x01(\x03\"i\n-rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12*\n\trole_list\x18\x02 \x03(\x0b\x32\x17.protos.role_snapshot_t\"1\n\x1ereq_E_LOGIN_MSG_C2S_ENTER_GAME\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\"Y\n\x1erep_E_LOGIN_MSG_C2S_ENTER_GAME\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\tgame_data\x18\x02 \x01(\x0b\x32\x16.protos.role_game_data\"7\n$req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\"_\n$rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12)\n\tgame_data\x18\x02 \x01(\x0b\x32\x16.protos.role_game_data\"9\n&req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\"K\n&rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x12\x13\n\x0blogic_index\x18\x02 \x01(\x05\"8\n%req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME\x12\x0f\n\x07role_id\x18\x01 \x01(\x03\"5\n%rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME\x12\x0c\n\x04isok\x18\x01 \x01(\x05\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -64,30 +64,30 @@ _ROLE_SNAPSHOT_T = _descriptor.Descriptor(
 )
 
 
-_ROLE_CREATE_T = _descriptor.Descriptor(
-  name='role_create_t',
-  full_name='protos.role_create_t',
+_ROLE_GAME_DATA = _descriptor.Descriptor(
+  name='role_game_data',
+  full_name='protos.role_game_data',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='role_id', full_name='protos.role_create_t.role_id', index=0,
+      name='role_id', full_name='protos.role_game_data.role_id', index=0,
       number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='nickname', full_name='protos.role_create_t.nickname', index=1,
+      name='nickname', full_name='protos.role_game_data.nickname', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='acc_id', full_name='protos.role_create_t.acc_id', index=2,
-      number=3, type=3, cpp_type=2, label=1,
+      name='zone_id', full_name='protos.role_game_data.zone_id', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -105,7 +105,7 @@ _ROLE_CREATE_T = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=84,
-  serialized_end=150,
+  serialized_end=152,
 )
 
 
@@ -142,8 +142,8 @@ _REQ_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=152,
-  serialized_end=226,
+  serialized_start=154,
+  serialized_end=228,
 )
 
 
@@ -194,8 +194,8 @@ _REP_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=228,
-  serialized_end=336,
+  serialized_start=230,
+  serialized_end=338,
 )
 
 
@@ -246,8 +246,8 @@ _REQ_E_LOGIN_MSG_C2S_LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=338,
-  serialized_end=438,
+  serialized_start=340,
+  serialized_end=440,
 )
 
 
@@ -284,8 +284,8 @@ _REP_E_LOGIN_MSG_C2S_LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=440,
-  serialized_end=525,
+  serialized_start=442,
+  serialized_end=527,
 )
 
 
@@ -336,8 +336,8 @@ _REQ_E_LOGIN_MSG_GG2ROOT_LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=527,
-  serialized_end=631,
+  serialized_start=529,
+  serialized_end=633,
 )
 
 
@@ -374,8 +374,8 @@ _REP_E_LOGIN_MSG_GG2ROOT_LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=633,
-  serialized_end=722,
+  serialized_start=635,
+  serialized_end=724,
 )
 
 
@@ -419,8 +419,8 @@ _REQ_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=724,
-  serialized_end=819,
+  serialized_start=726,
+  serialized_end=821,
 )
 
 
@@ -450,8 +450,8 @@ _REP_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=821,
-  serialized_end=874,
+  serialized_start=823,
+  serialized_end=876,
 )
 
 
@@ -481,8 +481,8 @@ _REQ_E_LOGIN_MSG_C2S_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=876,
-  serialized_end=927,
+  serialized_start=878,
+  serialized_end=929,
 )
 
 
@@ -519,8 +519,8 @@ _REP_E_LOGIN_MSG_C2S_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=929,
-  serialized_end=1019,
+  serialized_start=931,
+  serialized_end=1021,
 )
 
 
@@ -557,8 +557,8 @@ _REQ_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1021,
-  serialized_end=1092,
+  serialized_start=1023,
+  serialized_end=1094,
 )
 
 
@@ -595,8 +595,8 @@ _REP_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1094,
-  serialized_end=1188,
+  serialized_start=1096,
+  serialized_end=1190,
 )
 
 
@@ -633,8 +633,8 @@ _REQ_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1190,
-  serialized_end=1264,
+  serialized_start=1192,
+  serialized_end=1266,
 )
 
 
@@ -685,8 +685,8 @@ _REP_E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1266,
-  serialized_end=1371,
+  serialized_start=1268,
+  serialized_end=1373,
 )
 
 
@@ -730,8 +730,8 @@ _REQ_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1373,
-  serialized_end=1463,
+  serialized_start=1375,
+  serialized_end=1465,
 )
 
 
@@ -761,8 +761,8 @@ _REP_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1465,
-  serialized_end=1518,
+  serialized_start=1467,
+  serialized_end=1520,
 )
 
 
@@ -806,8 +806,8 @@ _REQ_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1520,
-  serialized_end=1611,
+  serialized_start=1522,
+  serialized_end=1613,
 )
 
 
@@ -844,8 +844,346 @@ _REP_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1613,
-  serialized_end=1710,
+  serialized_start=1615,
+  serialized_end=1712,
+)
+
+
+_REQ_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT = _descriptor.Descriptor(
+  name='req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT',
+  full_name='protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='acc_id', full_name='protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.acc_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1714,
+  serialized_end=1777,
+)
+
+
+_REP_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT = _descriptor.Descriptor(
+  name='rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT',
+  full_name='protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isok', full_name='protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.isok', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='role_list', full_name='protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1779,
+  serialized_end=1884,
+)
+
+
+_REQ_E_LOGIN_MSG_C2S_ENTER_GAME = _descriptor.Descriptor(
+  name='req_E_LOGIN_MSG_C2S_ENTER_GAME',
+  full_name='protos.req_E_LOGIN_MSG_C2S_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='role_id', full_name='protos.req_E_LOGIN_MSG_C2S_ENTER_GAME.role_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1886,
+  serialized_end=1935,
+)
+
+
+_REP_E_LOGIN_MSG_C2S_ENTER_GAME = _descriptor.Descriptor(
+  name='rep_E_LOGIN_MSG_C2S_ENTER_GAME',
+  full_name='protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isok', full_name='protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.isok', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='game_data', full_name='protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.game_data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1937,
+  serialized_end=2026,
+)
+
+
+_REQ_E_LOGIN_MSG_GG2CENTER_ENTER_GAME = _descriptor.Descriptor(
+  name='req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME',
+  full_name='protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='role_id', full_name='protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.role_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2028,
+  serialized_end=2083,
+)
+
+
+_REP_E_LOGIN_MSG_GG2CENTER_ENTER_GAME = _descriptor.Descriptor(
+  name='rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME',
+  full_name='protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isok', full_name='protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.isok', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='game_data', full_name='protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2085,
+  serialized_end=2180,
+)
+
+
+_REQ_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME = _descriptor.Descriptor(
+  name='req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME',
+  full_name='protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='role_id', full_name='protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.role_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2182,
+  serialized_end=2239,
+)
+
+
+_REP_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME = _descriptor.Descriptor(
+  name='rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME',
+  full_name='protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isok', full_name='protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.isok', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='logic_index', full_name='protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.logic_index', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2241,
+  serialized_end=2316,
+)
+
+
+_REQ_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME = _descriptor.Descriptor(
+  name='req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME',
+  full_name='protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='role_id', full_name='protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.role_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2318,
+  serialized_end=2374,
+)
+
+
+_REP_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME = _descriptor.Descriptor(
+  name='rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME',
+  full_name='protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isok', full_name='protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.isok', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2376,
+  serialized_end=2429,
 )
 
 _REP_E_LOGIN_MSG_C2S_LOGIN.fields_by_name['role_list'].message_type = _ROLE_SNAPSHOT_T
@@ -853,8 +1191,11 @@ _REP_E_LOGIN_MSG_GG2ROOT_LOGIN.fields_by_name['role_list'].message_type = _ROLE_
 _REP_E_LOGIN_MSG_C2S_CREATE_ROLE.fields_by_name['snapshot'].message_type = _ROLE_SNAPSHOT_T
 _REP_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE.fields_by_name['snapshot'].message_type = _ROLE_SNAPSHOT_T
 _REP_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE.fields_by_name['snapshot'].message_type = _ROLE_SNAPSHOT_T
+_REP_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.fields_by_name['role_list'].message_type = _ROLE_SNAPSHOT_T
+_REP_E_LOGIN_MSG_C2S_ENTER_GAME.fields_by_name['game_data'].message_type = _ROLE_GAME_DATA
+_REP_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.fields_by_name['game_data'].message_type = _ROLE_GAME_DATA
 DESCRIPTOR.message_types_by_name['role_snapshot_t'] = _ROLE_SNAPSHOT_T
-DESCRIPTOR.message_types_by_name['role_create_t'] = _ROLE_CREATE_T
+DESCRIPTOR.message_types_by_name['role_game_data'] = _ROLE_GAME_DATA
 DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT'] = _REQ_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
 DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT'] = _REP_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
 DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_C2S_LOGIN'] = _REQ_E_LOGIN_MSG_C2S_LOGIN
@@ -873,6 +1214,16 @@ DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE'] = _REQ
 DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE'] = _REP_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE
 DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE'] = _REQ_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE
 DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE'] = _REP_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE
+DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT'] = _REQ_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT'] = _REP_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_C2S_ENTER_GAME'] = _REQ_E_LOGIN_MSG_C2S_ENTER_GAME
+DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_C2S_ENTER_GAME'] = _REP_E_LOGIN_MSG_C2S_ENTER_GAME
+DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME'] = _REQ_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME'] = _REP_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME'] = _REQ_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME'] = _REP_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+DESCRIPTOR.message_types_by_name['req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME'] = _REQ_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
+DESCRIPTOR.message_types_by_name['rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME'] = _REP_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
 
 role_snapshot_t = _reflection.GeneratedProtocolMessageType('role_snapshot_t', (_message.Message,), dict(
   DESCRIPTOR = _ROLE_SNAPSHOT_T,
@@ -881,12 +1232,12 @@ role_snapshot_t = _reflection.GeneratedProtocolMessageType('role_snapshot_t', (_
   ))
 _sym_db.RegisterMessage(role_snapshot_t)
 
-role_create_t = _reflection.GeneratedProtocolMessageType('role_create_t', (_message.Message,), dict(
-  DESCRIPTOR = _ROLE_CREATE_T,
+role_game_data = _reflection.GeneratedProtocolMessageType('role_game_data', (_message.Message,), dict(
+  DESCRIPTOR = _ROLE_GAME_DATA,
   __module__ = 'protcl_login_pb2'
-  # @@protoc_insertion_point(class_scope:protos.role_create_t)
+  # @@protoc_insertion_point(class_scope:protos.role_game_data)
   ))
-_sym_db.RegisterMessage(role_create_t)
+_sym_db.RegisterMessage(role_game_data)
 
 req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT', (_message.Message,), dict(
   DESCRIPTOR = _REQ_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT,
@@ -1013,6 +1364,76 @@ rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE = _reflection.GeneratedProtocolMessageTyp
   # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE)
   ))
 _sym_db.RegisterMessage(rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE)
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  ))
+_sym_db.RegisterMessage(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT = _reflection.GeneratedProtocolMessageType('rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT', (_message.Message,), dict(
+  DESCRIPTOR = _REP_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  ))
+_sym_db.RegisterMessage(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_C2S_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_E_LOGIN_MSG_C2S_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(req_E_LOGIN_MSG_C2S_ENTER_GAME)
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME = _reflection.GeneratedProtocolMessageType('rep_E_LOGIN_MSG_C2S_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REP_E_LOGIN_MSG_C2S_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_E_LOGIN_MSG_GG2CENTER_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME = _reflection.GeneratedProtocolMessageType('rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REP_E_LOGIN_MSG_GG2CENTER_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME = _reflection.GeneratedProtocolMessageType('rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REP_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME = _reflection.GeneratedProtocolMessageType('req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME = _reflection.GeneratedProtocolMessageType('rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME', (_message.Message,), dict(
+  DESCRIPTOR = _REP_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME,
+  __module__ = 'protcl_login_pb2'
+  # @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  ))
+_sym_db.RegisterMessage(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
 
 
 # @@protoc_insertion_point(module_scope)

@@ -23,6 +23,10 @@ enum class EFrameMsgType : int32_t
     E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE      = 8,  // 更新客户端网络节点
     E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE              = 9,  // gg->root客户端下线
     E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE              = 10, // root->xs 通知其他服务器客户端下线
+    E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES       = 11, // 保存玩家数据
+    E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES       = 12, // 保存全局数据
+    E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES       = 13, // 加载玩家数据表
+    E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES       = 14, // 加载全局数据表
 };
 
 #define INT_FRAMEMSG(msg_type) int32_t(EFrameMsgType::msg_type)

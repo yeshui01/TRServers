@@ -14,6 +14,7 @@
 #include "protocol_frame.h"
 #include "tr_log/log_module.h"
 #include "logic_frame_handle.h"
+#include "logic_login_handle.h"
 void LogicServer::RegisterMsgHandle()
 {
     AddLoopRun([](time_t cur_mtime)
@@ -22,7 +23,7 @@ void LogicServer::RegisterMsgHandle()
 	});
     
     g_MsgDispatcher.RegisterMsgHandlerEx<LogicFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
+    g_MsgDispatcher.RegisterMsgHandlerEx<LogicLoginHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_LOGIN));
 
     TINFO("logic server register msg handlers");
 }

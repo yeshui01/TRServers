@@ -39,6 +39,7 @@ std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServe
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT}},
         }
     },
     {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, 

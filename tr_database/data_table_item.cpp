@@ -76,6 +76,7 @@ bool DataTableItem::SetFieldBoolValue(int8_t field_index, bool val)
         return false;
     }
     field_ptr->field_val.val_bool = val;
+    field_ptr->val_changed = true;
     return true;
 }
 
@@ -87,6 +88,7 @@ bool DataTableItem::SetFieldSmallIntValue(int8_t field_index, int16_t val)
         return false;
     }
     field_ptr->field_val.val_smint = val;
+    field_ptr->val_changed = true;
     return true;
 }
 
@@ -98,6 +100,7 @@ bool DataTableItem::SetFieldIntValue(int8_t field_index, int32_t val)
         return false;
     }
     field_ptr->field_val.val_int = val;
+    field_ptr->val_changed = true;
     return true;
 }
 
@@ -109,6 +112,7 @@ bool DataTableItem::SetFieldBigIntValue(int8_t field_index, int64_t val)
         return false;
     }
     field_ptr->field_val.val_bigint = val;
+    field_ptr->val_changed = true;
     return true;
 }
 
@@ -120,6 +124,7 @@ bool DataTableItem::SetFieldFloatValue(int8_t field_index, float val)
         return false;
     }
     field_ptr->field_val.val_f = val;
+    field_ptr->val_changed = true;
     return true;
 }
 
@@ -140,6 +145,7 @@ bool DataTableItem::SetFieldStringValue(int8_t field_index, const char* str, int
     {
         field_ptr->field_val.val_str = new std::string(str, len);
     }
+    field_ptr->val_changed = true;
     return true;
 }
 bool DataTableItem::SetFieldStringValue(int8_t field_index, const std::string & str)
@@ -157,6 +163,7 @@ bool DataTableItem::SetFieldStringValue(int8_t field_index, const std::string & 
     {
         field_ptr->field_val.val_str = new std::string(str);
     }
+    field_ptr->val_changed = true;
     return true;
 }
 const DataField * DataTableItem::GetField(int32_t field_index)
@@ -332,4 +339,38 @@ size_t DataTableItem::GetFieldsSize()
 size_t DataTableItem::GetFieldsSize() const
 {
     return fields_.size();
+}
+
+void DataTableItem::SetDbStatus(EDbStatus db_status)
+{
+    if (E_DB_STATUS_NONE == db_status_)
+    {
+        db_status_ = db_status;
+    }
+    else if (E_DB_STATUS_INSERT == db_status_)
+    {
+        ;
+    }
+    else if (E_DB_STATUS_DELETE == db_status_)
+    {
+        ;
+    }
+    else if (E_DB_STATUS_UPDATE == db_status_)
+    {
+        db_status_ = db_status;
+    }
+}
+
+void DataTableItem::ClearDbStatus()
+{
+    db_status_ = E_DB_STATUS_NONE;
+    for (auto & v : fields_)
+    {
+        v.val_changed = false;
+    }
+}
+
+void DataTableItem::SwapFields(DataTableItem & tb_item)
+{
+    fields_.swap(tb_item.fields_);
 }

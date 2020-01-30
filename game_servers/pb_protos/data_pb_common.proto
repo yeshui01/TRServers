@@ -1,5 +1,5 @@
 syntax = "proto3";
-package db_protos;
+package protos;
 
 // 数据字段
 message pb_table_field
@@ -11,6 +11,7 @@ message pb_table_field
 	int64 val_bigint = 5;
 	string val_str = 6;
 	bool val_bool = 7;
+	bool primary = 8;
 }
 
 // 数据项

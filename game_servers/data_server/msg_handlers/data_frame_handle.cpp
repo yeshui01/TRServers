@@ -10,11 +10,16 @@
 #include "protocol_class.h"
 #include "protocol_frame.h"
 #include "protcl_frame.pb.h"
+#include "protocol_error_code.h"
 #include "server_common/server_define.h"
 #include "tr_log/log_module.h"
 #include "server_common/server_info_manager.h"
 #include "server_common/server_session.h"
 #include "data_server/data_server.h"
+#include "data_server/data_global.h"
+#include "data_server/data_player.h"
+#include "data_server/data_table_service.h"
+
 DataFrameHandler::DataFrameHandler()
 {
 
@@ -29,6 +34,7 @@ void DataFrameHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), DataFrameHandler, OnRegisterServerInfo);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), DataFrameHandler, OnRecvRootStartCmd);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES), DataFrameHandler, OnSaveDataPlayer);
 }
 
 EMsgHandleResult DataFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
@@ -66,3 +72,20 @@ EMsgHandleResult DataFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, c
     }
     RETURN_NO_HANDLE;
 }
+
+TR_BEGIN_HANDLE_MSG(DataFrameHandler, OnSaveDataPlayer, E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+{
+    int64_t role_id = req.role_id();
+    auto p = g_DataGlobal.GetDataPlayer(role_id);
+    if (!p)
+    {
+        TERROR("save dataplayer faile, not found data_player, role_id:" << role_id);
+        RETURN_NO_HANDLE
+    }
+    for (int32_t i = 0; i < req.table_list_size(); ++i)
+    {
+        g_DataTableService.UpdatePlayerTablesFromPbTables(p, req.mutable_table_list(i));
+    }
+    g_DataTableService.SaveDataPlayer(p);
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG

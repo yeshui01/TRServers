@@ -79,7 +79,7 @@ TRDataBase::TRDataBase()
 
 TRDataBase::~TRDataBase()
 {
-    WaitWokers();
+    WaitWorkers();
     for (auto it = db_event_queue_.begin(); it != db_event_queue_.end(); ++it)
     {
         SAFE_DELETE_PTR(*it);
@@ -111,6 +111,8 @@ bool TRDataBase::Init(std::string host, std::string user_name, std::string pwd, 
         }
         db_conn->setSchema(db_name_);
         conns_.push_back(std::shared_ptr<sql::Connection>(db_conn));
+        std::shared_ptr<TRDBPrepareStmtMgr> prestmt_mgr(new TRDBPrepareStmtMgr());
+        conn_prestmt_mgrs_.push_back(prestmt_mgr);
     }
     // if (worker_size > 0)
     // {
@@ -126,6 +128,16 @@ sql::Connection * TRDataBase::HoldConnect(int32_t index)
     }
     return nullptr;
 }
+
+TRDBPrepareStmtMgr *TRDataBase::HoldPreStmtMgr(int32_t index)
+{
+    if (index >= 0 && index < int32_t(conn_prestmt_mgrs_.size()))
+    {
+        return conn_prestmt_mgrs_[index].get();
+    }
+    return nullptr;
+}
+
 void TRDataBase::WorkerReady(int32_t worker_id)
 {
     std::unique_lock<std::mutex> lck(worker_mutex_);
@@ -164,7 +176,12 @@ void TRDataBase::WorkerRun(int32_t worker_id)
                 if (db_task_pt->evnt_pt_)
                 {
                     db_task_pt->evnt_pt_->worker_id_ = worker_id;
-                    db_task_pt->evnt_pt_->AttatchConnect(conn_pt, &local_prestmt_mgr);
+                    auto prestmt_mgr = HoldPreStmtMgr(worker_id);
+                    if (prestmt_mgr)
+                    {
+                        db_task_pt->evnt_pt_->AttatchConnect(conn_pt, &local_prestmt_mgr);
+                    }
+                    
                     auto r = db_task_pt->evnt_pt_->Run(db_task_pt->cb_pt_->result_ptr);
 
                     db_task_pt->evnt_prom_.set_value(r);
@@ -245,7 +262,7 @@ void TRDataBase::StartWorkers()
 
 }
 
-void TRDataBase::WaitWokers()
+void TRDataBase::WaitWorkers()
 {
     for (auto && w : workers_)
     {
@@ -256,7 +273,7 @@ void TRDataBase::StopWorkers()
 {
     worker_stop_ = true;
     evt_queue_con_var_.notify_all();
-    WaitWokers();
+    WaitWorkers();
     workers_.clear();
 }
 sql::Connection *TRDataBase::HoldMainConnect()
@@ -269,9 +286,17 @@ void TRDataBase::Query(const std::string & sql_str, std::vector<DataTableItem> &
     auto conn = HoldMainConnect();
     if (!conn)
         return;
-    std::shared_ptr<sql::Statement> stmt(conn->createStatement());
-    std::shared_ptr<sql::ResultSet> result(stmt->executeQuery(sql_str));
-    ResultSetConvt(result.get(), v_local_set);
+    
+    try
+    {
+        std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+        std::shared_ptr<sql::ResultSet> result(stmt->executeQuery(sql_str));
+        ResultSetConvt(result.get(), v_local_set);
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+    }
 }
 
 bool TRDataBase::Execute(const std::string & sql_str)
@@ -280,8 +305,17 @@ bool TRDataBase::Execute(const std::string & sql_str)
     if (!conn)
         return false;
     
-    std::shared_ptr<sql::Statement> stmt(conn->createStatement());
-    return stmt->execute(sql_str);
+    try
+    {
+        std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+        return stmt->execute(sql_str);
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        return false;
+    }
+    return false;
 }
 
 int32_t TRDataBase::ExecuteUpdate(const std::string & sql_str)
@@ -289,9 +323,17 @@ int32_t TRDataBase::ExecuteUpdate(const std::string & sql_str)
     auto conn = HoldMainConnect();
     if (!conn)
         return 0;
-    
-    std::shared_ptr<sql::Statement> stmt(conn->createStatement());
-    return stmt->executeUpdate(sql_str);
+        
+    try
+    {
+        std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+        return stmt->executeUpdate(sql_str);
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        return e.getErrorCode();
+    }
 }
 
 
@@ -365,6 +407,34 @@ void TRDataBase::ResultSetConvt(sql::ResultSet *meta_result, std::vector<DataTab
         }
     }
 }
+
+// 设置所有连接使用utf8字符集
+void TRDataBase::SetConnsUtf8Char()
+{
+    for (auto & conn : conns_)
+    {
+        std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+        stmt->execute("set NAMES 'utf8'");
+    }
+}
+
+// 初始安装预处理语句
+void TRDataBase::InstallPreStmts(std::function<void (sql::Connection *, TRDBPrepareStmtMgr *) > && install_func)
+{
+    for (size_t i = 0; i < conns_.size() && i < conn_prestmt_mgrs_.size(); ++i)
+    {
+        install_func(conns_[i].get(), conn_prestmt_mgrs_[i].get());
+    }
+}
+
+sql::PreparedStatement *TRDataBase::HoldMainPreStmt(int32_t stmt_id)
+{
+    if (conn_prestmt_mgrs_.empty())
+    {
+        return nullptr;
+    }
+    return conn_prestmt_mgrs_[0]->HoldStatement(stmt_id);
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 TRDataBaseHelper::TRDataBaseHelper()
 {
@@ -398,5 +468,13 @@ void TRDataBaseHelper::Stop()
     for (auto it = databases_.begin(); it != databases_.end(); ++it)
     {
         it->second->StopWorkers();
+    }
+}
+
+void TRDataBaseHelper::FrameUpdate()
+{
+    for (auto it = databases_.begin(); it != databases_.end(); ++it)
+    {
+        it->second->EventRun();
     }
 }

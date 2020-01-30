@@ -33,7 +33,6 @@ public:
     DataField(const DataField &rfield);
     ~DataField();
     void InitValue();
-// TODO:后面有空改成protected
 public:
     EFieldValueType val_type;
     union FieldValue
@@ -111,6 +110,10 @@ public:
     int32_t TableId() const;
     size_t GetFieldsSize();
     size_t GetFieldsSize() const;
+    void SetDbStatus(EDbStatus db_status);
+    void ClearDbStatus();
+    // 交换字段
+    void SwapFields(DataTableItem & tb_item);
 public:
     // 获取字段数据
     const DataField * GetField(int32_t field_index);
@@ -217,6 +220,7 @@ public:
 
     TbItemType & HoldData()
     {
+        table_item_.SetDbStatus(E_DB_STATUS_UPDATE);
         return table_item_;
     }
     const TbItemType & GetData()

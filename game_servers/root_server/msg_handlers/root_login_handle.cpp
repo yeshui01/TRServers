@@ -16,12 +16,10 @@
 #include "tr_log/log_module.h"
 #include "server_common/server_info_manager.h"
 #include "server_common/server_session.h"
-#include "gate_server/gate_server.h"
 #include "server_common/game_msg_helper.h"
 #include "server_common/server_config.h"
 #include "protocol_error_code.h"
 #include "server_common/client_net_node.h"
-#include "gate_server/gate_server.h"
 
 RootLoginHandler::RootLoginHandler()
 {
@@ -57,13 +55,13 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
         TERROR("cant login from user status = " << static_cast<int32_t>(cur_usr_satus) << ", user_id:" << req.account_id());
         SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_LOGINGED, rep);
     }
-    g_ClientNetNodeMgr.UpdateUserStatus(req.account_id(), EUserStatus::E_CIENT_USER_STATUS_LOGIN_ING);
+    g_ClientNetNodeMgr.UpdateUserStatus(req.account_id(), EUserStatus::E_CLIENT_USER_STATUS_LOGIN_ING);
     // 登录状态正常,校验一下密码
-    REQMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) login_req;
+    REQMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK) login_req;
     login_req.set_account_name(req.account_name());
     login_req.set_pswd(req.pswd());
     login_req.set_account_id(req.account_id());
-    login_req.set_zone_id(g_ServerConfig.GetZoneId());
+    // login_req.set_zone_id(g_ServerConfig.GetZoneId());
     TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK, login_req,accid{req.account_id()})
     {
         REPMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) ret;
@@ -71,7 +69,7 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
         if (cb_rep.isok() == INT_PROTOERR(E_PROTOCOL_ERR_CORRECT))
         {
             // 正常
-            g_ClientNetNodeMgr.UpdateUserStatus(accid, EUserStatus::E_CIENT_USER_STATUS_LOGINED);
+            g_ClientNetNodeMgr.UpdateUserStatus(accid, EUserStatus::E_CLIENT_USER_STATUS_LOGINED);
             // 设置gate节点
             ServerSession* session_pt = dynamic_cast<ServerSession*>(cb_param.session_pt);
             if (session_pt)
@@ -82,14 +80,32 @@ EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, co
             else
             {
                 TERROR("cast to server_session failed, may be loginc error");
+                ret.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_INNER_ERROR));
+                g_ClientNetNodeMgr.DeleteUser(accid);
+                // g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+                TINFO("rep async rep_E_LOGIN_MSG_GG2ROOT_LOGIN:" << ret.ShortDebugString());
+                return;
             }
         }
         else
         {
             g_ClientNetNodeMgr.DeleteUser(accid);
+            // g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+            TINFO("rep async rep_E_LOGIN_MSG_GG2ROOT_LOGIN:" << ret.ShortDebugString());
+            return;
         }
-        
-        g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+        // 获取角色列表
+        REQMSG(E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT) data_req;
+        data_req.set_acc_id(accid);
+        TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, data_req, data_rep,async_env(cb_param))
+        {
+            REPMSG(E_LOGIN_MSG_GG2ROOT_LOGIN) ret;
+            ret.set_isok(data_rep.isok());
+            ret.mutable_role_list()->CopyFrom(data_rep.role_list());
+            g_MsgHelper.SendAsyncRepMsg(ret, async_env);
+        }
+        TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_DATA, 0)
+        // g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
         TINFO("rep async rep_E_LOGIN_MSG_GG2ROOT_LOGIN:" << ret.ShortDebugString());
     }
     TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_LOGIN, 0)
@@ -101,7 +117,7 @@ TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREA
 {
     int64_t acc_id = req.acc_id();
     auto user_status = g_ClientNetNodeMgr.GetUserStatus(acc_id);
-    if (EUserStatus::E_CIENT_USER_STATUS_LOGINED != user_status)
+    if (EUserStatus::E_CLIENT_USER_STATUS_LOGINED != user_status)
     {
         SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_STATUS, rep);
     }
@@ -118,8 +134,14 @@ TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREA
             g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
             return;
         }
+        
         REQMSG(E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE) data_req;
-        TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE, data_req, data_rep, async_env{cb_param},acc_id)
+        data_req.set_role_id(cb_rep.role_id());
+        data_req.set_acc_id(cb_rep.acc_id());
+        data_req.set_nickname(cb_rep.nickname());
+        TINFO("data_req:" << data_req.ShortDebugString());
+        TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE, data_req, data_rep, \
+            async_env{cb_param},acc_id,role_id{cb_rep.role_id()}, nickname(cb_rep.nickname()))
         {
             if (data_rep.isok() != INT_PROTOERR(E_PROTOCOL_ERR_CORRECT))
             {
@@ -129,7 +151,22 @@ TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREA
                 g_MsgHelper.SendAsyncRepMsg(ret, async_env);
                 return;
             }
-            // TODO: to logic server init role data
+            // to logic server init role data
+            // 动态分配一个logic TODO:
+            int32_t logic_index = 0;
+            REQMSG(E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE) logic_req;
+            logic_req.set_role_id(role_id);
+            logic_req.set_acc_id(acc_id);
+            logic_req.set_nickname(nickname);
+            TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE, logic_req, logic_rep, async_env)
+            {
+                TINFO("create role finish");
+                REPMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE) ret;
+                ret.set_isok(logic_rep.isok());
+                ret.mutable_snapshot()->CopyFrom(logic_rep.snapshot());
+                g_MsgHelper.SendAsyncRepMsg(ret, async_env);
+            }
+            TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_LOGIC, logic_index)
         }
         TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_DATA, 0)
     }

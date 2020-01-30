@@ -28,6 +28,9 @@ public:
     EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt);
     // 等待其他服务器完成，开始运行
     EMsgHandleResult OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt);
+    // 
+    // 保存玩家数据
+    DECLARE_MSG_HANDLER_FUN(OnSaveDataPlayer);
 };
 
 #endif // __DATA_FRAME_MSG_HANDLE_H__

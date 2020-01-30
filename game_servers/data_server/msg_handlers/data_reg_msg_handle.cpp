@@ -14,6 +14,7 @@
 #include "protocol_frame.h"
 #include "tr_log/log_module.h"
 #include "data_frame_handle.h"
+#include "data_login_handle.h"
 void DataServer::RegisterMsgHandle()
 {
     AddLoopRun([](time_t cur_mtime)
@@ -22,7 +23,7 @@ void DataServer::RegisterMsgHandle()
 	});
     
     g_MsgDispatcher.RegisterMsgHandlerEx<DataFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
+    g_MsgDispatcher.RegisterMsgHandlerEx<DataLoginHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_LOGIN));
 
     TINFO("data server register msg handlers");
 }

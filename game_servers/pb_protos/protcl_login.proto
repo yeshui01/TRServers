@@ -10,6 +10,15 @@ message role_snapshot_t
     string nickname  = 2;   // 昵称
 }
 
+// 玩家游戏角色数据
+message role_game_data
+{
+	int64 role_id = 1;
+	string nickname = 2;
+	int32 zone_id = 3;
+}
+
+
 // E_LOGIN_MSG_C2S_REGISTER_ACCOUNT                    = 1,  // 注册账号
 message req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT
 {
@@ -46,7 +55,7 @@ message req_E_LOGIN_MSG_GG2ROOT_LOGIN
     string account_name = 1;    // 账号名字
     string pswd = 2;            // 密码
     int64 account_id = 3;       // 账号唯一id
-    int32 zone_id = 4;          // 区号id
+    int32 zone_id = 4;          // 区号id发
 }
 
 message rep_E_LOGIN_MSG_GG2ROOT_LOGIN
@@ -131,4 +140,62 @@ message rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE
 {
 	int32 isok = 1;
 	role_snapshot_t snapshot = 2;	// 角色快照
+}
+
+// E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT           = 10, // 获取玩家角色快照
+message req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+{
+	int64 acc_id = 1;	// 账号id
+}
+
+message rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+{
+	int32 isok = 1;
+	repeated role_snapshot_t role_list = 2; // 角色快照列表
+}
+
+// E_LOGIN_MSG_C2S_ENTER_GAME                          = 11,  // 客户端请求进入游戏
+message req_E_LOGIN_MSG_C2S_ENTER_GAME
+{
+	int64 role_id = 1;
+}
+
+message rep_E_LOGIN_MSG_C2S_ENTER_GAME
+{
+	int32 isok = 1;
+	role_game_data game_data = 2;
+}
+
+// E_LOGIN_MSG_GG2CENTER_ENTER_GAME                    = 101,   // gate->center 进入游戏
+message req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+{
+	int64 role_id = 1;
+}
+
+message rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+{
+	int32 isok = 1;
+	role_game_data game_data = 2;
+}
+
+// E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME                  = 102,   // center->root 玩家进入游戏
+message req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+{
+	int64 role_id = 1;
+}
+
+message rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+{
+	int32 isok = 1;
+	int32 logic_index = 2;	// logic_server的节点索引
+}
+
+// E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME                   = 103,   // root->logic 玩家进入游戏
+message req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
+{
+	int64 role_id = 1;
+}
+message rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
+{
+	int32 isok = 1;
 }

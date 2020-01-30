@@ -26,6 +26,9 @@ enum class EProtocolErrorCode : int32_t
     E_PROTOCOL_ERR_INVALID_SESSION = 11,    // 非法的连接
     E_PROTOCOL_ERR_ACCOUNT_UNLOGIN = 12,    // 账号未登录
     E_PROTOCOL_ERR_ACCOUNT_STATUS = 13,     // 账号状态异常
+    E_PROTOCOL_ERR_NICKNAME_EXISTED = 14,   // 角色名已存在
+    E_PROTOCOL_ERR_GAME_DB_NOT_FOUND = 15,  // 没有游戏服务器数据库
+    E_PROTOCOL_ERR_ACCOUNT_DB_NOT_FOUND = 16,  // 没有账号数据库
 };
 
 #define INT_PROTOERR(err_code) static_cast<int32_t>(EProtocolErrorCode::err_code)

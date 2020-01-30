@@ -27,7 +27,10 @@
 #include "server_common/server_session.h"
 #include "server_common/server_info_manager.h"
 #include <string>
-
+#include "logic_global.h"
+#include "tr_timer/server_time.h"
+#include "logic_timers.h"
+#include "global_timer.h"
 LogicServer::LogicServer(int32_t index):GameServer(index)
 {
     server_type_ = EServerType::E_SERVER_TYPE_LOGIC_SERVER;
@@ -45,6 +48,21 @@ bool LogicServer::Init()
     {
         return false;
     }
+    if (!g_LogicGlobal.Init())
+    {
+        TERROR("logic global init failed");
+        return false;
+    }
+    // 定时器初始化
+    g_GlobalTimer.Init(g_ServerTime.NowTimeMs(), 100, 100); // 一轮10秒
+    {
+        std::shared_ptr<LogicSecTimer> sec_timer(new LogicSecTimer(g_ServerTime.NowTimeMs() + 5000));
+        g_GlobalTimer.AddTimer(sec_timer);
+    }
+    AddLoopRun([](time_t cur_mtime)
+    {
+        g_LogicGlobal.FrameUpdate(cur_mtime);
+    });
     return true;
 }
 

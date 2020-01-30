@@ -29,6 +29,7 @@
 #include <google/protobuf/map.h>
 #include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "data_pb_common.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace protos {
@@ -49,6 +50,10 @@ class rep_E_FRAME_MSG_REGISTER_SERVER_INFO;
 class rep_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE;
 class rep_E_FRAME_MSG_ROOT_TO_XS_START_RUN;
 class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE;
+class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES;
+class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
+class rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES;
+class rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES;
 class rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS;
 class req_E_FRAME_MSG_FORWARD_MESSAGE;
 class req_E_FRAME_MSG_FORWARD_TEST_MESSAGE;
@@ -59,6 +64,10 @@ class req_E_FRAME_MSG_REGISTER_SERVER_INFO;
 class req_E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE;
 class req_E_FRAME_MSG_ROOT_TO_XS_START_RUN;
 class req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE;
+class req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES;
+class req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
+class req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES;
+class req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES;
 class req_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS;
 class server_info_t;
 
@@ -2124,6 +2133,707 @@ class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE : public ::google::protobuf::Messag
   void InitAsDefaultInstance();
   static rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES) */ {
+ public:
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+  virtual ~req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& operator=(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& default_instance();
+
+  void Swap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+  void MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 role_id = 1;
+  void clear_role_id();
+  static const int kRoleIdFieldNumber = 1;
+  ::google::protobuf::int64 role_id() const;
+  void set_role_id(::google::protobuf::int64 value);
+
+  // repeated .protos.pb_data_module table_list = 2;
+  int table_list_size() const;
+  void clear_table_list();
+  static const int kTableListFieldNumber = 2;
+  const ::protos::pb_data_module& table_list(int index) const;
+  ::protos::pb_data_module* mutable_table_list(int index);
+  ::protos::pb_data_module* add_table_list();
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+      mutable_table_list();
+  const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+      table_list() const;
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 role_id_;
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module > table_list_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES) */ {
+ public:
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+  virtual ~rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES();
+
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& operator=(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+  void MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES) */ {
+ public:
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+  virtual ~req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& operator=(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& default_instance();
+
+  void Swap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+  void MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .protos.pb_data_module table_list = 2;
+  int table_list_size() const;
+  void clear_table_list();
+  static const int kTableListFieldNumber = 2;
+  const ::protos::pb_data_module& table_list(int index) const;
+  ::protos::pb_data_module* mutable_table_list(int index);
+  ::protos::pb_data_module* add_table_list();
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+      mutable_table_list();
+  const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+      table_list() const;
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module > table_list_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES) */ {
+ public:
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+  virtual ~rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES();
+
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& operator=(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+  void MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES) */ {
+ public:
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+  virtual ~req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& operator=(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& default_instance();
+
+  void Swap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+  void MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 role_id = 1;
+  void clear_role_id();
+  static const int kRoleIdFieldNumber = 1;
+  ::google::protobuf::int64 role_id() const;
+  void set_role_id(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 role_id_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES) */ {
+ public:
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+  virtual ~rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES();
+
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& operator=(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+  void MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // optional int64 role_id = 2;
+  void clear_role_id();
+  static const int kRoleIdFieldNumber = 2;
+  ::google::protobuf::int64 role_id() const;
+  void set_role_id(::google::protobuf::int64 value);
+
+  // repeated .protos.pb_data_module table_list = 3;
+  int table_list_size() const;
+  void clear_table_list();
+  static const int kTableListFieldNumber = 3;
+  const ::protos::pb_data_module& table_list(int index) const;
+  ::protos::pb_data_module* mutable_table_list(int index);
+  ::protos::pb_data_module* add_table_list();
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+      mutable_table_list();
+  const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+      table_list() const;
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 role_id_;
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module > table_list_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES) */ {
+ public:
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
+  virtual ~req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
+
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& operator=(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& default_instance();
+
+  void Swap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* New() const { return New(NULL); }
+
+  req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+  void MergeFrom(const req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES) */ {
+ public:
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
+  virtual ~rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES();
+
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& operator=(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& default_instance();
+
+  void Swap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* New() const { return New(NULL); }
+
+  rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+  void MergeFrom(const rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // repeated .protos.pb_data_module table_list = 2;
+  int table_list_size() const;
+  void clear_table_list();
+  static const int kTableListFieldNumber = 2;
+  const ::protos::pb_data_module& table_list(int index) const;
+  ::protos::pb_data_module* mutable_table_list(int index);
+  ::protos::pb_data_module* add_table_list();
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+      mutable_table_list();
+  const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+      table_list() const;
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module > table_list_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
+  friend void protobuf_AssignDesc_protcl_5fframe_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5fframe_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES* default_instance_;
+};
 // ===================================================================
 
 
@@ -2950,7 +3660,273 @@ inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_reason(::google::protobu
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.reason)
 }
 
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+
+// optional int64 role_id = 1;
+inline void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+inline void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.role_id)
+}
+
+// repeated .protos.pb_data_module table_list = 2;
+inline int req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+inline void req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+inline const ::protos::pb_data_module& req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Get(index);
+}
+inline ::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+inline ::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return &table_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.table_list)
+  return table_list_;
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES.isok)
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+
+// repeated .protos.pb_data_module table_list = 2;
+inline int req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+inline void req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+inline const ::protos::pb_data_module& req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Get(index);
+}
+inline ::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+inline ::protos::pb_data_module* req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return &table_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.table_list)
+  return table_list_;
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES.isok)
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+
+// optional int64 role_id = 1;
+inline void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+inline void req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.isok)
+}
+
+// optional int64 role_id = 2;
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+  return role_id_;
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.role_id)
+}
+
+// repeated .protos.pb_data_module table_list = 3;
+inline int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+inline const ::protos::pb_data_module& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Get(index);
+}
+inline ::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+inline ::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return &table_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES.table_list)
+  return table_list_;
+}
+
+// -------------------------------------------------------------------
+
+// req_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+
+// -------------------------------------------------------------------
+
+// rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES
+
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.isok)
+}
+
+// repeated .protos.pb_data_module table_list = 2;
+inline int rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list_size() const {
+  return table_list_.size();
+}
+inline void rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::clear_table_list() {
+  table_list_.Clear();
+}
+inline const ::protos::pb_data_module& rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Get(index);
+}
+inline ::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::mutable_table_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Mutable(index);
+}
+inline ::protos::pb_data_module* rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::add_table_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >*
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::mutable_table_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return &table_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protos::pb_data_module >&
+rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES::table_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES.table_list)
+  return table_list_;
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

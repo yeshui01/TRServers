@@ -33,6 +33,7 @@ void LoginAccountHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_REGISTER_ACCOUNT), LoginAccountHandler, OnRegisnterAccount);
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_ROOT2LOGIN_ACCT_CHECK), LoginAccountHandler, OnAccountCheck);
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE), LoginAccountHandler, OnCreateRole);
 }
 
 // 注册账号
@@ -155,3 +156,60 @@ EMsgHandleResult LoginAccountHandler::OnAccountCheck(TConnection *session_pt, co
     }
     RETURN_REP_CONTENT(rep);
 }
+
+TR_BEGIN_HANDLE_MSG(LoginAccountHandler, OnCreateRole, E_LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE)
+{
+    int64_t acc_id = req.acc_id();
+    const std::string & nickname = req.nickname();
+    int32_t acc_db_id = DatabaseHash::GetAccountDbID(acc_id);
+    std::string acc_tb_name = DatabaseHash::AccountTbNameHashByAccId(acc_id);
+    std::string role_name_tb = DatabaseHash::RoleNameTbNameHashByNickname(nickname);
+    // 是否已经存在这个名字
+    auto database_pt = g_LoginGlobal.db_helper_.HoldDataBase(acc_db_id);
+    if (!database_pt)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_DB_NOT_FOUND, rep);
+    }
+    std::vector<DataTableItem> v_local_set;
+    std::stringstream ss_sql;
+    ss_sql << "select nickname from " << role_name_tb << " where nickname = '" << req.nickname() << "';";
+    TDEBUG("ss_sql:" << ss_sql.str());
+    database_pt->Query(ss_sql.str(), v_local_set);
+    if (v_local_set.size() > 0)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_NICKNAME_EXISTED, rep);
+    }
+    // 插入一条记录
+    ss_sql.str("");
+    ss_sql.clear();
+    ss_sql << "insert into " << role_name_tb << "(`nickname`)" << " values('" << nickname << "');";
+    TINFO("start insert new role info, ss_sql:" << ss_sql);
+    if (database_pt->ExecuteUpdate(ss_sql.str()) < 1)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PARAM_ERROR, rep);
+    }
+    else
+    {
+        v_local_set.clear();
+        ss_sql.str("");
+        ss_sql.clear();
+        ss_sql << "select * from " << role_name_tb << " where nickname = '" << nickname << "';";
+        database_pt->Query(ss_sql.str(), v_local_set);
+        TINFO("create role int table:" << role_name_tb << ", acc_id:" << acc_id << "nickname:" << nickname);
+        if (v_local_set.size() > 0)
+        {
+            int64_t role_id = v_local_set[0].GetFieldBigIntValue(0);
+            TDEBUG("create success, acc_id:" << acc_id);
+            rep.set_acc_id(acc_id);
+            rep.set_nickname(req.nickname());
+            rep.set_role_id(role_id);
+        }
+        else
+        {
+            SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PARAM_ERROR, rep);
+            TERROR("may be logic error");
+        }
+    }
+    
+}
+TR_END_HANDLE_MSG_AND_RETURN_MSG

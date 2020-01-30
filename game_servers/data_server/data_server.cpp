@@ -30,7 +30,7 @@
 #include "protocol_frame.h"
 #include "protcl_frame.pb.h"
 #include "server_common/game_msg_helper.h"
-
+#include "data_global.h"
 #include <string>
 
 DataServer::DataServer(int32_t index):GameServer(index)
@@ -50,6 +50,15 @@ bool DataServer::Init()
     {
         return false;
     }
+    if (!g_DataGlobal.Init())
+    {
+        TERROR("data global init failed");
+        return false;
+    }
+    AddLoopRun([](time_t cur_mtime)
+    {
+        g_DataGlobal.FrameUpdate(cur_mtime);
+    });
     return true;
 }
 

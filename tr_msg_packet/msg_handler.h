@@ -64,6 +64,7 @@ return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;
 #define RETURN_NO_HANDLE return EMsgHandleResult::E_MSG_HANDLE_NOT_RETURN;
 
 #define SET_ISOK_AND_RETURN_CONTENT(ISOK_CODE, rep_msg) rep_msg.set_isok(INT_PROTOERR(ISOK_CODE)); \
+TINFO("rep_msg:" << rep_msg.ShortDebugString());\
 RETURN_REP_CONTENT(rep_msg)
 
 // 声明消息处理的成员函数
@@ -81,16 +82,18 @@ RETURN_REP_CONTENT(rep_msg)
         TERROR("parse pbmsg failed");\
         rep.SerializeToString(&rep_content_);\
         return EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT;\
-        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_PB_PARSE_ERROR, rep);\
     } \
-	TINFO("req_" << #MSG_NAME << ":" << req.ShortDebugString());
+	TINFO("req_" << #MSG_NAME << ":" << req.ShortDebugString());\
+	rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_CORRECT));
+	
 
 // 结束消息处理,但是不用返回消息
 #define TR_END_HANDLE_MSG_NO_RETURN_MSG RETURN_NO_HANDLE \
 }
 
 // 结束消息处理,需要返回消息内容
-#define TR_END_HANDLE_MSG_AND_RETURN_MSG RETURN_REP_CONTENT(rep);\
+#define TR_END_HANDLE_MSG_AND_RETURN_MSG TINFO("rep_msg:" << rep.ShortDebugString());\
+ RETURN_REP_CONTENT(rep);\
 }
 
 #endif  // __MSG_HANDLER_H__

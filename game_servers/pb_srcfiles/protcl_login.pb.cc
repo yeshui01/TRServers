@@ -24,9 +24,9 @@ namespace {
 const ::google::protobuf::Descriptor* role_snapshot_t_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   role_snapshot_t_reflection_ = NULL;
-const ::google::protobuf::Descriptor* role_create_t_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* role_game_data_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  role_create_t_reflection_ = NULL;
+  role_game_data_reflection_ = NULL;
 const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_reflection_ = NULL;
@@ -81,6 +81,36 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_ = NULL;
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_ = NULL;
 
 }  // namespace
 
@@ -108,23 +138,23 @@ void protobuf_AssignDesc_protcl_5flogin_2eproto() {
       sizeof(role_snapshot_t),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_snapshot_t, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_snapshot_t, _is_default_instance_));
-  role_create_t_descriptor_ = file->message_type(1);
-  static const int role_create_t_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_create_t, role_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_create_t, nickname_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_create_t, acc_id_),
+  role_game_data_descriptor_ = file->message_type(1);
+  static const int role_game_data_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_game_data, role_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_game_data, nickname_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_game_data, zone_id_),
   };
-  role_create_t_reflection_ =
+  role_game_data_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      role_create_t_descriptor_,
-      role_create_t::default_instance_,
-      role_create_t_offsets_,
+      role_game_data_descriptor_,
+      role_game_data::default_instance_,
+      role_game_data_offsets_,
       -1,
       -1,
       -1,
-      sizeof(role_create_t),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_create_t, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_create_t, _is_default_instance_));
+      sizeof(role_game_data),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_game_data, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_game_data, _is_default_instance_));
   req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_descriptor_ = file->message_type(2);
   static const int req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT, account_name_),
@@ -421,6 +451,160 @@ void protobuf_AssignDesc_protcl_5flogin_2eproto() {
       sizeof(rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE, _is_default_instance_));
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_ = file->message_type(20);
+  static const int req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, acc_id_),
+  };
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_,
+      req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_,
+      req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, _is_default_instance_));
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_ = file->message_type(21);
+  static const int rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, role_list_),
+  };
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_,
+      rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_,
+      rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT, _is_default_instance_));
+  req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_ = file->message_type(22);
+  static const int req_E_LOGIN_MSG_C2S_ENTER_GAME_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_C2S_ENTER_GAME, role_id_),
+  };
+  req_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_,
+      req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_,
+      req_E_LOGIN_MSG_C2S_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_LOGIN_MSG_C2S_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_C2S_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_C2S_ENTER_GAME, _is_default_instance_));
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_ = file->message_type(23);
+  static const int rep_E_LOGIN_MSG_C2S_ENTER_GAME_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_C2S_ENTER_GAME, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_C2S_ENTER_GAME, game_data_),
+  };
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_,
+      rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_,
+      rep_E_LOGIN_MSG_C2S_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_LOGIN_MSG_C2S_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_C2S_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_C2S_ENTER_GAME, _is_default_instance_));
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_ = file->message_type(24);
+  static const int req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, role_id_),
+  };
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_,
+      req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_,
+      req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, _is_default_instance_));
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_ = file->message_type(25);
+  static const int rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, game_data_),
+  };
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_,
+      rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_,
+      rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME, _is_default_instance_));
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_ = file->message_type(26);
+  static const int req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, role_id_),
+  };
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_,
+      req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_,
+      req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, _is_default_instance_));
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_ = file->message_type(27);
+  static const int rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, logic_index_),
+  };
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_,
+      rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_,
+      rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, _is_default_instance_));
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_ = file->message_type(28);
+  static const int req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, role_id_),
+  };
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_,
+      req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_,
+      req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, _is_default_instance_));
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_ = file->message_type(29);
+  static const int rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, isok_),
+  };
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_,
+      rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_,
+      rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, _is_default_instance_));
 }
 
 namespace {
@@ -437,7 +621,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       role_snapshot_t_descriptor_, &role_snapshot_t::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      role_create_t_descriptor_, &role_create_t::default_instance());
+      role_game_data_descriptor_, &role_game_data::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_descriptor_, &req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -474,6 +658,26 @@ void protobuf_RegisterTypes(const ::std::string&) {
       req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_descriptor_, &req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_descriptor_, &rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_, &req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_, &rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_, &req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_, &rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_, &req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_, &rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_, &req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_, &rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_, &req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_, &rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance());
 }
 
 }  // namespace
@@ -481,8 +685,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_protcl_5flogin_2eproto() {
   delete role_snapshot_t::default_instance_;
   delete role_snapshot_t_reflection_;
-  delete role_create_t::default_instance_;
-  delete role_create_t_reflection_;
+  delete role_game_data::default_instance_;
+  delete role_game_data_reflection_;
   delete req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_;
   delete req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT_reflection_;
   delete rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_;
@@ -519,6 +723,26 @@ void protobuf_ShutdownFile_protcl_5flogin_2eproto() {
   delete req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_reflection_;
   delete rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance_;
   delete rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE_reflection_;
+  delete req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_;
+  delete req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_;
+  delete rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_;
+  delete rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_;
+  delete req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_;
+  delete req_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_;
+  delete rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_;
+  delete rep_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_;
+  delete req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_;
+  delete req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_;
+  delete rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_;
+  delete rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_;
+  delete req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_;
+  delete req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_;
+  delete rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_;
+  delete rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_;
+  delete req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_;
+  delete req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_;
+  delete rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_;
+  delete rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_;
 }
 
 void protobuf_AddDesc_protcl_5flogin_2eproto() GOOGLE_ATTRIBUTE_COLD;
@@ -531,51 +755,69 @@ void protobuf_AddDesc_protcl_5flogin_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\022protcl_login.proto\022\006protos\"4\n\017role_sna"
     "pshot_t\022\017\n\007role_id\030\001 \001(\003\022\020\n\010nickname\030\002 \001"
-    "(\t\"B\n\rrole_create_t\022\017\n\007role_id\030\001 \001(\003\022\020\n\010"
-    "nickname\030\002 \001(\t\022\016\n\006acc_id\030\003 \001(\003\"J\n$req_E_"
-    "LOGIN_MSG_C2S_REGISTER_ACCOUNT\022\024\n\014accoun"
-    "t_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001(\t\"l\n$rep_E_LOGI"
-    "N_MSG_C2S_REGISTER_ACCOUNT\022\014\n\004isok\030\001 \001(\005"
-    "\022\024\n\014account_name\030\002 \001(\t\022\014\n\004pswd\030\003 \001(\t\022\022\n\n"
-    "account_id\030\004 \001(\003\"d\n\031req_E_LOGIN_MSG_C2S_"
-    "LOGIN\022\024\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001("
-    "\t\022\022\n\naccount_id\030\003 \001(\003\022\017\n\007zone_id\030\004 \001(\005\"U"
-    "\n\031rep_E_LOGIN_MSG_C2S_LOGIN\022\014\n\004isok\030\001 \001("
-    "\005\022*\n\trole_list\030\002 \003(\0132\027.protos.role_snaps"
-    "hot_t\"h\n\035req_E_LOGIN_MSG_GG2ROOT_LOGIN\022\024"
-    "\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001(\t\022\022\n\nac"
-    "count_id\030\003 \001(\003\022\017\n\007zone_id\030\004 \001(\005\"Y\n\035rep_E"
-    "_LOGIN_MSG_GG2ROOT_LOGIN\022\014\n\004isok\030\001 \001(\005\022*"
-    "\n\trole_list\030\002 \003(\0132\027.protos.role_snapshot"
-    "_t\"_\n%req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_CH"
-    "ECK\022\024\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001(\t\022"
-    "\022\n\naccount_id\030\003 \001(\003\"5\n%rep_E_LOGIN_MSG_R"
-    "OOT2LOGIN_ACCT_CHECK\022\014\n\004isok\030\001 \001(\005\"3\n\037re"
-    "q_E_LOGIN_MSG_C2S_CREATE_ROLE\022\020\n\010nicknam"
-    "e\030\001 \001(\t\"Z\n\037rep_E_LOGIN_MSG_C2S_CREATE_RO"
-    "LE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapshot\030\002 \001(\0132\027.pro"
-    "tos.role_snapshot_t\"G\n#req_E_LOGIN_MSG_G"
-    "G2ROOT_CREATE_ROLE\022\016\n\006acc_id\030\001 \001(\003\022\020\n\010ni"
-    "ckname\030\002 \001(\t\"^\n#rep_E_LOGIN_MSG_GG2ROOT_"
-    "CREATE_ROLE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapshot\030\002 "
-    "\001(\0132\027.protos.role_snapshot_t\"J\n&req_E_LO"
-    "GIN_MSG_ROOT2LOGIN_CREATE_ROLE\022\016\n\006acc_id"
-    "\030\001 \001(\003\022\020\n\010nickname\030\002 \001(\t\"i\n&rep_E_LOGIN_"
-    "MSG_ROOT2LOGIN_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005"
-    "\022\020\n\010nickname\030\002 \001(\t\022\016\n\006acc_id\030\003 \001(\003\022\017\n\007ro"
-    "le_id\030\004 \001(\003\"Z\n%req_E_LOGIN_MSG_ROOT2DATA"
-    "_CREATE_ROLE\022\016\n\006acc_id\030\001 \001(\003\022\020\n\010nickname"
-    "\030\002 \001(\t\022\017\n\007role_id\030\003 \001(\003\"5\n%rep_E_LOGIN_M"
-    "SG_ROOT2DATA_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005\"["
-    "\n&req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE"
-    "\022\017\n\007role_id\030\001 \001(\003\022\016\n\006acc_id\030\002 \001(\003\022\020\n\010nic"
-    "kname\030\003 \001(\t\"a\n&rep_E_LOGIN_MSG_ROOT2LOGI"
-    "C_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapshot\030"
-    "\002 \001(\0132\027.protos.role_snapshot_tb\006proto3", 1718);
+    "(\t\"D\n\016role_game_data\022\017\n\007role_id\030\001 \001(\003\022\020\n"
+    "\010nickname\030\002 \001(\t\022\017\n\007zone_id\030\003 \001(\005\"J\n$req_"
+    "E_LOGIN_MSG_C2S_REGISTER_ACCOUNT\022\024\n\014acco"
+    "unt_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001(\t\"l\n$rep_E_LO"
+    "GIN_MSG_C2S_REGISTER_ACCOUNT\022\014\n\004isok\030\001 \001"
+    "(\005\022\024\n\014account_name\030\002 \001(\t\022\014\n\004pswd\030\003 \001(\t\022\022"
+    "\n\naccount_id\030\004 \001(\003\"d\n\031req_E_LOGIN_MSG_C2"
+    "S_LOGIN\022\024\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 "
+    "\001(\t\022\022\n\naccount_id\030\003 \001(\003\022\017\n\007zone_id\030\004 \001(\005"
+    "\"U\n\031rep_E_LOGIN_MSG_C2S_LOGIN\022\014\n\004isok\030\001 "
+    "\001(\005\022*\n\trole_list\030\002 \003(\0132\027.protos.role_sna"
+    "pshot_t\"h\n\035req_E_LOGIN_MSG_GG2ROOT_LOGIN"
+    "\022\024\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001(\t\022\022\n\n"
+    "account_id\030\003 \001(\003\022\017\n\007zone_id\030\004 \001(\005\"Y\n\035rep"
+    "_E_LOGIN_MSG_GG2ROOT_LOGIN\022\014\n\004isok\030\001 \001(\005"
+    "\022*\n\trole_list\030\002 \003(\0132\027.protos.role_snapsh"
+    "ot_t\"_\n%req_E_LOGIN_MSG_ROOT2LOGIN_ACCT_"
+    "CHECK\022\024\n\014account_name\030\001 \001(\t\022\014\n\004pswd\030\002 \001("
+    "\t\022\022\n\naccount_id\030\003 \001(\003\"5\n%rep_E_LOGIN_MSG"
+    "_ROOT2LOGIN_ACCT_CHECK\022\014\n\004isok\030\001 \001(\005\"3\n\037"
+    "req_E_LOGIN_MSG_C2S_CREATE_ROLE\022\020\n\010nickn"
+    "ame\030\001 \001(\t\"Z\n\037rep_E_LOGIN_MSG_C2S_CREATE_"
+    "ROLE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapshot\030\002 \001(\0132\027.p"
+    "rotos.role_snapshot_t\"G\n#req_E_LOGIN_MSG"
+    "_GG2ROOT_CREATE_ROLE\022\016\n\006acc_id\030\001 \001(\003\022\020\n\010"
+    "nickname\030\002 \001(\t\"^\n#rep_E_LOGIN_MSG_GG2ROO"
+    "T_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapshot\030"
+    "\002 \001(\0132\027.protos.role_snapshot_t\"J\n&req_E_"
+    "LOGIN_MSG_ROOT2LOGIN_CREATE_ROLE\022\016\n\006acc_"
+    "id\030\001 \001(\003\022\020\n\010nickname\030\002 \001(\t\"i\n&rep_E_LOGI"
+    "N_MSG_ROOT2LOGIN_CREATE_ROLE\022\014\n\004isok\030\001 \001"
+    "(\005\022\020\n\010nickname\030\002 \001(\t\022\016\n\006acc_id\030\003 \001(\003\022\017\n\007"
+    "role_id\030\004 \001(\003\"Z\n%req_E_LOGIN_MSG_ROOT2DA"
+    "TA_CREATE_ROLE\022\016\n\006acc_id\030\001 \001(\003\022\020\n\010nickna"
+    "me\030\002 \001(\t\022\017\n\007role_id\030\003 \001(\003\"5\n%rep_E_LOGIN"
+    "_MSG_ROOT2DATA_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005"
+    "\"[\n&req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_RO"
+    "LE\022\017\n\007role_id\030\001 \001(\003\022\016\n\006acc_id\030\002 \001(\003\022\020\n\010n"
+    "ickname\030\003 \001(\t\"a\n&rep_E_LOGIN_MSG_ROOT2LO"
+    "GIC_CREATE_ROLE\022\014\n\004isok\030\001 \001(\005\022)\n\010snapsho"
+    "t\030\002 \001(\0132\027.protos.role_snapshot_t\"\?\n-req_"
+    "E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHO"
+    "T\022\016\n\006acc_id\030\001 \001(\003\"i\n-rep_E_LOGIN_MSG_ROO"
+    "T2DATA_FETCH_ROLE_SNAPSHOT\022\014\n\004isok\030\001 \001(\005"
+    "\022*\n\trole_list\030\002 \003(\0132\027.protos.role_snapsh"
+    "ot_t\"1\n\036req_E_LOGIN_MSG_C2S_ENTER_GAME\022\017"
+    "\n\007role_id\030\001 \001(\003\"Y\n\036rep_E_LOGIN_MSG_C2S_E"
+    "NTER_GAME\022\014\n\004isok\030\001 \001(\005\022)\n\tgame_data\030\002 \001"
+    "(\0132\026.protos.role_game_data\"7\n$req_E_LOGI"
+    "N_MSG_GG2CENTER_ENTER_GAME\022\017\n\007role_id\030\001 "
+    "\001(\003\"_\n$rep_E_LOGIN_MSG_GG2CENTER_ENTER_G"
+    "AME\022\014\n\004isok\030\001 \001(\005\022)\n\tgame_data\030\002 \001(\0132\026.p"
+    "rotos.role_game_data\"9\n&req_E_LOGIN_MSG_"
+    "CENTER2ROOT_ENTER_GAME\022\017\n\007role_id\030\001 \001(\003\""
+    "K\n&rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAM"
+    "E\022\014\n\004isok\030\001 \001(\005\022\023\n\013logic_index\030\002 \001(\005\"8\n%"
+    "req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME\022\017\n"
+    "\007role_id\030\001 \001(\003\"5\n%rep_E_LOGIN_MSG_ROOT2L"
+    "OGIC_ENTER_GAME\022\014\n\004isok\030\001 \001(\005b\006proto3", 2437);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protcl_login.proto", &protobuf_RegisterTypes);
   role_snapshot_t::default_instance_ = new role_snapshot_t();
-  role_create_t::default_instance_ = new role_create_t();
+  role_game_data::default_instance_ = new role_game_data();
   req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_ = new req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT();
   rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_ = new rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT();
   req_E_LOGIN_MSG_C2S_LOGIN::default_instance_ = new req_E_LOGIN_MSG_C2S_LOGIN();
@@ -594,8 +836,18 @@ void protobuf_AddDesc_protcl_5flogin_2eproto() {
   rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE::default_instance_ = new rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE();
   req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance_ = new req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE();
   rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance_ = new rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE();
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_ = new req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT();
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_ = new rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT();
+  req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_ = new req_E_LOGIN_MSG_C2S_ENTER_GAME();
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_ = new rep_E_LOGIN_MSG_C2S_ENTER_GAME();
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_ = new req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME();
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_ = new rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME();
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_ = new req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME();
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_ = new rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME();
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_ = new req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME();
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_ = new rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME();
   role_snapshot_t::default_instance_->InitAsDefaultInstance();
-  role_create_t::default_instance_->InitAsDefaultInstance();
+  role_game_data::default_instance_->InitAsDefaultInstance();
   req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_->InitAsDefaultInstance();
   rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT::default_instance_->InitAsDefaultInstance();
   req_E_LOGIN_MSG_C2S_LOGIN::default_instance_->InitAsDefaultInstance();
@@ -614,6 +866,16 @@ void protobuf_AddDesc_protcl_5flogin_2eproto() {
   rep_E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE::default_instance_->InitAsDefaultInstance();
   req_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance_->InitAsDefaultInstance();
   rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::default_instance_->InitAsDefaultInstance();
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_->InitAsDefaultInstance();
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_->InitAsDefaultInstance();
+  req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_->InitAsDefaultInstance();
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protcl_5flogin_2eproto);
 }
 
@@ -964,86 +1226,86 @@ void role_snapshot_t::clear_nickname() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int role_create_t::kRoleIdFieldNumber;
-const int role_create_t::kNicknameFieldNumber;
-const int role_create_t::kAccIdFieldNumber;
+const int role_game_data::kRoleIdFieldNumber;
+const int role_game_data::kNicknameFieldNumber;
+const int role_game_data::kZoneIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-role_create_t::role_create_t()
+role_game_data::role_game_data()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:protos.role_create_t)
+  // @@protoc_insertion_point(constructor:protos.role_game_data)
 }
 
-void role_create_t::InitAsDefaultInstance() {
+void role_game_data::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-role_create_t::role_create_t(const role_create_t& from)
+role_game_data::role_game_data(const role_game_data& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:protos.role_create_t)
+  // @@protoc_insertion_point(copy_constructor:protos.role_game_data)
 }
 
-void role_create_t::SharedCtor() {
+void role_game_data::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   role_id_ = GOOGLE_LONGLONG(0);
   nickname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  acc_id_ = GOOGLE_LONGLONG(0);
+  zone_id_ = 0;
 }
 
-role_create_t::~role_create_t() {
-  // @@protoc_insertion_point(destructor:protos.role_create_t)
+role_game_data::~role_game_data() {
+  // @@protoc_insertion_point(destructor:protos.role_game_data)
   SharedDtor();
 }
 
-void role_create_t::SharedDtor() {
+void role_game_data::SharedDtor() {
   nickname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
 
-void role_create_t::SetCachedSize(int size) const {
+void role_game_data::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* role_create_t::descriptor() {
+const ::google::protobuf::Descriptor* role_game_data::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return role_create_t_descriptor_;
+  return role_game_data_descriptor_;
 }
 
-const role_create_t& role_create_t::default_instance() {
+const role_game_data& role_game_data::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
   return *default_instance_;
 }
 
-role_create_t* role_create_t::default_instance_ = NULL;
+role_game_data* role_game_data::default_instance_ = NULL;
 
-role_create_t* role_create_t::New(::google::protobuf::Arena* arena) const {
-  role_create_t* n = new role_create_t;
+role_game_data* role_game_data::New(::google::protobuf::Arena* arena) const {
+  role_game_data* n = new role_game_data;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void role_create_t::Clear() {
-// @@protoc_insertion_point(message_clear_start:protos.role_create_t)
+void role_game_data::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.role_game_data)
   role_id_ = GOOGLE_LONGLONG(0);
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  acc_id_ = GOOGLE_LONGLONG(0);
+  zone_id_ = 0;
 }
 
-bool role_create_t::MergePartialFromCodedStream(
+bool role_game_data::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:protos.role_create_t)
+  // @@protoc_insertion_point(parse_start:protos.role_game_data)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1072,21 +1334,21 @@ bool role_create_t::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->nickname().data(), this->nickname().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "protos.role_create_t.nickname"));
+            "protos.role_game_data.nickname"));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_acc_id;
+        if (input->ExpectTag(24)) goto parse_zone_id;
         break;
       }
 
-      // optional int64 acc_id = 3;
+      // optional int32 zone_id = 3;
       case 3: {
         if (tag == 24) {
-         parse_acc_id:
+         parse_zone_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &acc_id_)));
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &zone_id_)));
 
         } else {
           goto handle_unusual;
@@ -1108,17 +1370,17 @@ bool role_create_t::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:protos.role_create_t)
+  // @@protoc_insertion_point(parse_success:protos.role_game_data)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:protos.role_create_t)
+  // @@protoc_insertion_point(parse_failure:protos.role_game_data)
   return false;
 #undef DO_
 }
 
-void role_create_t::SerializeWithCachedSizes(
+void role_game_data::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:protos.role_create_t)
+  // @@protoc_insertion_point(serialize_start:protos.role_game_data)
   // optional int64 role_id = 1;
   if (this->role_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
@@ -1129,22 +1391,22 @@ void role_create_t::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->nickname().data(), this->nickname().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "protos.role_create_t.nickname");
+      "protos.role_game_data.nickname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->nickname(), output);
   }
 
-  // optional int64 acc_id = 3;
-  if (this->acc_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->acc_id(), output);
+  // optional int32 zone_id = 3;
+  if (this->zone_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->zone_id(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:protos.role_create_t)
+  // @@protoc_insertion_point(serialize_end:protos.role_game_data)
 }
 
-::google::protobuf::uint8* role_create_t::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* role_game_data::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:protos.role_create_t)
+  // @@protoc_insertion_point(serialize_to_array_start:protos.role_game_data)
   // optional int64 role_id = 1;
   if (this->role_id() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
@@ -1155,23 +1417,23 @@ void role_create_t::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->nickname().data(), this->nickname().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "protos.role_create_t.nickname");
+      "protos.role_game_data.nickname");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->nickname(), target);
   }
 
-  // optional int64 acc_id = 3;
-  if (this->acc_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->acc_id(), target);
+  // optional int32 zone_id = 3;
+  if (this->zone_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->zone_id(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:protos.role_create_t)
+  // @@protoc_insertion_point(serialize_to_array_end:protos.role_game_data)
   return target;
 }
 
-int role_create_t::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:protos.role_create_t)
+int role_game_data::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.role_game_data)
   int total_size = 0;
 
   // optional int64 role_id = 1;
@@ -1188,11 +1450,11 @@ int role_create_t::ByteSize() const {
         this->nickname());
   }
 
-  // optional int64 acc_id = 3;
-  if (this->acc_id() != 0) {
+  // optional int32 zone_id = 3;
+  if (this->zone_id() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->acc_id());
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->zone_id());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -1201,25 +1463,25 @@ int role_create_t::ByteSize() const {
   return total_size;
 }
 
-void role_create_t::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:protos.role_create_t)
+void role_game_data::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.role_game_data)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  const role_create_t* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const role_create_t>(
+  const role_game_data* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const role_game_data>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.role_create_t)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.role_game_data)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.role_create_t)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.role_game_data)
     MergeFrom(*source);
   }
 }
 
-void role_create_t::MergeFrom(const role_create_t& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:protos.role_create_t)
+void role_game_data::MergeFrom(const role_game_data& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.role_game_data)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -1230,123 +1492,123 @@ void role_create_t::MergeFrom(const role_create_t& from) {
 
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
-  if (from.acc_id() != 0) {
-    set_acc_id(from.acc_id());
+  if (from.zone_id() != 0) {
+    set_zone_id(from.zone_id());
   }
 }
 
-void role_create_t::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:protos.role_create_t)
+void role_game_data::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.role_game_data)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void role_create_t::CopyFrom(const role_create_t& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:protos.role_create_t)
+void role_game_data::CopyFrom(const role_game_data& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.role_game_data)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool role_create_t::IsInitialized() const {
+bool role_game_data::IsInitialized() const {
 
   return true;
 }
 
-void role_create_t::Swap(role_create_t* other) {
+void role_game_data::Swap(role_game_data* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void role_create_t::InternalSwap(role_create_t* other) {
+void role_game_data::InternalSwap(role_game_data* other) {
   std::swap(role_id_, other->role_id_);
   nickname_.Swap(&other->nickname_);
-  std::swap(acc_id_, other->acc_id_);
+  std::swap(zone_id_, other->zone_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata role_create_t::GetMetadata() const {
+::google::protobuf::Metadata role_game_data::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = role_create_t_descriptor_;
-  metadata.reflection = role_create_t_reflection_;
+  metadata.descriptor = role_game_data_descriptor_;
+  metadata.reflection = role_game_data_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// role_create_t
+// role_game_data
 
 // optional int64 role_id = 1;
-void role_create_t::clear_role_id() {
+void role_game_data::clear_role_id() {
   role_id_ = GOOGLE_LONGLONG(0);
 }
- ::google::protobuf::int64 role_create_t::role_id() const {
-  // @@protoc_insertion_point(field_get:protos.role_create_t.role_id)
+ ::google::protobuf::int64 role_game_data::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.role_game_data.role_id)
   return role_id_;
 }
- void role_create_t::set_role_id(::google::protobuf::int64 value) {
+ void role_game_data::set_role_id(::google::protobuf::int64 value) {
   
   role_id_ = value;
-  // @@protoc_insertion_point(field_set:protos.role_create_t.role_id)
+  // @@protoc_insertion_point(field_set:protos.role_game_data.role_id)
 }
 
 // optional string nickname = 2;
-void role_create_t::clear_nickname() {
+void role_game_data::clear_nickname() {
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& role_create_t::nickname() const {
-  // @@protoc_insertion_point(field_get:protos.role_create_t.nickname)
+ const ::std::string& role_game_data::nickname() const {
+  // @@protoc_insertion_point(field_get:protos.role_game_data.nickname)
   return nickname_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void role_create_t::set_nickname(const ::std::string& value) {
+ void role_game_data::set_nickname(const ::std::string& value) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:protos.role_create_t.nickname)
+  // @@protoc_insertion_point(field_set:protos.role_game_data.nickname)
 }
- void role_create_t::set_nickname(const char* value) {
+ void role_game_data::set_nickname(const char* value) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:protos.role_create_t.nickname)
+  // @@protoc_insertion_point(field_set_char:protos.role_game_data.nickname)
 }
- void role_create_t::set_nickname(const char* value, size_t size) {
+ void role_game_data::set_nickname(const char* value, size_t size) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:protos.role_create_t.nickname)
+  // @@protoc_insertion_point(field_set_pointer:protos.role_game_data.nickname)
 }
- ::std::string* role_create_t::mutable_nickname() {
+ ::std::string* role_game_data::mutable_nickname() {
   
-  // @@protoc_insertion_point(field_mutable:protos.role_create_t.nickname)
+  // @@protoc_insertion_point(field_mutable:protos.role_game_data.nickname)
   return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* role_create_t::release_nickname() {
-  // @@protoc_insertion_point(field_release:protos.role_create_t.nickname)
+ ::std::string* role_game_data::release_nickname() {
+  // @@protoc_insertion_point(field_release:protos.role_game_data.nickname)
   
   return nickname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void role_create_t::set_allocated_nickname(::std::string* nickname) {
+ void role_game_data::set_allocated_nickname(::std::string* nickname) {
   if (nickname != NULL) {
     
   } else {
     
   }
   nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
-  // @@protoc_insertion_point(field_set_allocated:protos.role_create_t.nickname)
+  // @@protoc_insertion_point(field_set_allocated:protos.role_game_data.nickname)
 }
 
-// optional int64 acc_id = 3;
-void role_create_t::clear_acc_id() {
-  acc_id_ = GOOGLE_LONGLONG(0);
+// optional int32 zone_id = 3;
+void role_game_data::clear_zone_id() {
+  zone_id_ = 0;
 }
- ::google::protobuf::int64 role_create_t::acc_id() const {
-  // @@protoc_insertion_point(field_get:protos.role_create_t.acc_id)
-  return acc_id_;
+ ::google::protobuf::int32 role_game_data::zone_id() const {
+  // @@protoc_insertion_point(field_get:protos.role_game_data.zone_id)
+  return zone_id_;
 }
- void role_create_t::set_acc_id(::google::protobuf::int64 value) {
+ void role_game_data::set_zone_id(::google::protobuf::int32 value) {
   
-  acc_id_ = value;
-  // @@protoc_insertion_point(field_set:protos.role_create_t.acc_id)
+  zone_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.role_game_data.zone_id)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7956,6 +8218,2692 @@ void rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE::set_allocated_snapshot(::protos::ro
     
   }
   // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE.snapshot)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::kAccIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT(const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::~req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT() {
+  // @@protoc_insertion_point(destructor:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  SharedDtor();
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_;
+}
+
+const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_ = NULL;
+
+req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::New(::google::protobuf::Arena* arena) const {
+  req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* n = new req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 acc_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &acc_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return false;
+#undef DO_
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  // optional int64 acc_id = 1;
+  if (this->acc_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->acc_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+::google::protobuf::uint8* req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  // optional int64 acc_id = 1;
+  if (this->acc_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->acc_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return target;
+}
+
+int req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  int total_size = 0;
+
+  // optional int64 acc_id = 1;
+  if (this->acc_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->acc_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergeFrom(const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.acc_id() != 0) {
+    set_acc_id(from.acc_id());
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::CopyFrom(const req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::Swap(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InternalSwap(req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* other) {
+  std::swap(acc_id_, other->acc_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_;
+  metadata.reflection = req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+
+// optional int64 acc_id = 1;
+void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::clear_acc_id() {
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::acc_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.acc_id)
+  return acc_id_;
+}
+ void req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::set_acc_id(::google::protobuf::int64 value) {
+  
+  acc_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.acc_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::kIsokFieldNumber;
+const int rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::kRoleListFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT(const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+}
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::~rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  SharedDtor();
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_;
+}
+
+const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::default_instance_ = NULL;
+
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::New(::google::protobuf::Arena* arena) const {
+  rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* n = new rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  isok_ = 0;
+  role_list_.Clear();
+}
+
+bool rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_role_list;
+        break;
+      }
+
+      // repeated .protos.role_snapshot_t role_list = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_role_list:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_role_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_role_list()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_role_list;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return false;
+#undef DO_
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // repeated .protos.role_snapshot_t role_list = 2;
+  for (unsigned int i = 0, n = this->role_list_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->role_list(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+}
+
+::google::protobuf::uint8* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // repeated .protos.role_snapshot_t role_list = 2;
+  for (unsigned int i = 0, n = this->role_list_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, this->role_list(i), false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  return target;
+}
+
+int rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // repeated .protos.role_snapshot_t role_list = 2;
+  total_size += 1 * this->role_list_size();
+  for (int i = 0; i < this->role_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->role_list(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::MergeFrom(const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  role_list_.MergeFrom(from.role_list_);
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::CopyFrom(const rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::Swap(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::InternalSwap(rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT* other) {
+  std::swap(isok_, other->isok_);
+  role_list_.UnsafeArenaSwap(&other->role_list_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_descriptor_;
+  metadata.reflection = rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT
+
+// optional int32 isok = 1;
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.isok)
+  return isok_;
+}
+ void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.isok)
+}
+
+// repeated .protos.role_snapshot_t role_list = 2;
+int rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::role_list_size() const {
+  return role_list_.size();
+}
+void rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::clear_role_list() {
+  role_list_.Clear();
+}
+const ::protos::role_snapshot_t& rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::role_list(int index) const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list)
+  return role_list_.Get(index);
+}
+::protos::role_snapshot_t* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::mutable_role_list(int index) {
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list)
+  return role_list_.Mutable(index);
+}
+::protos::role_snapshot_t* rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::add_role_list() {
+  // @@protoc_insertion_point(field_add:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list)
+  return role_list_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >*
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::mutable_role_list() {
+  // @@protoc_insertion_point(field_mutable_list:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list)
+  return &role_list_;
+}
+const ::google::protobuf::RepeatedPtrField< ::protos::role_snapshot_t >&
+rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT::role_list() const {
+  // @@protoc_insertion_point(field_list:protos.rep_E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT.role_list)
+  return role_list_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_LOGIN_MSG_C2S_ENTER_GAME::kRoleIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME::req_E_LOGIN_MSG_C2S_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME::req_E_LOGIN_MSG_C2S_ENTER_GAME(const req_E_LOGIN_MSG_C2S_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME::~req_E_LOGIN_MSG_C2S_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  SharedDtor();
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_C2S_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_;
+}
+
+const req_E_LOGIN_MSG_C2S_ENTER_GAME& req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME* req_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_ = NULL;
+
+req_E_LOGIN_MSG_C2S_ENTER_GAME* req_E_LOGIN_MSG_C2S_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  req_E_LOGIN_MSG_C2S_ENTER_GAME* n = new req_E_LOGIN_MSG_C2S_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_LOGIN_MSG_C2S_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+::google::protobuf::uint8* req_E_LOGIN_MSG_C2S_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return target;
+}
+
+int req_E_LOGIN_MSG_C2S_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_LOGIN_MSG_C2S_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_LOGIN_MSG_C2S_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::MergeFrom(const req_E_LOGIN_MSG_C2S_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::CopyFrom(const req_E_LOGIN_MSG_C2S_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_LOGIN_MSG_C2S_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::Swap(req_E_LOGIN_MSG_C2S_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::InternalSwap(req_E_LOGIN_MSG_C2S_ENTER_GAME* other) {
+  std::swap(role_id_, other->role_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_LOGIN_MSG_C2S_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_;
+  metadata.reflection = req_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_LOGIN_MSG_C2S_ENTER_GAME
+
+// optional int64 role_id = 1;
+void req_E_LOGIN_MSG_C2S_ENTER_GAME::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_LOGIN_MSG_C2S_ENTER_GAME::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME.role_id)
+  return role_id_;
+}
+ void req_E_LOGIN_MSG_C2S_ENTER_GAME::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_C2S_ENTER_GAME.role_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_LOGIN_MSG_C2S_ENTER_GAME::kIsokFieldNumber;
+const int rep_E_LOGIN_MSG_C2S_ENTER_GAME::kGameDataFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME::rep_E_LOGIN_MSG_C2S_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  game_data_ = const_cast< ::protos::role_game_data*>(&::protos::role_game_data::default_instance());
+}
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME::rep_E_LOGIN_MSG_C2S_ENTER_GAME(const rep_E_LOGIN_MSG_C2S_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+  game_data_ = NULL;
+}
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME::~rep_E_LOGIN_MSG_C2S_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  SharedDtor();
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+    delete game_data_;
+  }
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_C2S_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_;
+}
+
+const rep_E_LOGIN_MSG_C2S_ENTER_GAME& rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME* rep_E_LOGIN_MSG_C2S_ENTER_GAME::default_instance_ = NULL;
+
+rep_E_LOGIN_MSG_C2S_ENTER_GAME* rep_E_LOGIN_MSG_C2S_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  rep_E_LOGIN_MSG_C2S_ENTER_GAME* n = new rep_E_LOGIN_MSG_C2S_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  isok_ = 0;
+  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
+  game_data_ = NULL;
+}
+
+bool rep_E_LOGIN_MSG_C2S_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_game_data;
+        break;
+      }
+
+      // optional .protos.role_game_data game_data = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_game_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_game_data()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *this->game_data_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+}
+
+::google::protobuf::uint8* rep_E_LOGIN_MSG_C2S_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, *this->game_data_, false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  return target;
+}
+
+int rep_E_LOGIN_MSG_C2S_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->game_data_);
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_LOGIN_MSG_C2S_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_LOGIN_MSG_C2S_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::MergeFrom(const rep_E_LOGIN_MSG_C2S_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+  if (from.has_game_data()) {
+    mutable_game_data()->::protos::role_game_data::MergeFrom(from.game_data());
+  }
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::CopyFrom(const rep_E_LOGIN_MSG_C2S_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_LOGIN_MSG_C2S_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::Swap(rep_E_LOGIN_MSG_C2S_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::InternalSwap(rep_E_LOGIN_MSG_C2S_ENTER_GAME* other) {
+  std::swap(isok_, other->isok_);
+  std::swap(game_data_, other->game_data_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_LOGIN_MSG_C2S_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_LOGIN_MSG_C2S_ENTER_GAME_descriptor_;
+  metadata.reflection = rep_E_LOGIN_MSG_C2S_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_LOGIN_MSG_C2S_ENTER_GAME
+
+// optional int32 isok = 1;
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_C2S_ENTER_GAME::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.isok)
+  return isok_;
+}
+ void rep_E_LOGIN_MSG_C2S_ENTER_GAME::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.isok)
+}
+
+// optional .protos.role_game_data game_data = 2;
+bool rep_E_LOGIN_MSG_C2S_ENTER_GAME::has_game_data() const {
+  return !_is_default_instance_ && game_data_ != NULL;
+}
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::clear_game_data() {
+  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
+  game_data_ = NULL;
+}
+const ::protos::role_game_data& rep_E_LOGIN_MSG_C2S_ENTER_GAME::game_data() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.game_data)
+  return game_data_ != NULL ? *game_data_ : *default_instance_->game_data_;
+}
+::protos::role_game_data* rep_E_LOGIN_MSG_C2S_ENTER_GAME::mutable_game_data() {
+  
+  if (game_data_ == NULL) {
+    game_data_ = new ::protos::role_game_data;
+  }
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.game_data)
+  return game_data_;
+}
+::protos::role_game_data* rep_E_LOGIN_MSG_C2S_ENTER_GAME::release_game_data() {
+  // @@protoc_insertion_point(field_release:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.game_data)
+  
+  ::protos::role_game_data* temp = game_data_;
+  game_data_ = NULL;
+  return temp;
+}
+void rep_E_LOGIN_MSG_C2S_ENTER_GAME::set_allocated_game_data(::protos::role_game_data* game_data) {
+  delete game_data_;
+  game_data_ = game_data;
+  if (game_data) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME.game_data)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::kRoleIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME(const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::~req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  SharedDtor();
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_;
+}
+
+const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_ = NULL;
+
+req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* n = new req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+::google::protobuf::uint8* req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return target;
+}
+
+int req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergeFrom(const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::CopyFrom(const req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::Swap(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InternalSwap(req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* other) {
+  std::swap(role_id_, other->role_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_;
+  metadata.reflection = req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+
+// optional int64 role_id = 1;
+void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.role_id)
+  return role_id_;
+}
+ void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.role_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::kIsokFieldNumber;
+const int rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::kGameDataFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  game_data_ = const_cast< ::protos::role_game_data*>(&::protos::role_game_data::default_instance());
+}
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME(const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+  game_data_ = NULL;
+}
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::~rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  SharedDtor();
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+    delete game_data_;
+  }
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_;
+}
+
+const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::default_instance_ = NULL;
+
+rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* n = new rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  isok_ = 0;
+  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
+  game_data_ = NULL;
+}
+
+bool rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_game_data;
+        break;
+      }
+
+      // optional .protos.role_game_data game_data = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_game_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_game_data()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *this->game_data_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+}
+
+::google::protobuf::uint8* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, *this->game_data_, false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  return target;
+}
+
+int rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // optional .protos.role_game_data game_data = 2;
+  if (this->has_game_data()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->game_data_);
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::MergeFrom(const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+  if (from.has_game_data()) {
+    mutable_game_data()->::protos::role_game_data::MergeFrom(from.game_data());
+  }
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::CopyFrom(const rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::Swap(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::InternalSwap(rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME* other) {
+  std::swap(isok_, other->isok_);
+  std::swap(game_data_, other->game_data_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_descriptor_;
+  metadata.reflection = rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
+
+// optional int32 isok = 1;
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.isok)
+  return isok_;
+}
+ void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.isok)
+}
+
+// optional .protos.role_game_data game_data = 2;
+bool rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::has_game_data() const {
+  return !_is_default_instance_ && game_data_ != NULL;
+}
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_game_data() {
+  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
+  game_data_ = NULL;
+}
+const ::protos::role_game_data& rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::game_data() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
+  return game_data_ != NULL ? *game_data_ : *default_instance_->game_data_;
+}
+::protos::role_game_data* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::mutable_game_data() {
+  
+  if (game_data_ == NULL) {
+    game_data_ = new ::protos::role_game_data;
+  }
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
+  return game_data_;
+}
+::protos::role_game_data* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::release_game_data() {
+  // @@protoc_insertion_point(field_release:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
+  
+  ::protos::role_game_data* temp = game_data_;
+  game_data_ = NULL;
+  return temp;
+}
+void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_allocated_game_data(::protos::role_game_data* game_data) {
+  delete game_data_;
+  game_data_ = game_data;
+  if (game_data) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::kRoleIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME(const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::~req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  SharedDtor();
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_;
+}
+
+const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_ = NULL;
+
+req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* n = new req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+::google::protobuf::uint8* req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return target;
+}
+
+int req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergeFrom(const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::CopyFrom(const req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::Swap(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InternalSwap(req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* other) {
+  std::swap(role_id_, other->role_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_;
+  metadata.reflection = req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+
+// optional int64 role_id = 1;
+void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.role_id)
+  return role_id_;
+}
+ void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.role_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::kIsokFieldNumber;
+const int rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::kLogicIndexFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME(const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+  logic_index_ = 0;
+}
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::~rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  SharedDtor();
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_;
+}
+
+const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::default_instance_ = NULL;
+
+rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* n = new rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(isok_, logic_index_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_logic_index;
+        break;
+      }
+
+      // optional int32 logic_index = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_logic_index:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &logic_index_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // optional int32 logic_index = 2;
+  if (this->logic_index() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->logic_index(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+}
+
+::google::protobuf::uint8* rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // optional int32 logic_index = 2;
+  if (this->logic_index() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->logic_index(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  return target;
+}
+
+int rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // optional int32 logic_index = 2;
+  if (this->logic_index() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->logic_index());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::MergeFrom(const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+  if (from.logic_index() != 0) {
+    set_logic_index(from.logic_index());
+  }
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::CopyFrom(const rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::Swap(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::InternalSwap(rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME* other) {
+  std::swap(isok_, other->isok_);
+  std::swap(logic_index_, other->logic_index_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_descriptor_;
+  metadata.reflection = rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
+
+// optional int32 isok = 1;
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.isok)
+  return isok_;
+}
+ void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.isok)
+}
+
+// optional int32 logic_index = 2;
+void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::clear_logic_index() {
+  logic_index_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::logic_index() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.logic_index)
+  return logic_index_;
+}
+ void rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_logic_index(::google::protobuf::int32 value) {
+  
+  logic_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.logic_index)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::kRoleIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME(const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::~req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  SharedDtor();
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_;
+}
+
+const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_ = NULL;
+
+req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* n = new req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+
+bool req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 role_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &role_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->role_id(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+::google::protobuf::uint8* req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->role_id(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return target;
+}
+
+int req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int64 role_id = 1;
+  if (this->role_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->role_id());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergeFrom(const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.role_id() != 0) {
+    set_role_id(from.role_id());
+  }
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::CopyFrom(const req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::Swap(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InternalSwap(req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* other) {
+  std::swap(role_id_, other->role_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_;
+  metadata.reflection = req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
+
+// optional int64 role_id = 1;
+void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.role_id)
+  return role_id_;
+}
+ void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.role_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::kIsokFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME(const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  isok_ = 0;
+}
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::~rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME() {
+  // @@protoc_insertion_point(destructor:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  SharedDtor();
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_;
+}
+
+const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protcl_5flogin_2eproto();
+  return *default_instance_;
+}
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::default_instance_ = NULL;
+
+rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::New(::google::protobuf::Arena* arena) const {
+  rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* n = new rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::Clear() {
+// @@protoc_insertion_point(message_clear_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  isok_ = 0;
+}
+
+bool rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 isok = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return false;
+#undef DO_
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+}
+
+::google::protobuf::uint8* rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  return target;
+}
+
+int rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  int total_size = 0;
+
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+    MergeFrom(*source);
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::MergeFrom(const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::CopyFrom(const rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::IsInitialized() const {
+
+  return true;
+}
+
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::Swap(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::InternalSwap(rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* other) {
+  std::swap(isok_, other->isok_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_descriptor_;
+  metadata.reflection = rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
+
+// optional int32 isok = 1;
+void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.isok)
+  return isok_;
+}
+ void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.isok)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
