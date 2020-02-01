@@ -29,6 +29,8 @@ public:
     EMsgHandleResult OnGateClientLogin(TConnection *session_pt, const NetMessage * message_pt);
     // 消息处理-创角
     DECLARE_MSG_HANDLER_FUN(OnGateCreateRole);
+    // 进入游戏
+    DECLARE_MSG_HANDLER_FUN(OnRootEnterGame);
 };
 
 #endif // __ROOT_LOGIN_MSG_HANDLE_H__

@@ -16,6 +16,9 @@
 #include "server_common/server_info_manager.h"
 #include "server_common/server_session.h"
 #include "center_server/center_server.h"
+#include "protocol_error_code.h"
+#include "server_common/client_net_node.h"
+
 CenterFrameHandler::CenterFrameHandler()
 {
 
@@ -30,6 +33,7 @@ void CenterFrameHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), CenterFrameHandler, OnRegisterServerInfo);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), CenterFrameHandler, OnRecvRootStartCmd);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE), CenterFrameHandler, OnCenterUserOffline);
 }
 
 EMsgHandleResult CenterFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
@@ -67,3 +71,21 @@ EMsgHandleResult CenterFrameHandler::OnRecvRootStartCmd(TConnection *session_pt,
     }
     RETURN_NO_HANDLE;
 }
+
+
+TR_BEGIN_HANDLE_MSG(CenterFrameHandler, OnCenterUserOffline, E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
+{
+    auto user_id = req.user_id();
+    {
+        auto user_info  = g_ClientNetNodeMgr.HoldClientUser(user_id);
+        if (user_info)
+        {
+            // role 下线TODO:
+            
+        }
+    }
+
+
+    g_ClientNetNodeMgr.DeleteUser(user_id);
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG

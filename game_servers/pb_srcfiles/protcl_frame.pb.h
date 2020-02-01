@@ -2106,15 +2106,21 @@ class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE : public ::google::protobuf::Messag
 
   // accessors -------------------------------------------------------
 
-  // optional int64 user_id = 1;
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // optional int64 user_id = 2;
   void clear_user_id();
-  static const int kUserIdFieldNumber = 1;
+  static const int kUserIdFieldNumber = 2;
   ::google::protobuf::int64 user_id() const;
   void set_user_id(::google::protobuf::int64 value);
 
-  // optional int32 reason = 2;
+  // optional int32 reason = 3;
   void clear_reason();
-  static const int kReasonFieldNumber = 2;
+  static const int kReasonFieldNumber = 3;
   ::google::protobuf::int32 reason() const;
   void set_reason(::google::protobuf::int32 value);
 
@@ -2124,6 +2130,7 @@ class rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE : public ::google::protobuf::Messag
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::int64 user_id_;
+  ::google::protobuf::int32 isok_;
   ::google::protobuf::int32 reason_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5fframe_2eproto();
@@ -3632,7 +3639,21 @@ inline void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_reason(::google::protobu
 
 // rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
 
-// optional int64 user_id = 1;
+// optional int32 isok = 1;
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.isok)
+  return isok_;
+}
+inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.isok)
+}
+
+// optional int64 user_id = 2;
 inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_user_id() {
   user_id_ = GOOGLE_LONGLONG(0);
 }
@@ -3646,7 +3667,7 @@ inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_user_id(::google::protob
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
 }
 
-// optional int32 reason = 2;
+// optional int32 reason = 3;
 inline void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
   reason_ = 0;
 }

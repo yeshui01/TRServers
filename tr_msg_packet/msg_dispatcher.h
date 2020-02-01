@@ -13,8 +13,16 @@
 #include "singleton.h"
 #include "msg_handler.h"
 #include <map>
+#include <memory>
 
 class NetMessage;
+using msg_dispatch_hook_t = std::function<bool (NetMessage * net_message)>;
+
+struct MsgDispatchHook
+{
+	msg_dispatch_hook_t hook_fun;
+};
+
 class MsgDispatcher : public TSingleton<MsgDispatcher>
 {
 public:
@@ -48,9 +56,12 @@ public:
 	}
 	// 根据msg_class获取消息处理器
 	IMessageHandler* FindHandler(int32_t msg_class);
+	void RegDispatchHook(msg_dispatch_hook_t && msg_hook);
 protected:
 	// key:msg_class value:handler
 	std::map<int32_t, IMessageHandler*> msg_handlers_;
+	std::shared_ptr<MsgDispatchHook> hook_info_;
+	
 };
 
 #define g_MsgDispatcher MsgDispatcher::Instance()

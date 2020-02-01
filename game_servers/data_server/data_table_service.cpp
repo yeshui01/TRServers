@@ -5,6 +5,8 @@
 # Filename     : data_table_service.cpp
 # Description  : 
 # =======================================================*/
+#include "protocol_class.h"
+#include "protocol_frame.h"
 
 #include "data_table_service.h"
 #include "data_global.h"
@@ -16,6 +18,7 @@
 #include "database_tools/data_pb_tools.h"
 
 #include "pb_srcfiles/data_pb_common.pb.h"
+#include "protcl_frame.pb.h"
 
 DataTableService::DataTableService()
 {
@@ -83,6 +86,7 @@ bool DataTableService::LoadDataPlayerTablesFromDB(int64_t role_id, DataPlayer *p
         {
             auto & role_base = p->role_base_.HoldData();
             role_base.SwapFields(v_local_set[0]);
+            role_base.ClearDbStatus();
         }
         else
         {
@@ -193,4 +197,21 @@ void DataTableService::UpdatePlayerTablesFromPbTables(DataPlayer *p, protos::pb_
     }
 
     // SaveDataPlayer(p);
+}
+
+void DataTableService::DumpPlayerTableToRepMsg(DataPlayer * p, \
+    protos::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES * rep_msg)
+{
+    if (!p || !rep_msg)
+    {
+        return;
+    }
+    
+    {
+        // role_base
+        auto & role_base = p->role_base_.HoldData();
+        auto pb_table = rep_msg->add_table_list();
+        pb_table->set_table_id(role_base.TableId());
+        DbProtoTools::DumpToOnePbTbItem(&role_base, pb_table->add_data_items());
+    }
 }

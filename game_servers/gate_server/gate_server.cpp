@@ -32,7 +32,7 @@
 #include "protocol_error_code.h"
 #include "protcl_frame.pb.h"
 #include "server_common/game_msg_helper.h"
-
+#include "gate_global.h"
 #include <string>
 
 GateServer::GateServer(int32_t index):GameServer(index)
@@ -49,6 +49,10 @@ GateServer::~GateServer()
 bool GateServer::Init()
 {
     if (!GateParentClass::Init())
+    {
+        return false;
+    }
+    if (!g_GateGlobal.Init())
     {
         return false;
     }

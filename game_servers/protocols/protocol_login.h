@@ -25,10 +25,12 @@ enum ELoginMsgType : int32_t
     E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT           = 10, // 获取玩家角色快照
 
     E_LOGIN_MSG_C2S_ENTER_GAME                          = 11,  // 客户端请求进入游戏
+    E_LOGIN_MSG_C2S_TEST_ROLE_MSG                       = 12,  // 测试角色相关的消息
 
     E_LOGIN_MSG_GG2CENTER_ENTER_GAME                    = 101,   // gate->center 进入游戏
     E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME                  = 102,   // center->root 玩家进入游戏
     E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME                   = 103,   // root->logic 玩家进入游戏
+    E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME                   = 104,   // gate->logic 玩家进入游戏
 
 };
 

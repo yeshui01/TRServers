@@ -21,6 +21,13 @@
 #include <utility>
 #include <memory>
 
+namespace protos
+{
+    class pb_data_module;
+    class pb_table_item;
+    class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
+}
+
 class LogicPlayer;
 
 // 玩家的数据表
@@ -46,6 +53,7 @@ public:
     LogicPlayerTables * CreatePlayerTables(int64_t role_id);
     LogicPlayerTables * HoldPlayerTables(int64_t role_id);
 
+    void LoadPlayerTableFromPbMsg(LogicPlayerTables & player_tbs, protos::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES * rep_msg);
 protected:
     void SavePlayerData(LogicPlayerTables & player_tbs);
 

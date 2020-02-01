@@ -31,6 +31,8 @@ public:
     // 
     // 保存玩家数据
     DECLARE_MSG_HANDLER_FUN(OnSaveDataPlayer);
+    // 加载玩家数据
+    DECLARE_MSG_HANDLER_FUN(OnDataLoadPlayer);
 };
 
 #endif // __DATA_FRAME_MSG_HANDLE_H__

@@ -93,3 +93,27 @@ void LogicTableService::SavePlayerData(LogicPlayerTables & player_tbs)
             0);
     }
 }
+
+void LogicTableService::LoadPlayerTableFromPbMsg(LogicPlayerTables & player_tbs, protos::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES * rep_msg)
+{
+    if (!rep_msg)
+    {
+        return;
+    }
+    for (int32_t i = 0; i < rep_msg->table_list_size(); ++i)
+    {
+        auto pb_table = rep_msg->mutable_table_list(i);
+        if (pb_table->table_id() == E_DATA_TABLE_ID_ROLE_BASE)
+        {
+            // role_base更新
+            auto &role_base = player_tbs.role_base.HoldData();
+            if (pb_table->data_items_size() > 0)
+            {
+                DbProtoTools::LoadFromOnePbTbItem(&role_base, pb_table->mutable_data_items(0), false);
+                role_base.UnSerialize();
+                role_base.ClearDbStatus();
+            }
+        }
+    }
+    
+}

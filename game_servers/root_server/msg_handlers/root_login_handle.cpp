@@ -20,7 +20,7 @@
 #include "server_common/server_config.h"
 #include "protocol_error_code.h"
 #include "server_common/client_net_node.h"
-
+#include "root_server/root_global.h"
 RootLoginHandler::RootLoginHandler()
 {
 
@@ -35,6 +35,7 @@ void RootLoginHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_GG2ROOT_LOGIN), RootLoginHandler, OnGateClientLogin);
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_GG2ROOT_CREATE_ROLE), RootLoginHandler, OnGateCreateRole);
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME), RootLoginHandler, OnRootEnterGame);
 }
 
 EMsgHandleResult RootLoginHandler::OnGateClientLogin(TConnection *session_pt, const NetMessage * message_pt)
@@ -152,8 +153,8 @@ TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREA
                 return;
             }
             // to logic server init role data
-            // 动态分配一个logic TODO:
-            int32_t logic_index = 0;
+            // 动态分配一个logic
+            int32_t logic_index = g_RootGlobal.AlocateLogicServerIndex(role_id);
             REQMSG(E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE) logic_req;
             logic_req.set_role_id(role_id);
             logic_req.set_acc_id(acc_id);
@@ -171,5 +172,49 @@ TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnGateCreateRole, E_LOGIN_MSG_GG2ROOT_CREA
         TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_DATA, 0)
     }
     TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_LOGIN, 0)
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG
+
+TR_BEGIN_HANDLE_MSG(RootLoginHandler, OnRootEnterGame, E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
+{
+    int64_t role_id = req.role_id();
+    int64_t acc_id = req.acc_id();
+    int32_t gate_index = req.gate_index();
+    auto user_status = g_ClientNetNodeMgr.GetUserStatus(acc_id);
+    if (EUserStatus::E_CLIENT_USER_STATUS_LOGINED != user_status)
+    {
+        TERROR("account status not match, acc_id:" << acc_id << ", status:" << int32_t(user_status));
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_STATUS, rep);
+    }
+
+    int32_t logic_index = g_RootGlobal.AlocateLogicServerIndex(role_id);
+    TINFO("role alocate logic index, roleid:" << role_id << ", logic_index:" << logic_index);
+    REQMSG(E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME) logic_req;
+    logic_req.set_role_id(role_id);
+    logic_req.set_acc_id(acc_id);
+    logic_req.set_gate_index(gate_index);
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME, logic_req, role_id,logic_index,acc_id, gate_index)
+    {
+        REPMSG(E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME) ret;
+        ret.set_isok(cb_rep.isok());
+        ret.set_logic_index(logic_index);
+        g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+        if (cb_rep.isok() != INT_PROTOERR(E_PROTOCOL_ERR_CORRECT))
+        {
+            return;
+        }
+        TINFO("role enter game, finish enter logic_server, role_id:" << role_id 
+            << ", logic_index:" << logic_index 
+            << ", gate_index:" << gate_index);
+
+        g_ClientNetNodeMgr.UpdateUserStatus(acc_id, EUserStatus::E_CLIENT_USER_STATUS_NORMAL);
+        g_ClientNetNodeMgr.AttachUserRole(acc_id, role_id);
+        g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, gate_index);
+        g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
+        g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, logic_index);
+        g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, 0);
+        g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+    }
+    TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_LOGIC, logic_index)
 }
 TR_END_HANDLE_MSG_NO_RETURN_MSG

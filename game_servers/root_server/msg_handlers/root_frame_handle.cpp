@@ -229,6 +229,19 @@ EMsgHandleResult RootFrameHandler::OnGateClientOffline(TConnection *session_pt, 
         RETURN_NO_HANDLE;
     }
     // TODO:通知其他相关服务器,客户端下线
+    REQMSG(E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE) offline_req;
+    offline_req.set_user_id(user_id);
+    offline_req.set_reason(E_USER_OFFLINE_REASON_GATE_OFFLINE);
+    // tmp code ,这里需要做个群组异步处理，等其他服务器处理完再处理自己的
+    for (auto it_node = user_pt->net_nodes_.begin(); it_node != user_pt->net_nodes_.end(); ++it_node)
+    {
+        g_MsgHelper.ForwardPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+            E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE,
+            offline_req,
+            it_node->first,
+            it_node->second.node_index,
+            it_node->second.zone_id);
+    }
     g_ClientNetNodeMgr.DeleteUser(user_id);
     RETURN_NO_HANDLE;
 }

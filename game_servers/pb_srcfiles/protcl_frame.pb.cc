@@ -477,7 +477,8 @@ void protobuf_AssignDesc_protcl_5fframe_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, _is_default_instance_));
   rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_descriptor_ = file->message_type(22);
-  static const int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_offsets_[2] = {
+  static const int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, isok_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, user_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE, reason_),
   };
@@ -822,26 +823,26 @@ void protobuf_AddDesc_protcl_5fframe_2eproto() {
     "\001 \001(\003\"6\n&rep_E_FRAME_MSG_GG2ROOT_CLIENT_"
     "OFFLINE\022\014\n\004isok\030\001 \001(\005\"I\n&req_E_FRAME_MSG"
     "_ROOT_XS_CLIENT_OFFLINE\022\017\n\007user_id\030\001 \001(\003"
-    "\022\016\n\006reason\030\002 \001(\005\"I\n&rep_E_FRAME_MSG_ROOT"
-    "_XS_CLIENT_OFFLINE\022\017\n\007user_id\030\001 \001(\003\022\016\n\006r"
-    "eason\030\002 \001(\005\"l\n-req_E_FRAME_MSG_XS_TO_DAT"
-    "A_SAVE_PLAYER_TABLES\022\017\n\007role_id\030\001 \001(\003\022*\n"
-    "\ntable_list\030\002 \003(\0132\026.protos.pb_data_modul"
-    "e\"=\n-rep_E_FRAME_MSG_XS_TO_DATA_SAVE_PLA"
-    "YER_TABLES\022\014\n\004isok\030\001 \001(\005\"[\n-req_E_FRAME_"
-    "MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES\022*\n\ntab"
-    "le_list\030\002 \003(\0132\026.protos.pb_data_module\"=\n"
-    "-rep_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_"
-    "TABLES\022\014\n\004isok\030\001 \001(\005\"@\n-req_E_FRAME_MSG_"
-    "XS_TO_DATA_LOAD_PLAYER_TABLES\022\017\n\007role_id"
-    "\030\001 \001(\003\"z\n-rep_E_FRAME_MSG_XS_TO_DATA_LOA"
-    "D_PLAYER_TABLES\022\014\n\004isok\030\001 \001(\005\022\017\n\007role_id"
-    "\030\002 \001(\003\022*\n\ntable_list\030\003 \003(\0132\026.protos.pb_d"
-    "ata_module\"/\n-req_E_FRAME_MSG_XS_TO_DATA"
-    "_LOAD_GLOBAL_TABLES\"i\n-rep_E_FRAME_MSG_X"
-    "S_TO_DATA_LOAD_GLOBAL_TABLES\022\014\n\004isok\030\001 \001"
-    "(\005\022*\n\ntable_list\030\002 \003(\0132\026.protos.pb_data_"
-    "moduleb\006proto3", 2574);
+    "\022\016\n\006reason\030\002 \001(\005\"W\n&rep_E_FRAME_MSG_ROOT"
+    "_XS_CLIENT_OFFLINE\022\014\n\004isok\030\001 \001(\005\022\017\n\007user"
+    "_id\030\002 \001(\003\022\016\n\006reason\030\003 \001(\005\"l\n-req_E_FRAME"
+    "_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES\022\017\n\007ro"
+    "le_id\030\001 \001(\003\022*\n\ntable_list\030\002 \003(\0132\026.protos"
+    ".pb_data_module\"=\n-rep_E_FRAME_MSG_XS_TO"
+    "_DATA_SAVE_PLAYER_TABLES\022\014\n\004isok\030\001 \001(\005\"["
+    "\n-req_E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL"
+    "_TABLES\022*\n\ntable_list\030\002 \003(\0132\026.protos.pb_"
+    "data_module\"=\n-rep_E_FRAME_MSG_XS_TO_DAT"
+    "A_SAVE_GLOBAL_TABLES\022\014\n\004isok\030\001 \001(\005\"@\n-re"
+    "q_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TAB"
+    "LES\022\017\n\007role_id\030\001 \001(\003\"z\n-rep_E_FRAME_MSG_"
+    "XS_TO_DATA_LOAD_PLAYER_TABLES\022\014\n\004isok\030\001 "
+    "\001(\005\022\017\n\007role_id\030\002 \001(\003\022*\n\ntable_list\030\003 \003(\013"
+    "2\026.protos.pb_data_module\"/\n-req_E_FRAME_"
+    "MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES\"i\n-rep"
+    "_E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABL"
+    "ES\022\014\n\004isok\030\001 \001(\005\022*\n\ntable_list\030\002 \003(\0132\026.p"
+    "rotos.pb_data_moduleb\006proto3", 2588);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protcl_frame.proto", &protobuf_RegisterTypes);
   server_info_t::default_instance_ = new server_info_t();
@@ -7531,6 +7532,7 @@ void req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::kIsokFieldNumber;
 const int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::kUserIdFieldNumber;
 const int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::kReasonFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -7556,6 +7558,7 @@ rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE(c
 void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
+  isok_ = 0;
   user_id_ = GOOGLE_LONGLONG(0);
   reason_ = 0;
 }
@@ -7630,9 +7633,24 @@ bool rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int64 user_id = 1;
+      // optional int32 isok = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &isok_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_user_id;
+        break;
+      }
+
+      // optional int64 user_id = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_user_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &user_id_)));
@@ -7640,13 +7658,13 @@ bool rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_reason;
+        if (input->ExpectTag(24)) goto parse_reason;
         break;
       }
 
-      // optional int32 reason = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional int32 reason = 3;
+      case 3: {
+        if (tag == 24) {
          parse_reason:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7683,14 +7701,19 @@ failure:
 void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
-  // optional int64 user_id = 1;
-  if (this->user_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->user_id(), output);
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->isok(), output);
   }
 
-  // optional int32 reason = 2;
+  // optional int64 user_id = 2;
+  if (this->user_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->user_id(), output);
+  }
+
+  // optional int32 reason = 3;
   if (this->reason() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->reason(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->reason(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
@@ -7699,14 +7722,19 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::SerializeWithCachedSizes(
 ::google::protobuf::uint8* rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
-  // optional int64 user_id = 1;
-  if (this->user_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->user_id(), target);
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->isok(), target);
   }
 
-  // optional int32 reason = 2;
+  // optional int64 user_id = 2;
+  if (this->user_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->user_id(), target);
+  }
+
+  // optional int32 reason = 3;
   if (this->reason() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->reason(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->reason(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
@@ -7717,14 +7745,21 @@ int rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
   int total_size = 0;
 
-  // optional int64 user_id = 1;
+  // optional int32 isok = 1;
+  if (this->isok() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->isok());
+  }
+
+  // optional int64 user_id = 2;
   if (this->user_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->user_id());
   }
 
-  // optional int32 reason = 2;
+  // optional int32 reason = 3;
   if (this->reason() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -7759,6 +7794,9 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::MergeFrom(const rep_E_FRAME_MSG_ROO
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
+  if (from.isok() != 0) {
+    set_isok(from.isok());
+  }
   if (from.user_id() != 0) {
     set_user_id(from.user_id());
   }
@@ -7791,6 +7829,7 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::Swap(rep_E_FRAME_MSG_ROOT_XS_CLIENT
   InternalSwap(other);
 }
 void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::InternalSwap(rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE* other) {
+  std::swap(isok_, other->isok_);
   std::swap(user_id_, other->user_id_);
   std::swap(reason_, other->reason_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -7808,7 +7847,21 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::InternalSwap(rep_E_FRAME_MSG_ROOT_X
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
 
-// optional int64 user_id = 1;
+// optional int32 isok = 1;
+void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_isok() {
+  isok_ = 0;
+}
+ ::google::protobuf::int32 rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.isok)
+  return isok_;
+}
+ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.isok)
+}
+
+// optional int64 user_id = 2;
 void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_user_id() {
   user_id_ = GOOGLE_LONGLONG(0);
 }
@@ -7822,7 +7875,7 @@ void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_user_id() {
   // @@protoc_insertion_point(field_set:protos.rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE.user_id)
 }
 
-// optional int32 reason = 2;
+// optional int32 reason = 3;
 void rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE::clear_reason() {
   reason_ = 0;
 }

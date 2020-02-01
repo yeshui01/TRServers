@@ -166,22 +166,39 @@ message rep_E_LOGIN_MSG_C2S_ENTER_GAME
 	role_game_data game_data = 2;
 }
 
+// E_LOGIN_MSG_C2S_TEST_ROLE_MSG                       = 12,  // 测试角色相关的消息
+message req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG
+{
+	string echo_content = 1;
+}
+
+message rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG
+{
+	int32 isok = 1;
+	string echo_content = 2;
+}
+// ------------------------------------------------ server msg --------------------------------------------
+
+
 // E_LOGIN_MSG_GG2CENTER_ENTER_GAME                    = 101,   // gate->center 进入游戏
 message req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
 {
 	int64 role_id = 1;
+	int64 acc_id = 2;
 }
 
 message rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
 {
 	int32 isok = 1;
-	role_game_data game_data = 2;
+	int32 logic_index = 2;		// 逻辑进程index
 }
 
 // E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME                  = 102,   // center->root 玩家进入游戏
 message req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
 {
 	int64 role_id = 1;
+	int64 acc_id = 2;
+	int32 gate_index = 3;
 }
 
 message rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
@@ -194,8 +211,23 @@ message rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME
 message req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
 {
 	int64 role_id = 1;
+	int64 acc_id = 2;
+	int32 gate_index = 3;
 }
 message rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
 {
 	int32 isok = 1;
+}
+
+// E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME                   = 104,   // gate->logic 玩家进入游戏
+message req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME
+{
+	int64 role_id = 1;
+	int64 acc_id = 2;
+}
+
+message rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME
+{
+	int32 isok = 1;
+	role_game_data game_data = 2;
 }

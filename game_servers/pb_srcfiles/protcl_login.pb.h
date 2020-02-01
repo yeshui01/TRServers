@@ -40,7 +40,9 @@ class rep_E_LOGIN_MSG_C2S_CREATE_ROLE;
 class rep_E_LOGIN_MSG_C2S_ENTER_GAME;
 class rep_E_LOGIN_MSG_C2S_LOGIN;
 class rep_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT;
+class rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG;
 class rep_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME;
+class rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME;
 class rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME;
 class rep_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE;
 class rep_E_LOGIN_MSG_GG2ROOT_LOGIN;
@@ -54,7 +56,9 @@ class req_E_LOGIN_MSG_C2S_CREATE_ROLE;
 class req_E_LOGIN_MSG_C2S_ENTER_GAME;
 class req_E_LOGIN_MSG_C2S_LOGIN;
 class req_E_LOGIN_MSG_C2S_REGISTER_ACCOUNT;
+class req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG;
 class req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME;
+class req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME;
 class req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME;
 class req_E_LOGIN_MSG_GG2ROOT_CREATE_ROLE;
 class req_E_LOGIN_MSG_GG2ROOT_LOGIN;
@@ -2282,6 +2286,187 @@ class req_E_LOGIN_MSG_C2S_ENTER_GAME : public ::google::protobuf::Message /* @@p
 };
 // -------------------------------------------------------------------
 
+class req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG) */ {
+ public:
+  req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG();
+  virtual ~req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG();
+
+  req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG(const req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+
+  inline req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& operator=(const req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& default_instance();
+
+  void Swap(req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* New() const { return New(NULL); }
+
+  req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+  void MergeFrom(const req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string echo_content = 1;
+  void clear_echo_content();
+  static const int kEchoContentFieldNumber = 1;
+  const ::std::string& echo_content() const;
+  void set_echo_content(const ::std::string& value);
+  void set_echo_content(const char* value);
+  void set_echo_content(const char* value, size_t size);
+  ::std::string* mutable_echo_content();
+  ::std::string* release_echo_content();
+  void set_allocated_echo_content(::std::string* echo_content);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr echo_content_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
+  friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5flogin_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG) */ {
+ public:
+  rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG();
+  virtual ~rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG();
+
+  rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG(const rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+
+  inline rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& operator=(const rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& default_instance();
+
+  void Swap(rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* New() const { return New(NULL); }
+
+  rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+  void MergeFrom(const rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // optional string echo_content = 2;
+  void clear_echo_content();
+  static const int kEchoContentFieldNumber = 2;
+  const ::std::string& echo_content() const;
+  void set_echo_content(const ::std::string& value);
+  void set_echo_content(const char* value);
+  void set_echo_content(const char* value, size_t size);
+  ::std::string* mutable_echo_content();
+  ::std::string* release_echo_content();
+  void set_allocated_echo_content(::std::string* echo_content);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr echo_content_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
+  friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5flogin_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class rep_E_LOGIN_MSG_C2S_ENTER_GAME : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_LOGIN_MSG_C2S_ENTER_GAME) */ {
  public:
   rep_E_LOGIN_MSG_C2S_ENTER_GAME();
@@ -2440,12 +2625,19 @@ class req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME : public ::google::protobuf::Message 
   ::google::protobuf::int64 role_id() const;
   void set_role_id(::google::protobuf::int64 value);
 
+  // optional int64 acc_id = 2;
+  void clear_acc_id();
+  static const int kAccIdFieldNumber = 2;
+  ::google::protobuf::int64 acc_id() const;
+  void set_acc_id(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::int64 role_id_;
+  ::google::protobuf::int64 acc_id_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
   friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
@@ -2522,22 +2714,19 @@ class rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME : public ::google::protobuf::Message 
   ::google::protobuf::int32 isok() const;
   void set_isok(::google::protobuf::int32 value);
 
-  // optional .protos.role_game_data game_data = 2;
-  bool has_game_data() const;
-  void clear_game_data();
-  static const int kGameDataFieldNumber = 2;
-  const ::protos::role_game_data& game_data() const;
-  ::protos::role_game_data* mutable_game_data();
-  ::protos::role_game_data* release_game_data();
-  void set_allocated_game_data(::protos::role_game_data* game_data);
+  // optional int32 logic_index = 2;
+  void clear_logic_index();
+  static const int kLogicIndexFieldNumber = 2;
+  ::google::protobuf::int32 logic_index() const;
+  void set_logic_index(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::protos::role_game_data* game_data_;
   ::google::protobuf::int32 isok_;
+  ::google::protobuf::int32 logic_index_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
   friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
@@ -2614,12 +2803,26 @@ class req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME : public ::google::protobuf::Messag
   ::google::protobuf::int64 role_id() const;
   void set_role_id(::google::protobuf::int64 value);
 
+  // optional int64 acc_id = 2;
+  void clear_acc_id();
+  static const int kAccIdFieldNumber = 2;
+  ::google::protobuf::int64 acc_id() const;
+  void set_acc_id(::google::protobuf::int64 value);
+
+  // optional int32 gate_index = 3;
+  void clear_gate_index();
+  static const int kGateIndexFieldNumber = 3;
+  ::google::protobuf::int32 gate_index() const;
+  void set_gate_index(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::int64 role_id_;
+  ::google::protobuf::int64 acc_id_;
+  ::google::protobuf::int32 gate_index_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
   friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
@@ -2785,12 +2988,26 @@ class req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME : public ::google::protobuf::Message
   ::google::protobuf::int64 role_id() const;
   void set_role_id(::google::protobuf::int64 value);
 
+  // optional int64 acc_id = 2;
+  void clear_acc_id();
+  static const int kAccIdFieldNumber = 2;
+  ::google::protobuf::int64 acc_id() const;
+  void set_acc_id(::google::protobuf::int64 value);
+
+  // optional int32 gate_index = 3;
+  void clear_gate_index();
+  static const int kGateIndexFieldNumber = 3;
+  ::google::protobuf::int32 gate_index() const;
+  void set_gate_index(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::int64 role_id_;
+  ::google::protobuf::int64 acc_id_;
+  ::google::protobuf::int32 gate_index_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
   friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
@@ -2880,6 +3097,187 @@ class rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME : public ::google::protobuf::Message
 
   void InitAsDefaultInstance();
   static rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME) */ {
+ public:
+  req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME();
+  virtual ~req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME();
+
+  req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME(const req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+
+  inline req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& operator=(const req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& default_instance();
+
+  void Swap(req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* other);
+
+  // implements Message ----------------------------------------------
+
+  inline req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* New() const { return New(NULL); }
+
+  req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+  void MergeFrom(const req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 role_id = 1;
+  void clear_role_id();
+  static const int kRoleIdFieldNumber = 1;
+  ::google::protobuf::int64 role_id() const;
+  void set_role_id(::google::protobuf::int64 value);
+
+  // optional int64 acc_id = 2;
+  void clear_acc_id();
+  static const int kAccIdFieldNumber = 2;
+  ::google::protobuf::int64 acc_id() const;
+  void set_acc_id(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 role_id_;
+  ::google::protobuf::int64 acc_id_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
+  friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5flogin_2eproto();
+
+  void InitAsDefaultInstance();
+  static req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME) */ {
+ public:
+  rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME();
+  virtual ~rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME();
+
+  rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME(const rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+
+  inline rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& operator=(const rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& default_instance();
+
+  void Swap(rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* other);
+
+  // implements Message ----------------------------------------------
+
+  inline rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* New() const { return New(NULL); }
+
+  rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+  void MergeFrom(const rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 isok = 1;
+  void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  ::google::protobuf::int32 isok() const;
+  void set_isok(::google::protobuf::int32 value);
+
+  // optional .protos.role_game_data game_data = 2;
+  bool has_game_data() const;
+  void clear_game_data();
+  static const int kGameDataFieldNumber = 2;
+  const ::protos::role_game_data& game_data() const;
+  ::protos::role_game_data* mutable_game_data();
+  ::protos::role_game_data* release_game_data();
+  void set_allocated_game_data(::protos::role_game_data* game_data);
+
+  // @@protoc_insertion_point(class_scope:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::protos::role_game_data* game_data_;
+  ::google::protobuf::int32 isok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protcl_5flogin_2eproto();
+  friend void protobuf_AssignDesc_protcl_5flogin_2eproto();
+  friend void protobuf_ShutdownFile_protcl_5flogin_2eproto();
+
+  void InitAsDefaultInstance();
+  static rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME* default_instance_;
 };
 // ===================================================================
 
@@ -4381,6 +4779,116 @@ inline void req_E_LOGIN_MSG_C2S_ENTER_GAME::set_role_id(::google::protobuf::int6
 
 // -------------------------------------------------------------------
 
+// req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG
+
+// optional string echo_content = 1;
+inline void req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::clear_echo_content() {
+  echo_content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::echo_content() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  return echo_content_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const ::std::string& value) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline void req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const char* value) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline void req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const char* value, size_t size) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline ::std::string* req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::mutable_echo_content() {
+  
+  // @@protoc_insertion_point(field_mutable:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  return echo_content_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::release_echo_content() {
+  // @@protoc_insertion_point(field_release:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  
+  return echo_content_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_allocated_echo_content(::std::string* echo_content) {
+  if (echo_content != NULL) {
+    
+  } else {
+    
+  }
+  echo_content_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), echo_content);
+  // @@protoc_insertion_point(field_set_allocated:protos.req_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG
+
+// optional int32 isok = 1;
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.isok)
+  return isok_;
+}
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.isok)
+}
+
+// optional string echo_content = 2;
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::clear_echo_content() {
+  echo_content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::echo_content() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  return echo_content_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const ::std::string& value) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const char* value) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_echo_content(const char* value, size_t size) {
+  
+  echo_content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+inline ::std::string* rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::mutable_echo_content() {
+  
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  return echo_content_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::release_echo_content() {
+  // @@protoc_insertion_point(field_release:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+  
+  return echo_content_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG::set_allocated_echo_content(::std::string* echo_content) {
+  if (echo_content != NULL) {
+    
+  } else {
+    
+  }
+  echo_content_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), echo_content);
+  // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_C2S_TEST_ROLE_MSG.echo_content)
+}
+
+// -------------------------------------------------------------------
+
 // rep_E_LOGIN_MSG_C2S_ENTER_GAME
 
 // optional int32 isok = 1;
@@ -4453,6 +4961,20 @@ inline void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_role_id(::google::protobuf
   // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.role_id)
 }
 
+// optional int64 acc_id = 2;
+inline void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_acc_id() {
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::acc_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.acc_id)
+  return acc_id_;
+}
+inline void req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_acc_id(::google::protobuf::int64 value) {
+  
+  acc_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.acc_id)
+}
+
 // -------------------------------------------------------------------
 
 // rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME
@@ -4471,42 +4993,18 @@ inline void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_isok(::google::protobuf::i
   // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.isok)
 }
 
-// optional .protos.role_game_data game_data = 2;
-inline bool rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::has_game_data() const {
-  return !_is_default_instance_ && game_data_ != NULL;
+// optional int32 logic_index = 2;
+inline void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_logic_index() {
+  logic_index_ = 0;
 }
-inline void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::clear_game_data() {
-  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
-  game_data_ = NULL;
+inline ::google::protobuf::int32 rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::logic_index() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.logic_index)
+  return logic_index_;
 }
-inline const ::protos::role_game_data& rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::game_data() const {
-  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
-  return game_data_ != NULL ? *game_data_ : *default_instance_->game_data_;
-}
-inline ::protos::role_game_data* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::mutable_game_data() {
+inline void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_logic_index(::google::protobuf::int32 value) {
   
-  if (game_data_ == NULL) {
-    game_data_ = new ::protos::role_game_data;
-  }
-  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
-  return game_data_;
-}
-inline ::protos::role_game_data* rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::release_game_data() {
-  // @@protoc_insertion_point(field_release:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
-  
-  ::protos::role_game_data* temp = game_data_;
-  game_data_ = NULL;
-  return temp;
-}
-inline void rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME::set_allocated_game_data(::protos::role_game_data* game_data) {
-  delete game_data_;
-  game_data_ = game_data;
-  if (game_data) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.game_data)
+  logic_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_GG2CENTER_ENTER_GAME.logic_index)
 }
 
 // -------------------------------------------------------------------
@@ -4525,6 +5023,34 @@ inline void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_role_id(::google::protob
   
   role_id_ = value;
   // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.role_id)
+}
+
+// optional int64 acc_id = 2;
+inline void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::clear_acc_id() {
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::acc_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.acc_id)
+  return acc_id_;
+}
+inline void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_acc_id(::google::protobuf::int64 value) {
+  
+  acc_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.acc_id)
+}
+
+// optional int32 gate_index = 3;
+inline void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::clear_gate_index() {
+  gate_index_ = 0;
+}
+inline ::google::protobuf::int32 req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::gate_index() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.gate_index)
+  return gate_index_;
+}
+inline void req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME::set_gate_index(::google::protobuf::int32 value) {
+  
+  gate_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME.gate_index)
 }
 
 // -------------------------------------------------------------------
@@ -4577,6 +5103,34 @@ inline void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_role_id(::google::protobu
   // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.role_id)
 }
 
+// optional int64 acc_id = 2;
+inline void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::clear_acc_id() {
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::acc_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.acc_id)
+  return acc_id_;
+}
+inline void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_acc_id(::google::protobuf::int64 value) {
+  
+  acc_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.acc_id)
+}
+
+// optional int32 gate_index = 3;
+inline void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::clear_gate_index() {
+  gate_index_ = 0;
+}
+inline ::google::protobuf::int32 req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::gate_index() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.gate_index)
+  return gate_index_;
+}
+inline void req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_gate_index(::google::protobuf::int32 value) {
+  
+  gate_index_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.gate_index)
+}
+
 // -------------------------------------------------------------------
 
 // rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME
@@ -4595,7 +5149,103 @@ inline void rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME::set_isok(::google::protobuf::
   // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME.isok)
 }
 
+// -------------------------------------------------------------------
+
+// req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME
+
+// optional int64 role_id = 1;
+inline void req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::clear_role_id() {
+  role_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::role_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.role_id)
+  return role_id_;
+}
+inline void req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::set_role_id(::google::protobuf::int64 value) {
+  
+  role_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.role_id)
+}
+
+// optional int64 acc_id = 2;
+inline void req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::clear_acc_id() {
+  acc_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::acc_id() const {
+  // @@protoc_insertion_point(field_get:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.acc_id)
+  return acc_id_;
+}
+inline void req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::set_acc_id(::google::protobuf::int64 value) {
+  
+  acc_id_ = value;
+  // @@protoc_insertion_point(field_set:protos.req_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.acc_id)
+}
+
+// -------------------------------------------------------------------
+
+// rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME
+
+// optional int32 isok = 1;
+inline void rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::clear_isok() {
+  isok_ = 0;
+}
+inline ::google::protobuf::int32 rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::isok() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.isok)
+  return isok_;
+}
+inline void rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::set_isok(::google::protobuf::int32 value) {
+  
+  isok_ = value;
+  // @@protoc_insertion_point(field_set:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.isok)
+}
+
+// optional .protos.role_game_data game_data = 2;
+inline bool rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::has_game_data() const {
+  return !_is_default_instance_ && game_data_ != NULL;
+}
+inline void rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::clear_game_data() {
+  if (GetArenaNoVirtual() == NULL && game_data_ != NULL) delete game_data_;
+  game_data_ = NULL;
+}
+inline const ::protos::role_game_data& rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::game_data() const {
+  // @@protoc_insertion_point(field_get:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.game_data)
+  return game_data_ != NULL ? *game_data_ : *default_instance_->game_data_;
+}
+inline ::protos::role_game_data* rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::mutable_game_data() {
+  
+  if (game_data_ == NULL) {
+    game_data_ = new ::protos::role_game_data;
+  }
+  // @@protoc_insertion_point(field_mutable:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.game_data)
+  return game_data_;
+}
+inline ::protos::role_game_data* rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::release_game_data() {
+  // @@protoc_insertion_point(field_release:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.game_data)
+  
+  ::protos::role_game_data* temp = game_data_;
+  game_data_ = NULL;
+  return temp;
+}
+inline void rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME::set_allocated_game_data(::protos::role_game_data* game_data) {
+  delete game_data_;
+  game_data_ = game_data;
+  if (game_data) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protos.rep_E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME.game_data)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

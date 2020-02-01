@@ -25,6 +25,12 @@ public:
 public:
    // 消息处理-创角
     DECLARE_MSG_HANDLER_FUN(OnLogicCreateRole);
+    // 消息处理-进入游戏
+    DECLARE_MSG_HANDLER_FUN(OnLogicStartEnterGame);
+    // 消息处理-客户端进入游戏
+    DECLARE_MSG_HANDLER_FUN(OnClientEnterGame);
+    // 消息处理-客户端角色的测试消息
+    DECLARE_MSG_HANDLER_FUN(OnRoleTestMsg)
 };
 
 #endif // __TR_LOGIC_LOGIN_HANDLE_H__

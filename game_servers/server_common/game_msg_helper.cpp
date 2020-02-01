@@ -232,7 +232,8 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
         AsyncMsgParam && cb_param,
         EServerRouteNodeType node_type, 
         int32_t node_index,
-        int32_t zone_id/*= -1*/)
+        int32_t zone_id/*= -1*/,
+        MsgAddonParam * addon_param/* = nullptr*/)
 {
     if (-1 == zone_id)
     {
@@ -289,6 +290,13 @@ bool GameMsgHelper::ForwardAsyncMessage(int32_t msg_class, int32_t msg_type,
             return false;
         }
         auto net_msg = g_MsgTools.MakeNetMessage(msg_class, msg_type, content);
+        if (addon_param)
+        {
+            if (addon_param->role_id > 0)
+            {
+                net_msg.SetParam(addon_param->role_id);
+            }
+        }
         if (!g_MsgTools.BindAsyncCallback(&net_msg, std::move(callback), std::move(cb_param)))
             return false;
         auto session_pt = server_node->session;
@@ -497,6 +505,29 @@ void GameMsgHelper::SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const 
     int32_t packet_size = rep_net_msg.SerializeByteNum();
     std::vector<char> buffer(packet_size, '\0');
     rep_net_msg.Serialize(buffer.data(), packet_size);
+    if (async_param.session_pt)
+    {
+        async_param.session_pt->Send(buffer.data(), packet_size);
+    }
+    else
+    {
+        TERROR("async_param.session is nullptr, msg_class:" << async_param.msg_class << ", msg_type:" << async_param.msg_type);
+    }
+}
+
+void GameMsgHelper::SendAsyncRepNetMsg(const NetMessage * rep_net_msg, const AsyncMsgParam & async_param)
+{
+    if (!rep_net_msg)
+    {
+        return;
+    }
+    
+    TINFO("SendAsyncRepNetMsg rep_no:" << async_param.req_no
+        << ", msg(" << async_param.msg_class << "," << async_param.msg_type << ")");
+
+    int32_t packet_size = rep_net_msg->SerializeByteNum();
+    std::vector<char> buffer(packet_size, '\0');
+    (const_cast<NetMessage *>(rep_net_msg))->Serialize(buffer.data(), packet_size);
     if (async_param.session_pt)
     {
         async_param.session_pt->Send(buffer.data(), packet_size);

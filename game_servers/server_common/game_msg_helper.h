@@ -15,6 +15,13 @@
 #include "tr_common/singleton.h"
 
 #include <google/protobuf/message.h>
+
+// 消息附加参数
+struct MsgAddonParam
+{
+    int64_t role_id = 0;
+};
+
 class GameMsgHelper : public TSingleton<GameMsgHelper>
 {
 public:
@@ -50,7 +57,8 @@ public:
         const std::string & content, asyncmsg_callback_t && callback, 
         AsyncMsgParam && cb_param,
         EServerRouteNodeType node_type, 
-        int32_t node_index, int32_t zone_id = -1);
+        int32_t node_index, int32_t zone_id = -1, 
+        MsgAddonParam * addon_param = nullptr);
         
     /**
      * 转发protobuf格式的异步回调消息
@@ -84,7 +92,7 @@ public:
      * @param  async_param : 
      */
     void SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param);
-
+    void SendAsyncRepNetMsg(const NetMessage * rep_net_msg, const AsyncMsgParam & async_param);
     /*
     *  转发消息到某个服务器
     *  @param msg_class : 消息大类

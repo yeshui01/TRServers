@@ -40,6 +40,7 @@ void GateLoginHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_LOGIN), GateLoginHandler, OnClientLogin);
     
     MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_CREATE_ROLE), GateLoginHandler, OnCreateRole);
+    MSG_BIND_HANDLER(INT_LOGINMSG(E_LOGIN_MSG_C2S_ENTER_GAME), GateLoginHandler, OnGateEnterGame);
 }
 
 EMsgHandleResult GateLoginHandler::OnClientLogin(TConnection *session_pt, const NetMessage * message_pt)
@@ -162,5 +163,71 @@ TR_BEGIN_HANDLE_MSG(GateLoginHandler, OnCreateRole, E_LOGIN_MSG_C2S_CREATE_ROLE)
         g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
     }
     TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_ROOT, 0);
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG
+
+
+TR_BEGIN_HANDLE_MSG(GateLoginHandler, OnGateEnterGame, E_LOGIN_MSG_C2S_ENTER_GAME)
+{
+    // TODO:
+    auto client_session = dynamic_cast<ServerSession*>(session_pt);
+    if (!client_session)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_INNER_ERROR, rep);
+    }
+    if (client_session->GetChannelType() != ESessionChannelType::E_CHANNEL_CLIENT_TO_SERVER)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_INVALID_SESSION, rep);
+    }
+    if (client_session->GetChannelInfo().user_id == 0)
+    {
+        SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ACCOUNT_UNLOGIN, rep);
+    }
+    auto client_user = g_ClientNetNodeMgr.HoldClientUser(client_session->GetChannelInfo().user_id);
+    if (client_user)
+    {
+        if (client_user->role_id > 0)
+        {
+            SET_ISOK_AND_RETURN_CONTENT(E_PROTOCOL_ERR_ROLE_ONLINE, rep);
+        }
+    }
+    int64_t acc_id =  client_session->GetChannelInfo().user_id;
+    int64_t role_id = req.role_id();
+    REQMSG(E_LOGIN_MSG_GG2CENTER_ENTER_GAME) cs_req;
+    cs_req.set_role_id(role_id);
+    cs_req.set_acc_id(acc_id);
+    TR_BEGIN_ASYNC_MSG_WITH_PARAM(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_GG2CENTER_ENTER_GAME, cs_req, acc_id,role_id)
+    {
+        if (INT_PROTOERR(E_PROTOCOL_ERR_CORRECT) == cb_rep.isok())
+        {
+            // 正常
+            g_ClientNetNodeMgr.UpdateUserStatus(acc_id, EUserStatus::E_CLIENT_USER_STATUS_NORMAL);
+            g_ClientNetNodeMgr.AttachUserRole(acc_id, role_id);
+            g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, 0);
+            g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
+            // g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
+            g_ClientNetNodeMgr.UpdateUserNode(acc_id, EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, cb_rep.logic_index());
+
+            REQMSG(E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME) logic_req;
+            logic_req.set_role_id(role_id);
+            logic_req.set_acc_id(acc_id);
+            TR_BEGIN_ASYNC_MSG(E_PROTOCOL_CLASS_LOGIN, E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME, logic_req, loigc_rep, async_env{cb_param})
+            {
+                TDEBUG("cb gate tologic entergame");
+                REPMSG(E_LOGIN_MSG_C2S_ENTER_GAME) ret;
+                ret.set_isok(loigc_rep.isok());
+                ret.mutable_game_data()->CopyFrom(loigc_rep.game_data());
+                g_MsgHelper.SendAsyncRepMsg(ret, async_env);
+            }
+            TR_END_ASYNC_MSG(E_SERVER_ROUTE_NODE_LOGIC, cb_rep.logic_index());
+        }
+        else
+        {
+            REPMSG(E_LOGIN_MSG_C2S_ENTER_GAME) ret;
+            ret.set_isok(cb_rep.isok());
+            g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
+        }
+    }
+    TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_CENTER, 0);
 }
 TR_END_HANDLE_MSG_NO_RETURN_MSG

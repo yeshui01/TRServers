@@ -16,6 +16,8 @@
 #include "server_common/server_info_manager.h"
 #include "server_common/server_session.h"
 #include "gate_server/gate_server.h"
+#include "server_common/client_net_node.h"
+#include "protocol_error_code.h"
 
 GateFrameHandler::GateFrameHandler()
 {
@@ -31,6 +33,7 @@ void GateFrameHandler::BindMsgHandle()
 {
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), GateFrameHandler, OnRegisterServerInfo);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), GateFrameHandler, OnRecvRootStartCmd);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE), GateFrameHandler, OnGateUserOffline);
 }
 
 EMsgHandleResult GateFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
@@ -68,3 +71,20 @@ EMsgHandleResult GateFrameHandler::OnRecvRootStartCmd(TConnection *session_pt, c
     }
     RETURN_NO_HANDLE;
 }
+
+TR_BEGIN_HANDLE_MSG(GateFrameHandler, OnGateUserOffline, E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE)
+{
+    auto user_id = req.user_id();
+    {
+        auto user_info  = g_ClientNetNodeMgr.HoldClientUser(user_id);
+        if (user_info)
+        {
+            // role 下线TODO:
+            
+        }
+    }
+
+
+    g_ClientNetNodeMgr.DeleteUser(user_id);
+}
+TR_END_HANDLE_MSG_NO_RETURN_MSG

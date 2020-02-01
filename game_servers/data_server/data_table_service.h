@@ -29,6 +29,7 @@ namespace protos
 {
     class pb_data_module;
     class pb_table_item;
+    class rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES;
 }
 class DataTableItem;
 class TRDataBase;
@@ -46,6 +47,7 @@ public:
     bool FillPrestmtParams(sql::PreparedStatement * pre_stmt, const DataTableItem * tb_item);
 
     void AttatchGameDB(TRDataBase * game_db);
+    void DumpPlayerTableToRepMsg(DataPlayer * p, protos::rep_E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES * rep_msg);
 protected:
     TRDataBase * game_db_ = nullptr;
 };

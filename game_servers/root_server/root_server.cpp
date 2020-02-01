@@ -32,7 +32,7 @@
 #include "protocol_frame.h"
 #include "protcl_frame.pb.h"
 #include "server_common/game_msg_helper.h"
-
+#include "root_global.h"
 #include <string>
 
 RootServer::RootServer(int32_t index):GameServer(index)
@@ -58,6 +58,13 @@ bool RootServer::Init()
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER] = 1;
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC] = g_ServerConfig.GetJsonConfig()["root_server"]["logic_server_num"].asInt();
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE] = g_ServerConfig.GetJsonConfig()["root_server"]["gate_server_num"].asInt();
+
+    if (!g_RootGlobal.Init())
+    {
+        TERROR("root global init failed");
+        return false;
+    }
+
     return true;
 }
 

@@ -29,6 +29,8 @@ public:
     EMsgHandleResult OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt);
     // 等待其他服务器完成，开始运行
     EMsgHandleResult OnRecvRootStartCmd(TConnection *session_pt, const NetMessage * message_pt);
+    // 客户端下线
+    DECLARE_MSG_HANDLER_FUN(OnGateUserOffline);
 };
 
 #endif // __GATE_FRAME_MSG_HANDLE_H__

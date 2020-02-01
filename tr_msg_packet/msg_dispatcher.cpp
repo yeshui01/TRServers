@@ -53,61 +53,78 @@ void MsgDispatcher::DispatchMessage()
 		}
 		else
 		{
-			int32_t msg_class = msg_pt->GetMsgClass();
-			auto msg_handler = FindHandler(msg_class);
-			if (msg_handler)
+			bool use_hook = false;
+			if (hook_info_ != nullptr)
 			{
-				EMsgHandleResult handle_result = msg_handler->HandleMsg(msg_pt->GetMsgType(), msg_pt->GetConnection(), msg_pt);
-				if (EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT == handle_result)
+				if (hook_info_->hook_fun(msg_pt))
 				{
-					// 要返回数据
-					NetMessage net_message(msg_pt->GetMsgClass(), msg_pt->GetMsgType());
-					net_message.SetContent(msg_handler->GetRepContent());
-					net_message.SetRepNo(msg_pt->GetReqNo());
-					auto connection_pt = msg_pt->GetConnection();
-					if (connection_pt)
+					use_hook = true;
+				}
+			}
+			if (!use_hook)
+			{
+				int32_t msg_class = msg_pt->GetMsgClass();
+				auto msg_handler = FindHandler(msg_class);
+				if (!msg_handler)
+				{
+					TERROR("msg_handler is null, msg_class:" << msg_class);
+				}
+				else
+				{
+					EMsgHandleResult handle_result = msg_handler->HandleMsg(msg_pt->GetMsgType(), msg_pt->GetConnection(), msg_pt);
+					if (EMsgHandleResult::E_MSG_HANDLE_RETURN_CONTENT == handle_result)
 					{
-						// 是否已经关闭
-						if (connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_CONNECTED || connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_BE_CONNECT)
+						// 要返回数据
+						NetMessage net_message(msg_pt->GetMsgClass(), msg_pt->GetMsgType());
+						net_message.SetContent(msg_handler->GetRepContent());
+						net_message.SetRepNo(msg_pt->GetReqNo());
+						auto connection_pt = msg_pt->GetConnection();
+						if (connection_pt)
 						{
-							static char msg_buffer[10240] = "";
-							net_message.SetConnection(connection_pt);
-							// 发送数据
-							int32_t msg_total_size = net_message.SerializeByteNum();
-							if (msg_total_size > sizeof(msg_buffer))
+							// 是否已经关闭
+							if (connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_CONNECTED || connection_pt->GetStatus() == ESocketStatus::E_SOCKET_STATUS_BE_CONNECT)
 							{
-								TERROR("msg_total_size is too large, msg_total_size:" << msg_total_size);
-								// 采用动态内存分配
-								char *new_tmp_buffer = new char[msg_total_size];
-								net_message.Serialize(new_tmp_buffer, msg_total_size);
-								connection_pt->Send(new_tmp_buffer, msg_total_size);
-								delete[] new_tmp_buffer;
+								static char msg_buffer[10240] = "";
+								net_message.SetConnection(connection_pt);
+								// 发送数据
+								int32_t msg_total_size = net_message.SerializeByteNum();
+								if (msg_total_size > sizeof(msg_buffer))
+								{
+									TERROR("msg_total_size is too large, msg_total_size:" << msg_total_size);
+									// 采用动态内存分配
+									char *new_tmp_buffer = new char[msg_total_size];
+									net_message.Serialize(new_tmp_buffer, msg_total_size);
+									connection_pt->Send(new_tmp_buffer, msg_total_size);
+									delete[] new_tmp_buffer;
+								}
+								else
+								{
+									net_message.Serialize(msg_buffer, sizeof(msg_buffer));
+									connection_pt->Send(msg_buffer, msg_total_size);
+								}
 							}
 							else
 							{
-								net_message.Serialize(msg_buffer, sizeof(msg_buffer));
-								connection_pt->Send(msg_buffer, msg_total_size);
+								TERROR("msg connection status error, stauts:" << int32_t(connection_pt->GetStatus()));
 							}
 						}
 						else
 						{
-							TERROR("msg connection status error, stauts:" << int32_t(connection_pt->GetStatus()));
+							TERROR("msg have no connection");
 						}
+						msg_handler->RunRepCallback();
+						msg_handler->ClearContent();
 					}
-					else
-					{
-						TERROR("msg have no connection");
-					}
-					msg_handler->RunRepCallback();
-					msg_handler->ClearContent();
 				}
-			}
-			else
-			{
-				TERROR("msg_handler is null, msg_class:" << msg_class);
 			}
 		}
 		SAFE_DELETE_PTR(msg_pt);
 		msg_pt = g_MsgQueue.PopMsg();
 	}
+}
+
+void MsgDispatcher::RegDispatchHook(msg_dispatch_hook_t && msg_hook)
+{
+	hook_info_.reset(new MsgDispatchHook());
+	hook_info_->hook_fun = msg_hook;
 }

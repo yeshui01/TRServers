@@ -144,8 +144,9 @@ message req_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
 
 message rep_E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE
 {
-	int64 user_id = 1;
-	int32 reason = 2;
+	int32 isok = 1;
+	int64 user_id = 2;
+	int32 reason = 3;
 }
 
 // E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES       = 11,   // 保存玩家数据

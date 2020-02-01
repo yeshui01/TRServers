@@ -14,6 +14,8 @@
 #include "protocol_frame.h"
 #include "tr_log/log_module.h"
 #include "center_frame_handle.h"
+#include "center_login_handle.h"
+
 void CenterServer::RegisterMsgHandle()
 {
     AddLoopRun([](time_t cur_mtime)
@@ -22,7 +24,7 @@ void CenterServer::RegisterMsgHandle()
 	});
     
     g_MsgDispatcher.RegisterMsgHandlerEx<CenterFrameHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_FRAME));
-    
+    g_MsgDispatcher.RegisterMsgHandlerEx<CenterLoginHandler>(int32_t(EProtocolClass::E_PROTOCOL_CLASS_LOGIN));
 
     TINFO("center server register msg handlers");
 }

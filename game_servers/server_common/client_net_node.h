@@ -31,12 +31,20 @@ enum class EUserStatus : int32_t
     E_CLIENT_USER_STATUS_OFFLINE_ING = 5,   // 离线中
     E_CLIENT_USER_STATUS_OFFLINE = 6,       // 离线
 };
+
+// 用户下线原因
+enum EUserOfflineReason
+{
+    E_USER_OFFLINE_REASON_GATE_OFFLINE = 0, //网关连接断开(客户端掉线)
+};
+
 // 一个客户端节点信息
 struct ClientNetNode
 {
     EServerRouteNodeType node_type = EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE;
     EClientNodeStatus status = EClientNodeStatus::E_CLIENT_NODE_STATUS_NONE;
     int32_t node_index = 0;
+    int32_t zone_id = -1;
 };
 
 struct ClientUser
@@ -53,15 +61,19 @@ public:
     ClientUserManager();
     ~ClientUserManager();
 
-    void UpdateUserNode(int64_t user_id, EServerRouteNodeType node_type, int32_t node_index);
+    void UpdateUserNode(int64_t user_id, EServerRouteNodeType node_type, int32_t node_index, int32_t zone_id = -1);
     void DeleteUser(int64_t user_id);
     void DeleteUserNode(int64_t user_id, EServerRouteNodeType node_type);
     void AttachUserRole(int64_t user_id, int64_t role_id);
+    void DetachUserRole(int64_t user_id, int64_t role_id);
     ClientUser * HoldClientUser(int64_t user_id);
     void UpdateUserStatus(int64_t user_id, EUserStatus e_status);
     EUserStatus GetUserStatus(int64_t user_id);
+    ClientNetNode * GetRoleNode(int64_t role_id, EServerRouteNodeType node_type);
+    const ClientUser * GetRoleUser(int64_t role_id);
 protected:
     std::map<int64_t,  ClientUser> client_users_; // key1:user_id value:ClientUser
+    std::map<int64_t, ClientUser *> role_users_;  // key:role_id value:ClientUser
 };
 
 #define g_ClientNetNodeMgr ClientUserManager::Instance()

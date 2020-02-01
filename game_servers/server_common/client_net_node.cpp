@@ -19,7 +19,7 @@ ClientUserManager::~ClientUserManager()
 
 }
 
-void ClientUserManager::UpdateUserNode(int64_t user_id, EServerRouteNodeType node_type, int32_t node_index)
+void ClientUserManager::UpdateUserNode(int64_t user_id, EServerRouteNodeType node_type, int32_t node_index, int32_t zone_id/* = -1*/)
 {
     ClientUser &user_data = client_users_[user_id];
     user_data.user_id = user_id;
@@ -27,6 +27,7 @@ void ClientUserManager::UpdateUserNode(int64_t user_id, EServerRouteNodeType nod
     node_info.node_type = node_type;
     node_info.status = EClientNodeStatus::E_CLIENT_NODE_STATUS_NORMAL;
     node_info.node_index = node_index;
+    node_info.zone_id = zone_id;
     TINFO("update user node, user_id:" << user_id << ", node_type:" << int32_t(node_type) << ", node_index" << node_index);
 }
 
@@ -61,6 +62,7 @@ void ClientUserManager::AttachUserRole(int64_t user_id, int64_t role_id)
     {
         user_info->role_id = role_id;
         TINFO("user attach role, user_id:" << user_id << ", role_id:" << role_id);
+        role_users_[role_id] = user_info;
     }
 }
 
@@ -77,10 +79,46 @@ void ClientUserManager::UpdateUserStatus(int64_t user_id, EUserStatus e_status)
         user_info.user_id = user_id;
     }
     user_info.status = e_status;
+    TDEBUG("UpdateUserStatus,user_id:" << user_id << "e_status:" << int32_t(e_status));
 }
 
 EUserStatus ClientUserManager::GetUserStatus(int64_t user_id)
 {
     auto user_pt = FuncTools::GetMapValue(client_users_, user_id);
     return user_pt ? user_pt->status : EUserStatus::E_CLIENT_USER_STATUS_NONE;
+}
+
+ClientNetNode * ClientUserManager::GetRoleNode(int64_t role_id, EServerRouteNodeType node_type)
+{
+    auto it_role = role_users_.find(role_id);
+    if (it_role != role_users_.end())
+    {
+        auto user_info = it_role->second;
+        auto it_node = user_info->net_nodes_.find(node_type);
+        if (it_node != user_info->net_nodes_.end())
+        {
+            return &(it_node->second);
+        }
+    }
+    return nullptr;
+}
+
+void ClientUserManager::DetachUserRole(int64_t user_id, int64_t role_id)
+{
+    auto it_role = role_users_.find(role_id);
+    if (it_role != role_users_.end())
+    {
+        role_users_.erase(it_role);
+    }
+    auto user_info = FuncTools::GetMapValue(client_users_, user_id);
+    if (user_info)
+    {
+        user_info->role_id = 0;
+    }
+}
+
+const ClientUser * ClientUserManager::GetRoleUser(int64_t role_id)
+{
+    auto it_role = role_users_.find(role_id);
+    return it_role != role_users_.end() ? it_role->second : nullptr;
 }

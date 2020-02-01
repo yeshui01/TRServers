@@ -27,7 +27,7 @@
 #include "server_common/server_session.h"
 #include "server_common/server_info_manager.h"
 #include <string>
-
+#include "center_global.h"
 CenterServer::CenterServer(int32_t index):GameServer(index)
 {
     server_type_ = EServerType::E_SERVER_TYPE_CENTER_SERVER;
@@ -45,6 +45,15 @@ bool CenterServer::Init()
     {
         return false;
     }
+    if (!g_CenterGlobal.Init())
+    {
+        TERROR("center global init failed");
+        return false;
+    }
+    AddLoopRun([](time_t cur_mtime)
+    {
+        g_CenterGlobal.FrameUpdate(cur_mtime);
+    });
     return true;
 }
 

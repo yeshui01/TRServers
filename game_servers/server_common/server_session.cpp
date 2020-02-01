@@ -98,7 +98,8 @@ void ServerSession::AfterReadData(int32_t read_size)
 													  << ", req_no:" << message_pt->GetReqNo()
 													  << ", rep_no:" << message_pt->GetRepNo()
 													  << ", confirm:" << message_pt->GetConfirm()
-													  << ", content_size:" << msg_head.ContentSize());
+													  << ", content_size:" << msg_head.ContentSize()
+													  << ", param:" << message_pt->GetParam());
 		}
 		else
 		{

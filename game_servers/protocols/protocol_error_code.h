@@ -29,6 +29,9 @@ enum class EProtocolErrorCode : int32_t
     E_PROTOCOL_ERR_NICKNAME_EXISTED = 14,   // 角色名已存在
     E_PROTOCOL_ERR_GAME_DB_NOT_FOUND = 15,  // 没有游戏服务器数据库
     E_PROTOCOL_ERR_ACCOUNT_DB_NOT_FOUND = 16,  // 没有账号数据库
+    E_PROTOCOL_ERR_ROLE_ONLINE = 17,          // 角色已经在线
+    E_PROTOCOL_ERR_NOT_FOUND_PLAYER = 18,      // 找不到玩家数据
+    E_PROTOCOL_ERR_ACCOUNT_ROLE_NOT_MATCH = 19,// 角色账号信息不匹配
 };
 
 #define INT_PROTOERR(err_code) static_cast<int32_t>(EProtocolErrorCode::err_code)

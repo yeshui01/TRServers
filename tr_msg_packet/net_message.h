@@ -43,11 +43,24 @@ struct NetMsgHead
     return head_size;
   }
 
+  int32_t Size() const
+  {
+    int32_t head_size = sizeof(msg_class)
+                      + sizeof(msg_type)
+                      + sizeof(req_no)
+                      + sizeof(rep_no)
+                      + sizeof(confirm)
+                      + sizeof(content_size)
+                      + sizeof(param);
+    return head_size;
+  }
+
   bool Serialize(char * buffer, int32_t buffer_len);
 
   bool UnSerialize(const char * buffer, const int32_t buffer_len);
 
   int32_t ContentSize();
+  int32_t ContentSize() const;
 
   int32_t CalcPacketSize();
 public:
@@ -103,10 +116,15 @@ public:
   int32_t GetConfirm() const;
   int32_t GetConfirm();
 
+  // 获取附加参数
+  int64_t GetParam() const;
+  int64_t GetParam();
+
   // 序列化到指定buffer 
   bool Serialize(char * buffer, int32_t buffer_len);
   // 序列化大小计算
   int32_t SerializeByteNum();
+  int32_t SerializeByteNum() const;
   // 数据包头大小
   int32_t HeadSize();
   // 反序列化
@@ -117,6 +135,10 @@ public:
   // 获取连接
   TConnection * GetConnection();
   TConnection * GetConnection() const;
+
+  // 设置附加参数
+  void SetParam(int64_t param);
+  
 protected:
   TConnection * connection_pt_ = nullptr;	// 消息对应的连接
   // int32_t msg_class_/* = 0*/;

@@ -35,6 +35,7 @@ void DataFrameHandler::BindMsgHandle()
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), DataFrameHandler, OnRegisterServerInfo);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_ROOT_TO_XS_START_RUN), DataFrameHandler, OnRecvRootStartCmd);
     MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES), DataFrameHandler, OnSaveDataPlayer);
+    MSG_BIND_HANDLER(INT_FRAMEMSG(E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES), DataFrameHandler, OnDataLoadPlayer);
 }
 
 EMsgHandleResult DataFrameHandler::OnRegisterServerInfo(TConnection *session_pt, const NetMessage * message_pt)
@@ -89,3 +90,20 @@ TR_BEGIN_HANDLE_MSG(DataFrameHandler, OnSaveDataPlayer, E_FRAME_MSG_XS_TO_DATA_S
     g_DataTableService.SaveDataPlayer(p);
 }
 TR_END_HANDLE_MSG_NO_RETURN_MSG
+
+
+TR_BEGIN_HANDLE_MSG(DataFrameHandler, OnDataLoadPlayer, E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES)
+{
+    int64_t role_id = req.role_id();
+    auto p = g_DataGlobal.GetDataPlayer(role_id);
+    if (!p)
+    {
+        p = new DataPlayer();
+        g_DataTableService.LoadDataPlayerTablesFromDB(role_id, p);
+        g_DataGlobal.AddDataPlayer(role_id, p);
+        TINFO("Load player tables from db, roleid:" << p->role_base_.GetData().GetRoleId());
+    }
+    rep.set_role_id(role_id);
+    g_DataTableService.DumpPlayerTableToRepMsg(p, &rep);
+}
+TR_END_HANDLE_MSG_AND_RETURN_MSG

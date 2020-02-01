@@ -11,7 +11,10 @@ int32_t NetMsgHead::ContentSize()
 {
 	return content_size;
 }
-  
+int32_t NetMsgHead::ContentSize() const
+{
+	return content_size;
+}  
 int32_t NetMsgHead::CalcPacketSize()
 {
 	return Size() + ContentSize();
@@ -197,6 +200,12 @@ int32_t NetMessage::SerializeByteNum()
 	return packet_size;
 }
 
+int32_t NetMessage::SerializeByteNum() const
+{
+	int32_t packet_size = msg_head_.Size() + msg_head_.ContentSize();
+	return packet_size;
+}
+
 bool NetMessage::UnSerialize(const char * buffer, const int32_t buffer_len)
 {
 	if (!buffer)
@@ -239,4 +248,19 @@ TConnection * NetMessage::GetConnection()
 TConnection * NetMessage::GetConnection() const
 {
 	return connection_pt_;
+}
+
+// 获取附加参数
+int64_t NetMessage::GetParam() const
+{
+	return msg_head_.param;
+}
+int64_t NetMessage::GetParam()
+{
+	return msg_head_.param;
+}
+
+void NetMessage::SetParam(int64_t param)
+{
+	msg_head_.param = param;
 }
