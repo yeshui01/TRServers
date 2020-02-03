@@ -6,6 +6,18 @@
 				"msg_type":[
 					{"type":1, "des":"E_FRAME_MSG_REGISTER_SERVER_INFO"},
 					{"type":2, "des":"E_FRAME_MSG_NEW_SERVER_BOOTUP"},
+					{"type":3, "des":"E_FRAME_MSG_QUERY_SERVER_NODE_LIST"},
+					{"type":4, "des":"E_FRAME_MSG_ROOT_TO_XS_START_RUN"},
+					{"type":5, "des":"E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS"},
+					{"type":6, "des":"E_FRAME_MSG_FORWARD_MESSAGE"},
+					{"type":7, "des":"E_FRAME_MSG_FORWARD_TEST_MESSAGE"},
+					{"type":8, "des":"E_FRAME_MSG_ROOT2XS_UPDATE_CLIENT_NET_NODE"},
+					{"type":9, "des":"E_FRAME_MSG_GG2ROOT_CLIENT_OFFLINE"},
+					{"type":10, "des":"E_FRAME_MSG_ROOT_XS_CLIENT_OFFLINE"},
+					{"type":11, "des":"E_FRAME_MSG_XS_TO_DATA_SAVE_PLAYER_TABLES"},
+					{"type":12, "des":"E_FRAME_MSG_XS_TO_DATA_SAVE_GLOBAL_TABLES"},
+					{"type":13, "des":"E_FRAME_MSG_XS_TO_DATA_LOAD_PLAYER_TABLES"},
+					{"type":14, "des":"E_FRAME_MSG_XS_TO_DATA_LOAD_GLOBAL_TABLES"},
 					
 					{"type":999999999, "des":"end type des"}
 				]
@@ -24,7 +36,12 @@
 					{"type":8, "des":"E_LOGIN_MSG_ROOT2DATA_CREATE_ROLE"},
 					{"type":9, "des":"E_LOGIN_MSG_ROOT2LOGIC_CREATE_ROLE"},
 					{"type":10, "des":"E_LOGIN_MSG_ROOT2DATA_FETCH_ROLE_SNAPSHOT"},
-					
+					{"type":11, "des":"E_LOGIN_MSG_C2S_ENTER_GAME"},
+					{"type":12, "des":"E_LOGIN_MSG_C2S_TEST_ROLE_MSG"},
+					{"type":101, "des":"E_LOGIN_MSG_GG2CENTER_ENTER_GAME"},
+					{"type":102, "des":"E_LOGIN_MSG_CENTER2ROOT_ENTER_GAME"},
+					{"type":103, "des":"E_LOGIN_MSG_ROOT2LOGIC_ENTER_GAME"},
+					{"type":104, "des":"E_LOGIN_MSG_GATE2LOGIC_ENTER_GAME"},
 					{"type":999999999, "des":"end type des"}
 				]
 			}

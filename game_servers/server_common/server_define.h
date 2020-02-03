@@ -22,6 +22,7 @@ enum class EServerType : uint8_t
 	E_SERVER_TYPE_LOG_SERVER = 5,		// 区域日志服务器
 	E_SERVER_TYPE_LOGIC_SERVER = 6,		// 逻辑服务器
 	E_SERVER_TYPE_GATE_SERVER = 7,		// 网关服务器
+	E_SERVER_TYPE_LOGIC_CENTER_SERVER = 8,// 逻辑中心服务器
 
 	E_SERVER_TYPE_WORLD_SERVER = 100, 	// 世界服务器
 	E_SERVER_TYPE_WORLD_CENTER = 101,	// 世界中心逻辑服
@@ -44,6 +45,7 @@ enum class EServerRouteNodeType : uint8_t
 	E_SERVER_ROUTE_NODE_LOG = 5,			// 日志服务
 	E_SERVER_ROUTE_NODE_LOGIC = 6,			// 逻辑
 	E_SERVER_ROUTE_NODE_GATE = 7,			// 网关
+	E_SERVER_ROUTE_NODE_LOGIC_CENTER = 8,	// 逻辑中心
 
 	E_SERVER_ROUTE_NODE_WORLD = 100,		// 世界服
 	E_SERVER_ROUTE_NODE_WORLD_CENTER = 101,	// 世界逻辑

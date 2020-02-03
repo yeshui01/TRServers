@@ -1,10 +1,11 @@
-/* ======================================================
- * Author       : mknight
- * Last modified: 2019-05-29 21:13
- * Email        : 824338670@qq.com
- * Filename     : main.cpp
- * Description  : 
- * ======================================================*/
+/*=======================================================
+# Author       : mknight
+# Last modified: 2020-02-01 16:42
+# Email        : 824338670@qq.com
+# Filename     : main.cpp
+# Description  : 
+# =======================================================*/
+
 #include <iostream>
 #include <string>
 #include <cstdint>
@@ -28,7 +29,7 @@
 #include <string>
 
 #include "game_servers/server_common/server_config.h"
-#include "logic_server.h"
+#include "logic_center_server.h"
 
 
 #include <log4cplus/logger.h>
@@ -38,17 +39,17 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2)
+	if (argc < 1)
 	{
 		std::cerr <<" bootup param size error" << std::endl;
 		return 0;
 	}
-	std::string log_config = std::string("log_config/logic_server") + std::string(argv[1]) + std::string("_log.properties");
+	std::string log_config = std::string("log_config/logic_center") + std::string("_log.properties");
 	// log4cplus::Logger logger = log4cplus::Logger::getRoot();
 	// log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT(log_config.c_str()));
 	g_ServerLog.Init(log_config);
-	TDEBUG("hello logic server");
-	LogicServer logic_server(std::stoi(argv[1]));
-	logic_server.RunService();
+	TDEBUG("hello logic_center_server");
+	LogicCenterServer logic_cs(0);
+	logic_cs.RunService();
 	return 0;
 }

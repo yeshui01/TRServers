@@ -56,6 +56,7 @@ bool RootServer::Init()
     // 初始化
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA] = 1;
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER] = 1;
+    node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER] = 1;
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC] = g_ServerConfig.GetJsonConfig()["root_server"]["logic_server_num"].asInt();
     node_type_to_wait_num_[EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE] = g_ServerConfig.GetJsonConfig()["root_server"]["gate_server_num"].asInt();
 

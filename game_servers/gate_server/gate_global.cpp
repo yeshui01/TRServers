@@ -18,6 +18,7 @@
 #include "server_common/server_session.h"
 #include "tr_msg_packet/msg_tools.h"
 #include "tr_msg_packet/msg_dispatcher.h"
+#include "tr_timer/server_time.h"
 GateGlobal::GateGlobal()
 {
 
@@ -101,12 +102,14 @@ bool GateGlobal::ForwardClientMsg(NetMessage * msg_pt)
 
     MsgAddonParam msg_addonparam;
     msg_addonparam.role_id = role_id;
+    time_t start_time = g_ServerTime.NowTimeMs();
     auto cb_param = g_MsgHelper.GenAsyncMsgEnvParam(session_pt, msg_pt);
     g_MsgHelper.ForwardAsyncMessage(msg_pt->GetMsgClass(), msg_pt->GetMsgType(),
         msg_pt->GetContent(), 
-        [](const NetMessage * rep_msg, const AsyncMsgParam & cb_param)
+        [start_time](const NetMessage * rep_msg, const AsyncMsgParam & cb_param)
         {
             g_MsgHelper.SendAsyncRepNetMsg(rep_msg, cb_param);
+            TDEBUG("test msg handle use time(ms):" << (g_ServerTime.NowTimeMs() - start_time));
         },
         std::move(cb_param),
         node_type,

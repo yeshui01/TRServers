@@ -1,6 +1,14 @@
 {
 	"node_des":[
 		{"node_type":1, "node_name": "E_SERVER_ROUTE_NODE_INTERFACE"},
-		{"node_type":2, "node_name": "E_SERVER_ROUTE_NODE_ROOT"}
+		{"node_type":2, "node_name": "E_SERVER_ROUTE_NODE_ROOT"},
+		{"node_type":3, "node_name": "E_SERVER_ROUTE_NODE_CENTER"},
+		{"node_type":4, "node_name": "E_SERVER_ROUTE_NODE_DATA"},
+		{"node_type":5, "node_name": "E_SERVER_ROUTE_NODE_LOG"},
+		{"node_type":6, "node_name": "E_SERVER_ROUTE_NODE_LOGIC"},
+		{"node_type":7, "node_name": "E_SERVER_ROUTE_NODE_GATE"},
+		{"node_type":8, "node_name": "E_SERVER_ROUTE_NODE_LOGIC_CENTER"},
+		
+		{"node_type":150, "node_name": "E_SERVER_ROUTE_NODE_LOGIN"}
 	]
 }

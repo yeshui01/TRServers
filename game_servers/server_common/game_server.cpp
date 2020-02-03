@@ -33,8 +33,10 @@ std::map<EServerRouteNodeType, std::vector<std::string>> GameServer::s_node_boot
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {"login_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, {"root_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {"root_server", "data_server"}},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server"}},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {"root_server", "center_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server", "logic_center_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {"root_server", "center_server", "logic_center_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {"root_server", "center_server", "data_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW, {"view_manager_server"}},
 };
 
 bool GameServer::Init()
@@ -42,13 +44,19 @@ bool GameServer::Init()
     signal(SIGINT, SignalHandle);
     signal(SIGTERM, SignalHandle);
     signal(SIGABRT, SignalHandle);
+    if (EServerRouteNodeType::E_SERVER_ROUTE_NODE_NONE == node_type_ ||
+        EServerType::E_SERVER_TYPE_INVALID_SERVER == server_type_)
+    {
+        TERROR("server type and node_type not set initvalue, maybe in constructor should init them");
+        return false;
+    }
     g_ServerDes.Load();
 	if (!g_ServerConfig.Load())
     {
         Stop();
         return false;
     }
-
+    
     g_ServerManager.SetCurrentServerInfo(node_type_,
         server_type_, index_);
     RegisterMsgHandle();
@@ -283,7 +291,10 @@ std::pair<bool, std::string> GameServer::GetServerNameByNodeType(EServerRouteNod
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, "data_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, "center_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, "logic_server"},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, "gate_server"}
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, "gate_server"},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, "logic_center_server"},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW_MANAGER, "view_manager_server"},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW, "view_server"},
     };
     auto it = s_route_server_name.find(route_type);
     if (it != s_route_server_name.end())
@@ -303,7 +314,10 @@ std::pair<bool, EServerRouteNodeType> GameServer::GetRouteTypeByServerName(const
         {"data_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA},
         {"center_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER},
         {"logic_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC},
-        {"gate_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE}
+        {"gate_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE},
+        {"logic_center_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER},
+        {"view_manager_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW_MANAGER},
+        {"view_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW}
     };
 
     auto it = s_server_name_route.find(server_name);
@@ -324,7 +338,10 @@ std::pair<bool, EServerType> GameServer::GetServerTypeByNodeType(EServerRouteNod
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, EServerType::E_SERVER_TYPE_DATA_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, EServerType::E_SERVER_TYPE_CENTER_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, EServerType::E_SERVER_TYPE_LOGIC_SERVER},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, EServerType::E_SERVER_TYPE_GATE_SERVER}
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, EServerType::E_SERVER_TYPE_GATE_SERVER},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, EServerType::E_SERVER_TYPE_LOGIC_CENTER_SERVER},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW_MANAGER, EServerType::E_SERVER_TYPE_VIEW_MANAGER_SERVER},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW, EServerType::E_SERVER_TYPE_VIEW_SERVER}
     };
 
     auto it = s_node_server_type.find(route_type);

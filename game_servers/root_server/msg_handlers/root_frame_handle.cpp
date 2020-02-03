@@ -19,6 +19,7 @@
 #include "server_common/game_msg_helper.h"
 #include "server_common/server_config.h"
 #include "server_common/client_net_node.h"
+#include "server_common/server_describe.h"
 RootFrameHandler::RootFrameHandler()
 {
 
@@ -53,7 +54,10 @@ EMsgHandleResult RootFrameHandler::OnRegisterServerInfo(TConnection *session_pt,
     TINFO("req:" << req.ShortDebugString());
     REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
     rep.set_isok(INT_PROTOERR(E_PROTOCOL_ERR_CORRECT));
-    
+    TINFO("recv server register info:" << g_ServerDes.GetServerNodeName(req.server_node().node_type()) 
+        << " index:" << req.server_node().server_index()
+        << ", zone_id:" << req.server_node().zone_id());
+
     g_ServerManager.AddServerInfo(dynamic_cast<ServerSession*>(session_pt), EServerRouteNodeType(req.server_node().node_type()), 
         EServerType(req.server_node().server_type()), 
         req.server_node().server_index(),
