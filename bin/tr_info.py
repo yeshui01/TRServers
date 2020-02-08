@@ -1,7 +1,7 @@
 import subprocess
 import os
 import sys
-show_cmd = "ps -au | grep tianyh | grep _server | grep -v 'grep' | awk '{print $2, $11, $12}'"
+show_cmd = "ps -ef | grep tianyh | grep _server | grep -v 'grep' | awk '{print $2, $8, $9}'"
 sub_info = subprocess.Popen(show_cmd, shell=True,stdout=subprocess.PIPE)
 cmd_info = sub_info.stdout.read().decode()
 #print(cmd_info)
@@ -14,7 +14,7 @@ cur_path = cur_path.strip()
 #print("cur_path:", cur_path)
 for one_line in cmd_line_list:
 	cmd_detail = one_line.split(' ')
-	if len(cmd_detail) < 3:
+	if len(cmd_detail) < 2:
 		continue
 	'''
 	print("cmd_detail:",cmd_detail)
@@ -34,7 +34,7 @@ for one_line in cmd_line_list:
 	server_show = {}
 	server_show["pid"] = int(cmd_detail[0])
 	server_show["server"] = cmd_detail[1]
-	if len(cmd_detail[2]) > 0:
+	if len(cmd_detail) > 2 and len(cmd_detail[2]) > 0:
 		server_show["index"] = int(cmd_detail[2])
 	#else:
 		#server_show["index"] = 0
