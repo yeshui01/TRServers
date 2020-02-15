@@ -14,6 +14,7 @@
 	"data_server": { "ip":"127.0.0.1", "port": 5053, "sock_num": 15},
 	"logic_center_server": { "ip":"127.0.0.1", "port": 5054, "sock_num": 15},
 	"view_manager_server": { "ip":"127.0.0.1", "port": 5055, "sock_num": 15},
+	"world_server": { "ip":"127.0.0.1", "port": 6055, "sock_num": 15},
 	"view_server": [
 		{ "ip":"127.0.0.1", "port": 5056, "sock_num": 15}
 	],
