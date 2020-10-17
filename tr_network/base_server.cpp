@@ -119,7 +119,7 @@ void TBaseServer::RunService()
         g_ServerTime.UpdateTime();
         if (run_step_ >= EServerRunStep::E_SERVER_RUN_STEP_LISTEN)
         {
-            epoll_ptr_->EventsWatch();
+            epoll_ptr_->EventsWatch(10);
             LoopRun();
         }
         switch (run_step_)
@@ -195,7 +195,7 @@ void TBaseServer::RunService()
         // 回收连接
         RecycleConnections();
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(30));
+        // std::this_thread::sleep_for(std::chrono::milliseconds(30));
     }
 }
 
