@@ -145,6 +145,8 @@ TR_BEGIN_HANDLE_MSG(LogicLoginHandler, OnLogicStartEnterGame, E_LOGIN_MSG_ROOT2L
             g_MsgHelper.SendAsyncRepMsg(ret, cb_param);
         }
         TR_END_ASYNC_MSG_WITH_PARAM(E_SERVER_ROUTE_NODE_DATA, 0)
+        
+        RETURN_NO_HANDLE
     }
     
 }

@@ -119,7 +119,7 @@ void TBaseServer::RunService()
         g_ServerTime.UpdateTime();
         if (run_step_ >= EServerRunStep::E_SERVER_RUN_STEP_LISTEN)
         {
-            epoll_ptr_->EventsWatch(10);
+            epoll_ptr_->EventsWatch(30);
             LoopRun();
         }
         switch (run_step_)
@@ -303,7 +303,8 @@ void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
     if (epoll_pt)
     {
         new_connection->SetNoblocking();
-        epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLOUT | EPOLLERR);
+        // epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLOUT | EPOLLERR);
+        epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLERR);
     }
     else
     {

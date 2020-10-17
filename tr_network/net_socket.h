@@ -92,6 +92,7 @@ protected:
     socket_buffer_t recv_buffer_ = {INIT_SOCKET_BUFFER_SIZE};
     socket_buffer_t send_buffer_ = {INIT_SOCKET_BUFFER_SIZE};
     Epoll * epoll_ = nullptr;
+    bool is_write_event_ = false; // 是否注册写数据事件
 };
 
 #endif // __NET_SOKCET_H__

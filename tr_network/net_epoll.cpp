@@ -77,7 +77,7 @@ ESocketOpCode Epoll::RegSockEvent(TSocket *sock_pt, int32_t event_flag)
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 // 取消套接字事件
-ESocketOpCode Epoll::CancleSockEvent(TSocket *sock_pt)
+ESocketOpCode Epoll::CancelSockEvent(TSocket *sock_pt)
 {
     if (INVALID_SOCKET_FD == ep_fd_)
     {
@@ -94,7 +94,7 @@ ESocketOpCode Epoll::CancleSockEvent(TSocket *sock_pt)
         return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAILE;
     }
     register_sockets_.erase(sock_pt->GetFd());
-    TDEBUG("CancleSockEvent, fd:" << sock_pt->GetFd());
+    TDEBUG("CancelSockEvent, fd:" << sock_pt->GetFd());
     sock_pt->AttachEpoll(nullptr);
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
@@ -133,7 +133,7 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
             // 出错了
             // 取消监听
             TERROR("error events, fd:");
-            CancleSockEvent(socket_pt);
+            CancelSockEvent(socket_pt);
             socket_pt->OnErrorEvent();
         }
     }
@@ -143,4 +143,40 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
 int32_t Epoll::RestFdSpace()
 {
     return max_size_ - register_sockets_.size();
+}
+
+ESocketOpCode Epoll::ChangeSockEvent(TSocket *sock_pt, int32_t event_flag)
+{
+    if (INVALID_SOCKET_FD == ep_fd_)
+    {
+        TERROR("invalid ep_fd:" << ep_fd_ << ", cant reg sock event");
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+    }
+    if (!sock_pt)
+    {
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+    }
+    if (INVALID_SOCKET_FD == sock_pt->GetFd())
+    {
+        TERROR("invalid socket fd, cant register event");
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+    }
+    // 防止重复注册
+    if (register_sockets_.find(sock_pt->GetFd()) == register_sockets_.end())
+    {
+        TERROR("cant find registed socket");
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+    }
+    epoll_event evt;
+    evt.events = event_flag;
+    evt.data.ptr = sock_pt;
+    if (-1 == epoll_ctl(ep_fd_, EPOLL_CTL_MOD, sock_pt->GetFd(), &evt))
+    {
+        TERROR("ChangeSockEvent, sock_fd:" << sock_pt->GetFd() << ", event_flag:" << event_flag);
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+    }
+    register_sockets_[sock_pt->GetFd()] = sock_pt;
+    sock_pt->AttachEpoll(this);
+    TDEBUG("ChangeSockEvent, sock_fd:" << sock_pt->GetFd() << ", event_flag:" << event_flag);
+    return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }

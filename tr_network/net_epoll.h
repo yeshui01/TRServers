@@ -22,8 +22,10 @@ public:
     int32_t GetFd();
     // 注册套接字事件
     ESocketOpCode RegSockEvent(TSocket *sock_pt, int32_t event_flag);
-    // 取消套接字事件
-    ESocketOpCode CancleSockEvent(TSocket *sock_pt);
+    // 取消套接字监听
+    ESocketOpCode CancelSockEvent(TSocket *sock_pt);
+    // 更改套接字的事件
+    ESocketOpCode ChangeSockEvent(TSocket *sock_pt, int32_t event_flag);
     // 事件监听
     int32_t EventsWatch(int32_t timeout = 0);
     // 创建epoll

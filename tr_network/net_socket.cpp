@@ -254,6 +254,16 @@ void TSocket::HandleWrite()
                 break;
 
         } while (send_buffer_.GetRestSpace() > 0 && send_size > 0);
+
+        if (send_buffer_.GetRestSpace() < 1)
+        {
+            // 取消写事件的监听
+            if (epoll_ && is_write_event_)
+            {
+                epoll_->ChangeSockEvent(this, EPOLLIN | EPOLLERR);
+                is_write_event_ = false;
+            }
+        }
     }
 }
 
@@ -262,7 +272,7 @@ void TSocket::HandleError()
     if (epoll_)
     {
         TERROR("TSocket::HandleError");
-        epoll_->CancleSockEvent(this);
+        epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
         Close();
     }
@@ -296,6 +306,12 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
             // 放到缓冲区等下次发送
             TDEBUG("send data be write to send buffer");
             send_buffer_.WriteDataToHead(buffer + send_size, buffer_size - send_size);
+            if (epoll_ && !is_write_event_)
+            {
+                // RegSockEvent(this, EPOLLOUT);
+                epoll_->ChangeSockEvent(this, EPOLLIN | EPOLLOUT | EPOLLERR);
+                is_write_event_ = true;
+            }
         }
     }
     else 
@@ -330,7 +346,7 @@ void TSocket::HandleOpClose()
     if (epoll_)
     {
         TERROR("TSocket::HandleOpClose");
-        epoll_->CancleSockEvent(this);
+        epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
         Close();
     }
@@ -341,7 +357,7 @@ void TSocket::HandleRecvError()
     if (epoll_)
     {
         TERROR("TSocket::HandleRecvError");
-        epoll_->CancleSockEvent(this);
+        epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
         Close();
     }
@@ -356,7 +372,7 @@ void TSocket::HandleSendError()
     if (epoll_)
     {
         TERROR("HandleSendError");
-        epoll_->CancleSockEvent(this);
+        epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
     }
 }
