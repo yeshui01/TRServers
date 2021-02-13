@@ -29,9 +29,7 @@ namespace Json {
       stringValue,   ///< UTF-8 string value
       booleanValue,  ///< bool value
       arrayValue,    ///< array value (ordered list)
-      objectValue,    ///< object value (collection of name/value pairs).
-      int64Value,    // 64位整数
-      uint64Value    // 无符号的64位的整数
+      objectValue    ///< object value (collection of name/value pairs).
    };
 
    enum CommentPlacement
@@ -123,8 +121,6 @@ namespace Json {
       typedef ValueConstIterator const_iterator;
       typedef Json::UInt UInt;
       typedef Json::Int Int;
-      typedef Json::UInt64 UInt64;
-      typedef Json::Int64 Int64;
       typedef UInt ArrayIndex;
 
       static const Value null;
@@ -132,9 +128,6 @@ namespace Json {
       static const Int maxInt;
       static const UInt maxUInt;
 
-      static const Int64 minInt64;
-      static const Int64 maxInt64;
-      static const UInt64 maxUInt64;
    private:
 #ifndef JSONCPP_DOC_EXCLUDE_IMPLEMENTATION
 # ifndef JSON_VALUE_USE_INTERNAL_MAP
@@ -191,8 +184,6 @@ namespace Json {
       Value( ValueType type = nullValue );
       Value( Int value );
       Value( UInt value );
-      Value( Int64 value );
-      Value( UInt64 value );
       Value( double value );
       Value( const char *value );
       Value( const char *beginValue, const char *endValue );
@@ -240,8 +231,6 @@ namespace Json {
 # endif
       Int asInt() const;
       UInt asUInt() const;
-      Int64 asInt64() const;
-      UInt64 asUInt64() const;
       double asDouble() const;
       bool asBool() const;
 
@@ -255,8 +244,6 @@ namespace Json {
       bool isString() const;
       bool isArray() const;
       bool isObject() const;
-      bool isInt64() const;
-      bool isUInt64() const;
 
       bool isConvertibleTo( ValueType other ) const;
 
@@ -382,8 +369,7 @@ namespace Json {
       std::string getComment( CommentPlacement placement ) const;
 
       std::string toStyledString() const;
-      // 序列化成单行的json字符串 add by tianyh at 2021-1-30 : 11:54
-      std::string toJsonStringFast() const;
+
       const_iterator begin() const;
       const_iterator end() const;
 
@@ -443,8 +429,6 @@ namespace Json {
          double real_;
          bool bool_;
          char *string_;
-         Int64 int64_;
-         UInt64 uint64_;
 # ifdef JSON_VALUE_USE_INTERNAL_MAP
          ValueInternalArray *array_;
          ValueInternalMap *map_;

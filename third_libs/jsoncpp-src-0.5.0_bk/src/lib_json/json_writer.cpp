@@ -39,18 +39,6 @@ static void uintToString( unsigned int value,
    while ( value != 0 );
 }
 
-static void uint64ToString( unsigned long long value, 
-                          char *&current )
-{
-   *--current = 0;
-   do
-   {
-      *--current = (value % 10) + '0';
-      value /= 10;
-   }
-   while ( value != 0 );
-}
-
 std::string valueToString( Int value )
 {
    char buffer[32];
@@ -64,34 +52,13 @@ std::string valueToString( Int value )
    assert( current >= buffer );
    return current;
 }
-std::string valueToString( Int64 value )
-{
-   char buffer[64];
-   char *current = buffer + sizeof(buffer);
-   bool isNegative = value < 0;
-   if ( isNegative )
-      value = -value;
-   uint64ToString( UInt64(value), current );
-   if ( isNegative )
-      *--current = '-';
-   assert( current >= buffer );
-   return current;
-}
+
 
 std::string valueToString( UInt value )
 {
    char buffer[32];
    char *current = buffer + sizeof(buffer);
    uintToString( value, current );
-   assert( current >= buffer );
-   return current;
-}
-
-std::string valueToString( UInt64 value )
-{
-   char buffer[64];
-   char *current = buffer + sizeof(buffer);
-   uint64ToString( value, current );
    assert( current >= buffer );
    return current;
 }
@@ -260,13 +227,6 @@ FastWriter::writeValue( const Value &value )
    case booleanValue:
       document_ += valueToString( value.asBool() );
       break;
-   case int64Value:
-      document_ += valueToString( value.asInt64() );
-      break;
-   case uint64Value:
-      document_ += valueToString( value.asUInt64() );
-      break;
-   
    case arrayValue:
       {
          document_ += "[";
@@ -340,12 +300,6 @@ StyledWriter::writeValue( const Value &value )
       break;
    case uintValue:
       pushValue( valueToString( value.asUInt() ) );
-      break;
-   case int64Value:
-      document_ += valueToString( value.asInt64() );
-      break;
-   case uint64Value:
-      document_ += valueToString( value.asUInt64() );
       break;
    case realValue:
       pushValue( valueToString( value.asDouble() ) );

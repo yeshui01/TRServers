@@ -23,9 +23,7 @@ const Value Value::null;
 const Int Value::minInt = Int( ~(UInt(-1)/2) );
 const Int Value::maxInt = Int( UInt(-1)/2 );
 const UInt Value::maxUInt = UInt(-1);
-const Int64 Value::maxInt64 = Int64(UInt64(-1)/2);
-const Int64 Value::minInt64 = Int64(~(UInt64(-1)/2) );
-const UInt64 Value::maxUInt64 =  UInt64(-1);
+
 // A "safe" implementation of strdup. Allow null pointer to be passed. 
 // Also avoid warning on msvc80.
 //
@@ -321,15 +319,6 @@ Value::Value( Int value )
    value_.int_ = value;
 }
 
-Value::Value( Int64 value )
-   : type_( int64Value )
-   , comments_( 0 )
-# ifdef JSON_VALUE_USE_INTERNAL_MAP
-   , itemIsUsed_( 0 )
-#endif
-{
-   value_.int64_ = value;
-}
 
 Value::Value( UInt value )
    : type_( uintValue )
@@ -339,16 +328,6 @@ Value::Value( UInt value )
 #endif
 {
    value_.uint_ = value;
-}
-
-Value::Value( UInt64 value )
-   : type_( uint64Value )
-   , comments_( 0 )
-# ifdef JSON_VALUE_USE_INTERNAL_MAP
-   , itemIsUsed_( 0 )
-#endif
-{
-   value_.uint64_ = value;
 }
 
 Value::Value( double value )
@@ -450,8 +429,6 @@ Value::Value( const Value &other )
    case uintValue:
    case realValue:
    case booleanValue:
-   case int64Value:
-   case uint64Value:
       value_ = other.value_;
       break;
    case stringValue:
@@ -501,8 +478,6 @@ Value::~Value()
    case uintValue:
    case realValue:
    case booleanValue:
-   case int64Value:
-   case uint64Value:
       break;
    case stringValue:
       if ( allocated_ )
@@ -600,10 +575,6 @@ Value::operator <( const Value &other ) const
       return value_.int_ < other.value_.int_;
    case uintValue:
       return value_.uint_ < other.value_.uint_;
-   case int64Value:
-      return value_.int64_ < other.value_.int64_;
-   case uint64Value:
-      return value_.uint64_ < other.value_.uint64_;
    case realValue:
       return value_.real_ < other.value_.real_;
    case booleanValue:
@@ -670,10 +641,6 @@ Value::operator ==( const Value &other ) const
       return value_.int_ == other.value_.int_;
    case uintValue:
       return value_.uint_ == other.value_.uint_;
-   case int64Value:
-      return value_.int64_ == other.value_.int64_;
-   case uint64Value:
-      return value_.uint64_ == other.value_.uint64_;
    case realValue:
       return value_.real_ == other.value_.real_;
    case booleanValue:
@@ -727,8 +694,6 @@ Value::asString() const
       return value_.bool_ ? "true" : "false";
    case intValue:
    case uintValue:
-   case int64Value:
-   case uint64Value:
    case realValue:
    case arrayValue:
    case objectValue:
@@ -759,11 +724,6 @@ Value::asInt() const
    case uintValue:
       JSON_ASSERT_MESSAGE( value_.uint_ < (unsigned)maxInt, "integer out of signed integer range" );
       return value_.uint_;
-   case int64Value:
-      return value_.int64_;
-   case uint64Value:
-      JSON_ASSERT_MESSAGE( value_.uint_ < (unsigned)maxInt, "biginteger out of signed integer range" );
-      return value_.uint64_;
    case realValue:
       JSON_ASSERT_MESSAGE( value_.real_ >= minInt  &&  value_.real_ <= maxInt, "Real out of signed integer range" );
       return Int( value_.real_ );
@@ -773,37 +733,6 @@ Value::asInt() const
    case arrayValue:
    case objectValue:
       JSON_ASSERT_MESSAGE( false, "Type is not convertible to int" );
-   default:
-      JSON_ASSERT_UNREACHABLE;
-   }
-   return 0; // unreachable;
-}
-Value::Int64 
-Value::asInt64() const
-{
-   switch ( type_ )
-   {
-   case nullValue:
-      return 0;
-   case intValue:
-      return value_.int_;
-   case uintValue:
-      JSON_ASSERT_MESSAGE( value_.uint_ < (unsigned)maxInt, "integer out of signed integer range" );
-      return value_.uint_;
-   case realValue:
-      // JSON_ASSERT_MESSAGE( value_.real_ >= minInt  &&  value_.real_ <= maxInt, "Real out of signed integer range" );
-      return Int64( value_.real_ );
-   case booleanValue:
-      return value_.bool_ ? 1 : 0;
-   case stringValue:
-   case arrayValue:
-   case objectValue:
-      JSON_ASSERT_MESSAGE( false, "Type is not convertible to int" );
-   case int64Value:
-      return value_.int64_;
-   case uint64Value:
-      JSON_ASSERT_MESSAGE( value_.uint_ < (unsigned)maxInt, "big integer out of signed integer range" );
-      return value_.uint64_;
    default:
       JSON_ASSERT_UNREACHABLE;
    }
@@ -836,37 +765,7 @@ Value::asUInt() const
    }
    return 0; // unreachable;
 }
-Value::UInt64
-Value::asUInt64() const
-{
-   switch ( type_ )
-   {
-   case nullValue:
-      return 0;
-   case intValue:
-      JSON_ASSERT_MESSAGE( value_.int_ >= 0, "Negative integer can not be converted to unsigned integer" );
-      return value_.int_;
-   case uintValue:
-      return value_.uint_;
-   case realValue:
-      // JSON_ASSERT_MESSAGE( value_.real_ >= 0  &&  value_.real_ <= maxUInt,  "Real out of unsigned integer range" );
-      return UInt64( value_.real_ );
-   case booleanValue:
-      return value_.bool_ ? 1 : 0;
-   case stringValue:
-   case arrayValue:
-   case objectValue:
-      JSON_ASSERT_MESSAGE( false, "Type is not convertible to uint" );
-   case int64Value:
-      JSON_ASSERT_MESSAGE( value_.int64_ >= 0, "Negative integer can not be converted to unsigned integer" );
-      return value_.int64_;
-   case uint64Value:
-      return value_.uint64_;
-   default:
-      JSON_ASSERT_UNREACHABLE;
-   }
-   return 0; // unreachable;
-}
+
 double 
 Value::asDouble() const
 {
@@ -1379,16 +1278,7 @@ Value::isUInt() const
    return type_ == uintValue;
 }
 
-bool 
-Value::isInt64() const
-{
-   return type_ == int64Value;
-}
-bool 
-Value::isUInt64() const
-{
-   return type_ == uint64Value;
-}
+
 bool 
 Value::isIntegral() const
 {
@@ -1473,12 +1363,6 @@ Value::toStyledString() const
    return writer.write( *this );
 }
 
-std::string 
-Value::toJsonStringFast() const
-{
-   FastWriter writer;
-   return writer.write( *this );
-}
 
 Value::const_iterator 
 Value::begin() const
