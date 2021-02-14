@@ -368,12 +368,12 @@ void TSocket::AfterReadData(int32_t read_size)
 }
 void TSocket::HandleSendError()
 {
-    Close();
     if (epoll_)
     {
         TERROR("HandleSendError");
         epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
+        Close();
     }
 }
 
