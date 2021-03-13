@@ -9,6 +9,7 @@
 #include "client_net_node.h"
 #include "tr_common/func_tools.h"
 #include "tr_log/log_module.h"
+#include "tr_timer/server_time.h"
 ClientUserManager::ClientUserManager()
 {
 
@@ -36,8 +37,17 @@ void ClientUserManager::DeleteUser(int64_t user_id)
     auto it = client_users_.find(user_id);
     if (it != client_users_.end())
     {
+        TINFO("delete user from client user manager, user_id:" << user_id << ", role_id:" << it->second.role_id);
+        if (it->second.role_id > 0)
+        {
+            auto it_role = role_users_.find(it->second.role_id);
+            if (it_role != role_users_.end())
+            {
+                role_users_.erase(it_role);
+            }
+        }
+        
         client_users_.erase(it);
-        TINFO("delete user from client user manager, user_id:" << user_id);
     }
 }
 
@@ -79,6 +89,7 @@ void ClientUserManager::UpdateUserStatus(int64_t user_id, EUserStatus e_status)
         user_info.user_id = user_id;
     }
     user_info.status = e_status;
+    user_info.status_time = g_ServerTime.NowTime();
     TDEBUG("UpdateUserStatus,user_id:" << user_id << "e_status:" << int32_t(e_status));
 }
 

@@ -15,7 +15,7 @@
 #include "tr_common/singleton.h"
 #include <vector>
 #include <map>
-
+#include <functional>
 
 class ServerSession;
 struct ServerInfo
@@ -49,7 +49,7 @@ public:
     // 根据路由节点类型获取服务器列表
     const std::vector<ServerInfo*> * GetRouteTypeServers(EServerRouteNodeType node_type);
     // 根据路由节点类型和类型索引获取服务器信息
-    const ServerInfo* GetRouteNodeInfo(EServerRouteNodeType node_type, int32_t index, int32_t zone_id = 0);
+    ServerInfo* GetRouteNodeInfo(EServerRouteNodeType node_type, int32_t index, int32_t zone_id = 0);
     // 删除一个服务器信息
     void DeleteServerInfo(int32_t session_id);
     // 设置当前服务器数据
@@ -60,6 +60,8 @@ public:
     EServerType GetCurrentServerType();
     // 获取当前服务器index
     int32_t GetCurrentServerIndex();
+    // 遍历
+    void Traversal(std::function<void (ServerInfo * server_info_pt)> && visitor);
 protected:
     std::map<int32_t, ServerInfo> server_infos_;    // key:connection_id value:server_info
     std::map<int8_t, std::vector<ServerInfo*> > type_servers_;   // key:server_type value:sever_info

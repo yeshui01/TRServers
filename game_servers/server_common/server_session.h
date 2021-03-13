@@ -68,6 +68,7 @@ public:
     static int32_t CalcServerId(EServerRouteNodeType route_type, int32_t index_id);
     // 注册关闭回调
     void AddCloseCallback(session_close_callback_t && close_cb);
+    
 protected:
     // 通道类型
     ESessionChannelType channel_type_ = ESessionChannelType::E_CHANNEL_NONE;
@@ -75,5 +76,7 @@ protected:
     SessionChannelInfo channel_info_;
     // 连接关闭回调
     std::vector<session_close_callback_t> close_callbacks_;
+    // 最近重连时间
+    time_t reconnect_time_ = 0;
 };
 #endif // __TR_SERVER_SESSION_H__

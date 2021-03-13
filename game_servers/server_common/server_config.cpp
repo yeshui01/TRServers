@@ -54,6 +54,12 @@ bool ServerConfig::Load()
     zone_id_ = js_config_["zone_id"].asInt();
     world_zone_id_ = js_config_["zone_id"].asInt();
     global_zone_id_ = js_config_["global_zone_id"].asInt();
+    if (js_config_.isMember("debug_mode"))
+    {
+        debug_user_ = js_config_["debug_mode"]["user_id"].asInt64();
+        debug_mode_ = js_config_["debug_mode"]["open"].asInt();
+    }
+    
     TDEBUG("config zone_id:" << zone_id_);
     return true;
 }
@@ -87,4 +93,13 @@ void ServerConfig::SetZoneId(int32_t zone_id)
 int32_t ServerConfig::GetGlobalZoneId()
 {
     return global_zone_id_;
+}
+
+bool ServerConfig::IsDebugUser(int64_t user_id)
+{
+    if (debug_mode_ > 0)
+    {
+        return user_id == debug_user_;
+    }
+    return false;
 }

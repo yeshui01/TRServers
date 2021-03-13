@@ -16,6 +16,7 @@
 #include "protcl_frame.pb.h"
 #include "server_common/server_define.h"
 #include "server_common/server_describe.h"
+#include "json/json.h"
 
 GameMsgHelper::GameMsgHelper()
 {
@@ -49,6 +50,7 @@ std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServe
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {}},
         }
     },
@@ -58,6 +60,7 @@ std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServe
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {}},
         }
     },
@@ -67,10 +70,19 @@ std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServe
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {}},
         }
     },
     {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, 
+        {
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {}},
+        }
+    },
+    {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, 
         {
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {}},
@@ -85,6 +97,7 @@ std::map<EServerRouteNodeType, std::map<EServerRouteNodeType, std::vector<EServe
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, {}},
+            {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {}},
             {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {}},
         }
     },
@@ -480,7 +493,8 @@ bool GameMsgHelper::IsZoneServerNode(EServerRouteNodeType node_type)
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC,
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER,
         EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA,
-        EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE,
+        EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG,
     };
 
     return std::find(s_zone_nodes.begin(), s_zone_nodes.end(), node_type) != s_zone_nodes.end();
@@ -529,6 +543,72 @@ void GameMsgHelper::SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const 
     }
 }
 
+void GameMsgHelper::SendAsyncRepMsgJson2(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param, int32_t isok)
+{
+    std::string str;
+    // str = pb_msg.DebugString();
+    // PbMsgToJsonStr(pb_msg, str);
+    Json::Value jv;
+    PbMsg2Json(pb_msg, jv);
+    jv.removeMember("isok");
+    // str = jv.toJsonStringFast();
+    Json::Value jv_rep;
+    jv_rep["isok"] = Json::Int(isok);
+    //] = async_param.msg_class * 1000 + async_param.msg_type;
+    jv_rep["msg_data"] = jv;
+    std::string final_str = jv_rep.toStyledString();
+    auto rep_net_msg = g_MsgTools.MakeNetMessage(async_param.msg_class,
+                                                 async_param.msg_type, 
+                                                 final_str);
+    if (async_param.req_no > 0)
+    {
+        rep_net_msg.SetRepNo(async_param.req_no);
+    }
+    TINFO("SendAsyncRepMsg rep_no:" << async_param.req_no 
+        << ", msg(" << async_param.msg_class << "," << async_param.msg_type << ")"
+        << ", msg_data:" << pb_msg.ShortDebugString());
+
+    int32_t packet_size = rep_net_msg.SerializeByteNum();
+    std::vector<char> buffer(packet_size, '\0');
+    rep_net_msg.Serialize(buffer.data(), packet_size);
+    if (async_param.session_pt)
+    {
+        async_param.session_pt->Send(buffer.data(), packet_size);
+    }
+    else
+    {
+        TERROR("async_param.session is nullptr, msg_class:" << async_param.msg_class << ", msg_type:" << async_param.msg_type);
+    }
+}
+
+void GameMsgHelper::SendAsyncRepMsgJson(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param)
+{
+    std::string str;
+    // str = pb_msg.DebugString();
+    PbMsgToJsonStr(pb_msg, str);
+    auto rep_net_msg = g_MsgTools.MakeNetMessage(async_param.msg_class,
+                                                 async_param.msg_type, 
+                                                 str);
+    if (async_param.req_no > 0)
+    {
+        rep_net_msg.SetRepNo(async_param.req_no);
+    }
+    TINFO("SendAsyncRepMsg rep_no:" << async_param.req_no 
+        << ", msg(" << async_param.msg_class << "," << async_param.msg_type << ")"
+        << ", msg_data:" << pb_msg.ShortDebugString());
+
+    int32_t packet_size = rep_net_msg.SerializeByteNum();
+    std::vector<char> buffer(packet_size, '\0');
+    rep_net_msg.Serialize(buffer.data(), packet_size);
+    if (async_param.session_pt)
+    {
+        async_param.session_pt->Send(buffer.data(), packet_size);
+    }
+    else
+    {
+        TERROR("async_param.session is nullptr, msg_class:" << async_param.msg_class << ", msg_type:" << async_param.msg_type);
+    }
+}
 void GameMsgHelper::SendAsyncRepNetMsg(const NetMessage * rep_net_msg, const AsyncMsgParam & async_param)
 {
     if (!rep_net_msg)
@@ -550,4 +630,508 @@ void GameMsgHelper::SendAsyncRepNetMsg(const NetMessage * rep_net_msg, const Asy
     {
         TERROR("async_param.session is nullptr, msg_class:" << async_param.msg_class << ", msg_type:" << async_param.msg_type);
     }
+}
+
+ 
+bool GameMsgHelper::Json2PbMsg(const Json::Value& src, ProtobufMsg& dst, bool str2enum)
+{
+    const ProtobufDescriptor* descriptor = dst.GetDescriptor();
+    const ProtobufReflection* reflection = dst.GetReflection();
+    if (nullptr == descriptor || nullptr == reflection)
+    {
+        return false;
+    }
+    
+    int32_t count = descriptor->field_count();
+    for (int32_t i = 0; i < count; ++i) 
+    {
+        const ProtobufFieldDescriptor* field = descriptor->field(i);
+        if (nullptr == field) continue;
+ 
+        if(!src.isMember(field->name()))
+        {
+            continue;
+        }
+        const Json::Value& value = src[field->name()];
+ 
+        if (field->is_repeated()) 
+        {
+            if (!value.isArray())
+            {
+                TERROR("pb error");
+                return false;
+            } 
+            else 
+            {
+                Json2RepeatedMessage(value, dst, field, reflection, str2enum);
+                continue;
+            }
+        }
+        switch (field->type()) 
+        {
+            case ProtobufFieldDescriptor::TYPE_BOOL: 
+            {
+                if (value.isBool())
+                {
+                    reflection->SetBool(&dst, field, value.asBool());
+                }
+ 
+                else if (value.isInt())
+                {
+                    reflection->SetBool(&dst, field, value.isInt());
+                }
+ 
+                else if (value.isString())
+                {
+                    if (value.asString() == "true")
+                        reflection->SetBool(&dst, field, true);
+                    else if (value.asString() == "false")
+                        reflection->SetBool(&dst, field, false);
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_INT32:
+            case ProtobufFieldDescriptor::TYPE_SINT32:
+            case ProtobufFieldDescriptor::TYPE_SFIXED32: 
+            {
+                if (value.isInt()) reflection->SetInt32(&dst, field, value.asInt());
+                break;
+            }
+ 
+            case ProtobufFieldDescriptor::TYPE_UINT32:
+            case ProtobufFieldDescriptor::TYPE_FIXED32: 
+            {
+                if (value.isUInt()) reflection->SetUInt32(&dst, field, value.asUInt());
+                break;
+            }  
+ 
+            case ProtobufFieldDescriptor::TYPE_INT64:
+            case ProtobufFieldDescriptor::TYPE_SINT64:
+            case ProtobufFieldDescriptor::TYPE_SFIXED64: 
+            {
+                if (value.isInt64() || value.isInt() || value.isNumeric()) 
+                {
+                    reflection->SetInt64(&dst, field, value.asInt64());
+                }
+                else if (value.isUInt64())
+                {
+                    reflection->SetInt64(&dst, field, value.asUInt64());
+                }
+                break;
+            } 
+            case ProtobufFieldDescriptor::TYPE_UINT64:
+            case ProtobufFieldDescriptor::TYPE_FIXED64: 
+            {
+                if (value.isUInt64() || value.isUInt() || value.isNumeric()) reflection->SetUInt64(&dst, field, value.asUInt64());
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_FLOAT: 
+            {
+                if (value.isDouble()) reflection->SetFloat(&dst, field, value.asDouble());
+                break;
+            }
+ 
+            case ProtobufFieldDescriptor::TYPE_DOUBLE: 
+            {
+                if (value.isDouble()) reflection->SetDouble(&dst, field, value.asDouble());
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_STRING:
+            case ProtobufFieldDescriptor::TYPE_BYTES: 
+            {
+                if (value.isString()) reflection->SetString(&dst, field, value.asString());
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_MESSAGE: 
+            {
+                if (value.isObject()) Json2PbMsg(value, *reflection->MutableMessage(&dst, field));
+                break;
+            } 
+            default:
+            {
+                TERROR("unkonw type handle,field_name:" << field->name() << ", json value type:" << value.type());
+                break;
+            }
+        }
+    }
+    return true;
+}
+// pb 与 json 互转
+bool GameMsgHelper::JsonStr2PbMsg(const std::string& src, ProtobufMsg& dst, bool str2enum) 
+{
+    Json::Value value;
+    Json::Reader reader(Json::Features::strictMode());
+    if (!reader.parse(src, value))
+    {
+        TERROR("parse json string is fail,str=" << src);
+        return false;
+    }
+    if(true != Json2PbMsg(value, dst, str2enum))
+    {
+        TERROR("pb convert error");
+        return false;
+    }
+    return true;
+}
+
+void GameMsgHelper::RepeatedMessage2Json(const ProtobufMsg& message, 
+                                        const ProtobufFieldDescriptor* field,
+                                        const ProtobufReflection* reflection, 
+                                        Json::Value& json, bool enum2str) 
+{
+    if (nullptr == field || nullptr == reflection) 
+    {
+        PbMsg2Json(message, json);
+    }
+ 
+    for (int32_t i = 0; i < reflection->FieldSize(message, field); ++i) 
+    {
+        Json::Value tmp_json;
+        switch (field->type()) 
+        {
+            case ProtobufFieldDescriptor::TYPE_MESSAGE: 
+            {
+                const ProtobufMsg& tmp_message = reflection->GetRepeatedMessage(message, field, i);
+                if (0 != tmp_message.ByteSize()) 
+                {
+                    PbMsg2Json(tmp_message, tmp_json);
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_BOOL:
+                tmp_json[field->name()] = reflection->GetRepeatedBool(message, field, i) ? true : false;
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_ENUM: 
+            {
+                const ::google::protobuf::EnumValueDescriptor* enum_value_desc = reflection->GetRepeatedEnum(message, field, i);
+                if (enum2str) 
+                {
+                    tmp_json = enum_value_desc->name();
+                } 
+                else 
+                {
+                    tmp_json = enum_value_desc->number();
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_INT32:
+            case ProtobufFieldDescriptor::TYPE_SINT32:
+            case ProtobufFieldDescriptor::TYPE_SFIXED32:
+                // tmp_json[field->name()] = reflection->GetRepeatedInt32(message, field, i);
+                // json.append(Json::Int(reflection->GetRepeatedInt32(message, field, i)));
+                tmp_json = Json::Int(reflection->GetRepeatedInt32(message, field, i));
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_UINT32:
+            case ProtobufFieldDescriptor::TYPE_FIXED32:
+                // tmp_json[field->name()] = reflection->GetRepeatedUInt32(message, field, i);
+                // json.append(Json::UInt(reflection->GetRepeatedInt32(message, field, i)));
+                tmp_json = Json::UInt(reflection->GetRepeatedInt32(message, field, i));
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_INT64:
+            case ProtobufFieldDescriptor::TYPE_SINT64:
+            case ProtobufFieldDescriptor::TYPE_SFIXED64:
+                // tmp_json[field->name()] = (Json::Int64)reflection->GetRepeatedInt64(message, field, i);
+                // json.append(Json::Int64(reflection->GetRepeatedInt64(message, field, i)));
+                tmp_json = Json::Int64(reflection->GetRepeatedInt64(message, field, i));
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_UINT64:
+            case ProtobufFieldDescriptor::TYPE_FIXED64:
+                // tmp_json[field->name()] = Json::UInt64(reflection->GetRepeatedUInt64(message, field, i));
+                // json.append(Json::UInt64(reflection->GetRepeatedUInt64(message, field, i)));
+                tmp_json = Json::UInt64(reflection->GetRepeatedUInt64(message, field, i));
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_FLOAT:
+                tmp_json[field->name()] = reflection->GetRepeatedFloat(message, field, i);
+                break;
+ 
+            case ProtobufFieldDescriptor::TYPE_STRING:
+            case ProtobufFieldDescriptor::TYPE_BYTES:
+                tmp_json[field->name()] = reflection->GetRepeatedString(message, field, i);
+                break;
+ 
+            default:
+                break;
+        }
+        json.append(tmp_json);
+    }
+}
+
+void GameMsgHelper::PbMsg2Json(const ProtobufMsg& src, Json::Value& dst, bool enum2str) 
+{
+    const ProtobufDescriptor* descriptor = src.GetDescriptor();
+    const ProtobufReflection* reflection = src.GetReflection();
+    if (nullptr == descriptor || nullptr == descriptor)
+    {
+        return;
+    }
+ 
+    int32_t count = descriptor->field_count();
+ 
+    for (int32_t i = 0; i < count; ++i) 
+    {
+        const ProtobufFieldDescriptor* field = descriptor->field(i);
+        
+        if (field->is_repeated()) 
+        {
+            dst[field->name()] = Json::Value(Json::ValueType::arrayValue);
+            
+            if (reflection->FieldSize(src, field) > 0)
+                RepeatedMessage2Json(src, field, reflection, dst[field->name()], enum2str);
+            continue;
+        }
+ 
+ 
+        // if (!reflection->HasField(src, field)) 
+        // {
+        //     continue;
+        // }
+ 
+        switch (field->type()) 
+        {
+            case ProtobufFieldDescriptor::TYPE_MESSAGE: 
+            {
+                const ProtobufMsg& tmp_message = reflection->GetMessage(src, field);
+                if (0 != tmp_message.ByteSize())
+                {
+                    PbMsg2Json(tmp_message, dst[field->name()]);
+                }
+                else
+                {
+                    dst[field->name()] = Json::Value(Json::ValueType::objectValue);
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_BOOL:
+            {
+                dst[field->name()] = reflection->GetBool(src, field) ? true : false;
+                break;
+            }
+            case ProtobufFieldDescriptor::TYPE_ENUM: 
+            {
+                const ::google::protobuf::EnumValueDescriptor* enum_value_desc = reflection->GetEnum(src, field);
+                if (enum2str) {
+                    dst[field->name()] = enum_value_desc->name();
+                } else {
+                    dst[field->name()] = enum_value_desc->number();
+                }
+                break;
+            }
+            case ProtobufFieldDescriptor::TYPE_INT32:
+            case ProtobufFieldDescriptor::TYPE_SINT32:
+            case ProtobufFieldDescriptor::TYPE_SFIXED32:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = Json::Int(0);
+                }
+                else
+                {
+                    dst[field->name()] = Json::Int(reflection->GetInt32(src, field));
+                }
+                break;
+            }
+            case ProtobufFieldDescriptor::TYPE_UINT32:
+            case ProtobufFieldDescriptor::TYPE_FIXED32:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = Json::UInt(0);
+                }
+                else
+                {
+                    dst[field->name()] = Json::UInt(reflection->GetUInt32(src, field));
+                }
+                break;
+            }
+            case ProtobufFieldDescriptor::TYPE_INT64:
+            case ProtobufFieldDescriptor::TYPE_SINT64:
+            case ProtobufFieldDescriptor::TYPE_SFIXED64:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = Json::Int64(0);
+                }
+                else
+                {
+                    dst[field->name()] = Json::Int64(reflection->GetInt64(src, field));
+                }
+                break;
+            }
+            case ProtobufFieldDescriptor::TYPE_UINT64:
+            case ProtobufFieldDescriptor::TYPE_FIXED64:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = Json::UInt64(0);
+                }
+                else
+                {
+                    dst[field->name()] = Json::UInt64(reflection->GetUInt64(src, field));
+                }
+                break;
+            }
+                
+ 
+            case ProtobufFieldDescriptor::TYPE_FLOAT:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = reflection->GetFloat(src, field);
+                }
+                else
+                {
+                    dst[field->name()] = 0;
+                }
+                break;
+            }
+                
+ 
+            case ProtobufFieldDescriptor::TYPE_STRING:
+            case ProtobufFieldDescriptor::TYPE_BYTES:
+            {
+                if (!reflection->HasField(src, field))
+                {
+                    dst[field->name()] = "x";
+                }
+                else
+                {
+                    dst[field->name()] = reflection->GetString(src, field);
+                }
+                
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+void GameMsgHelper::PbMsgToJsonStr(const ::google::protobuf::Message& src, std::string& dst, bool enum2str)
+{
+    Json::Value value;
+    PbMsg2Json(src, value, enum2str);
+    Json::FastWriter writer;
+    dst = writer.write(value);
+}
+
+bool GameMsgHelper::Json2RepeatedMessage(const Json::Value& json, ProtobufMsg& message, 
+                                const ProtobufFieldDescriptor* field,
+                                const ProtobufReflection* reflection,
+                                bool str2enum) 
+{
+    int32_t count = json.size();
+    for (int32_t j = 0; j < count; ++j) 
+    {
+        switch (field->type()) 
+        {
+            case ProtobufFieldDescriptor::TYPE_BOOL: 
+            {
+                if (json.isBool())
+                {
+                    reflection->AddBool(&message, field, json[j].asBool());
+                }
+                else if (json[j].isInt())
+                {
+                    reflection->AddBool(&message, field, json[j].asInt());
+                }
+                else if (json[j].isString()) 
+                {
+                    if (json[j].asString() == "true")
+                    {
+                        reflection->AddBool(&message, field, true);
+                    }
+                    else if (json[j].asString() == "false")
+                    {
+                        reflection->AddBool(&message, field, false);
+                    }
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_ENUM: 
+            {
+                const ::google::protobuf::EnumDescriptor *pedesc = field->enum_type();
+                const ::google::protobuf::EnumValueDescriptor* pevdesc = nullptr;
+                if (str2enum) 
+                {
+                    pevdesc = pedesc->FindValueByName(json[j].asString());
+ 
+                } 
+                else 
+                {
+                    pevdesc = pedesc->FindValueByNumber(json[j].asInt());
+                }
+                if (nullptr != pevdesc) 
+                {
+                    reflection->AddEnum(&message, field, pevdesc);
+                }
+                break;
+            } 
+ 
+            case ProtobufFieldDescriptor::TYPE_INT32:
+            case ProtobufFieldDescriptor::TYPE_SINT32:
+            case ProtobufFieldDescriptor::TYPE_SFIXED32: 
+            {
+                if (json[j].isInt()) reflection->AddInt32(&message, field, json[j].asInt());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_UINT32:
+            case ProtobufFieldDescriptor::TYPE_FIXED32: 
+            {
+                if (json[j].isUInt()) reflection->AddUInt32(&message, field, json[j].asUInt());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_INT64:
+            case ProtobufFieldDescriptor::TYPE_SINT64:
+            case ProtobufFieldDescriptor::TYPE_SFIXED64: 
+            {
+                if (json[j].isInt()) reflection->AddInt64(&message, field, json[j].asInt64());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_UINT64:
+            case ProtobufFieldDescriptor::TYPE_FIXED64: 
+            {
+                if (json[j].isUInt()) reflection->AddUInt64(&message, field, json[j].asUInt64());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_FLOAT: 
+            {
+                if (json[j].isDouble()) reflection->AddFloat(&message, field, json[j].asDouble());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_DOUBLE: 
+            {
+                if (json[j].isDouble()) reflection->AddDouble(&message, field, json[j].asDouble());
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_MESSAGE: 
+            {
+                if (json[j].isObject()) Json2PbMsg(json[j], *reflection->AddMessage(&message, field));
+            } break;
+ 
+            case ProtobufFieldDescriptor::TYPE_STRING:
+            case ProtobufFieldDescriptor::TYPE_BYTES: 
+            {
+                if (json[j].isString()) reflection->AddString(&message, field, json[j].asString());
+            } break;
+ 
+            default:
+            {
+                break;
+            }
+        }
+    }
+    return true;
 }

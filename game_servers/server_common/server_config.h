@@ -37,11 +37,14 @@ public:
 	void SetZoneId(int32_t zone_id);
 	// 获取全局区id
 	int32_t GetGlobalZoneId();
-	
+	// 是否是调试玩家
+	bool IsDebugUser(int64_t user_id);
 protected:
 	int32_t zone_id_ = 0;
 	int32_t world_zone_id_ = 0;
 	int32_t global_zone_id_ = 0;
+	int64_t debug_user_ = 0;
+	int32_t debug_mode_ = 0;
 	// json配置数据缓存
 	Json::Value js_config_;
 };

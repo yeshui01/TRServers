@@ -87,7 +87,7 @@ public:
     async_dbevnt_fut_t evt_fut;                          // 异步事件结果
     std::shared_ptr<TRAsyncDBEvent> db_evt;              // 异步事件
     async_dbevnt_callback_t cb_evt;                      // 回调事件
-    std::vector<DataTableItem> * result_ptr = nullptr;
+    std::vector<DataTableItem> * result_ptr = nullptr;   // 如果有结果集，这里指向结果集
 };
 
 class TRAsyncDBTask
@@ -111,6 +111,7 @@ public:
     ~TRDataBase();
 
     bool Init(std::string host, std::string user_name, std::string pwd, std::string db_name, int32_t worker_size);
+    bool Init2(std::string host, int32_t port, std::string user_name, std::string pswd, std::string db_name, int32_t worker_size);
     // 每帧事件循环
     void EventRun();
     // 添加一个异步事件
@@ -138,6 +139,13 @@ public:
     void InstallPreStmts(std::function<void (sql::Connection *, TRDBPrepareStmtMgr *) > && install_func);
     // 获取主连接的预处理语句
     sql::PreparedStatement *HoldMainPreStmt(int32_t stmt_id);
+    // 执行预处理语句
+    bool ExecutePreStmt(sql::PreparedStatement * stmt_pt);
+    // 执行预处理语句更新
+    int32_t ExecutePreUpdate(sql::PreparedStatement * stmt_pt);
+    // 执行预处理语句查询
+    sql::ResultSet *ExecutePreQuery(sql::PreparedStatement * stmt_pt);
+    
 public:
     // 查询结果转换到本地结果集
     static void ResultSetConvt(sql::ResultSet * meta_result, std::vector<DataTableItem> & v_local_set);
@@ -181,6 +189,8 @@ public:
     void FrameUpdate();
     // 停止所有数据库服务
     void Stop();
+    // 遍历
+    void ForEach(std::function<void(int32_t db_id, TRDataBase *)> && visitor);
 protected:
     std::map<int32_t, std::shared_ptr<TRDataBase> > databases_; // key:database_id value: database ptr
 };

@@ -99,7 +99,7 @@ public:
     // 获取节点索引
     int32_t GetRouteNodeIndex();
     
-protected:
+public:
     // 启动时连接其他服务器
     virtual bool BootUpConnectServer();
     // 检查服务器连接是否都连接完毕
@@ -113,7 +113,7 @@ protected:
     // 向其他服务器节点注册自己的服务器节点数据
     void RegServerInfoToOtherServers(EServerRouteNodeType node_type, int32_t index);
     // 根据服务器节点类型和配置连接服务器
-    bool ConnectToOtherServer(EServerRouteNodeType node_type, int32_t index);
+    bool ConnectToOtherServer(EServerRouteNodeType node_type, int32_t index, bool need_reconnect = true);
     
 protected:
 	EServerType server_type_ = EServerType::E_SERVER_TYPE_INVALID_SERVER;
@@ -122,7 +122,7 @@ protected:
     time_t bootup_update_time_ = 0;
     std::map<int32_t, ServerBootupWaitEvent> wait_events_;  // 等待启动的事件列表
     bool wait_other_servers_ = true;
-
+    time_t reconnect_update_time_ = 0;
 protected:
     static std::vector<std::function<void (int32_t sig)> > s_v_sigfuns_;
     static std::map<EServerRouteNodeType, std::vector<std::string> > s_node_bootup_connect_;

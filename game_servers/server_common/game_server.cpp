@@ -16,7 +16,8 @@
 #include "game_msg_helper.h"
 #include "tr_timer/global_timer.h"
 #include "server_common/server_describe.h"
-
+#include "server_time.h"
+#include "server_common/server_info_manager.h"
 GameServer::GameServer(int32_t index)
 {
 	index_ = index;
@@ -30,11 +31,12 @@ std::vector<std::function<void (int32_t sig)> > GameServer::s_v_sigfuns_ = {};
 
 std::map<EServerRouteNodeType, std::vector<std::string>> GameServer::s_node_bootup_connect_ =
 {
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {"login_server"}},
+        // {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {"login_server"}},  // 临时屏蔽
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, {"root_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {"root_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {"root_server", "data_server"}},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server", "logic_center_server"}},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {"root_server", "center_server", "logic_center_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server", "log_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {"root_server", "center_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {"root_server", "center_server", "data_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW, {"view_manager_server"}},
 };
@@ -69,7 +71,9 @@ bool GameServer::Init()
     AddLoopRun([](time_t cur_mtime)
     {
         g_GlobalTimer.Update(cur_mtime);
+        g_MsgTools.Update(cur_mtime/1000);
     });
+    
     return true;
 }
 
@@ -82,6 +86,36 @@ bool GameServer::RunStepCheck()
 // 正常运行
 bool GameServer::RunStepRunning()
 {
+    // 重连
+    time_t now_time = g_ServerTime.NowTime();
+
+    if (now_time - reconnect_update_time_ <= 1)
+    {
+        return GameParentClass::RunStepRunning();
+    }
+
+    g_ServerManager.Traversal([](ServerInfo *server_info_pt)
+    {
+        if (!server_info_pt)
+        {
+            return;
+        }
+        if (server_info_pt->session == nullptr)
+        {
+            return;
+        }
+        if (server_info_pt->session->GetFd() != INVALID_SOCKET_FD)
+        {
+            return;
+        }
+        ServerSession * session = server_info_pt->session;
+        if (session->CloseReconnect())
+        {
+            session->Reconnect();
+        }
+    });
+
+    reconnect_update_time_ = now_time;
 	return GameParentClass::RunStepRunning();
 }
 
@@ -115,15 +149,15 @@ bool GameServer::BootUpConnectServer()
             TERROR("not found config:" << v);
             return false;
         }
-        std::string server_name = v;
-        std::string ip = jv_config[server_name]["ip"].asString();
-        int32_t port = jv_config[server_name]["port"].asInt();
         auto session = AllocateConnect();
         if (!session)
         {
             TERROR("session is nullptr in bootup connect");
             return false;
         }
+        std::string server_name = v;
+        std::string ip = jv_config[server_name]["ip"].asString();
+        int32_t port = jv_config[server_name]["port"].asInt();
         ESocketOpCode op_code = session->Connect(ip, port);
         if (op_code != ESocketOpCode::E_SOCKET_OP_CODE_CORRECT)
         {
@@ -179,6 +213,7 @@ bool GameServer::BootUpConnectServer()
         {
             node_zone_id = g_ServerConfig.GetGlobalZoneId();
         }
+        server_session->SetNeedReconnect(true); // 断线后自动重连
         g_ServerManager.AddServerInfo(server_session, 
             result.second, 
             server_type_ret.second, 
@@ -192,6 +227,20 @@ bool GameServer::BootUpConnectServer()
             << ", node_zone_id:" << node_zone_id);
         // 3.添加管理记录
         TBaseServer::OnNewConnectComeIn(server_session);
+
+        // 设置重连
+        // {
+        //     server_session->SetReConnectAction([req_msg{req}, node_type, index](TConnection *connect_pt) mutable
+        //     {
+        //         g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+        //         INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), req_msg,
+        //         [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
+        //             REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
+        //             STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+        //             TDEBUG("reconnect asyncmsg callback:rep_E_FRAME_MSG_REGISTER_SERVER_INFO:" << rep.ShortDebugString());
+        //         }, AsyncMsgParam(), node_type, index);
+        //     });
+        // }
     }
 
     return true;
@@ -217,7 +266,7 @@ bool GameServer::StartLocalListen(std::string server_name)
             }
             else 
             {
-                TINFO("listen sccess, ip:" << ip << ", port:" << port << ", sock_num:" << sock_num);
+                TINFO("listen success, ip:" << ip << ", port:" << port << ", sock_num:" << sock_num);
                 InitConnectionPool<ServerSession>(sock_num);
             }
         }
@@ -289,6 +338,7 @@ std::pair<bool, std::string> GameServer::GetServerNameByNodeType(EServerRouteNod
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, "login_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, "root_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, "data_server"},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, "log_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, "center_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, "logic_server"},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, "gate_server"},
@@ -312,6 +362,7 @@ std::pair<bool, EServerRouteNodeType> GameServer::GetRouteTypeByServerName(const
         {"login_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN},
         {"root_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT},
         {"data_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA},
+        {"log_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG},
         {"center_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER},
         {"logic_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC},
         {"gate_server", EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE},
@@ -336,6 +387,7 @@ std::pair<bool, EServerType> GameServer::GetServerTypeByNodeType(EServerRouteNod
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIN, EServerType::E_SERVER_TYPE_LOGIN_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, EServerType::E_SERVER_TYPE_ROOT_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, EServerType::E_SERVER_TYPE_DATA_SERVER},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, EServerType::E_SERVER_TYPE_LOG_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, EServerType::E_SERVER_TYPE_CENTER_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, EServerType::E_SERVER_TYPE_LOGIC_SERVER},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, EServerType::E_SERVER_TYPE_GATE_SERVER},
@@ -407,26 +459,28 @@ bool GameServer::RunStepWaiting()
         if (it->second.state != EBootupWaitEvtState::E_BOOTUP_WAIT_EVT_STATE_FINISH)
         {
             all_finished = false;
+            break;
         }
     }
     if (all_finished)
     {
-        if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER && !g_MsgHelper.IsGlobalServerNode(g_ServerManager.GetCurrentNodeType()))
-        {
-            TINFO("all wait event finished");
-            // 通知root，开始等待其他服务器启动了
-            REQMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) req;
-            req.set_node_type(int32_t(node_type_));
-            req.set_node_index(index_);
-            g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-            INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), req,
-            [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
-                REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
-                STRING_TO_PBMSG(rep_msg->GetContent(), rep);
-                TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS:" << rep.ShortDebugString());
-            },
-            AsyncMsgParam(), EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
-        }
+        // 这个项目不需要这一步
+        // if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER && !g_MsgHelper.IsGlobalServerNode(g_ServerManager.GetCurrentNodeType()))
+        // {
+        //     TINFO("all wait event finished");
+        //     // 通知root，开始等待其他服务器启动了
+        //     REQMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) req;
+        //     req.set_node_type(int32_t(node_type_));
+        //     req.set_node_index(index_);
+        //     g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+        //     INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), req,
+        //     [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
+        //         REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
+        //         STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+        //         TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS:" << rep.ShortDebugString());
+        //     },
+        //     AsyncMsgParam(), EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
+        // }
     }
     return all_finished;
 }
@@ -515,9 +569,27 @@ void GameServer::RegServerInfoToOtherServers(EServerRouteNodeType node_type, int
             STRING_TO_PBMSG(rep_msg->GetContent(), rep);
             TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_REGISTER_SERVER_INFO:" << rep.ShortDebugString());
         }, AsyncMsgParam(), node_type, index);
+
+    // 设置重连动作
+    // RegServerInfoToOtherServers
+    ServerInfo * server_info = g_ServerManager.GetRouteNodeInfo(node_type, index, g_ServerConfig.GetZoneId());
+    if (server_info && server_info->session && server_info->session->CloseReconnect())
+    {
+        TINFO("register reconnect handle,node_type:" << int32_t(node_type) << ", index:" << index);
+        server_info->session->SetReConnectAction([req_msg{req}, node_type, index](TConnection *connect_pt) mutable
+        {
+            g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+            INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), req_msg,
+            [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
+                REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
+                STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+                TDEBUG("reconnect asyncmsg callback:rep_E_FRAME_MSG_REGISTER_SERVER_INFO:" << rep.ShortDebugString());
+            }, AsyncMsgParam(), node_type, index);
+        });
+    }
 }
 
-bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t index)
+bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t index, bool need_reconnect)
 {
     auto check_ret = GetServerNameByNodeType(node_type);
     if (!check_ret.first)
@@ -589,6 +661,11 @@ bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t in
     {
         node_zone_id = g_ServerConfig.GetGlobalZoneId();
     }
+    if (need_reconnect)
+    {
+        server_session->SetNeedReconnect(true);
+    }
+    
     // 2.登记到服务器管理
     g_ServerManager.AddServerInfo(server_session,
                                   result.second,
@@ -601,6 +678,24 @@ bool GameServer::ConnectToOtherServer(EServerRouteNodeType node_type, int32_t in
                                                 << ", index:" << index
                                                 << ", fd:" << server_session->GetFd()
                                                 << ", sessionptr:" << (int64_t)(server_session));
+    // {
+    //     REQMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) req;
+    //     req.mutable_server_node()->set_node_type(int32_t(node_type_));
+    //     req.mutable_server_node()->set_server_type(int32_t(server_type_));
+    //     req.mutable_server_node()->set_server_index(index_);
+    //     req.mutable_server_node()->set_zone_id(g_ServerConfig.GetZoneId());
+    //     server_session->SetReConnectAction([req_msg{req}, node_type{node_type_}, index{index_}](TConnection *connect_pt) mutable
+    //         {
+    //         g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+    //             INT_FRAMEMSG(E_FRAME_MSG_REGISTER_SERVER_INFO), req_msg,
+    //         [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
+    //                 REPMSG(E_FRAME_MSG_REGISTER_SERVER_INFO) rep;
+    //                 STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+    //                 TDEBUG("reconnect asyncmsg callback:rep_E_FRAME_MSG_REGISTER_SERVER_INFO:" << rep.ShortDebugString());
+    //         }, AsyncMsgParam(), node_type, index);
+    //     });
+    // }
+    
     // 3.添加管理记录
     TBaseServer::OnNewConnectComeIn(server_session);
     return true;

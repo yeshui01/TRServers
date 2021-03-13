@@ -15,6 +15,14 @@
 #include "tr_common/singleton.h"
 
 #include <google/protobuf/message.h>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/message.h>
+#include "json/json.h"
+
+typedef ::google::protobuf::Message         ProtobufMsg;
+typedef ::google::protobuf::Reflection      ProtobufReflection;
+typedef ::google::protobuf::FieldDescriptor ProtobufFieldDescriptor;
+typedef ::google::protobuf::Descriptor      ProtobufDescriptor;
 
 // 消息附加参数
 struct MsgAddonParam
@@ -92,6 +100,8 @@ public:
      * @param  async_param : 
      */
     void SendAsyncRepMsg(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param);
+    void SendAsyncRepMsgJson(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param);
+    void SendAsyncRepMsgJson2(::google::protobuf::Message & pb_msg, const AsyncMsgParam & async_param, int32_t isok);
     void SendAsyncRepNetMsg(const NetMessage * rep_net_msg, const AsyncMsgParam & async_param);
     /*
     *  转发消息到某个服务器
@@ -113,6 +123,20 @@ public:
     bool IsGlobalServerNode(EServerRouteNodeType node_type);
     // 是否是大区节点
     bool IsZoneServerNode(EServerRouteNodeType node_type);
+public:
+    // pb与json互相转换
+    void PbMsgToJsonStr(const ::google::protobuf::Message& src, std::string& dst, bool enum2str = false);
+    bool JsonStr2PbMsg(const std::string& src, ProtobufMsg& dst, bool str2enum = false);
+    bool Json2PbMsg(const Json::Value& src, ProtobufMsg& dst, bool str2enum = false);
+    void PbMsg2Json(const ProtobufMsg& src, Json::Value& dst, bool enum2str = false);
+    bool Json2RepeatedMessage(const Json::Value& json, ProtobufMsg& message, 
+                                const ProtobufFieldDescriptor* field,
+                                const ProtobufReflection* reflection,
+                                bool str2enum = false);
+    void RepeatedMessage2Json(const ProtobufMsg& message, 
+                                        const ProtobufFieldDescriptor* field,
+                                        const ProtobufReflection* reflection, 
+                                        Json::Value& json, bool enum2str);
 protected:
     void EnsureMsgBuffer(int32_t buffer_size);
     

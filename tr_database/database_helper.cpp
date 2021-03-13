@@ -120,6 +120,44 @@ bool TRDataBase::Init(std::string host, std::string user_name, std::string pwd, 
     // }
     return true;
 }
+
+bool TRDataBase::Init2(std::string host, int32_t port, std::string user_name, std::string pswd, std::string db_name, int32_t worker_size)
+{
+    // "tcp://192.168.16.19:3306", "root", "1q2w3e4R@ttt"
+    db_name_ = db_name;
+    user_ = user_name;
+    pswd_ = pswd;
+    host_ = host;
+    if (worker_size < 0)
+    {
+        worker_size = 0;
+    }
+    std::stringstream ss_connect;
+    ss_connect << "tcp://" << host << ":" << port;
+    TINFO("database init, host:" << host << ", user_name:" << user_name << ", pswd:" << pswd_ << ", db_name:" << db_name_ << ", worker_size:" << worker_size);
+    auto db_driver = get_driver_instance();
+    for (int32_t i = 0; i < worker_size + 1; ++i)
+    {
+        // 设计上一个worker使用一个连接器,至少要一个主连接器,因此这里使用  worker_size + 1
+        // auto db_conn = db_driver->connect(host_, user_, pswd_);
+        auto db_conn = db_driver->connect(ss_connect.str(), user_name, pswd);
+        if (!db_conn)
+        {
+            TERROR("connect data base failed");
+            return false;;
+        }
+        db_conn->setSchema(db_name_);
+        conns_.push_back(std::shared_ptr<sql::Connection>(db_conn));
+        std::shared_ptr<TRDBPrepareStmtMgr> prestmt_mgr(new TRDBPrepareStmtMgr());
+        conn_prestmt_mgrs_.push_back(prestmt_mgr);
+    }
+    // if (worker_size > 0)
+    // {
+    //     db_driver->threadInit();
+    // }
+    return true;
+}
+
 sql::Connection * TRDataBase::HoldConnect(int32_t index)
 {
     if (index >= 0 && index < int32_t(conns_.size()))
@@ -295,7 +333,26 @@ void TRDataBase::Query(const std::string & sql_str, std::vector<DataTableItem> &
     }
     catch (sql::SQLException &e)
     {
-        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        // mysql err_code:2013, err:Lost connection to MySQL server during query, sql_state:HY000
+        // mysql err_code:2006, err:MySQL server has gone away, sql_state:HY000
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState() << ",sql:" << sql_str);
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            // 重连mysql
+            if (conn->reconnect())
+            {
+                TWARN("reconnect mysql success");
+
+                std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+                std::shared_ptr<sql::ResultSet> result(stmt->executeQuery(sql_str));
+                ResultSetConvt(result.get(), v_local_set);
+            }
+            else
+            {
+                TERROR("reconnect mysql fail");
+            }
+            
+        }
     }
 }
 
@@ -312,8 +369,27 @@ bool TRDataBase::Execute(const std::string & sql_str)
     }
     catch (sql::SQLException &e)
     {
-        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
-        return false;
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState() << ",sql:" << sql_str);
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            // 重连mysql
+            if (conn->reconnect())
+            {
+                TWARN("reconnect mysql success2");
+
+                std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+                return stmt->execute(sql_str);
+            }
+            else
+            {
+                TERROR("reconnect mysql fail2");
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
     return false;
 }
@@ -331,9 +407,31 @@ int32_t TRDataBase::ExecuteUpdate(const std::string & sql_str)
     }
     catch (sql::SQLException &e)
     {
-        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
-        return e.getErrorCode();
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState() << ",sql:" << sql_str);
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            // 重连mysql
+            if (conn->reconnect())
+            {
+                TWARN("reconnect mysql success3");
+
+                std::shared_ptr<sql::Statement> stmt(conn->createStatement());
+                return stmt->executeUpdate(sql_str);
+            }
+            else
+            {
+                TERROR("reconnect mysql fail3");
+                return 0;
+            }
+        }
+        else
+        {
+            return 0;
+        }
+        return 0;
+        // return e.getErrorCode();
     }
+    return 0;
 }
 
 
@@ -435,6 +533,116 @@ sql::PreparedStatement *TRDataBase::HoldMainPreStmt(int32_t stmt_id)
     }
     return conn_prestmt_mgrs_[0]->HoldStatement(stmt_id);
 }
+
+
+// 执行预处理语句
+bool TRDataBase::ExecutePreStmt(sql::PreparedStatement * stmt_pt)
+{
+    try
+    {
+        return stmt_pt->execute();  // 更新数据库
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            auto conn = stmt_pt->getConnection();
+            if (conn)
+            {
+                // 重连mysql
+                if (conn->reconnect())
+                {
+                    TWARN("reconnect mysql success2");
+                    return stmt_pt->execute();
+                }
+                else
+                {
+                    TERROR("reconnect mysql fail2");
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+// 执行预处理语句更新
+int32_t TRDataBase::ExecutePreUpdate(sql::PreparedStatement * stmt_pt)
+{
+    try
+    {
+        return stmt_pt->executeUpdate();  // 更新数据库
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            auto conn = stmt_pt->getConnection();
+            if (conn)
+            {
+                // 重连mysql
+                if (conn->reconnect())
+                {
+                    TWARN("reconnect mysql success2");
+                    return stmt_pt->executeUpdate();
+                }
+                else
+                {
+                    TERROR("reconnect mysql fail2");
+                    return 0;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    return 0;
+}
+
+// 执行预处理语句查询
+sql::ResultSet *TRDataBase::ExecutePreQuery(sql::PreparedStatement * stmt_pt)
+{
+    try
+    {
+        return stmt_pt->executeQuery();  // 查询数据库
+    }
+    catch (sql::SQLException &e)
+    {
+        TERROR("mysql err_code:" << e.getErrorCode() << ", err:" << e.what() << ", sql_state:" << e.getSQLState());
+        if (e.getErrorCode() == 2013 || e.getErrorCode() == 2006)
+        {
+            auto conn = stmt_pt->getConnection();
+            if (conn)
+            {
+                // 重连mysql
+                if (conn->reconnect())
+                {
+                    TWARN("reconnect mysql success2");
+                    return stmt_pt->executeQuery();
+                }
+                else
+                {
+                    TERROR("reconnect mysql fail2");
+                    return nullptr;
+                }
+            }
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+    return nullptr;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 TRDataBaseHelper::TRDataBaseHelper()
 {
@@ -476,5 +684,13 @@ void TRDataBaseHelper::FrameUpdate()
     for (auto it = databases_.begin(); it != databases_.end(); ++it)
     {
         it->second->EventRun();
+    }
+}
+
+void TRDataBaseHelper::ForEach(std::function<void(int32_t db_id, TRDataBase *)> && visitor)
+{
+    for (auto it = databases_.begin(); it != databases_.end(); ++it)
+    {
+        visitor(it->first, it->second.get());
     }
 }

@@ -23,6 +23,9 @@
 #include "common_define.h"
 #include <string>
 #include "server_info_manager.h"
+#include "server_time.h"
+#include "server_buffer.h"
+#include "msg_pool.h"
 ServerSession::ServerSession() : TConnection()
 {
 
@@ -44,51 +47,36 @@ void ServerSession::AfterReadData(int32_t read_size)
 	{
 		NetMsgHead msg_head;
 		if (GetRecvBuffer().PeekDataSize() < msg_head.Size())
-			return;
+			break;
 		// peek 数据包头
 		char buffer_head[256] = "";
 		int32_t real_read_size = GetRecvBuffer().ReadData(buffer_head, msg_head.Size(), true);
 		if (real_read_size < msg_head.Size())
-			return;
+			break;
 
 		if (!msg_head.UnSerialize(buffer_head, sizeof(buffer_head)))
 		{
 			TERROR("msg head unserialize msg failed, maybe logic error!!!");
-			return;
+			break;
 		}
 		if (msg_head.CalcPacketSize() > GetRecvBuffer().PeekDataSize())
 		{
 			// 数据还未接受完整
-			return;
+			break;
 		}
 		int32_t packet_size = msg_head.CalcPacketSize();
+		if (packet_size > 10240)
+		{
+			TWARN("packet maybe too large, msg(" << msg_head.msg_class << "," << msg_head.msg_type << ")");
+		}
 		// 读取数据包
 		TDEBUG("fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 											<< ", write_index:" << GetRecvBuffer().GetWriteIndex());
 
-		static char *packet_buffer = nullptr;
-		static int32_t packet_buffer_size = 0;
-		if (!packet_buffer)
-		{
-			// 初始默认10k
-			packet_buffer = new char[10240];
-			packet_buffer_size = 10240;
-		}
-		if (packet_buffer)
-		{
-			if (packet_buffer_size < packet_size)
-			{
-				TWARN("packet body maybe too large, please check!!!!");
-				// 重新分配更大的内存
-				SAFE_DELETE_PTR(packet_buffer);
-				packet_buffer = new char[packet_size];
-				packet_buffer_size = packet_size;
-			}
-		}
-
-		GetRecvBuffer().ReadData(packet_buffer, packet_size);
-		NetMessage *message_pt = new NetMessage();
-		if (message_pt->UnSerialize(packet_buffer, packet_size))
+		auto packet_buffer = g_ServerBuffer.HoldMsgBuffer(packet_size);
+		GetRecvBuffer().ReadData(packet_buffer->buffer, packet_size);
+		NetMessage *message_pt = g_NetMsgPool.ApplyMsg();
+		if (message_pt->UnSerialize(packet_buffer->buffer, packet_size))
 		{
 			message_pt->SetConnection(this);
 			g_MsgQueue.AddMsg(message_pt);
@@ -104,7 +92,7 @@ void ServerSession::AfterReadData(int32_t read_size)
 		else
 		{
 			TERROR("msg UnSerialize failed");
-			SAFE_DELETE_PTR(message_pt)
+			g_NetMsgPool.RecycleMsg(message_pt);
 		}
 		TDEBUG("after fetch package, read_index:" << GetRecvBuffer().GetReadIndex()
 												  << ", write_index:" << GetRecvBuffer().GetWriteIndex()
@@ -118,13 +106,22 @@ void ServerSession::OnClose()
 	{
 		cb(this);
 	}
-	close_callbacks_.clear();
-	if (GetChannelType() == ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER)
+	if (!reconnect_)
 	{
-		g_ServerManager.DeleteServerInfo(GetConnId());
+		close_callbacks_.clear();
+		if (GetChannelType() == ESessionChannelType::E_CHANNEL_SERVER_TO_SERVER)
+		{
+			g_ServerManager.DeleteServerInfo(GetConnId());
+		}
+		channel_type_ = ESessionChannelType::E_CHANNEL_NONE;
+		channel_info_.Reset();
 	}
-	channel_type_ = ESessionChannelType::E_CHANNEL_NONE;
-	channel_info_.Reset();
+	else
+	{
+		// 需要重连, 1秒钟后重连
+		reconnect_time_ = g_ServerTime.NowTime() + 1;
+	}
+	
     TConnection::OnClose();
 }
 

@@ -24,6 +24,14 @@ enum EFieldValueType : int8_t
     E_FIELD_VALUE_TYPE_FLOAT = 5,       // 浮点数
     E_FIELD_VALUE_TYPE_STRING = 6,      // string
 };
+// 数据状态
+enum EDbStatus : int8_t
+{
+    E_DB_STATUS_NONE = 0,
+    E_DB_STATUS_INSERT = 1, // 插入
+    E_DB_STATUS_UPDATE = 2, // 更新
+    E_DB_STATUS_DELETE = 3, // 删除
+};
 // 数据库字段
 class DataField
 {
@@ -64,14 +72,7 @@ struct DataTableDescribe
     std::string table_name;                     // 数据表名
     std::vector<DataFieldDescribe> field_info;  // 字段信息
 };
-// 数据状态
-enum EDbStatus : int8_t
-{
-    E_DB_STATUS_NONE = 0,
-    E_DB_STATUS_INSERT = 1, // 插入
-    E_DB_STATUS_UPDATE = 2, // 更新
-    E_DB_STATUS_DELETE = 3, // 删除
-};
+
 // 数据库表的数据项
 class DataTableItem
 {
@@ -110,10 +111,16 @@ public:
     int32_t TableId() const;
     size_t GetFieldsSize();
     size_t GetFieldsSize() const;
-    void SetDbStatus(EDbStatus db_status);
+    void SetDbStatus(EDbStatus db_status, bool force = false);
     void ClearDbStatus();
     // 交换字段
     void SwapFields(DataTableItem & tb_item);
+    // 设置字段值
+    void UpdateFieldsValueByItem(const DataTableItem & tb_item);
+    // 字段是否变化
+    bool FieldsChange();
+    bool FieldsChange() const;
+    void SetFieldChange(int32_t field_index);
 public:
     // 获取字段数据
     const DataField * GetField(int32_t field_index);
@@ -151,6 +158,12 @@ public:
         if (it == data_items_.end())
             return nullptr;
         
+        if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+        {
+            return nullptr;
+        }
+        
+        it->second->SetDbStatus(E_DB_STATUS_UPDATE);
         return it->second;
     }
 
@@ -160,26 +173,85 @@ public:
         if (it == data_items_.end())
             return nullptr;
         
-        return it->second;
+        return it->second->GetDbStatus() != E_DB_STATUS_DELETE ? it->second:nullptr;
+    }
+
+    const TbItemType * FindItemC(std::function<bool (const TbItemType * data_pt)> && filter)
+    {
+        const TbItemType * ret = nullptr;
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
+            if (filter(it->second))
+            {
+                ret = it->second;
+                break;
+            }
+        }
+
+        return ret;
+    }
+    TbItemType * FindItem(std::function<bool (TbItemType * data_pt)> && filter)
+    {
+        TbItemType * ret = nullptr;
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
+            if (filter(it->second))
+            {
+                ret = it->second;
+                break;
+            }
+        }
+
+        return ret;
     }
 
     TbItemType * AddItem(key_type key)
     {
         auto it = data_items_.find(key);
         if (it != data_items_.end())
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                // 覆盖
+                it->second->SetDbStatus(E_DB_STATUS_UPDATE);
+                return it->second;
+            }
+            else
+            {
+                // 已经存在了
+                return nullptr;   
+            }
+        }
+        auto new_item_pt = new TbItemType(table_id);
+        if (!new_item_pt)
+        {
             return nullptr;
-        
-        auto check_ret = data_items_.insert(std::make_pair(key, new TbItemType(table_id)));
-        
-        return check_ret.second ? check_ret.first->second : nullptr;
+        }
+        auto check_ret = data_items_.insert(std::make_pair(key, new_item_pt));
+        if (check_ret.second == false)
+        {
+            delete new_item_pt;
+            return nullptr;
+        }
+        new_item_pt->SetDbStatus(E_DB_STATUS_INSERT);
+        return new_item_pt;
     }
     void DeleteItem(key_type key)
     {
         auto it = data_items_.find(key);
         if (it != data_items_.end())
         {
-            delete it->second;
-            data_items_.erase(it);
+            it->second->SetDbStatus(E_DB_STATUS_DELETE);
+            // delete it->second;
+            // data_items_.erase(it);
         }
     }
     int32_t GetTableId()
@@ -191,6 +263,10 @@ public:
     {
         for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
         {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
             visitor(it->second);
         }
     }
@@ -198,12 +274,92 @@ public:
     {
         for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
         {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
             visitor(it->second);
         }
+    }
+    void ForEachForDB(std::function<void(const TbItemType * item_data)> && visitor) const
+    {
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            visitor(it->second);
+        }
+    }
+    void ForEachForDB(std::function<void(TbItemType * item_data)> && visitor)
+    {
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            visitor(it->second);
+        }
+    }
+    void ForEachWithBreak(std::function<bool(const TbItemType * item_data)> && visitor) const
+    {
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
+            if (visitor(it->second))
+            {
+                break;
+            }
+        }
+    }
+    void ForEachWithBreak(std::function<bool(TbItemType * item_data)> && visitor)
+    {
+        for (auto it = data_items_.begin(); it != data_items_.end(); ++it)
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                continue;
+            }
+            if (visitor(it->second))
+            {
+                break;
+            }
+        }
+    }
+    // 刷新item,回收需要删除的item
+    void FlushItem()
+    {
+        for (auto it = data_items_.begin(); it != data_items_.end();)
+        {
+            if (it->second->GetDbStatus() == E_DB_STATUS_DELETE)
+            {
+                delete it->second;
+                data_items_.erase(it++);
+            }
+            else
+            {
+                it->second->ClearDbStatus();
+                ++it;
+            }
+        }
+    }
+    size_t Size()
+    {
+        return data_items_.size();
+    }
+    void SetUserData(int32_t user_data)
+    {
+        user_data_ = user_data;
+    }
+    int32_t GetUserData()
+    {
+        return user_data_;
+    }
+    void ChangeTableId(int32_t new_tb_id)
+    {
+        table_id_ = new_tb_id;
     }
 protected:
     std::map<key_type, TbItemType* > data_items_;    // key:item value:tb_item
     int32_t table_id_ = 0;
+    int32_t user_data_ = 0;
 };
 
 template<class TbItemType, int32_t table_id>

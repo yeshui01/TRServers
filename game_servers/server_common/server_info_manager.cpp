@@ -59,7 +59,7 @@ const std::vector<ServerInfo*> * ServerInfoManager::GetRouteTypeServers(EServerR
     return FuncTools::GetMapValue(route_servers_, (int8_t)(node_type));
 }
 
-const ServerInfo* ServerInfoManager::GetRouteNodeInfo(EServerRouteNodeType node_type, int32_t index, int32_t zone_id)
+ServerInfo* ServerInfoManager::GetRouteNodeInfo(EServerRouteNodeType node_type, int32_t index, int32_t zone_id)
 {
     auto v_server_info = GetRouteTypeServers(node_type);
     if (!v_server_info)
@@ -68,7 +68,7 @@ const ServerInfo* ServerInfoManager::GetRouteNodeInfo(EServerRouteNodeType node_
         return nullptr;
     }
     
-    const ServerInfo * ret = nullptr;
+    ServerInfo * ret = nullptr;
     for (auto && v : *v_server_info)
     {
         // TDEBUG("v->route_type:" << int32_t(v->route_type) << ", v->index:" << v->server_index << " vptr:" << int64_t(v));
@@ -121,4 +121,12 @@ EServerType ServerInfoManager::GetCurrentServerType()
 int32_t ServerInfoManager::GetCurrentServerIndex()
 {
     return cur_server_index_;
+}
+
+void ServerInfoManager::Traversal(std::function<void (ServerInfo * server_info_pt)> && visitor)
+{
+    for (auto it = server_infos_.begin(); it != server_infos_.end(); ++it)
+    {
+        visitor(&(it->second));
+    }
 }

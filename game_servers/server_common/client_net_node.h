@@ -53,6 +53,7 @@ struct ClientUser
     int64_t role_id = 0;    // 同一时间只允许一个角色
     std::map<EServerRouteNodeType, ClientNetNode> net_nodes_;    // key:node_type value:ClientNetNode
     EUserStatus status = EUserStatus::E_CLIENT_USER_STATUS_NONE;
+    time_t status_time = 0;
 };
 
 class ClientUserManager : public TSingleton<ClientUserManager>
