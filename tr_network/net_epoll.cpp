@@ -27,7 +27,8 @@ void Epoll::Create(int32_t size)
 {
     max_size_ = size;
     ep_fd_ = epoll_create(size);
-    v_events_.resize(size);
+    int32_t event_size = size > 1024 ? 1024:size;
+    v_events_.resize(event_size);
     TDEBUG("epoll create, size:" << size << ", ep_fd:" << ep_fd_);
 }
 
@@ -109,7 +110,7 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
     auto code = epoll_wait(ep_fd_, &v_events_[0], max_size_, timeout);
     if (code == -1)
     {
-        TERROR("epoll wait error");
+        TERROR("epoll wait error,errono:" << errno);
         return code;
     }
     for (int32_t i = 0; i < code; ++i)

@@ -104,6 +104,9 @@ ESocketOpCode TSocket::Connect(std::string ip, int32_t port)
     int32_t code = connect(fd_, reinterpret_cast<struct sockaddr *>(&server_addr), sizeof(server_addr));
     if (-1 == code)
     {
+        ::close(fd_);
+        fd_ = INVALID_SOCKET_FD;
+
         TERROR("connect server failed, op:" << ip << ", port:" << port);
         return ESocketOpCode::E_SOCKET_OP_CODE_CONNECT_FAILE;
     }
@@ -118,6 +121,12 @@ void TSocket::Close()
 {
     if (INVALID_SOCKET_FD != fd_)
     {
+        if (epoll_)
+        {
+            TERROR("TSocket::Close, epoll unreg");
+            epoll_->CancelSockEvent(this);
+            epoll_ = nullptr;
+        }
         ::close(fd_);
         OnClose();
         status_ = ESocketStatus::E_SOCKET_STATUS_CLOSED;
@@ -179,11 +188,11 @@ void TSocket::HandleAccept()
 void TSocket::HandleRecv()
 {
     // 接收数据到缓冲区
-    char buffer[1024];
+    char buffer[16384]; // 16K
     int32_t read_ret = 0;
     do 
     {
-        read_ret = recv(fd_, buffer, 1024, 0);
+        read_ret = recv(fd_, buffer, 16384, 0);
         if (0 == read_ret)
         {
             // 对端socket关闭了
@@ -222,33 +231,12 @@ void TSocket::HandleWrite()
     if (send_buffer_.PeekDataSize() > 0)
     {
         TDEBUG("ready to send data, peek data size:" << send_buffer_.PeekDataSize());
-        static char buffer[4096];
+        static char buffer[16384];      // 16K
         //static int32_t buffer_default_size = 4096;
         int32_t send_size = 0;
         do
         {
-            int32_t s = send_buffer_.ReadData(buffer, 4096);
-            // send_size = send(fd_, buffer, s, 0);
-            // if (send_size > 0)
-            // {
-            //     // 发送出去了send_size字节,缓冲区清理
-            //     send_buffer_.ReadData(buffer, send_size);
-            // }
-            // else if (send_size == 0)
-            // {
-            //     // 对端关闭
-            //     HandleOpClose();
-            //     break;
-            // }
-            // else if (send_size < 0)
-            // {
-            //     if (EAGAIN != errno)
-            //     {
-            //         // 意外错误
-            //         HandleSendError();
-            //     }
-            //     break;
-            // }
+            int32_t s = send_buffer_.ReadData(buffer, 16384);
             send_size = InnerSend(buffer, s, true);
             if (send_size < 1)
                 break;
@@ -258,6 +246,7 @@ void TSocket::HandleWrite()
         if (send_buffer_.GetRestSpace() < 1)
         {
             // 取消写事件的监听
+            TWARN("cancel write event,fd:" << fd_);
             if (epoll_ && is_write_event_)
             {
                 epoll_->ChangeSockEvent(this, EPOLLIN | EPOLLERR);
@@ -297,6 +286,11 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         TERROR("buffer is nullptr");
         return 0;
     }
+    if (is_write_event_ && !fail_to_head && send_buffer_.GetRestSpace() > 0)
+    {
+        // 说明有待发送的数据未发送完，那么直接放到发送缓冲区
+        return send_buffer_.WriteData(buffer, buffer_size);
+    }
     int32_t send_size = send(fd_, buffer, buffer_size, 0);
     TDEBUG("TSocket::send, ret:" << send_size);
     if (send_size > 0)
@@ -304,7 +298,7 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         if (send_size < buffer_size)
         {
             // 放到缓冲区等下次发送
-            TDEBUG("send data be write to send buffer");
+            TWARN("send data be write to send buffer,fd:" << fd_);
             send_buffer_.WriteDataToHead(buffer + send_size, buffer_size - send_size);
             if (epoll_ && !is_write_event_)
             {
@@ -316,20 +310,26 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
     }
     else 
     {
+        if (fail_to_head)
+        {
+            send_size = send_buffer_.WriteDataToHead(buffer, buffer_size);
+        }
+        else
+        {
+            send_size = send_buffer_.WriteData(buffer, buffer_size);
+        }
+        if (epoll_ && !is_write_event_)
+        {
+            // RegSockEvent(this, EPOLLOUT);
+            epoll_->ChangeSockEvent(this, EPOLLIN | EPOLLOUT | EPOLLERR);
+            is_write_event_ = true;
+        }
+        if (send_size < buffer_size)
+        {
+            TERROR("send buffer full");
+        }
         if (EAGAIN == errno)
         {
-            if (fail_to_head)
-            {
-                send_size = send_buffer_.WriteDataToHead(buffer, buffer_size);
-            }
-            else
-            {
-                send_size = send_buffer_.WriteData(buffer, buffer_size);
-            }
-            if (send_size < buffer_size)
-            {
-                TERROR("send buffer full");
-            }
             return 0;
         }
         else 
@@ -389,8 +389,9 @@ void TSocket::HandleSendError()
 
  void TSocket::SetNoblocking()
  {
-     int32_t flag = fcntl(fd_, F_GETFL, 0);
-     fcntl(fd_, F_SETFL, flag | O_NONBLOCK);
+    int32_t flag = fcntl(fd_, F_GETFL, 0);
+    fcntl(fd_, F_SETFL, flag | O_NONBLOCK);
+    TDEBUG("SetNoblocking:" << fd_);
  }
 
  void TSocket::OnClose()
@@ -401,3 +402,39 @@ void TSocket::HandleSendError()
  {
      return recv(fd_, buffer, buffer_size, 0);
  }
+
+ void TSocket::SetSockRecvBufferSize(int32_t buffer_size)
+ {
+    if (buffer_size < 1)
+    {
+        return;
+    }
+    if (fd_ == INVALID_SOCKET_FD)
+    {
+        return;
+    }
+    //设置socket发送、接收缓冲区大小为64k，默认为8k，最大为64k
+    int32_t set_size = buffer_size;
+    int32_t set_code = 0;
+    int32_t result = 0;
+    socklen_t opt_len = 4;
+    set_code = ::setsockopt(fd_, SOL_SOCKET, SO_RCVBUF, (char*)&set_size, sizeof(set_size));
+
+    set_code = ::getsockopt(fd_,SOL_SOCKET, SO_RCVBUF, (char*)&result, &opt_len);
+    TDEBUG("set socket recv buffer:" << result);
+ }
+
+void TSocket::SetSockWriteBufferSize(int32_t buffer_size)
+{
+    //设置socket发送、接收缓冲区大小为64k，默认为8k，最大为64k
+    int32_t set_size = buffer_size;
+    int32_t set_code = 0;
+    int32_t result = 0;
+    socklen_t opt_len = 4;
+    set_code = ::getsockopt(fd_,SOL_SOCKET, SO_SNDBUF, (char*)&result, &opt_len);
+    TDEBUG("get socket send buffer:" << result << "," << set_size);
+    set_code = ::setsockopt(fd_, SOL_SOCKET, SO_SNDBUF, (char*)&set_size, sizeof(set_size));
+
+    set_code = ::getsockopt(fd_,SOL_SOCKET, SO_SNDBUF, (char*)&result, &opt_len);
+    TDEBUG("get socket send buffer:" << result << "," << set_size);
+}

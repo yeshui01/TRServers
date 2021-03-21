@@ -119,7 +119,7 @@ void TBaseServer::RunService()
         g_ServerTime.UpdateTime();
         if (run_step_ >= EServerRunStep::E_SERVER_RUN_STEP_LISTEN)
         {
-            epoll_ptr_->EventsWatch(50);
+            epoll_ptr_->EventsWatch(epoll_mtime_);
             LoopRun();
         }
         switch (run_step_)
@@ -186,6 +186,7 @@ void TBaseServer::RunService()
             case EServerRunStep::E_SERVER_RUN_STEP_STOP:
             {
                 RunStepStop();
+                stop_ = true;
                 break;
             }
         default:
@@ -212,8 +213,8 @@ void TBaseServer::Stop()
         }
     });
     Close();
-    stop_ = true;
     SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_STOP);
+    // stop_ = true;
 }
 
 void TBaseServer::AddLoopRun(loop_func_t && func)
@@ -305,6 +306,7 @@ void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
     if (epoll_pt)
     {
         new_connection->SetNoblocking();
+        // new_connection->SetSockWriteBufferSize(16*1024);
         // epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLOUT | EPOLLERR);
         epoll_pt->RegSockEvent(new_connection, EPOLLIN | EPOLLERR);
     }
@@ -338,4 +340,13 @@ bool TBaseServer::RunStepWaitOtherServers()
 bool TBaseServer::RunStepStop()
 {
     return true;
+}
+
+void TBaseServer::SetEpollTimeout(int32_t msec)
+{
+    if (msec < 0)
+    {
+        msec = 0;
+    }
+    epoll_mtime_ = msec;
 }

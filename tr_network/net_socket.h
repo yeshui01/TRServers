@@ -53,6 +53,9 @@ public:
     void AttachEpoll(Epoll * epoll_pt);
     // 设置非组赛模式
     void SetNoblocking();
+    // 调整socket缓冲区大小
+    void SetSockRecvBufferSize(int32_t buffer_size);
+    void SetSockWriteBufferSize(int32_t buffer_size);
 public:
     // 可读事件
     virtual void OnReadEvent();

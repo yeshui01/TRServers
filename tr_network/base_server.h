@@ -56,7 +56,8 @@ public:
     // 获取运行阶段
     EServerRunStep GetRunStep() const;
     EServerRunStep GetRunStep();
-    
+    // 设置epoll timeout
+    void SetEpollTimeout(int32_t msec);
 public:
     // 接受连接处理
     virtual void HandleAccept();
@@ -85,6 +86,7 @@ protected:
     std::vector<TConnection*> wait_recycle_connect_;  // 等待回收的连接
     int32_t max_connect_num_ = 0;
     EServerRunStep run_step_ = EServerRunStep::E_SERVER_RUN_STEP_NONE;
+    int32_t epoll_mtime_ = 250;
 };
 
 #endif  // __BASE_SERVER_H__

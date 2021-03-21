@@ -31,11 +31,11 @@ std::vector<std::function<void (int32_t sig)> > GameServer::s_v_sigfuns_ = {};
 
 std::map<EServerRouteNodeType, std::vector<std::string>> GameServer::s_node_bootup_connect_ =
 {
-        // {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {"login_server"}},  // 临时屏蔽
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, {"login_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_DATA, {"root_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOG, {"root_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_CENTER, {"root_server", "data_server"}},
-        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server", "log_server"}},
+        {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC, {"root_server", "center_server", "data_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_GATE, {"root_server", "center_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_LOGIC_CENTER, {"root_server", "center_server", "data_server"}},
         {EServerRouteNodeType::E_SERVER_ROUTE_NODE_VIEW, {"view_manager_server"}},
@@ -464,23 +464,22 @@ bool GameServer::RunStepWaiting()
     }
     if (all_finished)
     {
-        // 这个项目不需要这一步
-        // if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER && !g_MsgHelper.IsGlobalServerNode(g_ServerManager.GetCurrentNodeType()))
-        // {
-        //     TINFO("all wait event finished");
-        //     // 通知root，开始等待其他服务器启动了
-        //     REQMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) req;
-        //     req.set_node_type(int32_t(node_type_));
-        //     req.set_node_index(index_);
-        //     g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
-        //     INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), req,
-        //     [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
-        //         REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
-        //         STRING_TO_PBMSG(rep_msg->GetContent(), rep);
-        //         TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS:" << rep.ShortDebugString());
-        //     },
-        //     AsyncMsgParam(), EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
-        // }
+        if (server_type_ != EServerType::E_SERVER_TYPE_ROOT_SERVER && !g_MsgHelper.IsGlobalServerNode(g_ServerManager.GetCurrentNodeType()))
+        {
+            TINFO("all wait event finished");
+            // 通知root，开始等待其他服务器启动了
+            REQMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) req;
+            req.set_node_type(int32_t(node_type_));
+            req.set_node_index(index_);
+            g_MsgHelper.ForwardAsyncPbMessage(INT_MSGCLASS(E_PROTOCOL_CLASS_FRAME),
+            INT_FRAMEMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS), req,
+            [](const NetMessage *rep_msg, const AsyncMsgParam &cb_param) {
+                REPMSG(E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS) rep;
+                STRING_TO_PBMSG(rep_msg->GetContent(), rep);
+                TDEBUG("asyncmsg callback:rep_E_FRAME_MSG_XS_TO_ROOT_WAIT_OTHERS:" << rep.ShortDebugString());
+            },
+            AsyncMsgParam(), EServerRouteNodeType::E_SERVER_ROUTE_NODE_ROOT, 0);
+        }
     }
     return all_finished;
 }
