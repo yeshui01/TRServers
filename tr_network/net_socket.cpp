@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <memory.h>
 #include <error.h>
+#include <sys/un.h>
 #include "net_socket.h"
 #include "log_module.h"
 #include "net_epoll.h"
@@ -54,8 +55,19 @@ ESocketOpCode TSocket::Bind(std::string ip, int32_t port)
     fd_ = ::socket(AF_INET, SOCK_STREAM, 0);
     if (INVALID_SOCKET_FD == fd_)
     {
-        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAIL;
     }
+    bool reuse_addr = true;
+    setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse_addr, sizeof(bool));
+    bool reuse_port = true;
+    setsockopt(fd_,SOL_SOCKET, SO_REUSEPORT,(const char*)&reuse_port,sizeof(bool));
+
+    struct linger so_linger;
+    so_linger.l_onoff = true;
+    so_linger.l_linger = 0;
+    setsockopt(fd_, SOL_SOCKET, SO_LINGER, &so_linger,sizeof(so_linger));
+
+    SetNoblocking();
     memset(&server_addr, 0, sizeof(sockaddr_in));
     server_addr.sin_family = AF_INET;
     auto code = inet_pton(AF_INET, ip.c_str(), &server_addr.sin_addr);
@@ -72,19 +84,20 @@ ESocketOpCode TSocket::Bind(std::string ip, int32_t port)
     // bind success
     bind_addr_.ip = ip;
     bind_addr_.port = port;
+    e_trans_mode_ = E_SOCKET_TRANS_MODE_TCP;
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 
 ESocketOpCode TSocket::Listen()
 {
-    auto code = listen(fd_, 100);
+    auto code = listen(fd_, SOMAXCONN);
     if (-1 == code)
     {
         return ESocketOpCode::E_SOCKET_OP_LISTEN_ERROR;
     }
     status_ = ESocketStatus::E_SOCKET_STATUS_LISTEN;
-    bool reuse_addr = true;
-    setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse_addr, sizeof(bool));
+    // bool reuse_addr = true;
+    // setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse_addr, sizeof(bool));
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 
@@ -94,7 +107,7 @@ ESocketOpCode TSocket::Connect(std::string ip, int32_t port)
     fd_ = ::socket(AF_INET, SOCK_STREAM, 0);
     if (INVALID_SOCKET_FD == fd_)
     {
-        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAIL;
     }
     memset(&server_addr, 0, sizeof(sockaddr_in));
     server_addr.sin_family = AF_INET;
@@ -108,12 +121,13 @@ ESocketOpCode TSocket::Connect(std::string ip, int32_t port)
         fd_ = INVALID_SOCKET_FD;
 
         TERROR("connect server failed, op:" << ip << ", port:" << port);
-        return ESocketOpCode::E_SOCKET_OP_CODE_CONNECT_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_CODE_CONNECT_FAIL;
     }
     status_ = ESocketStatus::E_SOCKET_STATUS_CONNECTED;
     // 记录连接的地址
     connect_addr_.ip = ip;
     connect_addr_.port = port;
+    e_trans_mode_ = E_SOCKET_TRANS_MODE_TCP;
     return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
 }
 
@@ -123,7 +137,7 @@ void TSocket::Close()
     {
         if (epoll_)
         {
-            TERROR("TSocket::Close, epoll unreg");
+            TWARN("TSocket::Close, epoll unreg");
             epoll_->CancelSockEvent(this);
             epoll_ = nullptr;
         }
@@ -241,9 +255,9 @@ void TSocket::HandleWrite()
             if (send_size < 1)
                 break;
 
-        } while (send_buffer_.GetRestSpace() > 0 && send_size > 0);
+        } while (send_buffer_.PeekDataSize() > 0 && send_size > 0);
 
-        if (send_buffer_.GetRestSpace() < 1)
+        if (send_buffer_.PeekDataSize() < 1)
         {
             // 取消写事件的监听
             TWARN("cancel write event,fd:" << fd_);
@@ -254,13 +268,23 @@ void TSocket::HandleWrite()
             }
         }
     }
+    else if (epoll_ && is_write_event_)
+    {
+        TWARN("cancel write event2,fd:" << fd_);
+        if (epoll_ && is_write_event_)
+        {
+            epoll_->ChangeSockEvent(this, EPOLLIN | EPOLLERR);
+            is_write_event_ = false;
+        }
+    }
+    
 }
 
 void TSocket::HandleError()
 {
     if (epoll_)
     {
-        TERROR("TSocket::HandleError");
+        TWARN("TSocket::HandleError");
         epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
         Close();
@@ -286,13 +310,22 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         TERROR("buffer is nullptr");
         return 0;
     }
-    if (is_write_event_ && !fail_to_head && send_buffer_.GetRestSpace() > 0)
+    if (buffer_size < 1)
+    {
+        return 0;
+    }
+    if (fd_ == INVALID_SOCKET_FD)
+    {
+        return 0;
+    }
+    if (is_write_event_ && !fail_to_head /*&& send_buffer_.GetRestSpace() > 0*/)
     {
         // 说明有待发送的数据未发送完，那么直接放到发送缓冲区
         return send_buffer_.WriteData(buffer, buffer_size);
     }
     int32_t send_size = send(fd_, buffer, buffer_size, 0);
-    TDEBUG("TSocket::send, ret:" << send_size);
+    int32_t cur_error_no = errno;
+    TDEBUG("TSocket::send, ret:" << send_size << ", cur_error_no:" << cur_error_no << ",fd:" << fd_ << ",buffer_size:" << buffer_size);
     if (send_size > 0)
     {
         if (send_size < buffer_size)
@@ -328,13 +361,13 @@ int32_t TSocket::Send(const char * buffer, int32_t buffer_size)
         {
             TERROR("send buffer full");
         }
-        if (EAGAIN == errno)
+        if (EAGAIN == cur_error_no)
         {
             return 0;
         }
-        else 
+        else if (cur_error_no > 0)
         {
-            TERROR("send error:" << errno);
+            TERROR("send error:" << cur_error_no);
             HandleSendError();
         }
     }
@@ -345,7 +378,7 @@ void TSocket::HandleOpClose()
 {
     if (epoll_)
     {
-        TERROR("TSocket::HandleOpClose");
+        TWARN("TSocket::HandleOpClose,error_no:" << errno);
         epoll_->CancelSockEvent(this);
         epoll_ = nullptr;
         Close();
@@ -390,8 +423,8 @@ void TSocket::HandleSendError()
  void TSocket::SetNoblocking()
  {
     int32_t flag = fcntl(fd_, F_GETFL, 0);
-    fcntl(fd_, F_SETFL, flag | O_NONBLOCK);
-    TDEBUG("SetNoblocking:" << fd_);
+    int32_t ret = fcntl(fd_, F_SETFL, flag | O_NONBLOCK);
+    TDEBUG("SetNoblocking:" << fd_ << ", ret:" << ret);
  }
 
  void TSocket::OnClose()
@@ -437,4 +470,66 @@ void TSocket::SetSockWriteBufferSize(int32_t buffer_size)
 
     set_code = ::getsockopt(fd_,SOL_SOCKET, SO_SNDBUF, (char*)&result, &opt_len);
     TDEBUG("get socket send buffer:" << result << "," << set_size);
+}
+
+ESocketOpCode TSocket::BindLocalFile(std::string sock_file)
+{
+    unlink(sock_file.c_str());
+    fd_ = ::socket(AF_UNIX, SOCK_STREAM, 0);
+    if (INVALID_SOCKET_FD == fd_)
+    {
+        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAIL;
+    }
+    struct sockaddr_un server_addr;
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sun_family = AF_UNIX;
+    memcpy(server_addr.sun_path, sock_file.c_str(), sock_file.size() + 1);
+    bool reuse_addr = true;
+    setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse_addr, sizeof(bool));
+    // int32_t size = offsetof(struct sockaddr_un, sun_path) + sock_file.length();
+    // int32_t server_len = sizeof(server_address)
+    struct linger so_linger;
+    so_linger.l_onoff = true;
+    so_linger.l_linger = 0;
+    setsockopt(fd_, SOL_SOCKET, SO_LINGER, &so_linger,sizeof(so_linger));
+    SetNoblocking();
+    auto code = bind(fd_, reinterpret_cast<struct sockaddr *>(&server_addr), sizeof(server_addr));
+    if (-1 == code)
+    {
+        return ESocketOpCode::E_SOCKET_OP_BIND_ERROR;
+    }
+    // bind success
+    bind_addr_.unix_sock_file = sock_file;
+    e_trans_mode_ = E_SOCKET_TRANS_MODE_UNIX_SOCK_FILE;
+    return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
+}
+ESocketOpCode TSocket::ConnectLocalFile(std::string sock_file)
+{
+    struct sockaddr_un server_addr;
+    memset(&server_addr, 0, sizeof(server_addr));
+    fd_ = ::socket(AF_UNIX, SOCK_STREAM, 0);
+    if (INVALID_SOCKET_FD == fd_)
+    {
+        return ESocketOpCode::E_SOCKET_OP_SOCK_CREATE_FAIL;
+    }
+    memset(&server_addr, 0, sizeof(sockaddr_in));
+    server_addr.sun_family = AF_UNIX;
+    memcpy(server_addr.sun_path, sock_file.c_str(), sock_file.size() + 1);
+    int32_t code = connect(fd_, reinterpret_cast<struct sockaddr *>(&server_addr), sizeof(server_addr));
+    if (-1 == code)
+    {
+        ::close(fd_);
+        fd_ = INVALID_SOCKET_FD;
+        TERROR("connect server faile:" << sock_file);
+        return ESocketOpCode::E_SOCKET_OP_CODE_CONNECT_FAIL;
+    }
+    status_ = ESocketStatus::E_SOCKET_STATUS_CONNECTED;
+    // 记录连接的地址
+    connect_addr_.unix_sock_file = sock_file;
+    e_trans_mode_ = E_SOCKET_TRANS_MODE_UNIX_SOCK_FILE;
+    return ESocketOpCode::E_SOCKET_OP_CODE_CORRECT;
+}
+ESocketTransMode TSocket::GetTransMode()
+{
+    return e_trans_mode_;
 }

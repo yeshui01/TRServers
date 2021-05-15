@@ -147,29 +147,56 @@ void TConnection::Reconnect()
         TERROR("Reconnect fail, GetFd() != INVALID_SOCKET_FD, connec_id:" << conn_id_);
         return;
     }
-    
-    if (ESocketOpCode::E_SOCKET_OP_CODE_CORRECT != Connect(connect_addr_.ip, connect_addr_.port))
-    {
-        TERROR("reconnect fail, ip:" << connect_addr_.ip << ", port:" << connect_addr_.port);
-    }
+    if (GetTransMode() == E_SOCKET_TRANS_MODE_TCP)
+	{
+		if (ESocketOpCode::E_SOCKET_OP_CODE_CORRECT != Connect(connect_addr_.ip, connect_addr_.port))
+    	{
+    	    TERROR("reconnect fail, ip:" << connect_addr_.ip << ", port:" << connect_addr_.port);
+    	}
+    	else
+    	{
+    	    GetRecvBuffer().Reset();
+    	    GetWriteBuffer().Reset();
+    	    if (server_)
+    	    {
+    	        server_->OnNewConnectComeIn(this);
+    	    }
+    	    TWARN("reconnect succ, connectid:" << conn_id_ << ", ip:" << connect_addr_.ip << ", port:" << connect_addr_.port);
+    	    if (reconnect_func_ != nullptr)
+    	    {
+    	        reconnect_func_(this);
+    	    }
+    	    else
+    	    {
+    	        TERROR("try connect, but reconnect handle is nullptr");
+    	    }
+    	}
+	}
     else
-    {
-        GetRecvBuffer().Reset();
-        GetWriteBuffer().Reset();
-        if (server_)
-        {
-            server_->OnNewConnectComeIn(this);
-        }
-        TWARN("reconnect succ, connectid:" << conn_id_ << ", ip:" << connect_addr_.ip << ", port:" << connect_addr_.port);
-        if (reconnect_func_ != nullptr)
-        {
-            reconnect_func_(this);
-        }
-        else
-        {
-            TERROR("try connect, but reconnect handle is nullptr");
-        }
-    }
+	{
+		if (ESocketOpCode::E_SOCKET_OP_CODE_CORRECT != ConnectLocalFile(connect_addr_.unix_sock_file))
+    	{
+    	    TERROR("reconnect fail, unix_sock_file:" << connect_addr_.unix_sock_file);
+    	}
+    	else
+    	{
+    	    GetRecvBuffer().Reset();
+    	    GetWriteBuffer().Reset();
+    	    if (server_)
+    	    {
+    	        server_->OnNewConnectComeIn(this);
+    	    }
+    	    TWARN("reconnect succ, connectid:" << conn_id_ << ", unix_sock_file:" << connect_addr_.unix_sock_file);
+    	    if (reconnect_func_ != nullptr)
+    	    {
+    	        reconnect_func_(this);
+    	    }
+    	    else
+    	    {
+    	        TERROR("try connect, but reconnect handle is nullptr");
+    	    }
+    	}
+	}
 }
 // 设置是否重连
 void TConnection::SetNeedReconnect(bool connect)

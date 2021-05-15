@@ -36,6 +36,7 @@ protected:
     int32_t ep_fd_ = INVALID_SOCKET_FD;     // epoll套接字
     int32_t max_size_ = 1;                  // 最大监听数量
     std::vector<epoll_event> v_events_;     // 事件集合
+    int32_t event_size_ = 1024;
     std::map<socket_fd_t, TSocket *> register_sockets_; // 监视的套接字记录
 };
 

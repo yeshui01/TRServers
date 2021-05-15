@@ -29,10 +29,13 @@ public:
     void SetStatus(ESocketStatus status);
     // 绑定地址和端口
     ESocketOpCode Bind(std::string ip, int32_t port);
+    // 绑定本地套接字
+    ESocketOpCode BindLocalFile(std::string sock_file);
     // 开始监听
     virtual ESocketOpCode Listen();
     // 连接服务器
     ESocketOpCode Connect(std::string ip, int32_t port);
+    ESocketOpCode ConnectLocalFile(std::string sock_file);
     // 关闭
     void Close();
     // 获取读缓冲区
@@ -56,6 +59,8 @@ public:
     // 调整socket缓冲区大小
     void SetSockRecvBufferSize(int32_t buffer_size);
     void SetSockWriteBufferSize(int32_t buffer_size);
+    // 获取传输模式
+    ESocketTransMode GetTransMode();
 public:
     // 可读事件
     virtual void OnReadEvent();
@@ -96,6 +101,7 @@ protected:
     socket_buffer_t send_buffer_ = {INIT_SOCKET_BUFFER_SIZE};
     Epoll * epoll_ = nullptr;
     bool is_write_event_ = false; // 是否注册写数据事件
+    ESocketTransMode e_trans_mode_ = E_SOCKET_TRANS_MODE_TCP;
 };
 
 #endif // __NET_SOKCET_H__

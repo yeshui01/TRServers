@@ -30,24 +30,32 @@ enum class ESocketStatus : int32_t
     E_SOCKET_STATUS_CLOSED = 5,     // 关闭状态
 };
 
+// 通信模式
+enum ESocketTransMode
+{
+    E_SOCKET_TRANS_MODE_TCP = 0,
+    E_SOCKET_TRANS_MODE_UNIX_SOCK_FILE = 1,
+};
+
 // 网络地址数据
 struct NetAddr
 {
     std::string ip;     // ip地址
     int32_t port = 0;   // 端口
+    std::string unix_sock_file;
 };
 
 // socket 操作码
 enum class ESocketOpCode : int32_t
 {
     E_SOCKET_OP_CODE_CORRECT = 0,
-    E_SOCKET_OP_SOCK_CREATE_FAILE = 1,  // socket创建失败
-    E_SOCKET_OP_CODE_CONNECT_FAILE = 2, // 连接失败
+    E_SOCKET_OP_SOCK_CREATE_FAIL = 1,  // socket创建失败
+    E_SOCKET_OP_CODE_CONNECT_FAIL = 2, // 连接失败
     E_SOCKET_OP_IP_ADDR_ERROR = 3,      // ip地址无效
     E_SOCKET_OP_BIND_ERROR = 4,         // 绑定地址失败
     E_SOCKET_OP_LISTEN_ERROR = 5,       // 绑定地址失败
-    E_SOCKET_OP_EPOLL_REG_FAILE = 6,   // epoll注册事件失败
-    E_SOCKET_OP_EPOLL_UNREG_FAILE = 6,  // epoll取消事件失败
+    E_SOCKET_OP_EPOLL_REG_FAIL = 6,   // epoll注册事件失败
+    E_SOCKET_OP_EPOLL_UNREG_FAIL = 6,  // epoll取消事件失败
 };
 
 // 服务器运行阶段

@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/epoll.h>
+#include <sys/un.h>
 #include <fcntl.h>
 #include <memory.h>
 #include <error.h>
@@ -53,32 +54,38 @@ void TBaseServer::HandleAccept()
         TConnection * connect_pt = AllocateConnect();
         if (connect_pt)
         {
-            sockaddr_in client_addr;
-            socklen_t addr_len = sizeof(client_addr);
-            socket_fd_t client_sock = accept(fd_, (struct sockaddr*)&client_addr, &addr_len);
-            if (INVALID_SOCKET_FD == client_sock)
+            if (GetTransMode() == E_SOCKET_TRANS_MODE_TCP)
             {
-                TERROR("client socket is invalid");
-                return;
+                sockaddr_in client_addr;
+                socklen_t addr_len = sizeof(client_addr);
+                socket_fd_t client_sock = accept(fd_, (struct sockaddr*)&client_addr, &addr_len);
+                if (INVALID_SOCKET_FD == client_sock)
+                {
+                    TERROR("client socket is invalid");
+                    return;
+                }
+                connect_pt->SetStatus(ESocketStatus::E_SOCKET_STATUS_BE_CONNECT);
+                connect_pt->SetFd(client_sock);
+                // 记录对方的地址数据
+                std::string ip = inet_ntoa(client_addr.sin_addr);
+                TDEBUG("accept new connect, fd:" << client_sock << ", ip:" << ip << ", port:" << client_addr.sin_port);
             }
-            connect_pt->SetStatus(ESocketStatus::E_SOCKET_STATUS_BE_CONNECT);
-            connect_pt->SetFd(client_sock);
-            // 记录对方的地址数据
-            std::string ip = inet_ntoa(client_addr.sin_addr);
-            TDEBUG("accept new connect, fd:" << client_sock << ", ip:" << ip << ", port:" << client_addr.sin_port);
-            // g_ConnectMgr.AddConnction(connect_pt);
-            // connect_pt->AttachServer(this);
-            // // 添加到epoll
-            // auto epoll_pt = GetEpoll();
-            // if (epoll_pt)
-            // {
-            //     connect_pt->SetNoblocking();
-            //     epoll_pt->RegSockEvent(connect_pt, EPOLLIN | EPOLLOUT | EPOLLERR);
-            // }
-            // else
-            // {
-            //     TERROR("epoll_pt is null");
-            // }
+            else
+            {
+                struct sockaddr_un client_addr;
+                socklen_t addr_len = sizeof(client_addr);
+                socket_fd_t client_sock = accept(fd_, (struct sockaddr*)&client_addr, &addr_len);
+                if (INVALID_SOCKET_FD == client_sock)
+                {
+                    TERROR("client socket is invalid");
+                    return;
+                }
+                connect_pt->SetStatus(ESocketStatus::E_SOCKET_STATUS_BE_CONNECT);
+                connect_pt->SetFd(client_sock);
+                // 记录对方的地址数据
+                TDEBUG("accept new connect on unix_sock_file, fd:" << client_sock);
+            }
+            
             OnNewConnectComeIn(connect_pt);
         }
         else
@@ -134,7 +141,15 @@ void TBaseServer::RunService()
             }
             case EServerRunStep::E_SERVER_RUN_STEP_LISTEN:
             {
-                epoll_ptr_->RegSockEvent(this, EPOLLIN);
+                if (this->GetFd() != INVALID_SOCKET_FD)
+                {
+                    epoll_ptr_->RegSockEvent(this, EPOLLIN);
+                }
+                else
+                {
+                    TWARN("server no bind port!!!");
+                }
+                
                 SetRunStep(EServerRunStep::E_SERVER_RUN_STEP_WILL_RUNNING);
                 break;
             }
@@ -303,6 +318,10 @@ void TBaseServer::OnNewConnectComeIn(TConnection * new_connection)
     new_connection->AttachServer(this);
     // 添加到epoll
     auto epoll_pt = GetEpoll();
+    if (!epoll_pt)
+    {
+        epoll_pt = epoll_ptr_.get();
+    }
     if (epoll_pt)
     {
         new_connection->SetNoblocking();

@@ -27,8 +27,8 @@ void Epoll::Create(int32_t size)
 {
     max_size_ = size;
     ep_fd_ = epoll_create(size);
-    int32_t event_size = size > 1024 ? 1024:size;
-    v_events_.resize(event_size);
+    event_size_ = size > 1024 ? 1024:size;
+    v_events_.resize(event_size_);
     TDEBUG("epoll create, size:" << size << ", ep_fd:" << ep_fd_);
 }
 
@@ -43,34 +43,34 @@ ESocketOpCode Epoll::RegSockEvent(TSocket *sock_pt, int32_t event_flag)
     if (INVALID_SOCKET_FD == ep_fd_)
     {
         TERROR("invalid ep_fd:" << ep_fd_ << ", cant reg sock event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     if (register_sockets_.size() >= max_size_)
     {
         TERROR("ep socket events size is large max_size, cant register event again");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     if (!sock_pt)
     {
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     if (INVALID_SOCKET_FD == sock_pt->GetFd())
     {
         TERROR("invalid socket fd, cant register event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     // 防止重复注册
     if (register_sockets_.find(sock_pt->GetFd()) != register_sockets_.end())
     {
         TERROR("cant repeated register socket event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     epoll_event evt;
     evt.events = event_flag;
     evt.data.ptr = sock_pt;
     if (-1 == epoll_ctl(ep_fd_, EPOLL_CTL_ADD, sock_pt->GetFd(), &evt))
     {
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     register_sockets_[sock_pt->GetFd()] = sock_pt;
     sock_pt->AttachEpoll(this);
@@ -83,16 +83,16 @@ ESocketOpCode Epoll::CancelSockEvent(TSocket *sock_pt)
     if (INVALID_SOCKET_FD == ep_fd_)
     {
         TERROR("invalid ep_fd");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAIL;
     }
     if (INVALID_SOCKET_FD == sock_pt->GetFd())
     {
         TERROR("invalid socket fd, cant cancle event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAIL;
     }
     if (-1 == epoll_ctl(ep_fd_, EPOLL_CTL_DEL, sock_pt->GetFd(), nullptr))
     {
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_UNREG_FAIL;
     }
     register_sockets_.erase(sock_pt->GetFd());
     TDEBUG("CancelSockEvent, fd:" << sock_pt->GetFd());
@@ -107,7 +107,7 @@ int32_t Epoll::EventsWatch(int32_t timeout/* = 0*/)
         TERROR("ep sockeet is invalid");
         return -1;
     }
-    auto code = epoll_wait(ep_fd_, &v_events_[0], max_size_, timeout);
+    auto code = epoll_wait(ep_fd_, &v_events_[0], event_size_, timeout);
     if (code == -1)
     {
         TERROR("epoll wait error,errono:" << errno);
@@ -151,22 +151,22 @@ ESocketOpCode Epoll::ChangeSockEvent(TSocket *sock_pt, int32_t event_flag)
     if (INVALID_SOCKET_FD == ep_fd_)
     {
         TERROR("invalid ep_fd:" << ep_fd_ << ", cant reg sock event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     if (!sock_pt)
     {
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     if (INVALID_SOCKET_FD == sock_pt->GetFd())
     {
         TERROR("invalid socket fd, cant register event");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     // 防止重复注册
     if (register_sockets_.find(sock_pt->GetFd()) == register_sockets_.end())
     {
         TERROR("cant find registed socket");
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     epoll_event evt;
     evt.events = event_flag;
@@ -174,7 +174,7 @@ ESocketOpCode Epoll::ChangeSockEvent(TSocket *sock_pt, int32_t event_flag)
     if (-1 == epoll_ctl(ep_fd_, EPOLL_CTL_MOD, sock_pt->GetFd(), &evt))
     {
         TERROR("ChangeSockEvent, sock_fd:" << sock_pt->GetFd() << ", event_flag:" << event_flag);
-        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAILE;
+        return ESocketOpCode::E_SOCKET_OP_EPOLL_REG_FAIL;
     }
     register_sockets_[sock_pt->GetFd()] = sock_pt;
     sock_pt->AttachEpoll(this);
